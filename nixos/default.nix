@@ -59,7 +59,6 @@
           wget
           aria2
           htop
-          tmux
           zellij
           efibootmgr
         ]

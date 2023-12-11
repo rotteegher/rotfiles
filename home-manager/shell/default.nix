@@ -7,11 +7,11 @@
     # ./fish.nix
     ./git.nix
     # ./neovim.nix
-    # ./nix.nix
+    ./nix.nix
     # ./rice
-    # ./shell.nix
+    ./shell.nix
     # ./starship.nix
-    # ./tmux.nix
+    ./tmux.nix
     # ./yazi
     # TODO!!!
   ];
