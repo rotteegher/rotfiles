@@ -18,9 +18,13 @@
   ];
 
   # Bluetooth
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    package = pkgs.bluez;  
+    settings.General.Enable = "Source,Sink,Media,Socket";
+  };
   services.blueman.enable = true;
-  hardware.bluetooth.package = pkgs.bluez;  
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

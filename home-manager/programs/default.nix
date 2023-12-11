@@ -3,11 +3,11 @@
     # ./brave.nix
     # ./deadbeef.nix
     # ./dunst.nix
-    # ./firefox.nix
+    ./firefox.nix
     # ./gtk.nix
     ./helix.nix
     # ./imv.nix
-    # ./kitty.nix
+    ./kitty.nix
     # ./mpv.nix
     # ./nemo.nix
     # ./obs-studio.nix

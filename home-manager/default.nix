@@ -60,18 +60,18 @@
 
   rot.persist = {
     home.directories = [
-      # {
-      #   directory = "Desktop";
-      #   method = "symlink";
-      # }
-      # {
-      #   directory = "Documents";
-      #   method = "symlink";
-      # }
-      # {
-      #   directory = "Pictures";
-      #   method = "symlink";
-      # }
+      {
+        directory = "Desktop";
+        method = "symlink";
+      }
+      {
+        directory = "Documents";
+        method = "symlink";
+      }
+      {
+        directory = "Pictures";
+        method = "symlink";
+      }
     ];
   };
 }
