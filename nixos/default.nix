@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    # ./audio.nix
+    ./audio.nix
     ./auth.nix
     ./configuration.nix
     # ./docker.nix

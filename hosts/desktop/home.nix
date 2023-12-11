@@ -7,7 +7,7 @@
   rot = {
     displays = [
       {
-        name = "HDMI-A-1";
+        name = "HDMI-A-5";
         hyprland = "1920x1080@60,1920x1080,1";
         workspaces = [1 2 3 4 5 6 7 8 9 10];
       }
@@ -29,6 +29,7 @@
       enable = true;
       git-keyid = "AD44C88C5EC758ED";
     };
+    terminal.exec = "kitty";
   };
 
   home = {
