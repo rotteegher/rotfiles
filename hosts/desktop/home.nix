@@ -15,8 +15,9 @@
     hyprland.plugin = "hyprnstack";
     rclip.enable = true;
     waybar = {
-      # theme = "transparent";
-      # persistent-workspaces = true;
+      enable = true;
+      theme = "transparent";
+      persistent-workspaces = true;
     };
     pathofbuilding.enable = true;
     vlc.enable = true;

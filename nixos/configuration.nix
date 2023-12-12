@@ -56,21 +56,28 @@
     };
   };
 
-  # CONSOLE
+  # KEYMAPS
   console = {
     # font = "ruscii_8x8";
     font = "drdos8x14";
     packages = with pkgs; [ terminus_font ];
     keyMap = "jp106";
     # useXkbConfig = true; # use xkbOptions in tty.
+
   };
   services.gpm.enable = true;
 
+  services.input-remapper = {
+    enableUdevRules = true;
+    package = pkgs.input-remapper;
+    enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver = {
     layout = "jp";
     xkbVariant = "";
+    xkbOptions = "japan:hztg_escape";
     # bye bye xterm
     excludePackages = [pkgs.xterm];
   };

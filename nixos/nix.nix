@@ -22,7 +22,6 @@
   ndefault = pkgs.writeShellScriptBin "ndefault" ''
     sudo /run/current-system/bin/switch-to-configuration boot
   '';
-  rotz = pkgs.writeShellScriptBin "rotz" ''cd ${rots}'';
   # build flake but don't switch
   nbuild = pkgs.writeShellApplication {
     name = "nbuild";
@@ -132,6 +131,12 @@
       yaml=$(cat - | yq)
       nix eval --expr "builtins.fromJSON '''$yaml'''" | alejandra -q
     '';
+  };
+  rotz = pkgs.writeShellApplication {
+    name = "rotz";
+    text = ''
+        cd ${rots}
+      '';
   };
   # create an fhs environment to run downloaded binaries
   # https://nixos-and-flakes.thiscute.world/best-practices/run-downloaded-binaries-on-nixos

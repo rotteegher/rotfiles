@@ -9,10 +9,10 @@
     # ./imv.nix
     ./kitty.nix
     # ./mpv.nix
-    # ./nemo.nix
+    ./nemo.nix
     # ./obs-studio.nix
     # ./pathofbuilding.nix
-    # ./rofi.nix
+    ./rofi.nix
     # ./vlc.nix
     # ./vscode.nix
     # ./wallust
