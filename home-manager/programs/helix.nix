@@ -23,8 +23,14 @@
             language-servers = ["rust-analyzer"];
           }];
         };
+        themes = {
+          mtr = {
+            "inherits" = "varua";
+            "ui.background" = { fg = "none"; };
+          };
+        };
         settings = {
-          theme = "papercolor-light";
+          theme = "mtr";
           editor = {
             lsp.display-inlay-hints = true;
             true-color = true;

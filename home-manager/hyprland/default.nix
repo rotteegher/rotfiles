@@ -15,7 +15,7 @@
       # ./screenshot.nix
       ./startup.nix
       # ./wallpaper.nix
-      # ./waybar
+      ./waybar
     ];
 
     config = lib.mkIf config.wayland.windowManager.hyprland.enable {
@@ -52,7 +52,6 @@
             };
           };
 
-          # "$mod" = "SUPER";
           "$mod" = "ALT";
 
           "$term" = "${config.rot.terminal.exec}";
@@ -80,7 +79,8 @@
             # dim_strength = 0.05
 
             blur = {
-              enabled = host != "vm";
+              # enabled = host != "vm";
+              enabled = false;
               size = 2;
               passes = 3;
               new_optimizations = true;

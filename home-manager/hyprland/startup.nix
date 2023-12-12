@@ -32,7 +32,7 @@ in {
         (openOnWorkspace 1 "$term")
 
         # firefox
-        # (openOnWorkspace 9 "firefox-developer-edition https://discordapp.com/channels/@me https://web.whatsapp.com http://localhost:9091")
+        (openOnWorkspace 2 "firefox-developer-edition https://discordapp.com/channels/@me ")
 
         # download desktop
         # (openOnWorkspace 10 "$term nvim ~/Desktop/yt.txt")
@@ -47,9 +47,9 @@ in {
 
         # FIXME: weird race condition with swww init, need to sleep for a second
         # https://github.com/Horus645/swww/issues/144
-        # "sleep 1; swww init && hypr-wallpaper"
+        "sleep 1; swww init && hypr-wallpaper"
 
-        # "sleep 5 && launch-waybar"
+        "sleep 5 && launch-waybar"
 
         # fix gparted "cannot open display: :0" error
         "${pkgs.xorg.xhost}/bin/xhost +local:${user}"
