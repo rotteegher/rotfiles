@@ -5,6 +5,7 @@
   ...
 }: {
   options.rot = {
+    telegram.enable = lib.mkEnableOption "telegram-desktop" // {default = true;};
     anime4k.enable = lib.mkEnableOption "anime4k" // {default = true;};
     deadbeef.enable = lib.mkEnableOption "deadbeef" // {default = host == "desktop";};
     helix.enable = lib.mkEnableOption "helix";

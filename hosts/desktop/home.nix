@@ -4,6 +4,7 @@
   isNixOS,
   ...
 }: {
+
   rot = {
     displays = [
       {
