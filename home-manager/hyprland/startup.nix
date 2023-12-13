@@ -25,6 +25,8 @@ in {
         # (openOnWorkspace 1 "brave --incognito")
         # (openOnWorkspace 1 "brave --profile-directory=Default")
 
+        (openOnWorkspace 5 "telegram-desktop")
+
         # file manager
         (openOnWorkspace 4 "nemo")
 

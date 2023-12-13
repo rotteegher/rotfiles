@@ -37,6 +37,7 @@
         "gitconfig".text = config.hm.xdg.configFile."git/config".text;
       };
       variables = {
+        GPG_TTY = "/dev/pts/0";
         TERMINAL = config.hm.rot.terminal.exec;
         EDITOR = "hx";
         VISUAL = "hx";

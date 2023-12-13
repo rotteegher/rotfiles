@@ -40,7 +40,6 @@
     "file:///home/rot/Downloads"
     "file:///home/rot/pr"
     "file:///home/rot/pr/rotfiles"
-    "file:///home/rot/pr/coinfc"
     "file:///home/rot/Pictures/Wallpapers"
     "file:///persist Persist"
   ];

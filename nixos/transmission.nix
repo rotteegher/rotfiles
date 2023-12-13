@@ -6,7 +6,7 @@
   ...
 }: let
   home = "/persist/home/${user}";
-  downloadDir = "/md/stsea-barra/Downloads";
+  downloadDir = "/md/stsea-okii/Downloads";
   pendingDir = "${downloadDir}/pending";
 in {
   config = lib.mkIf config.rot-nixos.bittorrent.enable {

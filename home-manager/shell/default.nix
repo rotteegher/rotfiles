@@ -3,14 +3,14 @@
   imports = [
     # ./bash.nix
     # ./btop.nix
-    # ./direnv.nix
-    # ./fish.nix
+    ./direnv.nix
+    ./fish.nix
     ./git.nix
     # ./neovim.nix
     ./nix.nix
     # ./rice
     ./shell.nix
-    # ./starship.nix
+    ./starship.nix
     ./tmux.nix
     # ./yazi
     # TODO!!!

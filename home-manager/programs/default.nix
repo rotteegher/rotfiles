@@ -4,7 +4,7 @@
     # ./deadbeef.nix
     # ./dunst.nix
     ./firefox.nix
-    # ./gtk.nix
+    ./gtk.nix
     ./helix.nix
     # ./imv.nix
     ./kitty.nix
@@ -19,6 +19,7 @@
     # ./wezterm.nix
     # ./yt-dlp.nix
     # ./zathura.nix
+    ./telegram.nix
     # TODO!!!!
   ];
 }
