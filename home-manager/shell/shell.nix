@@ -23,6 +23,7 @@
       nano = "nvim";
       open = "xdg-open";
       pr = "openpr";
+      rotsh = "hx ~/pr/rotfiles";
       py = "python";
       tr = "eza --tree";
       l = "eza -lag --group-directories-first --git";
