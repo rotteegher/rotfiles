@@ -132,12 +132,6 @@
       nix eval --expr "builtins.fromJSON '''$yaml'''" | alejandra -q
     '';
   };
-  rotz = pkgs.writeShellApplication {
-    name = "rotz";
-    text = ''
-        cd ${rots}
-      '';
-  };
   # create an fhs environment to run downloaded binaries
   # https://nixos-and-flakes.thiscute.world/best-practices/run-downloaded-binaries-on-nixos
   # fhs = let
@@ -186,7 +180,6 @@ in {
           comma
           nix-current-generation
           nh
-          rotz
           ndefault
           nbuild
           nswitchf

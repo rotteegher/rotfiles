@@ -22,6 +22,10 @@ in {
         # shut up welcome message
         set fish_greeting
 
+        # ADD password prompt for gnupg
+        set GPG_TTY $(tty)
+        export GPG_TTY
+
         # fix starship prompt to only have newlines after the first command
         # https://github.com/starship/starship/issues/560#issuecomment-1465630645
         function postexec_newline --on-event fish_postexec

@@ -8,7 +8,7 @@
     ./helix.nix
     # ./imv.nix
     ./kitty.nix
-    # ./mpv.nix
+    ./mpv.nix
     ./nemo.nix
     # ./obs-studio.nix
     # ./pathofbuilding.nix

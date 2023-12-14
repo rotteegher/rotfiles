@@ -34,7 +34,8 @@ in {
         (openOnWorkspace 1 "$term")
 
         # firefox
-        (openOnWorkspace 2 "firefox-developer-edition https://discordapp.com/channels/@me ")
+        # (openOnWorkspace 2 "firefox-developer-edition https://discordapp.com/channels/@me ")
+        (openOnWorkspace 2 "firefox-developer-edition")
 
         # download desktop
         # (openOnWorkspace 10 "$term nvim ~/Desktop/yt.txt")

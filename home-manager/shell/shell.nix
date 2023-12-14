@@ -10,6 +10,7 @@
   home.shellAliases =
     {
       ":e" = "nvim";
+      ":o" = "hx";
       ":q" = "exit";
       c = "clear";
       cat = "bat";
@@ -21,12 +22,14 @@
       mount = "mount --mkdir";
       nano = "nvim";
       open = "xdg-open";
-      pj = "openproj";
+      pr = "openpr";
       py = "python";
-      t = "eza --tree";
+      tr = "eza --tree";
+      l = "eza -lag --group-directories-first --git";
+      lto = "eza -lag --group-directories-first --git --total-size";
       v = "nvim";
       wget = "wget --content-disposition";
-      coinfc = "openproj coinfc";
+      coinfc = "openpr coinfc";
 
       # cd aliases
       ".." = "cd ..";
@@ -71,37 +74,37 @@
       '';
     };
     # cd to project dir
-    openproj = {
+    openpr = {
       bashBody = ''
-        cd $HOME/projects
+        cd $HOME/pr
         if [[ $# -eq 1 ]]; then
           cd $1;
         fi
       '';
       bashCompletion = ''
-        _openproj() {
-            ( cd "$HOME/projects"; printf "%s\n" "$2"* )
+        _openpr() {
+            ( cd "$HOME/pr"; printf "%s\n" "$2"* )
         }
-        complete -o nospace -C _openproj openproj
+        complete -o nospace -C _openpr openpr
       '';
       fishBody = ''
-        cd $HOME/projects
+        cd $HOME/pr
         if test (count $argv) -eq 1
           cd $argv[1]
         end
       '';
-      fishCompletion = ''find "$HOME/projects/" -maxdepth 1 -type d -exec basename {} \;'';
+      fishCompletion = ''find "$HOME/pr/" -maxdepth 1 -type d -exec basename {} \;'';
     };
     renamer = {
       bashBody = ''
-        cd $HOME/projects/personal-graphql
+        cd $HOME/pr/personal-graphql
         # activate direnv
         direnv allow && eval "$(direnv export bash)"
         cargo run --release --bin renamer
         cd - > /dev/null
       '';
       fishBody = ''
-        cd $HOME/projects/personal-graphql
+        cd $HOME/pr/personal-graphql
         # activate direnv
         direnv allow; and eval (direnv export fish)
         cargo run --release --bin renamer
