@@ -43,6 +43,9 @@ in {
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+    settings = {
+      
+    };
   };
 
   # i can't type xD

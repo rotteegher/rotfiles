@@ -60,10 +60,10 @@
 
   rot.persist = {
     home.directories = [
-      {
-        directory = "Desktop";
-        method = "symlink";
-      }
+      # {
+      #   directory = "Desktop";
+      #   method = "symlink";
+      # }
       {
         directory = "Documents";
         method = "symlink";
