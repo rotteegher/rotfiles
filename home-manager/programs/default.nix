@@ -20,6 +20,7 @@
     # ./yt-dlp.nix
     # ./zathura.nix
     ./telegram.nix
+    ./blender.nix
     # TODO!!!!
   ];
 }
