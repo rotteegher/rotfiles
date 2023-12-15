@@ -62,6 +62,7 @@ in {
         enable = true;
         text = builtins.toJSON {
           wallpaper = "{wallpaper}";
+          # TODO not needed (hypr-chan is good)
           fallback = "${../../gits-catppuccin.jpg}";
           monitors = config.rot.displays;
           persistent_workspaces = config.rot.waybar.persistent-workspaces;

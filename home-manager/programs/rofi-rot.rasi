@@ -1,30 +1,3 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
-  };
-
-  home.packages = with pkgs; [rofi-power-menu];
-
-  xdg.configFile = {
-    "rofi/rofi-wifi-menu" = lib.mkIf config.rot.wifi.enable {
-      source = ./rofi-wifi-menu.sh;
-    };
-
-    "rofi/config.rasi".text = ''
-      @theme "~/.cache/wallust/rofi.rasi"
-    '';
-  };
-
-  rot.wallust.entries."rofi.rasi" = {
-    enable = config.programs.rofi.enable;
-    target = "~/.cache/wallust/rofi.rasi";
-    text = ''
 * {
     accent: {color4};
     background: {background};
@@ -139,7 +112,4 @@ window {
     border-color: @border-color;
     border-radius: 12px;
     height: 360px;
-}
-    '';
-  };
 }

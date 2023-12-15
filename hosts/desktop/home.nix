@@ -14,6 +14,8 @@
       }
     ];
     hyprland.plugin = "hyprnstack";
+    wallust.enable = true;
+    rofi.enable = true;
     rclip.enable = true;
     waybar = {
       enable = true;
@@ -38,7 +40,6 @@
     packages = lib.mkIf isNixOS (
       with pkgs; [
         ffmpeg
-        neofetch
         # vial  
       ]
     );
