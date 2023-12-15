@@ -1,12 +1,12 @@
 {...}: {
   imports = [
     # ./brave.nix
-    # ./deadbeef.nix
-    # ./dunst.nix
+    ./deadbeef.nix
+    ./dunst.nix
     ./firefox.nix
     ./gtk.nix
     ./helix.nix
-    # ./imv.nix
+    ./imv.nix
     ./kitty.nix
     ./mpv.nix
     ./nemo.nix
@@ -15,7 +15,7 @@
     ./rofi.nix
     # ./vlc.nix
     # ./vscode.nix
-    # ./wallust
+    ./wallust
     # ./wezterm.nix
     # ./yt-dlp.nix
     # ./zathura.nix

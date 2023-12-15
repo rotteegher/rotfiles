@@ -73,7 +73,7 @@
 
     homeConfigurations = import ./hosts (commonInherits // {isNixOS = false;});
 
-    # devenv for working on dotfiles, provides rust environment
+    # devenv for working on rotfiles, provides rust environment
     devShells = forAllSystems (pkgs: {
       default = inputs.devenv.lib.mkShell {
         inherit inputs pkgs;
@@ -98,6 +98,6 @@
     inherit self;
 
     # templates for devenv
-    # templates = import ./templates;
+    templates = import ./templates;
   };
 }
