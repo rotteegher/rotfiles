@@ -24,6 +24,7 @@
     # ./vercel.nix
     # ./virt-manager.nix
     ./zfs.nix
+    ./input.nix
   ];
 
   config = {

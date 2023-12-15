@@ -43,31 +43,6 @@
     LC_TIME = "en_AU.UTF-8";
   };
 
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    inputMethod = {
-        enabled = "ibus";
-        ibus.engines = with pkgs.ibus-engines; [ anthy ];
-    };
-  };
-
-  # KEYMAPS
-  console = {
-    # font = "ruscii_8x8";
-    font = "drdos8x14";
-    packages = with pkgs; [ terminus_font ];
-    keyMap = "jp106";
-    # useXkbConfig = true; # use xkbOptions in tty.
-
-  };
-  services.gpm.enable = true;
-
-  services.input-remapper = {
-    enableUdevRules = true;
-    package = pkgs.input-remapper;
-    enable = true;
-  };
 
   # Configure keymap in X11
   services.xserver = {

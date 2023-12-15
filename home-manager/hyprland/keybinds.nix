@@ -29,6 +29,9 @@ in {
         # reset monitors
         "CTRL_SHIFT, Escape, exec, hypr-monitors"
 
+        # reset input language
+        "$mod, Escape, exec, fcitx5-remote -s keyboard-jp"
+        
         # bind = $mod, P, pseudo, # dwindle
         # bind = $mod, J, togglesplit, # dwindle
 

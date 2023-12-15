@@ -21,6 +21,9 @@ in {
         # init ipc listener
         "hypr-ipc &"
 
+        # Input fcitx5
+        "fcitx5"
+
         # browsers
         # (openOnWorkspace 1 "brave --incognito")
         # (openOnWorkspace 1 "brave --profile-directory=Default")
@@ -37,7 +40,7 @@ in {
         (openOnWorkspace 1 "$term")
 
         # download desktop
-        (openOnWorkspace 10 "$term cd /md/wdc-data/_SMALL/_ANIME")
+        (openOnWorkspace 10 "$term /md/wdc-data/_SMALL/_ANIME")
         (openOnWorkspace 10 "transmission-remote-gtk")
 
         # Telegram

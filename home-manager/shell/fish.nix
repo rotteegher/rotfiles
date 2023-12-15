@@ -26,6 +26,10 @@ in {
         set GPG_TTY $(tty)
         export GPG_TTY
 
+        set GTK_IM_MODULE ibus
+        set QT_IM_MODULE ibus
+        set XMODIFIERS @im=ibus
+
         # fix starship prompt to only have newlines after the first command
         # https://github.com/starship/starship/issues/560#issuecomment-1465630645
         function postexec_newline --on-event fish_postexec

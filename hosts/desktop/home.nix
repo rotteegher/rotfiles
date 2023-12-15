@@ -40,6 +40,7 @@
     packages = lib.mkIf isNixOS (
       with pkgs; [
         ffmpeg
+        cmatrix
         # vial  
       ]
     );
