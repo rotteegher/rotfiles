@@ -43,7 +43,6 @@
         home-manager
         libreoffice
         trash-cli
-        gnupg
         # misc utilities for dotfiles written in rust
         # rot.dotfiles-utils
       ]

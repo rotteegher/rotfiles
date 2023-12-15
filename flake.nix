@@ -91,9 +91,9 @@
       };
     });
 
-    # packages = forAllSystems (
-    #   pkgs: (import ./packages {inherit pkgs inputs;})
-    # );
+    packages = forAllSystems (
+      pkgs: (import ./packages {inherit pkgs inputs;})
+    );
 
     inherit self;
 
