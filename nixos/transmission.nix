@@ -6,8 +6,8 @@
   ...
 }: let
   home = "/persist/home/${user}";
-  downloadDir = "/md/stsea-okii/Downloads";
-  pendingDir = "${downloadDir}/pending";
+  downloadDir = "/md/wdc-data/_SMALL/_ANIME";
+  pendingDir = "${downloadDir}/_CURRENT";
 in {
   config = lib.mkIf config.rot-nixos.bittorrent.enable {
     services.transmission = {
@@ -114,6 +114,7 @@ in {
 
     rot-nixos.persist.home.directories = [
       ".config/transmission-daemon"
+      ".config/transmission-remote-gtk"
     ];
   };
 }

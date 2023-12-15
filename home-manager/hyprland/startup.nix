@@ -25,7 +25,10 @@ in {
         # (openOnWorkspace 1 "brave --incognito")
         # (openOnWorkspace 1 "brave --profile-directory=Default")
 
-        (openOnWorkspace 5 "telegram-desktop")
+
+        # firefox
+        # (openOnWorkspace 2 "firefox-developer-edition https://discordapp.com/channels/@me ")
+        (openOnWorkspace 2 "firefox")
 
         # file manager
         (openOnWorkspace 4 "nemo")
@@ -33,14 +36,12 @@ in {
         # terminal
         (openOnWorkspace 1 "$term")
 
-        # firefox
-        # (openOnWorkspace 2 "firefox-developer-edition https://discordapp.com/channels/@me ")
-        (openOnWorkspace 2 "firefox")
-
         # download desktop
-        # (openOnWorkspace 10 "$term nvim ~/Desktop/yt.txt")
-        # (openOnWorkspace 10 "$term")
+        (openOnWorkspace 10 "$term cd /md/wdc-data/_SMALL/_ANIME")
+        (openOnWorkspace 10 "transmission-remote-gtk")
 
+        # Telegram
+        (openOnWorkspace 5 "telegram-desktop")
         # "${pkgs.swayidle}/bin/swayidle -w timeout 480 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
 
         # focus the initial workspaces on startup

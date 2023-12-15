@@ -57,7 +57,8 @@
           inherit extraSpecialArgs;
           pkgs = import inputs.nixpkgs {config.allowUnfree = true;};
           # make sure to add overlays later!!!
-          # modules = homeManagerImports ++ [../overlays];
+          modules = homeManagerImports;
+           # ++ [../overlays];
         };
   in
     builtins.listToAttrs (map (host: {

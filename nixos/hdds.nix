@@ -1,6 +1,7 @@
   {
     lib,
     config,
+    user,
     ...
   }: let
     cfg = config.rot-nixos.hdds;
@@ -38,11 +39,13 @@
     # add bookmarks for gtk
     hm = {...} @ hmCfg: {
       gtk.gtk3.bookmarks = lib.mkIf cfg.wdc1tb [
-        "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/_CURRENT _ANIME_CURRENT"
+        "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/_CURRENT/ _ANIME_CURRENT"
         # "file://${wdc-blue-mountpoint}/TV/Current TV Current"
         "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
         # "file://${wdc-blue-mountpoint}/TV TV"
-        "file://${wdc-blue-mountpoint}/_SMALL/_FILM _FILM"
+        "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
+        "file://${wdc-blue-mountpoint}/_SMALL/ _SMALL"
+        "file://${wdc-blue-mountpoint}/_IMAGE/ _IMAGE"
       ];
 
       # create symlinks for locations with ~
@@ -57,7 +60,7 @@
     # symlinks from hdds
     # dest src
     systemd.tmpfiles.rules = lib.optionals (cfg.wdc1tb && cfg.stsea3tb) [
-      "L+ ${stsea-mountpoint}/_SMALL/_ANIME            - - - - ${wdc-blue-mountpoint}/_SMALL/_ANIME"
+      "L+ ${wdc-blue-mountpoint}/Wallpapers            - - - - /home/${user}/Pictures/Wallpapers"
       # "L+ ${stsea-mountpoint}/Movies           - - - - ${wdc-blue-mountpoint}/Movies"
       # "L+ ${stsea-mountpoint}/TV               - - - - ${wdc-blue-mountpoint}/TV"
     ];
