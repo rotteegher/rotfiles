@@ -7,6 +7,7 @@
   options.rot = {
     rofi.enable = lib.mkEnableOption "rofi" // {default = true;};
     telegram.enable = lib.mkEnableOption "telegram-desktop" // {default = true;};
+    blender.enable = lib.mkEnableOption "blender" // {default = true;};
     anime4k.enable = lib.mkEnableOption "anime4k" // {default = true;};
     deadbeef.enable = lib.mkEnableOption "deadbeef" // {default = host == "desktop";};
     helix.enable = lib.mkEnableOption "helix";

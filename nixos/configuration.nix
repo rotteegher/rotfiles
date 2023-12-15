@@ -91,6 +91,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Cuda support
+  nixpkgs.config.cudaSupport = true;
+
   # enable sysrq in case for kernel panic
   boot.kernel.sysctl."kernel.sysrq" = 1;
 
