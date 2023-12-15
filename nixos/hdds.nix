@@ -43,9 +43,11 @@
         # "file://${wdc-blue-mountpoint}/TV/Current TV Current"
         "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
         # "file://${wdc-blue-mountpoint}/TV TV"
-        "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
         "file://${wdc-blue-mountpoint}/_SMALL/ _SMALL"
-        "file://${wdc-blue-mountpoint}/_IMAGE/ _IMAGE"
+        "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
+        "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
+        "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
+        "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
       ];
 
       # create symlinks for locations with ~
