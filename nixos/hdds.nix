@@ -39,7 +39,7 @@
     # add bookmarks for gtk
     hm = {...} @ hmCfg: {
       gtk.gtk3.bookmarks = lib.mkIf cfg.wdc1tb [
-        "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/_CURRENT/ _ANIME_CURRENT"
+        "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/_CURRENT/ _CURRENT"
         # "file://${wdc-blue-mountpoint}/TV/Current TV Current"
         "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
         # "file://${wdc-blue-mountpoint}/TV TV"

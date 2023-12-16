@@ -13,7 +13,7 @@
     # ./obs-studio.nix
     # ./pathofbuilding.nix
     ./rofi.nix
-    # ./vlc.nix
+    ./vlc.nix
     # ./vscode.nix
     ./wallust
     # ./wezterm.nix

@@ -11,14 +11,15 @@ pkgs,
         enabled = "fcitx5";
           fcitx5.addons = with pkgs; [
             fcitx5-mozc
+            fcitx5-anthy
             fcitx5-gtk
         ];
       };
     };
     rot-nixos.persist = {
       home.directories = [
-        "~/.config/fcitx"
-        "~/.config/fcitx5"
+        "~/.config/fcitx/"
+        "~/.config/fcitx5/"
         ];
     };
 
@@ -34,7 +35,7 @@ pkgs,
     services.gpm.enable = true;
 
     environment.variables = {
-      GTK_IM_MODULE = "fcitx";
+      # GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
       GLFW_IM_MODULE = "fcitx";
