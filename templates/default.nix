@@ -7,6 +7,11 @@ let
     ```
   '';
 in rec {
+  c = {
+    inherit welcomeText;
+    path = ./c;
+    description = "testing compiling stuff (and blender)";
+  };
   javascript = {
     inherit welcomeText;
     path = ./javascript;
@@ -29,4 +34,6 @@ in rec {
   ts = javascript;
   py = python;
   rs = rust;
+  clang = c;
+
 }
