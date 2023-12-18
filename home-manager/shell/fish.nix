@@ -26,9 +26,9 @@ in {
         set GPG_TTY $(tty)
         export GPG_TTY
 
-        set GTK_IM_MODULE ibus
-        set QT_IM_MODULE ibus
-        set XMODIFIERS @im=ibus
+        # set GTK_IM_MODULE ibus
+        set QT_IM_MODULE fcitx
+        set XMODIFIERS @im=fcitx
 
         # fix starship prompt to only have newlines after the first command
         # https://github.com/starship/starship/issues/560#issuecomment-1465630645

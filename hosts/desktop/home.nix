@@ -41,6 +41,8 @@
       with pkgs; [
         ffmpeg
         cmatrix
+        libgcc
+        glibc
         # vial  
       ]
     );
