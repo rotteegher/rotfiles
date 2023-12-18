@@ -17,7 +17,7 @@
     # ./vscode.nix
     ./wallust
     # ./wezterm.nix
-    # ./yt-dlp.nix
+    ./yt-dlp.nix
     # ./zathura.nix
     ./telegram.nix
     ./blender.nix
