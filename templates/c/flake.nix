@@ -33,6 +33,7 @@
                 libgcc
                 git
                 glibc
+                glibc.static
                 zlib
                 cxxtools
                 subversion

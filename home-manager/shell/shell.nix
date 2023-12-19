@@ -16,7 +16,7 @@
       cat = "bat";
       crate = "cargo";
       btop = "btop --preset 0";
-      isodate = ''date - u + "%Y-%m-%dT%H:%M:%SZ"'';
+      isodate = ''date -u + "%Y-%m-%dT%H:%M:%SZ"'';
       man = "${pkgs.bat-extras.batman}/bin/batman";
       mkdir = "mkdir -p";
       mount = "mount --mkdir";
