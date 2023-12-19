@@ -18,8 +18,8 @@ pkgs,
     };
     rot-nixos.persist = {
       home.directories = [
-        "~/.config/fcitx/"
-        "~/.config/fcitx5/"
+        ".config/fcitx/"
+        ".config/fcitx5/"
         ];
     };
 
