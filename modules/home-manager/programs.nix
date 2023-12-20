@@ -5,7 +5,9 @@
   ...
 }: {
   options.rot = {
+    firefox.enable = lib.mkEnableOption "firefox" // {default = true;};
     rofi.enable = lib.mkEnableOption "rofi" // {default = true;};
+    k3b.enable = lib.mkEnableOption "k3b" // {default = false;};
     telegram.enable = lib.mkEnableOption "telegram-desktop" // {default = true;};
     blender.enable = lib.mkEnableOption "blender" // {default = true;};
     anime4k.enable = lib.mkEnableOption "anime4k" // {default = true;};
