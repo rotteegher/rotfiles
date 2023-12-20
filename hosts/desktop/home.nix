@@ -13,6 +13,7 @@
         workspaces = [1 2 3 4 5 6 7 8 9 10];
       }
     ];
+    firefox.enable = true;
     hyprland.plugin = "hyprnstack";
     wallust.enable = true;
     rofi.enable = true;
@@ -24,6 +25,7 @@
     };
     pathofbuilding.enable = true;
     vlc.enable = true;
+    k3b.enable = true;
     helix.enable = true;
 
     # To list the gpg signing keyid run:
@@ -43,6 +45,7 @@
         cmatrix
         libgcc
         glibc
+        zola
         # vial  
       ]
     );

@@ -1,6 +1,6 @@
-{pkgs, ...}: {
+{pkgs, config, lib, ...}: {
   config = {
-    programs = {
+    programs = lib.mkIf config.rot.firefox.enable {
       # firefox dev edition
       firefox = {
         enable = true;

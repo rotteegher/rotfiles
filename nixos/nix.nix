@@ -35,21 +35,6 @@
       fi
     '';
   };
-  nswitchf = pkgs.writeShellApplication {
-    name= "nswitchf";
-    runtimeInputs = [nh];
-    text = ''
-      cd ${rots}
-
-    
-      if [ "$#" -eq 0 ]; then
-          nh os switch --nom --hostname "${host}"
-      else
-          nh os switch --nom "$@"
-      fi
-    '';
-    
-  };
   # switch via nix flake (note you have to pass --hostname to switch to a different host)
   nswitch = pkgs.writeShellApplication {
     name = "nswitch";
@@ -182,7 +167,6 @@ in {
           nh
           ndefault
           nbuild
-          nswitchf
           nswitch
           nvfetcher
           nv-update
@@ -198,7 +182,6 @@ in {
 
   hm.home.shellAliases = {
     nsw = "nswitch";
-    nswf = "nswitchf";
   };
 
   # add symlink of configuration flake to nixos closure

@@ -21,6 +21,7 @@
     # ./zathura.nix
     ./telegram.nix
     ./blender.nix
+    ./k3b.nix
     # TODO!!!!
   ];
 }

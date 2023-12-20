@@ -29,7 +29,7 @@
             ../nixos
             ../modules/nixos
             # make sure to add overlays later !!!!
-            # ../overlays
+            ../overlays
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -57,8 +57,7 @@
           inherit extraSpecialArgs;
           pkgs = import inputs.nixpkgs {config.allowUnfree = true;};
           # make sure to add overlays later!!!
-          modules = homeManagerImports;
-           # ++ [../overlays];
+          modules = homeManagerImports ++ [../overlays];
         };
   in
     builtins.listToAttrs (map (host: {
