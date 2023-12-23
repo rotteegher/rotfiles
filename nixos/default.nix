@@ -23,6 +23,7 @@
     ./transmission.nix
     # ./vercel.nix
     # ./virt-manager.nix
+    ./waydroid.nix
     ./zfs.nix
     ./input.nix
   ];
