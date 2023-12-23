@@ -22,7 +22,12 @@
     enable = true;
     powerOnBoot = true;
     package = pkgs.bluez;  
-    settings.General.Enable = "Source,Sink,Media,Socket";
+    settings = {
+      General.Enable = "Source,Sink,Media,Socket";
+      # General.DiscoverableTimeout = 0;
+      # General.Name = "G604 LIGHTSPEED";
+      # Policy.AutoEnable = true;
+    };
   };
   services.blueman.enable = true;
 
