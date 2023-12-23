@@ -14,7 +14,7 @@
       # ./lock.nix
       # ./screenshot.nix
       ./startup.nix
-      # ./wallpaper.nix
+      ./wallpaper.nix
       ./waybar
     ];
 
