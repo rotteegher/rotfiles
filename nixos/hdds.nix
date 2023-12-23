@@ -48,6 +48,7 @@
         "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
         "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
         "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
+        "file://${wdc-blue-mountpoint}/papers papers"
       ];
 
       # create symlinks for locations with ~
@@ -63,6 +64,7 @@
     # dest src
     systemd.tmpfiles.rules = lib.optionals (cfg.wdc1tb && cfg.stsea3tb) [
       "L+ ${wdc-blue-mountpoint}/Wallpapers            - - - - /home/${user}/Pictures/Wallpapers"
+      "L+ ${wdc-blue-mountpoint}/pr/rustpr             - - - - /home/${user}/pr/rustpr/ln/"
       # "L+ ${stsea-mountpoint}/Movies           - - - - ${wdc-blue-mountpoint}/Movies"
       # "L+ ${stsea-mountpoint}/TV               - - - - ${wdc-blue-mountpoint}/TV"
     ];

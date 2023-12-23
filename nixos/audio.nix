@@ -10,6 +10,14 @@
     };
     hardware.pulseaudio.enable = false;
 
-    environment.systemPackages = with pkgs; [pavucontrol];
+    environment.systemPackages = with pkgs;
+      [
+        alsa-lib
+        pavucontrol
+        helvum
+        easyeffects
+        lyrebird
+        sox
+      ];
   };
 }

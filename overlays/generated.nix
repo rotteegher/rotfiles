@@ -15,15 +15,15 @@
   };
   swww = {
     pname = "swww";
-    version = "41501980a1875c7e3708ea961caf43cde5a44747";
+    version = "0908f36050d545a0eb97ca0cbfc40c47fc50d6ba";
     src = fetchFromGitHub {
       owner = "Horus645";
       repo = "swww";
-      rev = "41501980a1875c7e3708ea961caf43cde5a44747";
+      rev = "0908f36050d545a0eb97ca0cbfc40c47fc50d6ba";
       fetchSubmodules = false;
-      sha256 = "sha256-muvEFqqeMi0EmxfXmxncUof+K7YUf+jvxTpbUrrJP3Q=";
+      sha256 = "sha256-NRmlctWwiUVlbB457y3e2BpWNyJ7CHpEnAYazwYQZpk=";
     };
-    date = "2023-12-16";
+    date = "2023-12-21";
   };
   transmission-web-soft-theme = {
     pname = "transmission-web-soft-theme";
@@ -52,26 +52,26 @@
   };
   waybar = {
     pname = "waybar";
-    version = "2674982c7b806f69935443450043f5f9f72f35ee";
+    version = "d2767fb84ac2efed1c29313dec7ede1b756a6f81";
     src = fetchFromGitHub {
       owner = "Alexays";
       repo = "Waybar";
-      rev = "2674982c7b806f69935443450043f5f9f72f35ee";
+      rev = "d2767fb84ac2efed1c29313dec7ede1b756a6f81";
       fetchSubmodules = false;
-      sha256 = "sha256-4g+aUCyvz+GzhB7Vb71D0P2htzqMkQmr9RkuM/WXy6Y=";
+      sha256 = "sha256-erB32F+3teZexSlBpSrj/oWupKxUxHwrvIACrgvvRvU=";
     };
-    date = "2023-12-20";
+    date = "2023-12-22";
   };
   wezterm = {
     pname = "wezterm";
-    version = "e3cd2e93d0ee5f3af7f3fe0af86ffad0cf8c7ea8";
+    version = "84ae00c868e711cf97b2bfe885892428f1131a1d";
     src = fetchFromGitHub {
       owner = "wez";
       repo = "wezterm";
-      rev = "e3cd2e93d0ee5f3af7f3fe0af86ffad0cf8c7ea8";
+      rev = "84ae00c868e711cf97b2bfe885892428f1131a1d";
       fetchSubmodules = true;
-      sha256 = "sha256-sj3S1fWC6j9Q/Yc+4IpLbKC3lttUWFk65ROyCdQt+Zc=";
+      sha256 = "sha256-Sx5NtapMe+CtSlW9mfxUHhzF+n9tV2j/St6pku26Rj0=";
     };
-    date = "2023-12-03";
+    date = "2023-12-21";
   };
 }

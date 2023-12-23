@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     # ./brave.nix
+    ./discord.nix
     ./deadbeef.nix
     ./dunst.nix
     ./firefox.nix
@@ -10,6 +11,7 @@
     ./kitty.nix
     ./mpv.nix
     ./nemo.nix
+    ./minecraft.nix
     # ./obs-studio.nix
     # ./pathofbuilding.nix
     ./rofi.nix
