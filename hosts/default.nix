@@ -28,7 +28,6 @@
             ./${host}/hardware.nix # host specific hardware configuration
             ../nixos
             ../modules/nixos
-            # make sure to add overlays later !!!!
             ../overlays
             inputs.home-manager.nixosModules.home-manager
             {
@@ -56,8 +55,8 @@
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit extraSpecialArgs;
           pkgs = import inputs.nixpkgs {config.allowUnfree = true;};
-          # make sure to add overlays later!!!
           modules = homeManagerImports ++ [../overlays];
+          # modules = homeManagerImports;
         };
   in
     builtins.listToAttrs (map (host: {

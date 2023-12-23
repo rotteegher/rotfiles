@@ -15,7 +15,7 @@ in {
       else value.fishBody)
     cfg.functions;
     shellAliases = {
-      ehistory = "nvim ~/.local/share/fish/fish_history";
+      ehistory = "hx ~/.local/share/fish/fish_history";
     };
     shellInit =
       ''

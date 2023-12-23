@@ -5,6 +5,8 @@
   ...
 }: {
   options.rot = {
+    minecraft.enable = lib.mkEnableOption "minecraft" // {default = false;};
+    discord.enable = lib.mkEnableOption "discord" // {default = false;};
     firefox.enable = lib.mkEnableOption "firefox" // {default = true;};
     rofi.enable = lib.mkEnableOption "rofi" // {default = true;};
     k3b.enable = lib.mkEnableOption "k3b" // {default = false;};

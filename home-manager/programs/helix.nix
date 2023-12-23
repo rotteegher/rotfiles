@@ -1,11 +1,11 @@
 {
   config,
   lib,
+  pkgs,
   ...
-}: let
-  cfg = config.rot.helix;
-  in {
-    config = lib.mkIf cfg.enable {
+}: {
+    config = lib.mkIf config.rot.helix.enable {
+      home.packages = [ pkgs.lldb ];
       programs.helix = {
         enable = true;
         languages = {

@@ -11,18 +11,15 @@ in {
   config = lib.mkIf config.wayland.windowManager.hyprland.enable {
     # start hyprland
     rot.shell.profileExtra = ''
-      if [ "$(tty)" = "/dev/tty1" ]; then
-        exec Hyprland &> /dev/null
-      fi
+      # if [ "$(tty)" = "/dev/tty1" ]; then
+        # exec Hyprland &> /dev/null
+      # fi
     '';
 
     wayland.windowManager.hyprland.settings = {
       exec-once = [
         # init ipc listener
-        "hypr-ipc &"
-
-        # Input fcitx5
-        "fcitx5"
+        # "hypr-ipc &"
 
         # browsers
         # (openOnWorkspace 1 "brave --incognito")
@@ -54,14 +51,17 @@ in {
 
         # FIXME: weird race condition with swww init, need to sleep for a second
         # https://github.com/Horus645/swww/issues/144
-        "sleep 1; swww init && hypr-wallpaper"
+        # "sleep 1; swww init && hypr-wallpaper"
 
-        "sleep 5 && launch-waybar"
+        # "sleep 5 && launch-waybar"
 
         # fix gparted "cannot open display: :0" error
         "${pkgs.xorg.xhost}/bin/xhost +local:${user}"
         # fix Authorization required, but no authorization protocol specified error
         # "${pkgs.xorg.xhost}/bin/xhost si:localuser:root"
+
+        # Input fcitx5
+        "fcitx5"
       ];
     };
   };

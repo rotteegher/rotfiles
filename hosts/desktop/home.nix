@@ -28,6 +28,8 @@
     k3b.enable = true;
     helix.enable = true;
 
+    discord.enable = false;
+    minecraft.enable = true;
     # To list the gpg signing keyid run:
     # gpg --list-secret-keys --keyid-format=long
     # Copy over id string after similar characters 'sec dsa2048/'
@@ -46,6 +48,7 @@
         libgcc
         glibc
         zola
+        fspy
         # vial  
       ]
     );
