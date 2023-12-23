@@ -13,6 +13,7 @@
     bittorrent.enable = true;
     vercel.enable = false; # was true at iynaix config
     virt-manager.enable = true;
+    waydroid.enable = true;
   };
 
   services.xserver.displayManager.autoLogin.user = user;
