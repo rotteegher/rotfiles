@@ -1,6 +1,7 @@
 {
 config,
 pkgs,
+user,
 ...
 }: {
   config = {
@@ -33,6 +34,10 @@ pkgs,
 
     };
     services.gpm.enable = true;
+
+    users.users.${user} = {...}: {
+      extraGroups = [ "input" ];
+    };
 
     environment.variables = {
       # GTK_IM_MODULE = "fcitx";
