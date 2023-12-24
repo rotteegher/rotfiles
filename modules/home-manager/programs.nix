@@ -11,10 +11,11 @@
     rofi.enable = lib.mkEnableOption "rofi" // {default = true;};
     k3b.enable = lib.mkEnableOption "k3b" // {default = false;};
     telegram.enable = lib.mkEnableOption "telegram-desktop" // {default = true;};
-    blender.enable = lib.mkEnableOption "blender" // {default = true;};
+    reaper.enable = lib.mkEnableOption "reaper" // {default = false;};
+    blender.enable = lib.mkEnableOption "blender" // {default = false;};
     anime4k.enable = lib.mkEnableOption "anime4k" // {default = true;};
     deadbeef.enable = lib.mkEnableOption "deadbeef" // {default = host == "desktop";};
-    helix.enable = lib.mkEnableOption "helix";
+    helix.enable = lib.mkEnableOption "helix" // {default = true;};
     kitty.enable = lib.mkEnableOption "kitty" // {default = isNixOS;};
     obs-studio.enable = lib.mkEnableOption "obs-studio" // {default = isNixOS && host == "desktop";};
     pathofbuilding.enable = lib.mkEnableOption "pathofbuilding" // {default = isNixOS;};

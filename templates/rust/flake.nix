@@ -3,7 +3,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default";
     devenv.url = "github:cachix/devenv";
-    fenix.url = "github:nix-community/fenix";
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = {
@@ -30,6 +34,8 @@
               env = {
                 PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
               };
+
+              packages = with pkgs; [ bacon ];
 
               languages.rust = {
                 enable = true;

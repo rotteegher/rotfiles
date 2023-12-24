@@ -28,6 +28,9 @@
     k3b.enable = true;
     helix.enable = true;
 
+    blender.enable = true;
+    reaper.enable = true;
+
     discord.enable = false;
     minecraft.enable = true;
     # To list the gpg signing keyid run:
@@ -43,6 +46,7 @@
   home = {
     packages = lib.mkIf isNixOS (
       with pkgs; [
+        feh
         ffmpeg
         cmatrix
         libgcc

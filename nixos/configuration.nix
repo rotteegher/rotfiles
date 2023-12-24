@@ -57,7 +57,7 @@
   users.users.${user} = {...}: {
     isNormalUser = true;
     initialPassword = "password";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
   security = {
     sudo.enable = true;

@@ -4,6 +4,7 @@
     default = {
       h = "~";
       rots = "~/pr/rotfiles";
+      dots = "~/pr/dotfiles";
       cfg = "~/.config";
       vd = "~/Videos";
       vaa = "~/Videos/Anime";
