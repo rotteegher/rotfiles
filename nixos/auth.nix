@@ -25,10 +25,7 @@ in {
     ${user}.openssh.authorizedKeys.keyFiles = keyFiles;
   };
   services.gnome.gnome-keyring.enable = true;
-  security.polkit.enable = true;
 
-  # stops errors with copilor login?
-  environment.systemPackages = [pkgs.gcr];
 
   services.xserver.displayManager.autoLogin.user = lib.mkDefault (
     if config.boot.zfs.requestEncryptionCredentials
@@ -36,7 +33,6 @@ in {
     else null
   );
   services.getty.autologinUser = autoLoginUser;
-  security.pam.services.gdm.enableGnomeKeyring = autoLoginUser != null;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -48,8 +44,53 @@ in {
     };
   };
 
-  # i can't type xD
-  security.sudo.extraConfig = "Defaults passwd_tries=10";
+
+  security = {
+    pam.services.gdm.enableGnomeKeyring = autoLoginUser != null;
+    polkit.enable = true;
+    # Reboot/poweroff for unprivileged users
+    # Grants permissions to reboot/poweroff the machine to users in the users group. 
+    polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          subject.isInGroup("users")
+            && (
+              action.id == "org.freedesktop.login1.reboot" ||
+              action.id == "org.freedesktop.login1.reboot-multiple-sessions" ||
+              action.id == "org.freedesktop.login1.power-off" ||
+              action.id == "org.freedesktop.login1.power-off-multiple-sessions"
+            )
+          )
+        {
+          return polkit.Result.YES;
+        }
+      })
+    '';
+  };
+
+  environment.systemPackages = [
+    # stops errors with copilor login?
+    pkgs.gcr
+    # auth agent
+    pkgs.polkit-kde-agent
+  ];
+
+  # AUTH agent
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-kde-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit-kde-agent}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+    };
+  };
 
   # persist keyring and misc other secrets
   rot-nixos.persist.home = {

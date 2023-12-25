@@ -46,6 +46,7 @@
   home = {
     packages = lib.mkIf isNixOS (
       with pkgs; [
+        kdenlive
         feh
         ffmpeg
         cmatrix
