@@ -39,7 +39,9 @@ in {
         (openOnWorkspace 1 "$term")
 
         # audio
-        (openOnWorkspace 9 "pavucontrol && helvum && easyeffects")
+        (openOnWorkspace 9 "pavucontrol")
+        (openOnWorkspace 9 "helvum")
+        # (openOnWorkspace 9 "easyeffects")
 
         # download desktop
         (openOnWorkspace 10 "$term /md/wdc-data/_SMALL/_ANIME")

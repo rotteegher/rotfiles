@@ -17,6 +17,6 @@ in {
     bittorrent.enable = lib.mkEnableOption "Torrenting Applications";
     vercel.enable = lib.mkEnableOption "Vercel Backups";
     virt-manager.enable = lib.mkEnableOption "virt-manager";
-    waydroid.enable = lib.mkEnableOption "waydroid";
+    steam.enable = lib.mkEnableOption "steam";
   };
 }
