@@ -16,7 +16,7 @@ in {
         "$mod_SHIFT, e, exec, $term yazi ~/Downloads"
         "$mod, w, exec, brave"
         "$mod_SHIFT, w, exec, brave --incognito"
-        "$mod, v, exec, $term nvim"
+        # "$mod, v, exec, $term nvim"
         "$mod_SHIFT, v, exec, code"
         "$mod, period, exec, code ~/projects/dotfiles"
 

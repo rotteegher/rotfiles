@@ -21,6 +21,8 @@ in {
         # init ipc listener
         # "hypr-ipc &"
 
+        "/nix/store/$(ls -la /nix/store | rg polkit-kde-agent | grep '^d' | awk '{print $9}')/libexec/polkit-kde-authentication-agent-1 & "
+
         # browsers
         # (openOnWorkspace 1 "brave --incognito")
         # (openOnWorkspace 1 "brave --profile-directory=Default")
@@ -35,6 +37,9 @@ in {
 
         # terminal
         (openOnWorkspace 1 "$term")
+
+        # audio
+        (openOnWorkspace 9 "pavucontrol && helvum && easyeffects")
 
         # download desktop
         (openOnWorkspace 10 "$term /md/wdc-data/_SMALL/_ANIME")

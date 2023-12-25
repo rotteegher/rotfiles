@@ -59,8 +59,12 @@
     initialPassword = "password";
     extraGroups = [ "networkmanager" "wheel" ];
   };
+  # Reboot/poweroff for unprivileged users
+  # Grants permissions to reboot/poweroff machine to users in the users group. 
   security = {
     sudo.enable = true;
+    # i can't type xD
+    sudo.extraConfig = "Defaults passwd_tries=10";
   };
 
   # Allow unfree packages
