@@ -11,7 +11,7 @@
     imports = [
       # ./hyprnstack.nix
       ./keybinds.nix
-      # ./lock.nix
+      ./lock.nix
       ./screenshot.nix
       ./startup.nix
       ./wallpaper.nix

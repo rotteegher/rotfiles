@@ -20,7 +20,7 @@
     ./wallust
     # ./wezterm.nix
     ./yt-dlp.nix
-    # ./zathura.nix
+    ./zathura.nix
     ./telegram.nix
     ./blender.nix
     ./reaper.nix
