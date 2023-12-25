@@ -48,6 +48,7 @@
       with pkgs; [
         kdenlive
         feh
+        mupdf
         ffmpeg
         cmatrix
         libgcc

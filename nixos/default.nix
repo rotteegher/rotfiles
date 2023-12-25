@@ -22,8 +22,8 @@
     # ./syncoid.nix
     ./transmission.nix
     # ./vercel.nix
-    # ./virt-manager.nix
-    ./waydroid.nix
+    ./virt-manager.nix
+    ./steam.nix
     ./zfs.nix
     ./input.nix
   ];

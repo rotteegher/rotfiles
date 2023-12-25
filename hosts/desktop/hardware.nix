@@ -25,7 +25,7 @@
     settings = {
       General.Enable = "Source,Sink,Media,Socket";
       General.DiscoverableTimeout = 0;
-      # General.Name = "G604 LIGHTSPEED";
+      General.Name = "G604 LIGHTSPEED";
       Policy.AutoEnable = true;
     };
   };
