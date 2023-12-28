@@ -59,8 +59,8 @@
           general = let
             gap =
               if host == "desktop"
-              then 8
-              else 4;
+              then 4
+              else 2;
           in {
             gaps_in = gap;
             gaps_out = gap;

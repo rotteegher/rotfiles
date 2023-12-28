@@ -25,7 +25,7 @@
         };
         themes = {
           mtr = {
-            "inherits" = "varua";
+            "inherits" = "mellow";
             "ui.background" = { fg = "none"; };
           };
         };

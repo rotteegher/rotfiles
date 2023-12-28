@@ -19,7 +19,7 @@ in {
     wayland.windowManager.hyprland.settings = {
       exec-once = [
         # init ipc listener
-        # "hypr-ipc &"
+        "hypr-ipc &"
 
         "/nix/store/$(ls -la /nix/store | rg polkit-kde-agent | grep '^d' | awk '{print $9}')/libexec/polkit-kde-authentication-agent-1 & "
 
@@ -60,7 +60,7 @@ in {
         # https://github.com/Horus645/swww/issues/144
         # "sleep 1; swww init && hypr-wallpaper"
 
-        # "sleep 5 && launch-waybar"
+        "sleep 5 && launch-waybar"
 
         # fix gparted "cannot open display: :0" error
         "${pkgs.xorg.xhost}/bin/xhost +local:${user}"

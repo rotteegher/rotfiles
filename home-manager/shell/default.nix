@@ -23,6 +23,7 @@
     htop
     sd
     ugrep
+    file
   ];
 
   programs = {

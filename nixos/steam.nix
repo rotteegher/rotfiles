@@ -11,12 +11,12 @@ lib,
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
   
-    # rot-nixos.persist = {
-    #   home.directories = [
-    #     ".steam"
-    #     ".local/share/Steam"
-    #   ];
-    # };
+    rot-nixos.persist = {
+      home.directories = [
+        ".steam"
+        ".local/share/Steam"
+      ];
+    };
   };
 }
 
