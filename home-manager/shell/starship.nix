@@ -4,7 +4,7 @@
     enableBashIntegration = true;
     enableFishIntegration = true;
     settings = {
-      add_newline = false;
+      add_newline = true;
       line_break = {
         disabled = true;
       };
