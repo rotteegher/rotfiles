@@ -1,7 +1,7 @@
 
 {pkgs, ...}: {
   imports = [
-    ./bash.nix
+    # ./bash.nix
     # ./btop.nix
     ./direnv.nix
     ./fish.nix

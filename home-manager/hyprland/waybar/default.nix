@@ -88,8 +88,8 @@ in {
 
       modules-left = [
         "custom/nix"
-        "hyprland/window"
         "tray"
+        "hyprland/window"
       ];
 
       modules-right =

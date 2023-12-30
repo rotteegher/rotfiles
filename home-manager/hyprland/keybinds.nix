@@ -37,8 +37,8 @@ in {
 
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"
-        "$mod, j, movefocus, u"
-        "$mod, k, movefocus, d"
+        "$mod, k, movefocus, u"
+        "$mod, j, movefocus, d"
 
         "$mod_SHIFT, h, movewindow, l"
         "$mod_SHIFT, l, movewindow, r"
@@ -58,16 +58,16 @@ in {
         "$mod, 0, workspace, 10"
 
         # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        "$mod_SHIFT, 1, movetoworkspace, 1"
-        "$mod_SHIFT, 2, movetoworkspace, 2"
-        "$mod_SHIFT, 3, movetoworkspace, 3"
-        "$mod_SHIFT, 4, movetoworkspace, 4"
-        "$mod_SHIFT, 5, movetoworkspace, 5"
-        "$mod_SHIFT, 6, movetoworkspace, 6"
-        "$mod_SHIFT, 7, movetoworkspace, 7"
-        "$mod_SHIFT, 8, movetoworkspace, 8"
-        "$mod_SHIFT, 9, movetoworkspace, 9"
-        "$mod_SHIFT, 0, movetoworkspace, 10"
+        "$mod_SHIFT, 1, movetoworkspacesilent, 1"
+        "$mod_SHIFT, 2, movetoworkspacesilent, 2"
+        "$mod_SHIFT, 3, movetoworkspacesilent, 3"
+        "$mod_SHIFT, 4, movetoworkspacesilent, 4"
+        "$mod_SHIFT, 5, movetoworkspacesilent, 5"
+        "$mod_SHIFT, 6, movetoworkspacesilent, 6"
+        "$mod_SHIFT, 7, movetoworkspacesilent, 7"
+        "$mod_SHIFT, 8, movetoworkspacesilent, 8"
+        "$mod_SHIFT, 9, movetoworkspacesilent, 9"
+        "$mod_SHIFT, 0, movetoworkspacesilent, 10"
 
         "$mod, b, layoutmsg, swapwithmaster"
 
