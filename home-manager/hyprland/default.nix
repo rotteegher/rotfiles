@@ -45,9 +45,10 @@
           input = {
             kb_layout = "jp";
             follow_mouse = 1;
+            repeat_delay = 300;
 
             touchpad = {
-              natural_scroll = false;
+              natural_scroll = true;
               disable_while_typing = true;
             };
           };
@@ -126,11 +127,11 @@
 
           misc = {
             # disable_hyprland_logo = true; TODO
-            # disable_splash_rendering = true;
+            disable_splash_rendering = true;
             mouse_move_enables_dpms = true;
-            # animate_manual_resizes = true;
-            # animate_mouse_windowdragging = true;
-            # key_press_enables_dpms = true;
+            animate_manual_resizes = true;
+            animate_mouse_windowdragging = true;
+            key_press_enables_dpms = true;
             enable_swallow = false;
             swallow_regex = "^([Kk]itty|[Ww]ezterm)$";
           };
@@ -152,8 +153,7 @@
 
           windowrule = [
             # do not idle while watching videos
-            "idleinhibit fullscreen,Brave-browser"
-            "idleinhibit fullscreen,firefox-aurora"
+            "idleinhibit fullscreen,firefox"
             "idleinhibit focus,YouTube"
             "idleinhibit focus,mpv"
           ];
