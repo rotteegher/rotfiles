@@ -2,6 +2,7 @@
   config,
   lib,
   user,
+  pkgs,
   ...
 }: let
   cfg = config.rot-nixos.zfs;

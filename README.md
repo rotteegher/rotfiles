@@ -1,6 +1,6 @@
 # Rotteegher's NixOS Config
 
-Forked from [iynaix/dotfiles](https::/github.com/iynaix/dotfiles).
+Forked from [iynaix/dotfiles](https://github.com/iynaix/dotfiles).
 
 This config is intended to be used with NixOS. There is *experimental* support for running the dotfiles on [legacy operating systems](https://github.com/iynaix/dotfiles/blob/main/home-manager.md).
 

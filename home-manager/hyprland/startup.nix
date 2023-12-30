@@ -11,9 +11,9 @@ in {
   config = lib.mkIf config.wayland.windowManager.hyprland.enable {
     # start hyprland
     rot.shell.profileExtra = ''
-      if [ "$(tty)" = "/dev/tty1" ]; then
-      exec Hyprland &> /dev/null
-      fi
+      # if [ "$(tty)" = "/dev/tty1" ]; then
+      # exec Hyprland &> /dev/null
+      # fi
     '';
 
     wayland.windowManager.hyprland.settings = {

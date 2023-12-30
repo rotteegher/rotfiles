@@ -17,6 +17,9 @@
     "boot.shell_on_fail"
   ];
 
+
+  boot.tmpOnTmpfs = true;
+
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
