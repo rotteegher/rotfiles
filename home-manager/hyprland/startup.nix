@@ -11,15 +11,16 @@ in {
   config = lib.mkIf config.wayland.windowManager.hyprland.enable {
     # start hyprland
     rot.shell.profileExtra = ''
-      # if [ "$(tty)" = "/dev/tty1" ]; then
-        # exec Hyprland &> /dev/null
-      # fi
+      if [ "$(tty)" = "/dev/tty1" ]; then
+      exec Hyprland &> /dev/null
+      fi
     '';
 
     wayland.windowManager.hyprland.settings = {
       exec-once = [
         # init ipc listener
         "hypr-ipc &"
+        "hypr-wallpaper"
 
         "/nix/store/$(ls -la /nix/store | rg polkit-kde-agent | grep '^d' | awk '{print $9}')/libexec/polkit-kde-authentication-agent-1 & "
 

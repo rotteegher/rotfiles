@@ -37,6 +37,15 @@ in {
         tooltip = false;
       };
 
+      memory = {
+        interval = 0.5;
+        format = "{used:0.1f}G|{total:0.1f}G ";
+      };
+      cpu = {
+        interval = 0.5;
+        format = "{usage}|{load} ";
+      };
+
       clock = {
         calendar = {
           actions = {
@@ -79,11 +88,12 @@ in {
 
       modules-left = [
         "custom/nix"
-        # "hyprland/window"
+        "hyprland/window"
+        "tray"
       ];
 
       modules-right =
-        ["network" "pulseaudio"]
+        ["cpu" "memory" "network" "pulseaudio"]
         ++ (lib.optionals cfg.backlight.enable ["backlight"])
         ++ (lib.optionals cfg.battery.enable ["battery"])
         ++ ["clock"];
@@ -104,6 +114,9 @@ in {
         };
 
       position = "top";
+
+      tray = {
+      };
 
       pulseaudio = {
         format = "{icon}  {volume}%";
