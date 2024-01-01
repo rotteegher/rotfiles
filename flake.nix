@@ -22,10 +22,10 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland";
+    #   # inputs.nixpkgs.follows = "nixpkgs"; # commented twice
+    # };
 
     xdph = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
