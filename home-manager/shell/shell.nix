@@ -32,6 +32,8 @@
       wget = "wget --content-disposition";
       coinfc = "openpr coinfc";
 
+      H = "Hyprland";
+
       # cd aliases
       ".." = "cd ..";
       "..." = "cd ../..";

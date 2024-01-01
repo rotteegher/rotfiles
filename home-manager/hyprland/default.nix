@@ -44,9 +44,9 @@
 
           input = {
             kb_layout = "jp";
-            follow_mouse = 2;
+            follow_mouse = 1;
             accel_profile = "flat";
-            repeat_delay = 200;
+            repeat_delay = 300;
 
             touchpad = {
               natural_scroll = true;

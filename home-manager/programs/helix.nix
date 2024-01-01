@@ -42,12 +42,14 @@
           keys.select = {
             X = ["extend_line_up" "extend_to_line_bounds"];
             A-x = "extend_to_line_bounds";
+            C-y = "yank_to_clipboard";
           };
           keys.normal = {
             X = ["extend_line_up" "extend_to_line_bounds"];
             A-x = "extend_to_line_bounds";
             C-p = ["move_line_up" "scroll_up"];
             C-n = ["move_line_down" "scroll_down"];
+            C-y = "yank_to_clipboard";
             # esc = ["collapse_selection" "keep_primary_selection"];
           };
           editor.cursor-shape = {
