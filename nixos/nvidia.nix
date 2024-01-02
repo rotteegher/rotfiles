@@ -12,15 +12,17 @@ in {
     services.xserver.videoDrivers = ["nvidia"];
 
     hardware.nvidia = {
-      # package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
       # prevents crashes with nvidia on resuming, see:
       # https://github.com/hyprwm/Hyprland/issues/804#issuecomment-1369994379
       powerManagement.enable = false;
+
+      open = false;
     };
 
     environment = {
-      systemPackages = [pkgs.nvtop];
+      systemPackages = [pkgs.nvtop pkgs.glxinfo pkgs.vulkan-tools];
       sessionVariables =
         {
           NIXOS_OZONE_WL = "1";

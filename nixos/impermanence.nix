@@ -41,12 +41,12 @@ in {
     fileSystems."/" = lib.mkIf (cfg.tmpfs && cfg.erase.root) (lib.mkForce {
       device = "tmpfs";
       fsType = "tmpfs";
-      options = ["defaults" "size=1G" "mode=755"];
+      options = ["defaults" "size=8G" "mode=755"];
     });
     fileSystems."/home/${user}" = lib.mkIf (cfg.tmpfs && cfg.erase.home) (lib.mkForce {
       device = "tmpfs";
       fsType = "tmpfs";
-      options = ["defaults" "size=1G" "mode=777"];
+      options = ["defaults" "size=16G" "mode=777"];
     });
 
     # shut sudo up
@@ -91,6 +91,10 @@ in {
             [
               {
                 directory = "pr"; # project files
+                method = "symlink";
+              }
+              {
+                directory = ".steam";
                 method = "symlink";
               }
             ]

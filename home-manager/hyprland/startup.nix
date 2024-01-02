@@ -20,7 +20,6 @@ in {
       exec-once = [
         # init ipc listener
         "hypr-ipc &"
-        "hypr-wallpaper"
 
         "/nix/store/$(ls -la /nix/store | rg polkit-kde-agent | grep '^d' | awk '{print $9}')/libexec/polkit-kde-authentication-agent-1 & "
 
@@ -34,7 +33,7 @@ in {
         (openOnWorkspace 2 "firefox")
 
         # file manager
-        (openOnWorkspace 4 "nemo")
+        # (openOnWorkspace 4 "nemo")
 
         # terminal
         (openOnWorkspace 1 "$term")
@@ -57,9 +56,11 @@ in {
         # "hyprctl dispatch workspace 7"
         "hyprctl dispatch workspace 1"
 
+        "blueman-applet"
+
         # FIXME: weird race condition with swww init, need to sleep for a second
         # https://github.com/Horus645/swww/issues/144
-        # "sleep 1; swww init && hypr-wallpaper"
+        "sleep 1; swww init && hypr-wallpaper"
 
         "sleep 5 && launch-waybar"
 
