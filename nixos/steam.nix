@@ -11,6 +11,8 @@ lib,
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
     environment.systemPackages = with pkgs; [
+      steam
+      
       steamcmd
       steam-tui
       gcc
@@ -26,12 +28,11 @@ lib,
       keyutils
       
     ];
-    # rot-nixos.persist = {
-    #   home.directories = [
-    #     ".steam"
-    #     ".local/share/Steam"
-    #   ];
-    # };
+    rot-nixos.persist = {
+      home.directories = [
+        ".local/share/Steam"
+      ];
+    };
   };
 }
 
