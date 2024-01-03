@@ -88,11 +88,42 @@ if [[ $do_format == "n" ]]; then
     exit
 fi
 
+# Check boot partition
+sudo mkdir -p /mnt/boot
+if mountpoint -q /mnt/boot; then
+    echo "Unmounting /mnt/boot"
+    sudo umount -f /mnt/boot || true
+fi
 
-sudo umount "$BOOTDISK"
-sudo swapoff "$SWAPDISK"
-sudo zpool destroy zroot
+# Check swap partition
+if [ -b "$SWAPDISK" ]; then
+    echo "Checking swap status for: $SWAPDISK"
 
+    swap_device=$(readlink -f "$SWAPDISK")
+    echo "Swap device readlink: $swap_device"
+
+    # Check if the swap is currently on
+    if swapon --show | grep -q "$swap_device"; then
+        echo "Swap '$swap_device' is currently on."
+        echo "Turning off SWAP device: $SWAPDISK"
+        sudo swapoff "$SWAPDISK"
+    else
+        echo "Swap is already off. Continuing..."
+    fi
+fi
+
+# Check if zroot pool exists
+if zpool list zroot; then
+    do_reinstall=$(yesno "'zroot' zfs pool already exists. Reinstall filesystem?")
+    if [[ $do_reinstall == "n" ]]; then
+        exit
+    else
+        echo "Destroying zroot"
+        sudo zpool destroy zroot
+    fi
+fi
+
+# Populate partitions
 echo "Creating partitions"
 sudo blkdiscard -f "$DISK"
 
@@ -102,6 +133,7 @@ sudo sgdisk -n1:0:0 -t1:BF01 "$DISK"
 
 # notify kernel of partition changes
 sudo sgdisk -p "$DISK" > /dev/null
+sync
 sleep 5
 
 echo "Creating Swap"
