@@ -28,6 +28,7 @@ in {
         # (openOnWorkspace 1 "brave --profile-directory=Default")
 
 
+
         # firefox
         # (openOnWorkspace 2 "firefox-developer-edition https://discordapp.com/channels/@me ")
         (openOnWorkspace 2 "firefox")
@@ -46,6 +47,7 @@ in {
         # download desktop
         (openOnWorkspace 10 "$term /md/wdc-data/_SMALL/_ANIME")
         (openOnWorkspace 10 "transmission-remote-gtk")
+        # (openOnWorkspace 10 "hyprctl dispatch layoutmsg orientationcycle left top")
 
         # Telegram
         (openOnWorkspace 5 "telegram-desktop")

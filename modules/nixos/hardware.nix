@@ -5,6 +5,7 @@
 }: {
   options.rot-nixos = {
     nvidia.enable = lib.mkEnableOption "Nvidia GPU";
+    bluetooth.enable = lib.mkEnableOption "Bluetooth" // {default = false;};
     hdds = {
       enable = lib.mkEnableOption "Desktop HDDs" // {default = false;};
       stsea3tb = lib.mkEnableOption "stsea-barra" // {default = false;}; #  Seagate Barracuda 3TB ST3000DM007

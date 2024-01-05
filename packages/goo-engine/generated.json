@@ -1,0 +1,22 @@
+{
+    "goo-engine": {
+        "cargoLocks": null,
+        "date": "2023-11-11",
+        "extract": null,
+        "name": "goo-engine",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "dillongoostudios",
+            "repo": "goo-engine",
+            "rev": "9d27635972055084ea82017d864dbcd1ea26a058",
+            "sha256": "sha256-Mld6On+HkNSpvqTV7hfiUQqxby0zZ2Ldc+LWW67jSkY=",
+            "type": "github"
+        },
+        "version": "9d27635972055084ea82017d864dbcd1ea26a058"
+    }
+}

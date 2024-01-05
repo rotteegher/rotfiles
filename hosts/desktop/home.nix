@@ -31,7 +31,7 @@
     blender.enable = true;
     reaper.enable = true;
 
-    discord.enable = false;
+    discord.enable = true;
     minecraft.enable = true;
     # To list the gpg signing keyid run:
     # gpg --list-secret-keys --keyid-format=long
@@ -48,7 +48,7 @@
 
       with pkgs; [
         gimp
-        kdenlive
+        # kdenlive
         feh
         mupdf
         ffmpeg

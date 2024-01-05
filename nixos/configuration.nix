@@ -22,6 +22,7 @@
   };
 
   networking.hostName = "${host}";
+  networking.nameservers = ["8.8.8.8" "8.8.8.8"];
 
   # Enable networking
   networking.networkmanager.enable = true;

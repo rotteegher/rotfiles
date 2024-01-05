@@ -26,6 +26,8 @@ in {
   dotfiles-utils =
     pkgs.callPackage ./dotfiles-utils {inherit rustPlatform;};
 
+  goo-engine = 
+    w pkgs.callPackage ./goo-engine {};
   # mpv plugins
   # mpv-anime4k = pkgs.callPackage ./mpv-anime4k {};
   # mpv-deletefile = w pkgs.callPackage ./mpv-deletefile {};

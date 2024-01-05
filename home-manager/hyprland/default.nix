@@ -127,7 +127,7 @@
           };
 
           misc = {
-            # disable_hyprland_logo = true; TODO
+            disable_hyprland_logo = false;
             disable_splash_rendering = true;
             mouse_move_enables_dpms = true;
             animate_manual_resizes = true;

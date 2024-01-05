@@ -49,9 +49,13 @@
       fi
 
       if [ "$#" -eq 0 ]; then
-          nh os switch --nom --hostname "${host}"
+          nh os switch --nom --hostname "${host}" -- --option eval-cache false
       else
-          nh os switch --nom "$@"
+          # force host to be current host
+          # disable shellcheck (substition syntax)
+          # shellcheck disable=SC2001
+          cleaned_args=$(echo "$@" | sed 's/\(--hostname\) [^[:space:]]*/\1 ${host}/')
+          nh os switch --nom "$cleaned_args" -- --option eval-cache false
       fi
 
       # only relevant if --dry is passed
@@ -61,6 +65,7 @@
       cd - > /dev/null
     '';
   };
+  # update all nvfetcher overlays and packages
   nv-update = pkgs.writeShellApplication {
     name = "nv-update";
     runtimeInputs = [nswitch pkgs.nvfetcher];
