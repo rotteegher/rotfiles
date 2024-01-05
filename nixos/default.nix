@@ -8,17 +8,16 @@
     ./audio.nix
     ./auth.nix
     ./configuration.nix
+    # ./keyd.nix # TODO 
     # ./docker.nix
     # ./filezilla.nix
-    # ./gnome3.nix
+    # ./gnome3.nix # TODO
     ./hdds.nix
-    ./hyprland.nix # TODO!!!
+    ./hyprland.nix
     ./impermanence.nix
-    # ./kanata.nix
     ./nix.nix
     ./nvidia.nix
     # ./sonarr.nix
-    ./sops.nix
     # ./syncoid.nix
     ./transmission.nix
     # ./vercel.nix
@@ -26,6 +25,7 @@
     ./steam.nix
     ./zfs.nix
     ./input.nix
+    ./bluetooth.nix
   ];
 
   config = {

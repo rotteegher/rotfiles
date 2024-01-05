@@ -25,14 +25,14 @@
       pr = "openpr";
       rotsh = "hx ~/pr/rotfiles";
       py = "python";
-      tr = "eza --tree";
+      tr = "eza --tree --level=3";
       l = "eza -lag --group-directories-first --git";
       lto = "eza -lag --group-directories-first --git --total-size";
       v = "nvim";
       wget = "wget --content-disposition";
-      coinfc = "openpr coinfc";
+      coinfc = "pr coinfc";
 
-      H = "Hyprland";
+      hy = "Hyprland";
 
       # cd aliases
       ".." = "cd ..";

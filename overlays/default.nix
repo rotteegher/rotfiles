@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: let
   # include generated sources from nvfetcher
@@ -50,7 +51,7 @@ in {
         imv = prev.imv.overrideAttrs (o: {
           patches =
             (o.patches or [])
-            ++ [
+             ++ [
               # https://lists.sr.ht/~exec64/imv-devel/patches/39476
               ./imv-fix-repeated-keypresses.patch
             ];
@@ -85,11 +86,80 @@ in {
         # wallust = overrideRustPackage "wallust";
 
         # use latest commmit from git
-        waybar = prev.waybar.overrideAttrs (o:
-          sources.waybar
-          // {
-            version = "${o.version}-${sources.waybar.version}";
-          });
+        # waybar = prev.waybar.overrideAttrs (o:
+        #   sources.waybar
+        #   // {
+        #     version = "${o.version}-${sources.waybar.version}";
+        #   });
+        waybar = let
+          version = "3.5.1";
+          catch2_3 = assert (lib.assertMsg (prev.catch2_3.version != version) "catch2: override is no longer needed");
+            prev.catch2_3.overrideAttrs (_: {
+              inherit version;
+              src = prev.fetchFromGitHub {
+                owner = "catchorg";
+                repo = "Catch2";
+                rev = "v${version}";
+                hash = "sha256-OyYNUfnu6h1+MfCF8O+awQ4Usad0qrdCtdZhYgOY+Vw=";
+              };
+            });
+        in
+          (prev.waybar.override {inherit catch2_3;}).overrideAttrs (o:
+            sources.waybar
+            // {
+              version = "${o.version}-${sources.waybar.version}";
+            });
+
+
+        # goo-engine = prev.blender.overrideAttrs (o: sources.goo-engine);
+        # goo-engine = stdenv.mkDerivation (
+        #   sources.goo-engine {
+        #     python = pkgs.python310;
+
+        #     phases = ["unpackPhase" "buildPhase" "installPhase"];
+        #     enableParallelBuilding = true;
+        #     nativeBuildInputs = with pkgs; [cmake git python pkg-config];
+        #     buildInputs = with pkgs; [
+        #       libjpeg libpng zstd freetype openimageio2 opencolorio openexr_3
+        #       embree boost ffmpeg_5 tbb fftw libGL libGLU glew
+        #       xorg.libX11 xorg.libXi xorg.libXxf86vm xorg.libXrender
+        #       # Python packages
+        #       python310Packages.numpy python310Packages.requests
+        #     ];
+
+        #     pythonPath = with pkgs.python310Packages; [numpy requests zstd python];
+
+        #     postPatch = ''
+        #       rm build_files/cmake/Modules/FindPython.cmake
+        #     '';
+
+        #     cmakeFlags = [
+        #       "-DWITH_TBB=ON"
+        #       "-DWITH_ALEMBIC=ON"
+        #       "-DWITH_MOD_OCEANSIM=ON"
+        #       "-DWITH_FFTW3=ON"
+        #       "-DWITH_INSTALL_PORTABLE=OFF"
+        #       # Python
+        #       # "-DPYTHON_LIBRARY=${python.libPrefix}"
+        #       # "-DPYTHON_VERSION=${python.pythonVersion}"
+        #       # "-DPYTHON_LIBPATH=${python}/lib"
+        #       "-DWITH_PYTHON_MODULE=OFF"
+        #       "-DWITH_PYTHON_INSTALL_NUMPY=OFF"
+        #       "-DWITH_PYTHON_INSTALL_ZSTANDARD=OFF"
+        #       "-DWITH_PYTHON_SAFETY=ON"
+        #       # OpenGL
+        #       "-DWITH_GL_EGL=ON"
+        #       "-DWITH_GLEW_ES=ON"
+        #       ];
+
+
+        #     installPhase = ''
+        #       echo "########################################"
+        #       echo $pythonPath
+        #     '';
+        #   }
+        # );
+
 
         # TODO: remove on new wezterm release
         # fix wezterm crashing instantly

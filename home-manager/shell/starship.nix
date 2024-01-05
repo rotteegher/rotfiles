@@ -57,10 +57,10 @@
         symbol = "❄️ ";
         style = "blue";
       };
-      # python = {
-      #   format = "[$virtualenv]($style) ";
-      #   style = "bright-black";
-      # };
+      python = {
+        format = "[$virtualenv]($style) ";
+        style = "bright-black";
+      };
     };
   };
 

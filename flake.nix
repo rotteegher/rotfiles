@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixpkgs-vscode.url = "github:nixos/nixpkgs/db9208ab987cdeeedf78ad9b4cf3c55f5ebd269b";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     fenix = {
@@ -22,18 +20,13 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    # hyprland = {
-    #   url = "github:hyprwm/Hyprland";
-    #   # inputs.nixpkgs.follows = "nixpkgs"; # commented twice
-    # };
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      # inputs.nixpkgs.follows = "nixpkgs"; # commented twice
+    };
 
     xdph = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

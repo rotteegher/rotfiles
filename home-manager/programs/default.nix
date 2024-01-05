@@ -12,7 +12,7 @@
     ./mpv.nix
     ./nemo.nix
     ./minecraft.nix
-    # ./obs-studio.nix
+    ./obs-studio.nix
     # ./pathofbuilding.nix
     ./rofi.nix
     ./vlc.nix

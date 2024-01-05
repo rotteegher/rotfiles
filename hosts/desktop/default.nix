@@ -10,6 +10,8 @@
     nvidia.enable = true;
     zfs.encryption = false;
 
+    bluetooth.enable = true;
+
     # software
     distrobox.enable = true;
     syncoid.enable = true;

@@ -30,13 +30,11 @@
 
     environment.systemPackages = with pkgs;
       [
-        alsa-lib
-        alsa-utils
+        # alsa-lib
+        # alsa-utils
         pavucontrol
         helvum
         easyeffects
-        lyrebird
-        sox
       ];
   };
 }

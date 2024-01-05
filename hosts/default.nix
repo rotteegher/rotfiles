@@ -48,8 +48,7 @@
             # alias for home-manager
             (lib.mkAliasOptionModule ["hm"] ["home-manager" "users" user])
             inputs.impermanence.nixosModules.impermanence
-            inputs.sops-nix.nixosModules.sops
-          ];
+            ];
         }
       else
         inputs.home-manager.lib.homeManagerConfiguration {

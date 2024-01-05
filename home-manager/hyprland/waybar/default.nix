@@ -128,15 +128,15 @@ in {
         tooltip = false;
       };
 
-      "hyprland/workspaces" = {
-        # TODO: pacman, remove active inverse circle
+      # "hyprland/workspaces" = {
+        # # TODO: pacman, remove active inverse circle
         # format = "{icon}";
         # format-icons = {
         #   active = "󰮯";
         #   default = "·";
         #   urgent = "󰊠";
         # };
-      };
+      # };
 
       "custom/nix" = {
         format = "󱄅";
