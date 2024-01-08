@@ -23,7 +23,7 @@
       nano = "nvim";
       open = "xdg-open";
       pr = "openpr";
-      rotsh = "hx ~/pr/rotfiles";
+      rhx = "cd ~/pr/rotfiles & hx .";
       py = "python";
       tr = "eza --tree --level=3";
       l = "eza -lag --group-directories-first --git";
@@ -53,8 +53,8 @@
     };
     # create a new devenv environment
     mkdevenv = {
-      bashBody = ''nix flake init --template github:rotteegher/dotfiles#$1'';
-      fishBody = ''nix flake init --template github:rotteegher/dotfiles#$argv[1]'';
+      bashBody = ''nix flake init --template github:rotteegher/rotfiles#$1'';
+      fishBody = ''nix flake init --template github:rotteegher/rotfiles#$argv[1]'';
     };
     # improved which for nix
     where = {

@@ -35,6 +35,10 @@ user,
     };
     services.gpm.enable = true;
 
+    # piper
+    services.ratbagd.enable = true;
+    environment.systemPackages = [pkgs.piper];
+
     users.users.${user} = {...}: {
       extraGroups = [ "input" ];
     };

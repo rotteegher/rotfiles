@@ -26,11 +26,16 @@
         };
 
         packages = with pkgs; [
+          xdg-utils
+          hyprshade
           # clipboard history
           cliphist
           wl-clipboard
         ];
+
+        file.".config/hypr/shaders".source = ./shaders;
       };
+   
 
       wayland.windowManager.hyprland.settings = lib.mkMerge [
         {
@@ -123,7 +128,7 @@
           };
 
           binds = {
-            workspace_back_and_forth = true;
+            workspace_back_and_forth = false;
           };
 
           misc = {

@@ -1,6 +1,5 @@
 {user, ...}: {
   rot-nixos = {
-    kanata.enable = true;
   };
 
   # by-id doesn't seem to work with amd mobo

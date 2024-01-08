@@ -30,8 +30,9 @@
 
     environment.systemPackages = with pkgs;
       [
-        # alsa-lib
-        # alsa-utils
+        sox
+        alsa-lib
+        alsa-utils
         pavucontrol
         helvum
         easyeffects

@@ -88,6 +88,7 @@ in {
 
       modules-left = [
         "custom/nix"
+        "custom/shade"
         "tray"
         "hyprland/window"
       ];
@@ -142,6 +143,13 @@ in {
         format = "󱄅";
         on-click = "hypr-wallpaper";
         on-click-right = "imv-wallpaper";
+        tooltip = false;
+      };
+      "custom/shade" = {
+        format = "";
+        on-click = "hyprshade on blue-light-filter";
+        on-click-right = "hyprshade on vibrance";
+        on-click-middle = "hyprshade off";
         tooltip = false;
       };
     };
