@@ -1,5 +1,5 @@
 use clap::Parser;
-use dotfiles_utils::{cli::WaifuFetchArgs, full_path, NixInfo};
+use dotfiles_utils::{cli::WaifuFetchArgs, full_path, nixinfo::NixInfo};
 use signal_hook::{
     consts::{SIGINT, SIGUSR2},
     iterator::Signals,
@@ -75,6 +75,12 @@ fn main() {
     let mut signals = Signals::new([SIGINT, SIGUSR2]).unwrap();
 
     thread::spawn(move || {
+        if args.exit {
+            // restore terminal cursor
+            print!("\x1B[?25h");
+            io::stdout().flush().expect("Failed to flush stdout");
+            std::process::exit(0);
+        }
         for sig in signals.forever() {
             match sig {
                 SIGINT => {

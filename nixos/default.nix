@@ -17,6 +17,7 @@
     ./impermanence.nix
     ./nix.nix
     ./nvidia.nix
+    ./plasma.nix
     # ./sonarr.nix
     # ./syncoid.nix
     ./transmission.nix
@@ -32,6 +33,7 @@
     # automount disks
     services.gvfs.enable = true;
     # services.devmon.enable = true;
+
 
     environment = {
       etc = {
@@ -82,6 +84,13 @@
     programs.nano.enable = lib.mkForce false;
 
     programs.file-roller.enable = true;
+
+    # use gtk theme on qt apps
+    qt = {
+      enable = true;
+      platformTheme = "gnome";
+      style = "adwaita-dark";
+    };
 
     rot-nixos.persist = {
       root.directories = lib.mkIf config.hm.rot.wifi.enable [

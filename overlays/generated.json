@@ -61,7 +61,7 @@
     },
     "wallust": {
         "cargoLocks": null,
-        "date": "2024-01-06",
+        "date": "2024-01-11",
         "extract": null,
         "name": "wallust",
         "passthru": null,
@@ -71,16 +71,16 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "dbb000b39ea57940d6900d0887cb967afd1a7236",
-            "sha256": "sha256-2Dt49zps3JSxElOsgUHOLuiJi/dkIlEFrS7dPHFIUGQ=",
+            "rev": "e6740a4a82abd794108582c5a02cd559643d87fa",
+            "sha256": "sha256-lwai3vaq/osEEuZmOVBPqgF6mzxFPbgU9fNWHhv0rWs=",
             "type": "git",
             "url": "https://codeberg.org/explosion-mental/wallust.git"
         },
-        "version": "dbb000b39ea57940d6900d0887cb967afd1a7236"
+        "version": "e6740a4a82abd794108582c5a02cd559643d87fa"
     },
     "waybar": {
         "cargoLocks": null,
-        "date": "2024-01-04",
+        "date": "2024-01-12",
         "extract": null,
         "name": "waybar",
         "passthru": null,
@@ -92,15 +92,15 @@
             "name": null,
             "owner": "Alexays",
             "repo": "Waybar",
-            "rev": "4b20f522f0b357d7140a60c70e90fafb58c6bd9f",
-            "sha256": "sha256-7z48B58W3YXOi41llbB/RJgm9RfzHT+rvlfpTGXQtok=",
+            "rev": "f744d906becbf6d06a3d95fee37af5c32061d1aa",
+            "sha256": "sha256-aiLvmd5aIFviuJNMEcSM1WC2Q8lQ4eMq8qIvUhwjEUA=",
             "type": "github"
         },
-        "version": "4b20f522f0b357d7140a60c70e90fafb58c6bd9f"
+        "version": "f744d906becbf6d06a3d95fee37af5c32061d1aa"
     },
     "wezterm": {
         "cargoLocks": null,
-        "date": "2024-01-03",
+        "date": "2024-01-11",
         "extract": null,
         "name": "wezterm",
         "passthru": null,
@@ -112,10 +112,10 @@
             "name": null,
             "owner": "wez",
             "repo": "wezterm",
-            "rev": "4921f139d35590ab35415021221a2a6f5cf10ab3",
-            "sha256": "sha256-WXOsP2rjbT4unc7lXbxbRbCcrc89SfyVdErzFndBF9o=",
+            "rev": "6c36a4dda2527836af0e0aa076d5dd0bd8d3dd79",
+            "sha256": "sha256-bWcez8vJlZttrVmBjyXZBZIbSBE7tpu1lkVSH1T6Fw0=",
             "type": "github"
         },
-        "version": "4921f139d35590ab35415021221a2a6f5cf10ab3"
+        "version": "6c36a4dda2527836af0e0aa076d5dd0bd8d3dd79"
     }
 }

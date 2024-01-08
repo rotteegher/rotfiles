@@ -36,9 +36,6 @@ in {
         # file manager
         # (openOnWorkspace 4 "nemo")
 
-        # terminal
-        (openOnWorkspace 1 "$term")
-
         # audio
         (openOnWorkspace 9 "pavucontrol")
         (openOnWorkspace 9 "helvum")

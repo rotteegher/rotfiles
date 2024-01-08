@@ -5,7 +5,7 @@
   ...
 }: {
     config = lib.mkIf config.rot.helix.enable {
-      home.packages = [ pkgs.lldb ];
+      home.packages = [ pkgs.lldb pkgs.clang-tools ];
       programs.helix = {
         enable = true;
         languages = {

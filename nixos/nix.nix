@@ -197,7 +197,7 @@ in {
 
   nix = {
     # use flakes
-    extraOptions = "experimental-features = nix-command flakes auto-allocate-uids configurable-impure-env";
+    extraOptions = "experimental-features = nix-command flakes auto-allocate-uids";
     gc = {
       # Automatic garbage collection
       automatic = true;

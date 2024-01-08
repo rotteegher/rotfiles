@@ -26,7 +26,7 @@ in {
         set GPG_TTY $(tty)
         export GPG_TTY
 
-        # set GTK_IM_MODULE ibus
+        set -e GTK_IM_MODULE
         set QT_IM_MODULE fcitx
         set XMODIFIERS @im=fcitx
 

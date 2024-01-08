@@ -1,6 +1,23 @@
 use clap::{builder::PossibleValuesParser, Parser, Subcommand};
 use std::path::PathBuf;
 
+// ------------------ HYPR MONITOR ------------------
+#[derive(Parser, Debug)]
+#[command(name = "hypr-monitors", about = "Re-arranges workspaces to monitor")]
+pub struct HyprMonitorArgs {
+    #[arg(
+        long,
+        default_value = "primary",
+        value_name = "EXTEND",
+        value_parser = PossibleValuesParser::new([
+            "primary",
+            "secondary",
+        ]),
+        help = "set new display(s) to be primary or secondary"
+    )]
+    pub extend: Option<String>,
+}
+
 // ------------------ HYPR SAME CLASS ------------------
 
 #[derive(Subcommand, Debug)]
@@ -29,13 +46,6 @@ pub struct HyprSameClassArgs {
 pub struct HyprWallpaperArgs {
     #[arg(long, action, help = "reload current wallpaper")]
     pub reload: bool,
-
-    #[arg(
-        long,
-        action,
-        help = "do not use wallust to generate colorschemes for programs"
-    )]
-    pub no_wallust: bool,
 
     #[arg(
         long,
@@ -104,4 +114,6 @@ pub struct RofiMpvArgs {
 pub struct WaifuFetchArgs {
     #[arg(long, action, help = "prints path to generated image")]
     pub image: bool,
+    #[arg(short, long, action)]
+    pub exit: bool,
 }

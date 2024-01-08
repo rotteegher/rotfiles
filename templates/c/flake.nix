@@ -27,16 +27,12 @@
               dotenv.disableHint = true;
 
               packages = with pkgs; [
-                gnumake
                 cmake
-                gcc
                 libgcc
-                git
                 glibc
                 glibc.static
                 zlib
                 cxxtools
-                subversion
               ];
 
               # setup openssl for reqwest (if used)
@@ -47,15 +43,15 @@
               languages.c = {
                 enable = true;
               };
-              languages.python = {
-               enable = true;
-               package = pkgs.python3.withPackages (ps:
-                 with ps; [
-                   flake8
-                   black
-                 ]);
-               venv.enable = true;
-              };
+              # languages.python = {
+              #  enable = true;
+              #  package = pkgs.python3.withPackages (ps:
+              #    with ps; [
+              #      flake8
+              #      black
+              #    ]);
+              #  venv.enable = true;
+              # };
             }
           ];
         };
