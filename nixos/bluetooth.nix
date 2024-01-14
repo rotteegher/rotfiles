@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.rot-nixos.bluetooth;
@@ -14,6 +15,9 @@ in {
     services.blueman.enable = true;
 
     hm = hmCfg: {
+      home.packages = with pkgs; [
+        bluez
+      ];
       # control media player over bluetooth
       services.mpris-proxy.enable = true;
 

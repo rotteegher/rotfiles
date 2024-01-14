@@ -21,6 +21,7 @@
     fd
     fx
     htop
+    btop
     sd
     ugrep
     file
