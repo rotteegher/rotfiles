@@ -26,8 +26,8 @@ user,
 
     # KEYMAPS
     console = {
-      # font = "ruscii_8x8";
-      font = "drdos8x14";
+      font = "ruscii_8x8";
+      #font = "drdos8x14";
       packages = with pkgs; [ terminus_font ];
       keyMap = "jp106";
       # useXkbConfig = true; # use xkbOptions in tty.

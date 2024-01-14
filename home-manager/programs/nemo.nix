@@ -79,9 +79,9 @@
       # folder preferences such as view mode and sort order
       ".local/share/gvfs-metadata"
     ];
-    cache = [
-      # thumbnail cache
-      ".cache/thumbnails"
-    ];
+    # cache = [
+    #   # thumbnail cache
+    #   ".cache/thumbnails"
+    # ];
   };
 }

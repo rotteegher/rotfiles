@@ -25,7 +25,8 @@
         };
         themes = {
           mtr = {
-            "inherits" = "mellow";
+            # "inherits" = "mellow";
+            "inherits" = "ferra";
             "ui.background" = { fg = "none"; };
           };
         };
@@ -36,7 +37,7 @@
             true-color = true;
             line-number = "relative";
             mouse = true;
-            rulers = [80];
+            rulers = [200];
             bufferline = "always";
           };
           keys.select = {

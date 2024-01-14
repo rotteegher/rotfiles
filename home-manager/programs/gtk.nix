@@ -5,7 +5,7 @@
   isNixOS,
   ...
 }: let
-  wallustGtk = false;
+  wallustGtk = true;
   gtkColor = color: value: ''@define-color ${color} ${value};'';
 in {
   home = {
@@ -37,15 +37,16 @@ in {
         package = pkgs.adw-gtk3;
       }
       else {
-        name = "Catppuccin-Mocha-Compact-Blue-Dark";
+        name = "Catppuccin-Mocha-Compact-Yellow-Dark";
         package = pkgs.catppuccin-gtk.override {
-          accents = ["blue"];
+          accents = ["yellow"];
           variant = "mocha";
+          tweaks = [ "rimless" "black" ];
           size = "compact";
         };
       };
     iconTheme = {
-      name = "Tela-blue-dark";
+      name = "Tela-yellow-dark";
       package = pkgs.tela-icon-theme;
     };
     font = {
