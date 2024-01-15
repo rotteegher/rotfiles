@@ -27,8 +27,8 @@ in {
         export GPG_TTY
 
         set -e GTK_IM_MODULE
-        set QT_IM_MODULE fcitx
-        set XMODIFIERS @im=fcitx
+        set -e QT_IM_MODULE
+        set -e XMODIFIERS
 
         # fix starship prompt to only have newlines after the first command
         # https://github.com/starship/starship/issues/560#issuecomment-1465630645
@@ -36,8 +36,12 @@ in {
           echo ""
         end
 
-      ''
-        # INSERT IN STRING shellInit UP THERE ^^^^^^
+        set -g fish_cursor underscore
+        set -g fish_cursor_default underscore
+        set -g fish_cursor_insert underscore
+        set -g fish_cursor_selection_mode underscore
+        echo ""
+        ''
         # fish doesn't seem to pick up completions for dotfiles_utils?
         # set --append fish_complete_path "${pkgs.rot.dotfiles-utils}/share/fish/vendor_completions.d" # TODO
 

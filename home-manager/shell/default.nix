@@ -1,7 +1,7 @@
 
 {pkgs, ...}: {
   imports = [
-    # ./bash.nix
+    ./bash.nix
     # ./btop.nix
     ./direnv.nix
     ./fish.nix
@@ -12,8 +12,7 @@
     ./shell.nix
     ./starship.nix
     ./tmux.nix
-    # ./yazi
-    # TODO!!!
+    ./yazi
   ];
 
   home.packages = with pkgs; [
