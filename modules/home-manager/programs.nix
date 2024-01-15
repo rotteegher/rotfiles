@@ -2,10 +2,10 @@
   host,
   isNixOS,
   lib,
+  pkgs,
   ...
 }: {
   options.rot = {
-    minecraft.enable = lib.mkEnableOption "minecraft" // {default = false;};
     discord.enable = lib.mkEnableOption "discord" // {default = false;};
     firefox.enable = lib.mkEnableOption "firefox" // {default = true;};
     rofi.enable = lib.mkEnableOption "rofi" // {default = true;};
@@ -23,6 +23,10 @@
     trimage.enable = lib.mkEnableOption "trimage";
     vlc.enable = lib.mkEnableOption "vlc";
     wezterm.enable = lib.mkEnableOption "wezterm" // {default = isNixOS;};
+
+    # MINECRAFT PRISMLAUNCHER
+    minecraft-launcher.enable = lib.mkEnableOption "minecraft-prismlauncher" // {default = false;};
+    # WALLUST
     wallust = with lib.types; {
       enable = lib.mkEnableOption "wallust" // {default = true;};
       threshold = lib.mkOption {

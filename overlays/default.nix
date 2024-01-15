@@ -41,6 +41,21 @@ in {
             ];
         });
 
+        rclip = prev.rclip.overridePythonAttrs (o: {
+          version = "1.7.24";
+
+          src = prev.fetchFromGitHub {
+            owner = "yurijmikhalevich";
+            repo = "rclip";
+            rev = "v1.7.24";
+            hash = "sha256-JWtKgvSP7oaPg19vWnnCDfm7P5Uew+v9yuvH7y2eHHM=";
+          };
+
+          nativeBuildInputs = o.nativeBuildInputs ++ [pkgs.python3Packages.pythonRelaxDepsHook];
+
+          pythonRelaxDeps = ["torch" "torchvision"];
+        });
+
         # add default font to silence null font errors
         lsix = prev.lsix.overrideAttrs (o: {
           postFixup = ''
@@ -93,56 +108,6 @@ in {
             // {
               version = "${o.version}-${sources.waybar.version}";
             });
-
-
-        # goo-engine = prev.blender.overrideAttrs (o: sources.goo-engine);
-        # goo-engine = stdenv.mkDerivation (
-        #   sources.goo-engine {
-        #     python = pkgs.python310;
-
-        #     phases = ["unpackPhase" "buildPhase" "installPhase"];
-        #     enableParallelBuilding = true;
-        #     nativeBuildInputs = with pkgs; [cmake git python pkg-config];
-        #     buildInputs = with pkgs; [
-        #       libjpeg libpng zstd freetype openimageio2 opencolorio openexr_3
-        #       embree boost ffmpeg_5 tbb fftw libGL libGLU glew
-        #       xorg.libX11 xorg.libXi xorg.libXxf86vm xorg.libXrender
-        #       # Python packages
-        #       python310Packages.numpy python310Packages.requests
-        #     ];
-
-        #     pythonPath = with pkgs.python310Packages; [numpy requests zstd python];
-
-        #     postPatch = ''
-        #       rm build_files/cmake/Modules/FindPython.cmake
-        #     '';
-
-        #     cmakeFlags = [
-        #       "-DWITH_TBB=ON"
-        #       "-DWITH_ALEMBIC=ON"
-        #       "-DWITH_MOD_OCEANSIM=ON"
-        #       "-DWITH_FFTW3=ON"
-        #       "-DWITH_INSTALL_PORTABLE=OFF"
-        #       # Python
-        #       # "-DPYTHON_LIBRARY=${python.libPrefix}"
-        #       # "-DPYTHON_VERSION=${python.pythonVersion}"
-        #       # "-DPYTHON_LIBPATH=${python}/lib"
-        #       "-DWITH_PYTHON_MODULE=OFF"
-        #       "-DWITH_PYTHON_INSTALL_NUMPY=OFF"
-        #       "-DWITH_PYTHON_INSTALL_ZSTANDARD=OFF"
-        #       "-DWITH_PYTHON_SAFETY=ON"
-        #       # OpenGL
-        #       "-DWITH_GL_EGL=ON"
-        #       "-DWITH_GLEW_ES=ON"
-        #       ];
-
-
-        #     installPhase = ''
-        #       echo "########################################"
-        #       echo $pythonPath
-        #     '';
-        #   }
-        # );
 
 
         # TODO: remove on new wezterm release

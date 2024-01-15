@@ -18,7 +18,7 @@ in {
         "$mod_SHIFT, w, exec, brave --incognito"
         # "$mod, v, exec, $term nvim"
         "$mod_SHIFT, v, exec, code"
-        "$mod, period, exec, hx ~/pr/rotfiles"
+        "$mod, period, exec, kitty --hold -d ~/pr/rotfiles hx"
 
         # exit hyprland
         "$mod_SHIFT, c, exit,"

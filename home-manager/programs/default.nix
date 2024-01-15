@@ -11,7 +11,7 @@
     ./kitty.nix
     ./mpv.nix
     ./nemo.nix
-    ./minecraft.nix
+    ./minecraft-launchers.nix
     ./obs-studio.nix
     # ./pathofbuilding.nix
     ./rofi.nix

@@ -16,9 +16,9 @@
         "$git_state"
         "$git_status"
         "$nix_shell"
-        # "$cmd_duration"
-        # "$line_break"
-        # "$python"
+        "$cmd_duration"
+        "$line_break"
+        "$python"
         "$character"
       ];
       character = {

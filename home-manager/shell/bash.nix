@@ -50,10 +50,15 @@ in {
         function _set_beam_cursor() {
             _set_cursor '\e[6 q'
         }
+        function _set_underline_cursor() {
+            _set_cursor '\e[4 q'
+        }
 
         # set starting cursor to blinking beam
         # echo -e -n "\x1b[\x35 q"
-        _set_beam_cursor
+
+        # set cursor with function
+        _set_underline_cursor
       ''
       # wallust colorscheme
       + lib.optionalString (config.rot.wallust.enable) ''

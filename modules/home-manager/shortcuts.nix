@@ -21,6 +21,8 @@
       dd = "~/Downloads";
       dp = "~/Downloads/pending";
       dus = "~/Downloads/pending/Unsorted";
+      mw = "/md/wdc-data";
+      ms = "/md/stsea-okii";
     };
     description = "Shortcuts for navigating across multiple terminal programs.";
   };

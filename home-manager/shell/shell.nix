@@ -22,7 +22,7 @@
       mount = "mount --mkdir";
       nano = "nvim";
       open = "xdg-open";
-      pr = "openpr";
+      opr = "openpr";
       rhx = "cd ~/pr/rotfiles & hx .";
       py = "python";
       tr = "eza --tree --level=3";

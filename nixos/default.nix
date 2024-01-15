@@ -22,6 +22,7 @@
     # ./syncoid.nix
     ./transmission.nix
     # ./vercel.nix
+    ./minecraft-bedrock-server.nix
     ./virt-manager.nix
     ./steam.nix
     ./zfs.nix

@@ -17,7 +17,7 @@
     hyprland.plugin = "hyprnstack";
     wallust.enable = true;
     rofi.enable = true;
-    rclip.enable = true;
+    rclip.enable = false;
     waybar = {
       enable = true;
       theme = "transparent";
@@ -29,10 +29,13 @@
     helix.enable = true;
 
     blender.enable = true;
-    reaper.enable = true;
+    reaper.enable = false;
 
     discord.enable = true;
-    minecraft.enable = true;
+
+
+    minecraft-launcher.enable = true;
+
     # To list the gpg signing keyid run:
     # gpg --list-secret-keys --keyid-format=long
     # Copy over id string after similar characters 'sec dsa2048/'
@@ -42,6 +45,7 @@
     };
     terminal.exec = "kitty";
   };
+
 
   home = {
     packages = lib.mkIf isNixOS (
