@@ -18,22 +18,6 @@
 
   boot.tmp.useTmpfs = true;
 
-  # Bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    package = pkgs.bluez;  
-    settings = {
-      General.Enable = "Source,Sink,Media,Socket";
-      General.DiscoverableTimeout = 0;
-      General.Name = "G604 LIGHTSPEED";
-      General.ControllerMode = "dual";
-      Policy.AutoEnable = true;
-    };
-  };
-  services.blueman.enable = true;
-  environment.systemPackages = [pkgs.bluedevil];
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction

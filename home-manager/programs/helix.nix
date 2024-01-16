@@ -26,7 +26,8 @@
         themes = {
           mtr = {
             # "inherits" = "mellow";
-            "inherits" = "ferra";
+            # "inherits" = "ferra";
+            "inherits" = "vim_dark_high_contrast";
             "ui.background" = { fg = "none"; };
           };
         };

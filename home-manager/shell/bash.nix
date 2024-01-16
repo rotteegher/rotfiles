@@ -19,16 +19,16 @@
       ${value.bashCompletion}
     '')
   cfg.functions);
-  histFile = "/persist/.config/bash/.bash_history";
+  histFile = "/persist/home/${user}/.config/bash/.bash_history";
 in {
   # NOTE: see shell.nix for shared aliases and initExtra
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    historyFile = histFile;
-    shellAliases = {
-      ehistory = "nvim ${histFile}";
-    };
+    # historyFile = histFile;
+    # shellAliases = {
+    #   ehistory = "nvim ${histFile}";
+    # };
 
     profileExtra = cfg.profileExtra;
     initExtra =
@@ -68,5 +68,10 @@ in {
         fi
       '';
   };
+  # rot.persist = {
+  #   home.directories = [
+  #     ".config/bash"  
+  #   ];
+  # };
 }
 

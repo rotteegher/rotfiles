@@ -46,7 +46,6 @@
         # misc utilities for dotfiles written in rust
         rot.dotfiles-utils
 
-        # rot.minecraft-bedrock-server
       ]
       ++ (lib.optional config.rot.helix.enable helix)
       # handle fonts

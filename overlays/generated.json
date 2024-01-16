@@ -1,27 +1,7 @@
 {
-    "goo-engine": {
-        "cargoLocks": null,
-        "date": "2023-11-11",
-        "extract": null,
-        "name": "goo-engine",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "dillongoostudios",
-            "repo": "goo-engine",
-            "rev": "9d27635972055084ea82017d864dbcd1ea26a058",
-            "sha256": "sha256-Mld6On+HkNSpvqTV7hfiUQqxby0zZ2Ldc+LWW67jSkY=",
-            "type": "github"
-        },
-        "version": "9d27635972055084ea82017d864dbcd1ea26a058"
-    },
     "swww": {
         "cargoLocks": null,
-        "date": "2024-01-15",
+        "date": "2024-01-16",
         "extract": null,
         "name": "swww",
         "passthru": null,
@@ -31,13 +11,13 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "owner": "Horus645",
+            "owner": "LGFae",
             "repo": "swww",
-            "rev": "d60139dffe3fb7ee26814fed292fdcca2309df31",
-            "sha256": "sha256-n7YdUmIZGu7W7cX6OvVW+wbkKjFvont4hEAhZXYDQd8=",
+            "rev": "a4c5bdbf08f6ff1839aa76f162f540b822cabca3",
+            "sha256": "sha256-huJnElxtHGmNd2I3zeDClPgfhfFPtb2y99FzR9i9JPc=",
             "type": "github"
         },
-        "version": "d60139dffe3fb7ee26814fed292fdcca2309df31"
+        "version": "a4c5bdbf08f6ff1839aa76f162f540b822cabca3"
     },
     "transmission-web-soft-theme": {
         "cargoLocks": null,
@@ -80,7 +60,7 @@
     },
     "waybar": {
         "cargoLocks": null,
-        "date": "2024-01-14",
+        "date": "2024-01-16",
         "extract": null,
         "name": "waybar",
         "passthru": null,
@@ -92,11 +72,11 @@
             "name": null,
             "owner": "Alexays",
             "repo": "Waybar",
-            "rev": "07eabc5328dc5056f667a93f58549314d10f007b",
-            "sha256": "sha256-Tbhj9nAP3PoECFWVVk3bciM+x1Vw6MVo779OqSFfZ/Y=",
+            "rev": "392f83e71d74323eac6e4e60be6fe026494b60bf",
+            "sha256": "sha256-sK8J5F6JjXMIiz0C79DyZdJ/67+0FrSvM1ahcxjIQis=",
             "type": "github"
         },
-        "version": "07eabc5328dc5056f667a93f58549314d10f007b"
+        "version": "392f83e71d74323eac6e4e60be6fe026494b60bf"
     },
     "wezterm": {
         "cargoLocks": null,

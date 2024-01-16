@@ -4,7 +4,10 @@
   pkgs,
   ...
 }: let
-  displays = config.rot.displays;
+  inherit (config.rot) displays;
+  rofi = lib.getExe pkgs.rofi;
+  pamixer = lib.getExe pkgs.pamixer;
+  qtile_like = config.custom.hyprland.qtile;
 in {
   wayland.windowManager.hyprland.settings = lib.mkIf config.wayland.windowManager.hyprland.enable {
     bind =
@@ -32,8 +35,6 @@ in {
         # reset input language
         "$mod, Escape, exec, fcitx5-remote -s keyboard-jp"
         
-        # bind = $mod, P, pseudo, # dwindle
-        # bind = $mod, J, togglesplit, # dwindle
 
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"

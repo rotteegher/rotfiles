@@ -26,27 +26,27 @@ in
       group = "minecraft";
     };
 
-  #   systemd.services.minecraft-bedrock-server = {
-  #     description   = "Minecraft Bedrock Server Service";
-  #     wantedBy      = [ "multi-user.target" ];
-  #     after         = [ "network.target" ];
+    systemd.services.minecraft-bedrock-server = {
+      description   = "Minecraft Bedrock Server Service";
+      wantedBy      = [ "multi-user.target" ];
+      after         = [ "network.target" ];
 
-  #     serviceConfig = {
-  #       ExecStart = "${cfg.package}/bin/bedrock_server";
-  #       Restart = "always";
-  #       User = "minecraft";
-  #       WorkingDirectory = cfg.dataDir;
-  #     };
+      serviceConfig = {
+        ExecStart = "${cfg.package}/bin/bedrock_server";
+        Restart = "always";
+        User = "minecraft";
+        WorkingDirectory = cfg.dataDir;
+      };
 
-  #     preStart = ''
-  #       cp -a -n ${cfg.package}/var/lib/* .
-  #       cp -f ${serverPropertiesFile} server.properties
-  #       chmod +w server.properties
-  #     '';
-  #   };
+      preStart = ''
+        cp -a -n ${cfg.package}/var/lib/* .
+        cp -f ${serverPropertiesFile} server.properties
+        chmod +w server.properties
+      '';
+    };
 
-  #   networking.firewall = {
-  #     allowedUDPPorts = [ serverPort ];
-  #   };
+    networking.firewall = {
+      allowedUDPPorts = [ serverPort ];
+    };
   };
 }

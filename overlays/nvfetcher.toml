@@ -1,6 +1,6 @@
 [swww]
 src.git = "https://github.com/Horus645/swww"
-fetch.github = "Horus645/swww"
+fetch.github = "LGFae/swww"
 
 [transmission-web-soft-theme]
 src.git = "https://github.com/diesys/transmission-web-soft-theme"
@@ -19,8 +19,3 @@ fetch.github = "Alexays/Waybar"
 src.git = "https://github.com/wez/wezterm"
 fetch.github = "wez/wezterm"
 git.fetchSubmodules = true
-
-[goo-engine]
-src.git = "https://github.com/dillongoostudios/goo-engine"
-fetch.github = "dillongoostudios/goo-engine"
-git.fetchSubmodules = false

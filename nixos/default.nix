@@ -69,7 +69,9 @@
         ]
         ++ (lib.optional (!config.services.xserver.desktopManager.gnome.enable) config.hm.rot.terminal.fakeGnomeTerminal)
         ++ (lib.optional config.rot-nixos.distrobox.enable pkgs.distrobox)
-        ++ (lib.optional config.hm.rot.helix.enable helix);
+        ++ (lib.optional config.hm.rot.helix.enable helix)
+        ++ (lib.optional config.hm.rot.discord.enable vesktop)
+        ;
     };
 
     # setup fonts
