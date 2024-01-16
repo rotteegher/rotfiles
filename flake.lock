@@ -8,11 +8,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1708326833,
-        "narHash": "sha256-cihQPArrJhDU1jqqKDeyI91ZK62lUlGXYNncz2k9mjk=",
+        "lastModified": 1708538593,
+        "narHash": "sha256-2q3tdg3TirbrTEPaVFTfxMG0TJdE77GsC6s5aHJhWkQ=",
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "bc4602a41c197edd5838c8a97da2ed0c1fc75d0e",
+        "rev": "f5d594f79022f4468fae9d04418cb607890a9347",
         "type": "github"
       },
       "original": {
@@ -29,11 +29,19 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1708410168,
-        "narHash": "sha256-98kCv2PbKfqt+oyyXHqdXPRRGjW+QEy9eBzNtRyCRHs=",
+<<<<<<< HEAD
+        "lastModified": 1708582955,
+        "narHash": "sha256-OOq0YCdOgCyMpr4TFPJVorU5I8k97G8AQ1mhnktp+ZA=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "846fc5ddb810c36411de6587384bef86c2db5127",
+        "rev": "244b9af2d0180619adcca5d020d085341c0d28c9",
+=======
+        "lastModified": 1705472611,
+        "narHash": "sha256-o9zxn4OPM6ltNmsiIK4Fl1k6aIF73x2wELGeCQYdO0k=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "39ef99bcc06101639781bdb5dd69155b7033badd",
+>>>>>>> 53f3d11 (Changed Some Program Settings. Enabled minecraft-bedrock-server)
         "type": "github"
       },
       "original": {
@@ -105,11 +113,19 @@
         ]
       },
       "locked": {
-        "lastModified": 1708451036,
-        "narHash": "sha256-tgZ38NummEdnXvxj4D0StHBzXgceAw8CptytHljH790=",
+<<<<<<< HEAD
+        "lastModified": 1708558280,
+        "narHash": "sha256-w1ns8evB6N9VTrAojcdXLWenROtd77g3vyClrqeFdG8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "517601b37c6d495274454f63c5a483c8e3ca6be1",
+        "rev": "0b69d574162cfa6eb7919d5614a48d0185550891",
+=======
+        "lastModified": 1705446327,
+        "narHash": "sha256-n7FCuAR2BI1SvLjF6eFc8VE6WLZCMlbToyfqU2ihbkU=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "16cefa78cc801911ebd4ff1faddc6280ab3c9228",
+>>>>>>> 53f3d11 (Changed Some Program Settings. Enabled minecraft-bedrock-server)
         "type": "github"
       },
       "original": {
@@ -128,11 +144,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1708513659,
-        "narHash": "sha256-mw2dtBBMrkagWYbvrx/dZxa1M1X+rOdETsA4uB3zNws=",
+        "lastModified": 1708571401,
+        "narHash": "sha256-FrWzY1x7BaAJMawSZLKcwqrnVllh8CknmzyqEGm1040=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "ddf022d61c63fb36b4abba392682772690c06b5c",
+        "rev": "94aeb06d6ba14d403c46b52d1d2e397acb5906a4",
         "type": "github"
       },
       "original": {
@@ -431,11 +447,19 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1708296515,
-        "narHash": "sha256-FyF489fYNAUy7b6dkYV6rGPyzp+4tThhr80KNAaF/yY=",
+<<<<<<< HEAD
+        "lastModified": 1708475490,
+        "narHash": "sha256-g1v0TsWBQPX97ziznfJdWhgMyMGtoBFs102xSYO4syU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "b98a4e1746acceb92c509bc496ef3d0e5ad8d4aa",
+        "rev": "0e74ca98a74bc7270d28838369593635a5db3260",
+=======
+        "lastModified": 1705316053,
+        "narHash": "sha256-J2Ey5mPFT8gdfL2XC0JTZvKaBw/b2pnyudEXFvl+dQM=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "c3e128f3c0ecc1fb04aef9f72b3dcc2f6cecf370",
+>>>>>>> 53f3d11 (Changed Some Program Settings. Enabled minecraft-bedrock-server)
         "type": "github"
       },
       "original": {
@@ -490,11 +514,19 @@
     "rust-analyzer-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1708361159,
-        "narHash": "sha256-HAZ/pEN0TVFoGMbITliYXbMLPaSy/X+WKY/y6K8iTr0=",
+<<<<<<< HEAD
+        "lastModified": 1708459863,
+        "narHash": "sha256-PzlnvPOv/1l2lSU0oj+gY+hq5MRqJNU3KWSO+RCwhgs=",
         "owner": "rust-lang",
         "repo": "rust-analyzer",
-        "rev": "2223b4fa71e543ac6dd1abd4770a69fab8dbdec1",
+        "rev": "543d7e98dbcc0668528dbf3f5b32d752882baa33",
+=======
+        "lastModified": 1705432736,
+        "narHash": "sha256-uUS5B8ypVevvhjA/2smEOu5s8zK3MBJU5tH0Tze3Kok=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "03336460fcb25a86675aaff9694998f5910ff747",
+>>>>>>> 53f3d11 (Changed Some Program Settings. Enabled minecraft-bedrock-server)
         "type": "github"
       },
       "original": {
@@ -608,11 +640,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1708298669,
-        "narHash": "sha256-Cc81p14wEN+uYWccRKHnGFUXRxcHxvvHEZSIdnrF6DY=",
+        "lastModified": 1708532964,
+        "narHash": "sha256-Hlor9vCcGVhoF5A3VTC640MDvScYQLmjXHOkb1IuqwU=",
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
-        "rev": "f62fcea0cbc460f325252a8479f160fdf5c788c2",
+        "rev": "65fb44ae496051c8377c6225f7187ca123bb68a5",
         "type": "github"
       },
       "original": {

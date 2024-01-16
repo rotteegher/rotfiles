@@ -99,13 +99,13 @@ in {
         '';
       };
 
-      # package = lib.mkOption {
-      #   type = lib.types.package;
-      #   default = pkgs.rot.minecraft-bedrock-server;
-      #   defaultText = "pkgs.minecraft-bedrock-server";
-      #   example = lib.literalExample "pkgs.minecraft-bedrock-server-1_17";
-      #   description = "Version of minecraft-bedrock-server to run.";
-      # };
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.rot.minecraft-bedrock-server;
+        defaultText = "pkgs.minecraft-bedrock-server";
+        example = lib.literalExample "pkgs.minecraft-bedrock-server-1_17";
+        description = "Version of minecraft-bedrock-server to run.";
+      };
     }; # Minecraft Bedrock Server
   };
 }

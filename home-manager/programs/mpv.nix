@@ -32,8 +32,8 @@
         MBTN_LEFT = "cycle pause";
         WHEEL_UP = "ignore";
         WHEEL_DOWN = "ignore";
-        RIGHT = "seek 10";
-        LEFT = "seek -10";
+        RIGHT = "seek 2";
+        LEFT = "seek -2";
         l = "seek  10";
         h = "seek -10";
         j = "seek  -60";

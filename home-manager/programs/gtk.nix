@@ -5,7 +5,7 @@
   isNixOS,
   ...
 }: let
-  wallustGtk = true;
+  wallustGtk = false;
   gtkColor = color: value: ''@define-color ${color} ${value};'';
 in {
   home = {

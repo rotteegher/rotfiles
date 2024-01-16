@@ -22,7 +22,7 @@
 
     services.minecraft-bedrock-server = {
       enable = true;
-      # package = pkgs.rot.minecraft-bedrock-server;
+      package = pkgs.rot.minecraft-bedrock-server;
       serverProperties =           {
             server-name = "Dedicated Rot Server";
             gamemode = "survival";
@@ -44,10 +44,10 @@
             content-log-file-enabled = false;
             compression-threshold = 1;
             server-authoritative-movement = "server-auth";
-            player-movement-score-threshold = 20;
-            player-movement-distance-threshold = 0.3;
-            player-movement-duration-threshold-in-ms = 500;
-            correct-player-movement = false;
+            # player-movement-score-threshold = 20;
+            # player-movement-distance-threshold = 0.3;
+            # player-movement-duration-threshold-in-ms = 500;
+            # correct-player-movement = false;
       };
     };
   };
