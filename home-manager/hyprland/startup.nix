@@ -11,9 +11,9 @@ in {
   config = lib.mkIf config.wayland.windowManager.hyprland.enable {
     # start hyprland
     rot.shell.profileExtra = ''
-      # if [ "$(tty)" = "/dev/tty1" ]; then
-      # exec Hyprland &> /dev/null
-      # fi
+      if [ "$(tty)" = "/dev/tty1" ]; then
+      exec Hyprland &> /dev/null
+      fi
     '';
 
     wayland.windowManager.hyprland.settings = {
@@ -24,9 +24,6 @@ in {
         # browsers
         # (openOnWorkspace 1 "brave --incognito")
         # (openOnWorkspace 1 "brave --profile-directory=Default")
-
-        # idle
-        "${lib.getExe pkgs.swayidle} -w timeout 480 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
 
 
         # firefox
@@ -48,7 +45,9 @@ in {
 
         # Telegram
         (openOnWorkspace 5 "telegram-desktop")
-        # "${pkgs.swayidle}/bin/swayidle -w timeout 480 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+
+        # Idle
+        "${lib.getExe pkgs.swayidle} -w timeout 480 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
 
         # focus the initial workspaces on startup
         # "hyprctl dispatch workspace 9"
