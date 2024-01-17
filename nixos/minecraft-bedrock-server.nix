@@ -9,19 +9,20 @@ let
   '' + lib.concatStringsSep "\n" (lib.mapAttrsToList
     (n: v: "${n}=${cfgToString v}") cfg.serverProperties));
 
-  defaultServerPort = 19132;
-
-  serverPort = cfg.serverProperties.server-port or defaultServerPort;
+  serverPort = cfg.serverProperties.server-port or 25575;
+  rconPort = cfg.serverProperties."rcon.port" or 19132;
 in
 {
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [ pkgs.mcrcon ];
+
     users.groups.minecraft = {};   
 
     users.users.minecraft = {
       description     = "Minecraft server service user";
       home            = cfg.dataDir;
       createHome      = true;
-      # uid             = 1337;
+      uid             = 1337;
       isSystemUser    = true;
       group = "minecraft";
     };
@@ -46,7 +47,8 @@ in
     };
 
     networking.firewall = {
-      allowedUDPPorts = [ serverPort ];
+      allowedUDPPorts = [ serverPort rconPort ];
+      allowedTCPPorts = [ serverPort rconPort ];
     };
   };
 }

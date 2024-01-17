@@ -56,7 +56,8 @@ in {
 
         "blueman-applet"
 
-        "swww init && hypr-wallpaper"
+        "sleep 1; swww init && hypr-wallpaper"
+        "hypr-wallpaper"
 
         "sleep 5 && launch-waybar"
 

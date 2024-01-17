@@ -45,7 +45,6 @@
         trash-cli
         # misc utilities for dotfiles written in rust
         rot.dotfiles-utils
-
       ]
       ++ (lib.optional config.rot.helix.enable helix)
       # handle fonts
