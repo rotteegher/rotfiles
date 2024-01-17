@@ -10,11 +10,15 @@ let
     (n: v: "${n}=${cfgToString v}") cfg.serverProperties));
 
   serverPort = cfg.serverProperties.server-port or 25575;
-  rconPort = cfg.serverProperties."rcon.port" or 19132;
 in
 {
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.mcrcon ];
+    environment.systemPackages = with pkgs; [
+      # My bedrock server package
+      rot.minecraft-bedrock-server
+      # RCON DOES NOT EXIST IN BEDROCK SERVER
+      mcrcon rcon rconc 
+    ];
 
     users.groups.minecraft = {};   
 
@@ -22,7 +26,6 @@ in
       description     = "Minecraft server service user";
       home            = cfg.dataDir;
       createHome      = true;
-      uid             = 1337;
       isSystemUser    = true;
       group = "minecraft";
     };
@@ -40,15 +43,20 @@ in
       };
 
       preStart = ''
-        cp -a -n ${cfg.package}/var/lib/* .
+        cp -a -f ${cfg.package}/var/lib/* .
         cp -f ${serverPropertiesFile} server.properties
-        chmod +w server.properties
+        chmod -R guo+rwx *
       '';
     };
 
     networking.firewall = {
-      allowedUDPPorts = [ serverPort rconPort ];
-      allowedTCPPorts = [ serverPort rconPort ];
+      allowedUDPPorts = [ serverPort 19132 19133 ];
+      allowedTCPPorts = [ serverPort 19132 19133 ];
+    };
+    rot-nixos.persist = {
+      root.directories = [
+        "/var/lib/minecraft-bedrock"
+      ];
     };
   };
 }

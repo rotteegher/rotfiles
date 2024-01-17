@@ -12,6 +12,7 @@
     # ./docker.nix
     # ./filezilla.nix
     # ./gnome3.nix # TODO
+    ./flatpak.nix
     ./hdds.nix
     ./hyprland.nix
     ./impermanence.nix
@@ -62,7 +63,11 @@
           ripgrep
           tree # for root, normal user has an eza alias
           wget
+          dig
+          lsof
+          nmap
           aria2
+          inetutils
           htop
           zellij
           efibootmgr
