@@ -17,6 +17,7 @@ in {
     bittorrent.enable = lib.mkEnableOption "Torrenting Applications";
     vercel.enable = lib.mkEnableOption "Vercel Backups";
     virt-manager.enable = lib.mkEnableOption "virt-manager";
+    flatpak.enable = lib.mkEnableOption "flatpak";
     steam.enable = lib.mkEnableOption "steam";
 
     # MINECRAFT
@@ -42,19 +43,17 @@ in {
         type = with lib.types; attrsOf (oneOf [ bool int str ]);
         default = {
             server-name = "Dedicated Server";
+            enable-status = true;
             gamemode = "survival";
             difficulty = "easy";
             allow-cheats = false;
             max-players = 10;
-            online-mode = false;
+            online-mode = true;
             white-list = false;
-            server-ip = "127.0.0.1";
-            "query.port" = 25565;
+            server-ip = "localhost";
             server-port = 25575;
             server-portv6 = 19177;
-            enable-rcon = true;
-            "rcon.port" = 19132;
-            "rcon.password" = "1234";
+            emit-server-telemetry = true;
             view-distance = 32;
             tick-distance = 4;
             player-idle-timeout = 30;
@@ -71,37 +70,6 @@ in {
             player-movement-duration-threshold-in-ms = 500;
             correct-player-movement = false;
         };
-        example = lib.literalExample ''
-          {
-            server-name = "Dedicated Server";
-            gamemode = "survival";
-            difficulty = "easy";
-            allow-cheats = false;
-            max-players = 10;
-            online-mode = false;
-            white-list = false;
-            server-port = 25575;
-            server-portv6 = 19177;
-            enable-rcon = true;
-            "rcon.port" = 19132;
-            "rcon.password" = "1234";
-            view-distance = 32;
-            tick-distance = 4;
-            player-idle-timeout = 30;
-            max-threads = 8;
-            level-name = "Bedrock level";
-            level-seed = "";
-            default-player-permission-level = "member";
-            texturepack-required = false;
-            content-log-file-enabled = false;
-            compression-threshold = 1;
-            server-authoritative-movement = "server-auth";
-            player-movement-score-threshold = 20;
-            player-movement-distance-threshold = 0.3;
-            player-movement-duration-threshold-in-ms = 500;
-            correct-player-movement = false;
-          }
-        '';
         description = ''
           Minecraft Bedrock server properties for the server.properties file.
         '';
@@ -111,7 +79,6 @@ in {
         type = lib.types.package;
         default = pkgs.rot.minecraft-bedrock-server;
         defaultText = "pkgs.minecraft-bedrock-server";
-        example = lib.literalExample "pkgs.minecraft-bedrock-server-1_17";
         description = "Version of minecraft-bedrock-server to run.";
       };
     }; # Minecraft Bedrock Server

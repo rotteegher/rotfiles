@@ -56,7 +56,7 @@ in {
 
         "blueman-applet"
 
-        "sleep 1; swww init && hypr-wallpaper"
+        "sleep 1; swww init && hypr-wallpaper ~/Pictures/Wallpapers/nix-wallpaper-gear.png"
         "hypr-wallpaper"
 
         "sleep 5 && launch-waybar"
