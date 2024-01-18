@@ -11,6 +11,11 @@
     zfs.encryption = false;
 
     bluetooth.enable = true;
+    hotspot = {
+      enable = true;
+      internet_iface = "eno1";
+      wifi_iface = "wlp2s0";
+    };
 
     # software
     distrobox.enable = true;

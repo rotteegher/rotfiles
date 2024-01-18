@@ -29,6 +29,7 @@
     ./zfs.nix
     ./input.nix
     ./bluetooth.nix
+    ./hotspot.nix
   ];
 
   config = {
