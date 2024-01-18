@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: 
+{ config, lib, pkgs, user, ... }: 
 let
   cfg = config.rot-nixos.services.minecraft-bedrock-server;
 
@@ -9,9 +9,7 @@ let
   '' + lib.concatStringsSep "\n" (lib.mapAttrsToList
     (n: v: "${n}=${cfgToString v}") cfg.serverProperties));
 
-  permissionsContent = {};
-
-  permissionsFile = pkgs.writeText "permissions.json" (builtins.toJSON permissionsContent);
+  permissionsFile = pkgs.writeText "permissions.json" (builtins.toJSON cfg.permissions);
 
   serverPort = cfg.serverProperties.server-port or 25575;
 in
@@ -47,10 +45,23 @@ in
       };
 
       preStart = ''
+        alias lss="ls -la --group-directories-first"
+
+        echo "Server Directory: $(stat ${cfg.dataDir})"
+        echo "Setting permissions"
+        chown -R minecraft:minecraft "${cfg.dataDir}"
+        chmod -R guo+rwx "${cfg.dataDir}"
+
+        echo "Starting Copying Package Files: ${cfg.package} -> ${cfg.dataDir}"
         cp -a -f ${cfg.package}/var/lib/* .
+
         cp -f ${serverPropertiesFile} server.properties
+        echo "[server.properties] Server Properties: $(cat server.properties)"
+
         cp -f ${permissionsFile} permissions.json
-        chmod -R guo+rwx *
+        echo "[permissions.json] Server Permissions: $(cat permissions.json)"
+
+        echo "Server Directory Contents: $(lss ${cfg.dataDir})"
       '';
     };
 

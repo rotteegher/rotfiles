@@ -2,6 +2,8 @@
   pkgs,
   user,
   host,
+  lib,
+  config,
   ...
 }: {
   # Bootloader.
@@ -59,7 +61,7 @@
   users.users.${user} = {...}: {
     isNormalUser = true;
     initialPassword = "password";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" (lib.mkIf config.rot-nixos.services.minecraft-bedrock-server.enable "minecraft" ) ];
   };
   # Reboot/poweroff for unprivileged users
   # Grants permissions to reboot/poweroff machine to users in the users group. 
