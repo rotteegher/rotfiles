@@ -29,6 +29,7 @@
     services.minecraft-bedrock-server = {
       enable = true;
       package = pkgs.rot.minecraft-bedrock-server;
+      dataDir = "/srv/minecraft-bedrock-server";
       permissions = [
         { permission = "operator"; pfid = "6cf9edda1be490d6"; }
         { permission = "operator"; xuid = "2535460878389100"; }
