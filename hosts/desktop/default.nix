@@ -29,13 +29,17 @@
     services.minecraft-bedrock-server = {
       enable = true;
       package = pkgs.rot.minecraft-bedrock-server;
+      permissions = [
+        { permission = "operator"; pfid = "6cf9edda1be490d6"; }
+        { permission = "operator"; xuid = "2535460878389100"; }
+      ];
       serverProperties = {
             server-name = "Dedicated Rot Server";
             gamemode = "survival";
             difficulty = "hard";
             allow-cheats = false;
             max-players = 10;
-            online-mode = true;
+            online-mode = false;
             white-list = false;
             # server-ip = "localhost";
             server-port = 25575;

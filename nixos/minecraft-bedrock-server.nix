@@ -9,6 +9,10 @@ let
   '' + lib.concatStringsSep "\n" (lib.mapAttrsToList
     (n: v: "${n}=${cfgToString v}") cfg.serverProperties));
 
+  permissionsContent = {};
+
+  permissionsFile = pkgs.writeText "permissions.json" (builtins.toJSON permissionsContent);
+
   serverPort = cfg.serverProperties.server-port or 25575;
 in
 {
@@ -45,6 +49,7 @@ in
       preStart = ''
         cp -a -f ${cfg.package}/var/lib/* .
         cp -f ${serverPropertiesFile} server.properties
+        cp -f ${permissionsFile} permissions.json
         chmod -R guo+rwx *
       '';
     };
@@ -55,7 +60,8 @@ in
     };
     rot-nixos.persist = {
       root.directories = [
-        "/var/lib/minecraft-bedrock"
+        # default dir is /var/lib/minecraft-bedrock
+        cfg.dataDir
       ];
     };
   };
