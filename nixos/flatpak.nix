@@ -8,6 +8,7 @@
     rot-nixos.persist = {
       home.directories = [
         ".local/share/flatpak"
+        ".var"
       ];
     };
   };

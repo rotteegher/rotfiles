@@ -9,6 +9,7 @@
     rot.persist = {
       home.directories = [
         ".local/share/PrismLauncher/"
+        ".minecraft"
       ];
     };
   };
