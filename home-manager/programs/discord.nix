@@ -6,6 +6,12 @@ lib,
 }: {
   config = lib.mkIf config.rot.discord.enable  {
     home.packages = [ 
+     (pkgs.writeShellApplication {
+      name = "discord-vesktop";
+      text = ''
+        env -u NIXOS_OZONE_WL vencorddesktop --use-gl=desktop
+      '';
+    })
      (pkgs.makeDesktopItem {
         name = "discord-vesktop";
         exec =
