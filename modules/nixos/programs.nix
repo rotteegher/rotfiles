@@ -28,7 +28,7 @@ in {
         description = ''
           If enabled, start a Minecraft Bedrock Server. The server
           data will be loaded from and saved to
-          <option>services.minecraft-bedrock-server.dataDir</option>.
+          services.minecraft-bedrock-server.dataDir
         '';
       };
             dataDir = lib.mkOption {
@@ -37,6 +37,35 @@ in {
         description = ''
           Directory to store Minecraft Bedrock database and other state/data files.
         '';
+      };
+      permissions = lib.mkOption {
+        type = lib.types.listOf lib.types.attrs;
+        default = [];
+        description = "Arbitrary permissions.json for the Minecraft Bedrock Server.";
+        example = [
+          { permission = "operator"; pfid = "451298348"; }
+          { permission = "member"; pfid = "52819329"; }
+          { permission = "visitor"; pfid = "234114123"; }
+          # or
+          { permission = "operator"; xuid = "733899948"; }
+          { permission = "member"; xuid = "89813164"; }
+          { permission = "visitor"; xuid = "147223597"; }
+        ];
+        #  example output permissions.json
+        # [
+        #     {
+        #         "permission": "operator",
+        #         "xuid": "451298348"
+        #     },
+        #     {
+        #         "permission": "member",
+        #         "xuid": "52819329"
+        #     },
+        #     {
+        #         "permission": "visitor",
+        #         "xuid": "234114123"
+        #     }
+        # ]
       };
 
       serverProperties = lib.mkOption {
