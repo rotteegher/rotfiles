@@ -16,6 +16,7 @@ in
 {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      tmux
       # My bedrock server package
       rot.minecraft-bedrock-server
       # RCON DOES NOT EXIST IN BEDROCK SERVER
@@ -29,7 +30,24 @@ in
       home            = cfg.dataDir;
       createHome      = true;
       isSystemUser    = true;
-      group = "minecraft";
+      group           = "minecraft";
+    };
+
+
+    systemd.tmpfiles.rules = [
+       "d ${cfg.dataDir} - minecraft minecraft"
+    ];
+
+    systemd.sockets.minecraft-bedrock-server = {
+      bindsTo = ["minecraft-bedrock-server.service"];
+      socketConfig = {
+        ListenFIFO = "${cfg.dataDir}/systemd.stdin";
+        Service = "minecraft-bedrock-server.service";
+        SocketUser = "minecraft";
+        SocketGroup = "minecraft";
+        RemoveOnStop = true;
+        SocketMode = "0600";
+      };
     };
 
     systemd.services.minecraft-bedrock-server = {
@@ -38,19 +56,41 @@ in
       after         = [ "network.target" ];
 
       serviceConfig = {
-        ExecStart = "${cfg.package}/bin/bedrock_server";
         Restart = "always";
         User = "minecraft";
+        Group = "minecraft";
+        # Type = "forking";
+        Nice = 5;
+
+        Sockets="minecraft-bedrock-server.socket";
+        StandardInput = "socket";
+        StandardOutput = "journal";
+        TimeoutStopSec = 90;
+
+        ProtectHome = "read-only";
+        # ProtectSystem = "full";
+        PrivateDevices = "no";
+        PrivateTmp = "no";
+        ReadWritePaths = cfg.dataDir;
+
         WorkingDirectory = cfg.dataDir;
+
+        ExecStart = ''
+            /bin/sh -c "${cfg.package}/bin/bedrock_server"
+          '';
+        ExecStop = ''
+          /bin/sh -c "echo stop > systemd.stdin"
+        '';
+
+        KillSignal = "SIGCONT";
       };
 
       preStart = ''
-        alias lss="ls -la --group-directories-first"
-
         echo "Server Directory: $(stat ${cfg.dataDir})"
+
         echo "Setting permissions"
         chown -R minecraft:minecraft "${cfg.dataDir}"
-        chmod -R guo+rwx "${cfg.dataDir}"
+        chmod -R gu+rw "${cfg.dataDir}"
 
         echo "Starting Copying Package Files: ${cfg.package} -> ${cfg.dataDir}"
         cp -a -f ${cfg.package}/var/lib/* .
@@ -61,7 +101,10 @@ in
         cp -f ${permissionsFile} permissions.json
         echo "[permissions.json] Server Permissions: $(cat permissions.json)"
 
-        echo "Server Directory Contents: $(lss ${cfg.dataDir})"
+        echo "Setting permissions AGAIN"
+        chown -R minecraft:minecraft "${cfg.dataDir}"
+        chmod -R guo+rw "${cfg.dataDir}"
+        echo "Server Directory Contents: $(ls -la --group-directories-first ${cfg.dataDir})"
       '';
     };
 
