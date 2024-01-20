@@ -33,7 +33,7 @@ in {
       };
             dataDir = lib.mkOption {
         type = lib.types.path;
-        default = "/var/lib/minecraft-bedrock";
+        default = "/srv/minecraft-bedrock";
         description = ''
           Directory to store Minecraft Bedrock database and other state/data files.
         '';

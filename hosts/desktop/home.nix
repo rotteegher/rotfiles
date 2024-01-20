@@ -9,8 +9,13 @@
     displays = [
       {
         name = "HDMI-A-5";
-        hyprland = "1920x1080@60,1920x1080,1";
-        workspaces = [1 2 3 4 5 6 7 8 9 10];
+        hyprland = "1920x1080@60,0x0,1";
+        workspaces = [ 1 3 6 7 8 ];
+      }
+      {
+        name = "HDMI-A-4";
+        hyprland = "1920x1080@60,1910x1080,1.333";
+        workspaces = [ 2 4 5 9 10 ];
       }
     ];
     firefox.enable = true;
@@ -34,7 +39,7 @@
     discord.enable = true;
 
 
-    minecraft-launcher.enable = true;
+    minecraft-launchers.enable = true;
 
     # To list the gpg signing keyid run:
     # gpg --list-secret-keys --keyid-format=long

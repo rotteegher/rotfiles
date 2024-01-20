@@ -28,10 +28,10 @@ in {
 
         # firefox
         # (openOnWorkspace 2 "firefox-developer-edition https://discordapp.com/channels/@me ")
-        (openOnWorkspace 2 "firefox")
+        (openOnWorkspace 1 "firefox")
 
-        # file manager
-        # (openOnWorkspace 4 "nemo")
+        # Open Discord
+        (openOnWorkspace 4 "discord-vesktop")
 
         # audio
         (openOnWorkspace 9 "pavucontrol")
@@ -51,7 +51,7 @@ in {
 
         # focus the initial workspaces on startup
         # "hyprctl dispatch workspace 9"
-        # "hyprctl dispatch workspace 7"
+        "hyprctl dispatch workspace 2"
         "hyprctl dispatch workspace 1"
 
         "blueman-applet"

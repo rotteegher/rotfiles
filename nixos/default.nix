@@ -70,6 +70,7 @@
           aria2
           inetutils
           htop
+          usbutils
           zellij
           efibootmgr
         ]

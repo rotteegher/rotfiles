@@ -16,81 +16,85 @@ in
 {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      tmux
+      # USE "sudo conspy 4" command to enter server console
+      conspy
+
       # My bedrock server package
       rot.minecraft-bedrock-server
-      # RCON DOES NOT EXIST IN BEDROCK SERVER
-      mcrcon rcon rconc 
     ];
-
-    users.groups.minecraft = {};   
-
-    users.users.minecraft = {
-      description     = "Minecraft server service user";
-      home            = cfg.dataDir;
-      createHome      = true;
-      isSystemUser    = true;
-      group           = "minecraft";
-    };
-
 
     systemd.tmpfiles.rules = [
-       "d ${cfg.dataDir} - minecraft minecraft"
+       "d ${cfg.dataDir} 0770 rot users"
     ];
 
-    systemd.sockets.minecraft-bedrock-server = {
-      bindsTo = ["minecraft-bedrock-server.service"];
-      socketConfig = {
-        ListenFIFO = "${cfg.dataDir}/systemd.stdin";
-        Service = "minecraft-bedrock-server.service";
-        SocketUser = "minecraft";
-        SocketGroup = "minecraft";
-        RemoveOnStop = true;
-        SocketMode = "0600";
-      };
-    };
+    # Specify socket file to 'echo "command" > systemd.stdin'
+    # systemd.sockets.minecraft-bedrock-server = {
+    #   bindsTo = ["minecraft-bedrock-server.service"];
+    #   socketConfig = {
+    #     ListenFIFO = "${cfg.dataDir}/systemd.stdin";
+    #     Service = "minecraft-bedrock-server.service";
+    #     # SocketUser = user;
+    #     # SocketGroup = "users";
+    #     RemoveOnStop = true;
+    #     # SocketMode = "0770";
+    #   };
+    # };
+
+    # make sure the tty4 is not overrun by getty
+    services.logind.extraConfig = ''
+      NAutoVTs=3
+    '';
 
     systemd.services.minecraft-bedrock-server = {
       description   = "Minecraft Bedrock Server Service";
       wantedBy      = [ "multi-user.target" ];
-      after         = [ "network.target" ];
+      conflicts     = [ "getty@tty4.service" ];
+      after         = [ "network.target" "getty@tty4.service" ];
 
       serviceConfig = {
-        Restart = "always";
-        User = "minecraft";
-        Group = "minecraft";
-        # Type = "forking";
-        Nice = 5;
-
-        Sockets="minecraft-bedrock-server.socket";
-        StandardInput = "socket";
-        StandardOutput = "journal";
-        TimeoutStopSec = 90;
+        Type = "simple";
 
         ProtectHome = "read-only";
-        # ProtectSystem = "full";
-        PrivateDevices = "no";
-        PrivateTmp = "no";
-        ReadWritePaths = cfg.dataDir;
+        ProtectSystem = "full";
+        PrivateDevices = false;
+        PrivateTmp = false;
 
+        ReadWritePaths = cfg.dataDir;
+        StateDirectory = cfg.dataDir;
         WorkingDirectory = cfg.dataDir;
 
-        ExecStart = ''
-            /bin/sh -c "${cfg.package}/bin/bedrock_server"
-          '';
-        ExecStop = ''
-          /bin/sh -c "echo stop > systemd.stdin"
-        '';
+        # Sockets="minecraft-bedrock-server.socket";
+        StandardInput = "tty";
+        # StandardInput = "socket";
+        StandardOutput = "tty";
+        StandardError = "journal";
+        TTYPath = "/dev/tty4";
+        TTYReset = true;
+        TTYVHangup = true;
+        TTYVTDisallocate = true;
 
-        KillSignal = "SIGCONT";
+        Restart = "on-failure";
+        RestartSec = 5;
+        RemainAfterExit = true;
+
+        ExecStart = "/bin/sh -c '${cfg.package}/bin/bedrock_server > /dev/tty4 < /dev/tty4'";
+        # PLEASE ISSUE a "stop" command to the server manually
+        # before shutting down systemd service 
+
+        # Works only with
+        # StandardInput = "socket";
+        # ExecStop = ''
+        #   /bin/sh -c "echo stop > ${cfg.dataDir}/systemd.stdin"
+        # '';
+        # KillSignal = "SIGCONT";
       };
 
       preStart = ''
         echo "Server Directory: $(stat ${cfg.dataDir})"
 
         echo "Setting permissions"
-        chown -R minecraft:minecraft "${cfg.dataDir}"
-        chmod -R gu+rw "${cfg.dataDir}"
+        chown -R ${user}:users ${cfg.dataDir}
+        chmod -R gu+rwx "${cfg.dataDir}"
 
         echo "Starting Copying Package Files: ${cfg.package} -> ${cfg.dataDir}"
         cp -a -f ${cfg.package}/var/lib/* .
@@ -101,9 +105,6 @@ in
         cp -f ${permissionsFile} permissions.json
         echo "[permissions.json] Server Permissions: $(cat permissions.json)"
 
-        echo "Setting permissions AGAIN"
-        chown -R minecraft:minecraft "${cfg.dataDir}"
-        chmod -R guo+rw "${cfg.dataDir}"
         echo "Server Directory Contents: $(ls -la --group-directories-first ${cfg.dataDir})"
       '';
     };
@@ -114,7 +115,7 @@ in
     };
     rot-nixos.persist = {
       root.directories = [
-        # default dir is /var/lib/minecraft-bedrock
+        # default dir is /srv/minecraft-bedrock
         cfg.dataDir
       ];
     };

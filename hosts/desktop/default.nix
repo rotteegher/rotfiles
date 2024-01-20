@@ -29,7 +29,7 @@
     services.minecraft-bedrock-server = {
       enable = true;
       package = pkgs.rot.minecraft-bedrock-server;
-      dataDir = "/var/lib/minecraft-bedrock-server";
+      dataDir = "/srv/minecraft-bedrock-server";
       permissions = [
         { permission = "operator"; pfid = "6cf9edda1be490d6"; }
         { permission = "operator"; xuid = "2535460878389100"; }
@@ -38,16 +38,16 @@
             server-name = "Dedicated Rot Server";
             gamemode = "survival";
             difficulty = "hard";
-            allow-cheats = false;
+            allow-cheats = true;
             max-players = 10;
             online-mode = false;
             white-list = false;
-            # server-ip = "localhost";
+            server-ip = "";
             server-port = 25575;
             server-portv6 = 19177;
             emit-server-telemetry = true;
-            # view-distance = 32;
-            # tick-distance = 4;
+            view-distance = 32;
+            tick-distance = 4;
             # player-idle-timeout = 30;
             # max-threads = 4;
             # level-name = "Bedrock level";
@@ -75,4 +75,6 @@
   '';
   # networking.firewall.allowedTCPPorts = [ 4444 ];
   # networking.firewall.allowedUDPPorts = [ 4444 ];
+
+  # networking.firewall.enable = false;
 }

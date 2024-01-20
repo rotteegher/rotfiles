@@ -29,19 +29,11 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-<<<<<<< HEAD
         "lastModified": 1708582955,
         "narHash": "sha256-OOq0YCdOgCyMpr4TFPJVorU5I8k97G8AQ1mhnktp+ZA=",
         "owner": "nix-community",
         "repo": "fenix",
         "rev": "244b9af2d0180619adcca5d020d085341c0d28c9",
-=======
-        "lastModified": 1705472611,
-        "narHash": "sha256-o9zxn4OPM6ltNmsiIK4Fl1k6aIF73x2wELGeCQYdO0k=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "39ef99bcc06101639781bdb5dd69155b7033badd",
->>>>>>> 53f3d11 (Changed Some Program Settings. Enabled minecraft-bedrock-server)
         "type": "github"
       },
       "original": {
@@ -113,19 +105,11 @@
         ]
       },
       "locked": {
-<<<<<<< HEAD
         "lastModified": 1708558280,
         "narHash": "sha256-w1ns8evB6N9VTrAojcdXLWenROtd77g3vyClrqeFdG8=",
         "owner": "nix-community",
         "repo": "home-manager",
         "rev": "0b69d574162cfa6eb7919d5614a48d0185550891",
-=======
-        "lastModified": 1705446327,
-        "narHash": "sha256-n7FCuAR2BI1SvLjF6eFc8VE6WLZCMlbToyfqU2ihbkU=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "16cefa78cc801911ebd4ff1faddc6280ab3c9228",
->>>>>>> 53f3d11 (Changed Some Program Settings. Enabled minecraft-bedrock-server)
         "type": "github"
       },
       "original": {
@@ -447,19 +431,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-<<<<<<< HEAD
         "lastModified": 1708475490,
         "narHash": "sha256-g1v0TsWBQPX97ziznfJdWhgMyMGtoBFs102xSYO4syU=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "0e74ca98a74bc7270d28838369593635a5db3260",
-=======
-        "lastModified": 1705316053,
-        "narHash": "sha256-J2Ey5mPFT8gdfL2XC0JTZvKaBw/b2pnyudEXFvl+dQM=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "c3e128f3c0ecc1fb04aef9f72b3dcc2f6cecf370",
->>>>>>> 53f3d11 (Changed Some Program Settings. Enabled minecraft-bedrock-server)
         "type": "github"
       },
       "original": {
@@ -514,19 +490,11 @@
     "rust-analyzer-src": {
       "flake": false,
       "locked": {
-<<<<<<< HEAD
         "lastModified": 1708459863,
         "narHash": "sha256-PzlnvPOv/1l2lSU0oj+gY+hq5MRqJNU3KWSO+RCwhgs=",
         "owner": "rust-lang",
         "repo": "rust-analyzer",
         "rev": "543d7e98dbcc0668528dbf3f5b32d752882baa33",
-=======
-        "lastModified": 1705432736,
-        "narHash": "sha256-uUS5B8ypVevvhjA/2smEOu5s8zK3MBJU5tH0Tze3Kok=",
-        "owner": "rust-lang",
-        "repo": "rust-analyzer",
-        "rev": "03336460fcb25a86675aaff9694998f5910ff747",
->>>>>>> 53f3d11 (Changed Some Program Settings. Enabled minecraft-bedrock-server)
         "type": "github"
       },
       "original": {

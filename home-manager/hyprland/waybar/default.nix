@@ -129,15 +129,17 @@ in {
         tooltip = false;
       };
 
-      # "hyprland/workspaces" = {
-        # # TODO: pacman, remove active inverse circle
+      "hyprland/workspaces" = {
+        # TODO: pacman, remove active inverse circle
         # format = "{icon}";
         # format-icons = {
         #   active = "󰮯";
         #   default = "·";
         #   urgent = "󰊠";
         # };
-      # };
+        on-scroll-down = "hyprctl dispatch workspace m-1";
+        on-scroll-up = "hyprctl dispatch workspace m+1";
+      };
 
       "custom/nix" = {
         format = "󱄅";

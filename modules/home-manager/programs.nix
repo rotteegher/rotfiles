@@ -25,7 +25,7 @@
     wezterm.enable = lib.mkEnableOption "wezterm" // {default = isNixOS;};
 
     # MINECRAFT PRISMLAUNCHER
-    minecraft-launcher.enable = lib.mkEnableOption "minecraft-prismlauncher" // {default = false;};
+    minecraft-launchers.enable = lib.mkEnableOption "minecraft-prismlauncher + others?" // {default = false;};
     # WALLUST
     wallust = with lib.types; {
       enable = lib.mkEnableOption "wallust" // {default = true;};
