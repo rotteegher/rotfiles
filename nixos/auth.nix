@@ -3,6 +3,7 @@
   lib,
   pkgs,
   user,
+  host,
   ...  
 }: let
 autoLoginUser = config.services.xserver.displayManager.autoLogin.user;
@@ -33,6 +34,7 @@ in {
     else null
   );
   services.getty.autologinUser = autoLoginUser;
+  # systemd.services."getty@tty2".enable = false;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

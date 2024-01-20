@@ -61,7 +61,7 @@
   users.users.${user} = {...}: {
     isNormalUser = true;
     initialPassword = "password";
-    extraGroups = [ "networkmanager" "wheel" (lib.mkIf config.rot-nixos.services.minecraft-bedrock-server.enable "minecraft" ) ];
+    extraGroups = [ "networkmanager" "wheel" ];
   };
   # Reboot/poweroff for unprivileged users
   # Grants permissions to reboot/poweroff machine to users in the users group. 
