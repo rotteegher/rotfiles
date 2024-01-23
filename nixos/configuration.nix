@@ -15,11 +15,14 @@
     };
     grub = {
       enable = true;
-      device = "nodev";
+      devices = ["nodev"];
       zfsSupport = true;
       efiSupport = true;
       useOSProber = false;
       default = "saved";
+      theme = pkgs.rot.distro-grub-themes-nixos;
+      gfxmodeBios = "1920x1080";
+      gfxmodeEfi = "1920x1080";
     };
   };
 
@@ -46,8 +49,6 @@
     LC_TIME = "uk_UA.UTF-8";
   };
 
-
-
   # Configure keymap in X11
   services.xserver = {
     layout = "jp";
@@ -61,10 +62,10 @@
   users.users.${user} = {...}: {
     isNormalUser = true;
     initialPassword = "password";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
   };
   # Reboot/poweroff for unprivileged users
-  # Grants permissions to reboot/poweroff machine to users in the users group. 
+  # Grants permissions to reboot/poweroff machine to users in the users group.
   security = {
     sudo.enable = true;
     # i can't type xD
@@ -73,6 +74,9 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Permit insecure packages
+  nixpkgs.config.permittedInsecurePackages = [] ++ (lib.optional config.hm.rot.viber.enable "openssl-1.1.1w");
 
   # Cuda support
   nixpkgs.config.cudaSupport = true;

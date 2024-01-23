@@ -1,24 +1,22 @@
 {
-config,
-pkgs,
-lib,
-...
+  config,
+  pkgs,
+  lib,
+  ...
 }: {
-  config = lib.mkIf config.rot.discord.enable  {
-    home.packages = [ 
-     (pkgs.writeShellApplication {
-      name = "discord-vesktop";
-      text = ''
-        env -u NIXOS_OZONE_WL vesktop --use-gl=desktop
-      '';
-    })
-     (pkgs.makeDesktopItem {
+  config = lib.mkIf config.rot.discord.enable {
+    home.packages = [
+      (pkgs.writeShellApplication {
         name = "discord-vesktop";
-        exec =
-          "env -u NIXOS_OZONE_WL vesktop --use-gl=desktop";
+        text = ''
+          env -u NIXOS_OZONE_WL vesktop --use-gl=desktop
+        '';
+      })
+      (pkgs.makeDesktopItem {
+        name = "discord-vesktop";
+        exec = "env -u NIXOS_OZONE_WL vesktop --use-gl=desktop";
         desktopName = "Discord-Vesktop";
-        icon =
-          "${pkgs.tela-circle-icon-theme}/share/icons/Tela-circle/scalable/apps/discord.svg";
+        icon = "${pkgs.tela-circle-icon-theme}/share/icons/Tela-circle/scalable/apps/discord.svg";
       })
     ];
 
@@ -31,4 +29,3 @@ lib,
     };
   };
 }
-

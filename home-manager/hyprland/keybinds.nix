@@ -7,10 +7,31 @@
   inherit (config.rot) displays;
   rofi = lib.getExe pkgs.rofi;
   pamixer = lib.getExe pkgs.pamixer;
-  qtile_like = config.custom.hyprland.qtile;
+  qtile_like = config.rot.hyprland.qtile;
 in {
   wayland.windowManager.hyprland.settings = lib.mkIf config.wayland.windowManager.hyprland.enable {
-    bind =
+    bind = let
+      workspace_keybinds = lib.flatten ((pkgs.rot.lib.mapWorkspaces ({
+        workspace,
+        key,
+        ...
+      }:
+        if qtile_like
+        then [
+          # Switch workspaces with mainMod + [0-9]
+          "$mod, ${key}, focusworkspaceoncurrentmonitor, ${workspace}"
+          # Move active window to a workspace with mainMod + SHIFT + [0-9]
+          "$mod_SHIFT, ${key}, movetoworkspace, ${workspace}"
+          "$mod_SHIFT, ${key}, focusworkspaceoncurrentmonitor, ${workspace}"
+        ]
+        else [
+          # Switch workspaces with mainMod + [0-9]
+          "$mod, ${key}, workspace, ${workspace}"
+          # Move active window to a workspace with mainMod + SHIFT + [0-9]
+          "$mod_SHIFT, ${key}, movetoworkspace, ${workspace}"
+        ]))
+      displays);
+    in
       [
         "$mod, Return, exec, $term"
         "$mod_SHIFT, Return, exec, rofi -show drun"
@@ -34,7 +55,6 @@ in {
 
         # reset input language
         "$mod, Escape, exec, fcitx5-remote -s keyboard-jp"
-        
 
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"
@@ -151,9 +171,9 @@ in {
         # "XF86AudioPlay, mpvctl playpause"
 
         # audio
-        ",XF86AudioLowerVolume, exec, ${lib.getExe pkgs.pamixer} -d 5"
-        ",XF86AudioRaiseVolume, exec, ${lib.getExe pkgs.pamixer} -i 5"
-        ",XF86AudioMute, exec, ${lib.getExe pkgs.pamixer} -t"
+        ",XF86AudioLowerVolume, exec, ${pamixer} -d 5"
+        ",XF86AudioRaiseVolume, exec, ${pamixer} -i 5"
+        ",XF86AudioMute, exec, ${pamixer} -t"
       ]
       ++ lib.optionals config.rot.wezterm.enable ["$mod, q, exec, wezterm start"]
       ++ lib.optionals config.rot.backlight.enable [

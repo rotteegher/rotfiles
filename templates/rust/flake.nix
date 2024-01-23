@@ -7,7 +7,6 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs = {
@@ -35,16 +34,16 @@
                 PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
               };
 
-              packages = with pkgs; [ bacon ];
+              packages = with pkgs; [bacon];
 
               languages.rust = {
                 enable = true;
                 channel = "stable";
-                components = [ "rustc" "cargo" "clippy" "rustfmt" "rust-analyzer" ];
+                components = ["rustc" "cargo" "clippy" "rustfmt" "rust-analyzer"];
               };
               pre-commit.hooks = {
-                 rustfmt.enable = true;
-                 clippy.enable = true;
+                rustfmt.enable = true;
+                clippy.enable = true;
               };
             }
           ];

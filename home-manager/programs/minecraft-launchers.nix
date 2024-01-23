@@ -1,6 +1,10 @@
-{config, pkgs, lib, ...}: {
-  
-  config = lib.mkIf config.rot.minecraft-launchers.enable  {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  config = lib.mkIf config.rot.minecraft-launchers.enable {
     home.packages = with pkgs; [
       # Launcher Java
       prismlauncher

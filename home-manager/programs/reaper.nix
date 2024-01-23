@@ -1,14 +1,14 @@
 {
-config,
-pkgs,
-lib,
-...
+  config,
+  pkgs,
+  lib,
+  ...
 }: {
-  config = lib.mkIf config.rot.reaper.enable  {
+  config = lib.mkIf config.rot.reaper.enable {
     home = {
-      packages = [ pkgs.reaper pkgs.helm ];
+      packages = [pkgs.reaper pkgs.helm];
       # persist plugins
-      sessionVariables =  {
+      sessionVariables = {
         LV2_PATH = "~/.nix-profile/lib/lv2/:~/.lv2:/nix/var/nix/profiles/default/lib/lv2:/var/run/current-system/sw/lib/lv2";
         VST_PATH = "~/.nix-profile/lib/vst/:~/.vst:/nix/var/nix/profiles/default/lib/vst:/var/run/current-system/sw/lib/vst";
         LXVST_PATH = "~/.nix-profile/lib/lxvst/:~/.lxvst:/nix/var/nix/profiles/default/lib/lxvst:/var/run/current-system/sw/lib/lxvst";
@@ -23,5 +23,3 @@ lib,
     };
   };
 }
-
-

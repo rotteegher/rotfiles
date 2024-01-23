@@ -1,8 +1,8 @@
 {
-config,
-pkgs,
-user,
-...
+  config,
+  pkgs,
+  user,
+  ...
 }: {
   config = {
     # Select internationalisation properties.
@@ -10,10 +10,10 @@ user,
       defaultLocale = "en_US.UTF-8";
       inputMethod = {
         enabled = "fcitx5";
-          fcitx5.addons = with pkgs; [
-            fcitx5-mozc
-            fcitx5-anthy
-            fcitx5-gtk
+        fcitx5.addons = with pkgs; [
+          fcitx5-mozc
+          fcitx5-anthy
+          fcitx5-gtk
         ];
       };
     };
@@ -21,17 +21,16 @@ user,
       home.directories = [
         ".config/fcitx/"
         ".config/fcitx5/"
-        ];
+      ];
     };
 
     # KEYMAPS
     console = {
       # font = "ruscii_8x8";
       #font = "drdos8x14";
-      packages = with pkgs; [ terminus_font ];
+      packages = with pkgs; [terminus_font];
       keyMap = "jp106";
       # useXkbConfig = true; # use xkbOptions in tty.
-
     };
     services.gpm.enable = true;
 
@@ -40,7 +39,7 @@ user,
     environment.systemPackages = [pkgs.piper];
 
     users.users.${user} = {...}: {
-      extraGroups = [ "input" ];
+      extraGroups = ["input"];
     };
 
     environment.variables = {

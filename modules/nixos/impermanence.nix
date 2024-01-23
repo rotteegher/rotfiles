@@ -16,7 +16,7 @@
     };
     home = {
       directories = lib.mkOption {
-        default = [ ];
+        default = [];
         description = "Directories to persist in home directory";
       };
       files = lib.mkOption {

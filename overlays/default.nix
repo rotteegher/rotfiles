@@ -35,11 +35,15 @@ in {
         imv = prev.imv.overrideAttrs (o: {
           patches =
             (o.patches or [])
-             ++ [
+            ++ [
               # https://lists.sr.ht/~exec64/imv-devel/patches/39476
               ./imv-fix-repeated-keypresses.patch
             ];
         });
+
+        viber = prev.viber.overrideAttrs (o: {permittedInsecurePackages = [
+          "openssl-1.1.1w"
+        ];});
 
         rclip = prev.rclip.overridePythonAttrs (o: {
           version = "1.7.24";
@@ -108,7 +112,6 @@ in {
             // {
               version = "${o.version}-${sources.waybar.version}";
             });
-
 
         # TODO: remove on new wezterm release
         # fix wezterm crashing instantly

@@ -6,7 +6,6 @@
 }:
 stdenvNoCC.mkDerivation (source
   // {
-
     pname = "rofi-themes";
     version = "0a55e154598466edb4352013798acc1d2f245306";
     src = fetchFromGitHub {

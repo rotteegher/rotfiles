@@ -1,8 +1,10 @@
-{config, lib, ...}:
-let
-cfg = config.rot-nixos.hotspot;
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.rot-nixos.hotspot;
+in {
   config = lib.mkIf cfg.enable {
     # Enable WIFi Hotspot
     services.create_ap = {

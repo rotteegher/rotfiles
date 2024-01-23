@@ -1,4 +1,3 @@
-
 # create a cross shell config
 {
   config,

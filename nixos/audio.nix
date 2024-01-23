@@ -1,4 +1,8 @@
-{pkgs, user, ...}: {
+{
+  pkgs,
+  user,
+  ...
+}: {
   config = {
     # setup pipewire for audio
     security.rtkit.enable = true;
@@ -28,14 +32,13 @@
     #   extraGroups = [ "jackaudio" ];
     # };
 
-    environment.systemPackages = with pkgs;
-      [
-        sox
-        alsa-lib
-        alsa-utils
-        pavucontrol
-        helvum
-        easyeffects
-      ];
+    environment.systemPackages = with pkgs; [
+      sox
+      alsa-lib
+      alsa-utils
+      pavucontrol
+      helvum
+      easyeffects
+    ];
   };
 }
