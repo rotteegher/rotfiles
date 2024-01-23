@@ -118,6 +118,26 @@
         "type": "github"
       }
     },
+    "hyprgrass": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ]
+      },
+      "locked": {
+        "lastModified": 1705984353,
+        "narHash": "sha256-KW7HHuThNRfwNfAm7DbwX52AS81wbU+8n+soaoC2Ric=",
+        "owner": "horriblename",
+        "repo": "hyprgrass",
+        "rev": "7f490fc908d81c00742bda2cf0679e256a860298",
+        "type": "github"
+      },
+      "original": {
+        "owner": "horriblename",
+        "repo": "hyprgrass",
+        "type": "github"
+      }
+    },
     "hyprland": {
       "inputs": {
         "hyprland-protocols": "hyprland-protocols",
@@ -478,6 +498,7 @@
         "devenv": "devenv",
         "fenix": "fenix",
         "home-manager": "home-manager",
+        "hyprgrass": "hyprgrass",
         "hyprland": "hyprland",
         "impermanence": "impermanence",
         "nh": "nh",
