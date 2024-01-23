@@ -1,19 +1,28 @@
-{ config, lib, pkgs, user, ... }: 
-let
+{
+  config,
+  lib,
+  pkgs,
+  user,
+  ...
+}: let
   cfg = config.rot-nixos.services.minecraft-bedrock-server;
 
-  cfgToString = v: if builtins.isBool v then lib.boolToString v else toString v;
+  cfgToString = v:
+    if builtins.isBool v
+    then lib.boolToString v
+    else toString v;
 
   serverPropertiesFile = pkgs.writeText "server.properties" (''
-    # server.properties managed by NixOS configuration
-  '' + lib.concatStringsSep "\n" (lib.mapAttrsToList
-    (n: v: "${n}=${cfgToString v}") cfg.serverProperties));
+      # server.properties managed by NixOS configuration
+    ''
+    + lib.concatStringsSep "\n" (lib.mapAttrsToList
+      (n: v: "${n}=${cfgToString v}")
+      cfg.serverProperties));
 
   permissionsFile = pkgs.writeText "permissions.json" (builtins.toJSON cfg.permissions);
 
   serverPort = cfg.serverProperties.server-port or 25575;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       # USE "sudo conspy 4" command to enter server console
@@ -24,7 +33,7 @@ in
     ];
 
     systemd.tmpfiles.rules = [
-       "d ${cfg.dataDir} 0770 rot users"
+      "d ${cfg.dataDir} 0770 rot users"
     ];
 
     # Specify socket file to 'echo "command" > systemd.stdin'
@@ -46,10 +55,10 @@ in
     '';
 
     systemd.services.minecraft-bedrock-server = {
-      description   = "Minecraft Bedrock Server Service";
-      wantedBy      = [ "multi-user.target" ];
-      conflicts     = [ "getty@tty4.service" ];
-      after         = [ "network.target" "getty@tty4.service" ];
+      description = "Minecraft Bedrock Server Service";
+      wantedBy = ["multi-user.target"];
+      conflicts = ["getty@tty4.service"];
+      after = ["network.target" "getty@tty4.service"];
 
       serviceConfig = {
         Type = "simple";
@@ -79,7 +88,7 @@ in
 
         ExecStart = "/bin/sh -c '${cfg.package}/bin/bedrock_server > /dev/tty4 < /dev/tty4'";
         # PLEASE ISSUE a "stop" command to the server manually
-        # before shutting down systemd service 
+        # before shutting down systemd service
 
         # Works only with
         # StandardInput = "socket";
@@ -110,8 +119,8 @@ in
     };
 
     networking.firewall = {
-      allowedUDPPorts = [ serverPort 19132 19133 ];
-      allowedTCPPorts = [ serverPort 19132 19133 ];
+      allowedUDPPorts = [serverPort 19132 19133];
+      allowedTCPPorts = [serverPort 19132 19133];
     };
     rot-nixos.persist = {
       root.directories = [

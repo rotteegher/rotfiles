@@ -1,4 +1,8 @@
-{user, pkgs, ...}: {
+{
+  user,
+  pkgs,
+  ...
+}: {
   rot-nixos = {
     # hardware
     hdds = {
@@ -31,36 +35,42 @@
       package = pkgs.rot.minecraft-bedrock-server;
       dataDir = "/srv/minecraft-bedrock-server";
       permissions = [
-        { permission = "operator"; pfid = "6cf9edda1be490d6"; }
-        { permission = "operator"; xuid = "2535460878389100"; }
+        {
+          permission = "operator";
+          pfid = "6cf9edda1be490d6";
+        }
+        {
+          permission = "operator";
+          xuid = "2535460878389100";
+        }
       ];
       serverProperties = {
-            server-name = "Dedicated Rot Server";
-            gamemode = "survival";
-            difficulty = "hard";
-            allow-cheats = true;
-            max-players = 10;
-            online-mode = false;
-            white-list = false;
-            server-ip = "";
-            server-port = 25575;
-            server-portv6 = 19177;
-            emit-server-telemetry = true;
-            view-distance = 32;
-            tick-distance = 4;
-            # player-idle-timeout = 30;
-            # max-threads = 4;
-            # level-name = "Bedrock level";
-            # level-seed = "";
-            # default-player-permission-level = "member";
-            # texturepack-required = false;
-            # content-log-file-enabled = false;
-            # compression-threshold = 1;
-            # server-authoritative-movement = "server-auth";
-            # player-movement-score-threshold = 20;
-            # player-movement-distance-threshold = "0.3";
-            # player-movement-duration-threshold-in-ms = 500;
-            # correct-player-movement = false;
+        server-name = "Dedicated Rot Server";
+        gamemode = "survival";
+        difficulty = "hard";
+        allow-cheats = true;
+        max-players = 10;
+        online-mode = false;
+        white-list = false;
+        server-ip = "";
+        server-port = 25575;
+        server-portv6 = 19177;
+        emit-server-telemetry = true;
+        view-distance = 32;
+        tick-distance = 4;
+        player-idle-timeout = 30;
+        max-threads = 4;
+        level-name = "Jungle Island";
+        level-seed = "1070141852853881206";
+        default-player-permission-level = "member";
+        texturepack-required = false;
+        content-log-file-enabled = false;
+        compression-threshold = 1;
+        server-authoritative-movement = "server-auth";
+        player-movement-score-threshold = 20;
+        player-movement-distance-threshold = "0.3";
+        player-movement-duration-threshold-in-ms = 500;
+        correct-player-movement = false;
       };
     };
   };

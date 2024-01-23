@@ -4,65 +4,68 @@
   pkgs,
   ...
 }: {
-    config = lib.mkIf config.rot.helix.enable {
-      home.packages = [ pkgs.lldb pkgs.clang-tools ];
-      programs.helix = {
-        enable = true;
-        languages = {
-          language = [{
+  config = lib.mkIf config.rot.helix.enable {
+    home.packages = [pkgs.lldb pkgs.clang-tools];
+    programs.helix = {
+      enable = true;
+      languages = {
+        language = [
+          {
             name = "rust";
             auto-format = true;
             scope = "source.rs";
             file-types = ["rs"];
-            indent = { 
+            indent = {
               tab-width = 4;
               unit = "    ";
             };
             language-id = "rust";
-            roots = [ "Cargo.lock" "Cargo.toml"];
+            roots = ["Cargo.lock" "Cargo.toml"];
             language-servers = ["rust-analyzer"];
-          }];
+          }
+        ];
+      };
+      themes = {
+        mtr = {
+          # "inherits" = "mellow";
+          # "inherits" = "ferra";
+          # "inherits" = "vim_dark_high_contrast";
+          "inherits" = "catppuccin_mocha";
+          "ui.background" = {fg = "none";};
         };
-        themes = {
-          mtr = {
-            # "inherits" = "mellow";
-            # "inherits" = "ferra";
-            "inherits" = "vim_dark_high_contrast";
-            "ui.background" = { fg = "none"; };
-          };
+      };
+      settings = {
+        theme = "mtr";
+        editor = {
+          lsp.display-inlay-hints = true;
+          true-color = true;
+          line-number = "relative";
+          mouse = true;
+          rulers = [200];
+          bufferline = "always";
         };
-        settings = {
-          theme = "mtr";
-          editor = {
-            lsp.display-inlay-hints = true;
-            true-color = true;
-            line-number = "relative";
-            mouse = true;
-            rulers = [200];
-            bufferline = "always";
-          };
-          keys.select = {
-            X = ["extend_line_up" "extend_to_line_bounds"];
-            A-x = "extend_to_line_bounds";
-            C-y = "yank_to_clipboard";
-          };
-          keys.normal = {
-            X = ["extend_line_up" "extend_to_line_bounds"];
-            A-x = "extend_to_line_bounds";
-            C-p = ["move_line_up" "scroll_up"];
-            C-n = ["move_line_down" "scroll_down"];
-            C-y = "yank_to_clipboard";
-            # esc = ["collapse_selection" "keep_primary_selection"];
-          };
-          editor.cursor-shape = {
-            insert = "bar";
-            # normal = "block";
-            select = "underline";
-          };
-          editor.file-picker = {
-            hidden = false;
-          };
+        keys.select = {
+          X = ["extend_line_up" "extend_to_line_bounds"];
+          A-x = "extend_to_line_bounds";
+          C-y = "yank_to_clipboard";
+        };
+        keys.normal = {
+          X = ["extend_line_up" "extend_to_line_bounds"];
+          A-x = "extend_to_line_bounds";
+          C-p = ["move_line_up" "scroll_up"];
+          C-n = ["move_line_down" "scroll_down"];
+          C-y = "yank_to_clipboard";
+          # esc = ["collapse_selection" "keep_primary_selection"];
+        };
+        editor.cursor-shape = {
+          insert = "bar";
+          # normal = "block";
+          select = "underline";
+        };
+        editor.file-picker = {
+          hidden = false;
         };
       };
     };
-  }
+  };
+}

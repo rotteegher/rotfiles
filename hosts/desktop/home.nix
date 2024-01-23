@@ -4,23 +4,22 @@
   isNixOS,
   ...
 }: {
-
   rot = {
     displays = [
       {
         name = "HDMI-A-5";
         hyprland = "1920x1080@60,0x0,1";
-        workspaces = [ 1 3 6 7 8 ];
+        workspaces = [1 3 6 7 8];
       }
       # second element by index 1 is set to be a touchscreen monitor
       {
         name = "HDMI-A-4";
         hyprland = "1920x1080@60,1910x1080,1.333";
-        workspaces = [ 2 4 5 9 10 ];
+        workspaces = [2 4 5 9 10];
       }
     ];
+    gradience.enable = false;
     firefox.enable = true;
-    hyprland.plugin = "hyprnstack";
     wallust.enable = true;
     rofi.enable = true;
     rclip.enable = false;
@@ -38,7 +37,8 @@
     reaper.enable = false;
 
     discord.enable = true;
-
+    telegram.enable = true;
+    viber.enable = true;
 
     minecraft-launchers.enable = true;
 
@@ -52,11 +52,10 @@
     terminal.exec = "kitty";
   };
 
-
   home = {
     packages = lib.mkIf isNixOS (
       with pkgs; [
-        gimp
+        # gimp
         # kdenlive
         feh
         mupdf
@@ -66,11 +65,8 @@
         glibc
         zola
         fspy
-        # vial  
       ]
     );
   };
 
-  # required vial to work?
-  # services.udev.extraRules = ''KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"'';
 }

@@ -41,10 +41,9 @@ in {
         set -g fish_cursor_insert underscore
         set -g fish_cursor_selection_mode underscore
         echo ""
-        ''
-        # fish doesn't seem to pick up completions for dotfiles_utils?
-        # set --append fish_complete_path "${pkgs.rot.dotfiles-utils}/share/fish/vendor_completions.d" # TODO
-
+      ''
+      # fish doesn't seem to pick up completions for dotfiles_utils?
+      # set --append fish_complete_path "${pkgs.rot.dotfiles-utils}/share/fish/vendor_completions.d" # TODO
       # wallust colorscheme
       + lib.optionalString (config.rot.wallust.enable) ''
         set wallust_colors "/home/${user}/.cache/wallust/sequences"
@@ -74,4 +73,3 @@ in {
     ];
   };
 }
-

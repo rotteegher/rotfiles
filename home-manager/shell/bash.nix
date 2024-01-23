@@ -70,8 +70,7 @@ in {
   };
   # rot.persist = {
   #   home.directories = [
-  #     ".config/bash"  
+  #     ".config/bash"
   #   ];
   # };
 }
-

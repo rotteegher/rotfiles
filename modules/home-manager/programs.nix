@@ -8,9 +8,11 @@
   options.rot = {
     discord.enable = lib.mkEnableOption "discord" // {default = false;};
     firefox.enable = lib.mkEnableOption "firefox" // {default = true;};
+    gradience.enable = lib.mkEnableOption "gradience";
     rofi.enable = lib.mkEnableOption "rofi" // {default = true;};
     k3b.enable = lib.mkEnableOption "k3b" // {default = false;};
-    telegram.enable = lib.mkEnableOption "telegram-desktop" // {default = true;};
+    telegram.enable = lib.mkEnableOption "telegram-desktop" // {default = false;};
+    viber.enable = lib.mkEnableOption "viber" // {default = false;};
     reaper.enable = lib.mkEnableOption "reaper" // {default = false;};
     blender.enable = lib.mkEnableOption "blender" // {default = false;};
     anime4k.enable = lib.mkEnableOption "anime4k" // {default = true;};

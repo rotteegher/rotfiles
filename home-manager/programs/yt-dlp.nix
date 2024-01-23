@@ -20,4 +20,3 @@
     ytplaylist = "yt --output '%(playlist_index)d - %(title)s.%(ext)s'";
   };
 }
-

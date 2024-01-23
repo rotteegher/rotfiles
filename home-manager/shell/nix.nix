@@ -82,25 +82,25 @@
       fi
     '';
   };
-  in {
-    config = lib.mkMerge [
-      (lib.mkIf (!isNixOS) {
-        home.packages = [
-          hmbuild
-          hmswitch
-          hmupd8
-          nh # nh is installed by nixos anyway
-        ];
+in {
+  config = lib.mkMerge [
+    (lib.mkIf (!isNixOS) {
+      home.packages = [
+        hmbuild
+        hmswitch
+        hmupd8
+        nh # nh is installed by nixos anyway
+      ];
 
-        home.shellAliases = {
-          hsw = "hswitch";
-        };
-      })
-      {
-        home.packages = [ngc nr];
-        home.shellAliases = {
-          nsh = "nix-shell --command fish -p";
-        };
-      }
-    ];
-  }
+      home.shellAliases = {
+        hsw = "hswitch";
+      };
+    })
+    {
+      home.packages = [ngc nr];
+      home.shellAliases = {
+        nsh = "nix-shell --command fish -p";
+      };
+    }
+  ];
+}

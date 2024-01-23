@@ -8,7 +8,7 @@
     ./audio.nix
     ./auth.nix
     ./configuration.nix
-    # ./keyd.nix # TODO 
+    # ./keyd.nix # TODO
     # ./docker.nix
     # ./filezilla.nix
     # ./gnome3.nix # TODO
@@ -36,7 +36,6 @@
     # automount disks
     services.gvfs.enable = true;
     # services.devmon.enable = true;
-
 
     environment = {
       etc = {
@@ -77,8 +76,7 @@
         ++ (lib.optional (!config.services.xserver.desktopManager.gnome.enable) config.hm.rot.terminal.fakeGnomeTerminal)
         ++ (lib.optional config.rot-nixos.distrobox.enable pkgs.distrobox)
         ++ (lib.optional config.hm.rot.helix.enable helix)
-        ++ (lib.optional config.hm.rot.discord.enable vesktop)
-        ;
+        ++ (lib.optional config.hm.rot.discord.enable vesktop);
     };
 
     # setup fonts

@@ -48,7 +48,6 @@ in {
     pkgs.lazygit
   ];
 
-
   programs = {
     gh.enable = true;
     git = {
@@ -95,7 +94,6 @@ in {
     };
   };
 
-  
   # extra git functions
   rot.shell.functions = {
     # delete a remote branch

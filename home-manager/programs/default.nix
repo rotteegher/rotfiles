@@ -13,6 +13,7 @@
     ./nemo.nix
     ./minecraft-launchers.nix
     ./obs-studio.nix
+    ./viber.nix
     # ./pathofbuilding.nix
     ./rofi.nix
     ./vlc.nix

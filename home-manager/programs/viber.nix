@@ -1,17 +1,21 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
-  cfg = config.rot.obs-studio;
+  cfg = config.rot.viber;
 in {
   config = lib.mkIf cfg.enable {
-    programs.obs-studio.enable = true;
+    home.packages = [ 
+      pkgs.viber
+    ];
 
     rot.persist = {
       home.directories = [
-        ".config/obs-studio"
+        # ".config/viber"
       ];
     };
   };
 }
+

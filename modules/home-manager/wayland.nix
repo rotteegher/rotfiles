@@ -37,11 +37,8 @@ in {
     };
 
     hyprland = {
-      plugin = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum ["hyprnstack"]);
-        description = "Plugin to enable for hyprland";
-        default = null;
-      };
+      autostart = lib.mkEnableOption "Autostart hyprland from tty" // {default = true;};
+      qtile = lib.mkEnableOption "qtile like behavior for workspaces";
     };
 
     waybar = {

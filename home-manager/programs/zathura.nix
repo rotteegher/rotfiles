@@ -69,4 +69,3 @@
     target = "~/.cache/wallust/zathurarc";
   };
 }
-

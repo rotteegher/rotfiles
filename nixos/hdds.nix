@@ -1,20 +1,20 @@
-  {
-    lib,
-    config,
-    user,
-    ...
-  }: let
-    cfg = config.rot-nixos.hdds;
-    wdc-blue-mountpoint = "/md/wdc-data";
-    wdc-blue-dataset = "wdc-blue/data";
-    stsea-mountpoint = "/md/stsea-okii";
-    stsea-dataset = "stsea-barra/okii";
-  in {
-    config = lib.mkIf cfg.enable {
+{
+  lib,
+  config,
+  user,
+  ...
+}: let
+  cfg = config.rot-nixos.hdds;
+  wdc-blue-mountpoint = "/md/wdc-data";
+  wdc-blue-dataset = "wdc-blue/data";
+  stsea-mountpoint = "/md/stsea-okii";
+  stsea-dataset = "stsea-barra/okii";
+in {
+  config = lib.mkIf cfg.enable {
     # non os zfs disks
-    boot.zfs.extraPools = [ "wdc-blue" "stsea-barra" ];
-      # lib.optional cfg.wdc1tb "wdc-blue"
-      # ++ (lib.optional cfg.stsea3tb "stsea-barra");
+    boot.zfs.extraPools = ["wdc-blue" "stsea-barra"];
+    # lib.optional cfg.wdc1tb "wdc-blue"
+    # ++ (lib.optional cfg.stsea3tb "stsea-barra");
 
     services.sanoid = lib.mkIf config.rot-nixos.zfs.snapshots {
       enable = true;
@@ -33,8 +33,7 @@
           monthly = 0;
         };
       };
-    };    
-
+    };
 
     # add bookmarks for gtk
     hm = {...} @ hmCfg: {
@@ -69,39 +68,37 @@
       # "L+ ${stsea-mountpoint}/TV               - - - - ${wdc-blue-mountpoint}/TV"
     ];
 
-
     # dual boot windows
     boot.loader.grub = {
-      extraEntries = lib.concatStringsSep "\n" ((lib.optional cfg.windows ''
-          menuentry "Windows 10" {
-            insmod part_gpt
-            insmod ntfs
-            insmod search_fs_uuid
-            insmod chain
-            search --fs-uuid --set=root 14A1-3DF5
-            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-          }
-      ''));
+      extraEntries = lib.concatStringsSep "\n" (lib.optional cfg.windows ''
+        menuentry "Windows 10" {
+          insmod part_gpt
+          insmod ntfs
+          insmod search_fs_uuid
+          insmod chain
+          search --fs-uuid --set=root 14A1-3DF5
+          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+        }
+      '');
     };
 
-
     fileSystems = {
-      "/windows" = 
-        { device = "/dev/disk/by-label/WINDOWS";
-          fsType = "ntfs";
-          neededForBoot = false;
-        };
+      "/windows" = {
+        device = "/dev/disk/by-label/WINDOWS";
+        fsType = "ntfs";
+        neededForBoot = false;
+      };
 
-      "/md/wdc-data" =
-        { device = "wdc-blue/data";
-          fsType = "zfs";
-          neededForBoot = false;
-        };
-      "/md/stsea-okii" =
-        { device = "stsea-barra/okii";
-          fsType = "zfs";
-          neededForBoot = false;
-        };
+      "/md/wdc-data" = {
+        device = "wdc-blue/data";
+        fsType = "zfs";
+        neededForBoot = false;
+      };
+      "/md/stsea-okii" = {
+        device = "stsea-barra/okii";
+        fsType = "zfs";
+        neededForBoot = false;
+      };
     };
   };
 }

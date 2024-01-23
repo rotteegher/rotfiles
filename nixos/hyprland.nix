@@ -17,7 +17,7 @@ in {
       text = "auth include login";
     };
 
-    programs.bash.shellAliases = { H = "Hyprland"; };
+    programs.bash.shellAliases = {H = "Hyprland";};
 
     programs.hyprland = {
       enable = true;

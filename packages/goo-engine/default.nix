@@ -1,5 +1,9 @@
-{ stdenvNoCC, source, pkgs, lib }:
-let
+{
+  stdenvNoCC,
+  source,
+  pkgs,
+  lib,
+}: let
   py = pkgs.python310;
   # Explicit dependency on libepoxy
   libepoxy = pkgs.libepoxy;
@@ -28,44 +32,65 @@ let
     "-DCXX=${pkgs.gcc}"
   ];
 in
-stdenvNoCC.mkDerivation (
-  finalAttrs: (source
-  //  {
-    python = py;
+  stdenvNoCC.mkDerivation (
+    finalAttrs: (source
+      // {
+        python = py;
 
-    cmakeFlags = cmakeFlags;
-    enableParallelBuilding = true;
-    nativeBuildInputs = [
-      pkgs.cmake
-      pkgs.git
-      py
-      pkgs.pkg-config
-      pkgs.dig
-    ];
-    buildInputs = with pkgs; [
-      gcc libgcc
-      shaderc
-      vulkan-tools vulkan-loader vulkan-headers
-      libtiff libepoxy libjpeg libpng zstd freetype openimageio2 opencolorio openexr_3
-      embree boost ffmpeg_5 tbb fftw libGL libGLU glew
-      xorg.libX11 xorg.libXi xorg.libXxf86vm xorg.libXrender
-      # Python packages
-      python310Packages.numpy python310Packages.requests
-    ];
+        cmakeFlags = cmakeFlags;
+        enableParallelBuilding = true;
+        nativeBuildInputs = [
+          pkgs.cmake
+          pkgs.git
+          py
+          pkgs.pkg-config
+          pkgs.dig
+        ];
+        buildInputs = with pkgs; [
+          gcc
+          libgcc
+          shaderc
+          vulkan-tools
+          vulkan-loader
+          vulkan-headers
+          libtiff
+          libepoxy
+          libjpeg
+          libpng
+          zstd
+          freetype
+          openimageio2
+          opencolorio
+          openexr_3
+          embree
+          boost
+          ffmpeg_5
+          tbb
+          fftw
+          libGL
+          libGLU
+          glew
+          xorg.libX11
+          xorg.libXi
+          xorg.libXxf86vm
+          xorg.libXrender
+          # Python packages
+          python310Packages.numpy
+          python310Packages.requests
+        ];
 
-    pythonPath = with pkgs.python310Packages; [numpy requests zstd python];
+        pythonPath = with pkgs.python310Packages; [numpy requests zstd python];
 
-    buildPhase = ''
-      cd ${source.src}
-      echo "THIS IS $(pwd)"
-      stat ${pkgs.bash}/bin/bash
-    '';
+        buildPhase = ''
+          cd ${source.src}
+          echo "THIS IS $(pwd)"
+          stat ${pkgs.bash}/bin/bash
+        '';
 
-    postPatch = ''
-      rm build_files/cmake/Modules/FindPython.cmake
-    '';
+        postPatch = ''
+          rm build_files/cmake/Modules/FindPython.cmake
+        '';
 
-    phases = ["unpackPhase" "buildPhase" "installPhase"];
-    
-  })
-)
+        phases = ["unpackPhase" "buildPhase" "installPhase"];
+      })
+  )
