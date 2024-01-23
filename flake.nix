@@ -25,6 +25,11 @@
       # inputs.nixpkgs.follows = "nixpkgs"; # commented twice
     };
 
+    hyprgrass = {
+      url = "github:horriblename/hyprgrass";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     xdph = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
       inputs.nixpkgs.follows = "nixpkgs";

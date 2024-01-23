@@ -12,6 +12,7 @@
         hyprland = "1920x1080@60,0x0,1";
         workspaces = [ 1 3 6 7 8 ];
       }
+      # second element by index 1 is set to be a touchscreen monitor
       {
         name = "HDMI-A-4";
         hyprland = "1920x1080@60,1910x1080,1.333";

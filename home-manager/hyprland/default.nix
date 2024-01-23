@@ -4,6 +4,7 @@
   isLaptop,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   displays = config.rot.displays;
@@ -36,6 +37,10 @@
         file.".config/hypr/shaders".source = ./shaders;
       };
    
+      # Plugins
+      wayland.windowManager.hyprland.plugins = [
+        inputs.hyprgrass.packages.${pkgs.system}.default
+      ];
 
       wayland.windowManager.hyprland.settings = lib.mkMerge [
         {
@@ -53,10 +58,43 @@
             accel_profile = "flat";
             repeat_delay = 300;
 
+            # Set second monitor as touchscreen monitor
+            touchdevice.output = (lib.elemAt displays (1)).name;
+
             touchpad = {
               natural_scroll = true;
               disable_while_typing = true;
             };
+          };
+
+          # touchscreen
+          gestures = {
+            workspace_swipe = true;
+            workspace_swipe_cancel_ratio = 0.15;
+          };
+
+          plugin.touch_gestures = {
+            # The default sensitivity is probably too low on tablet screens,
+            # I recommend turning it up to 4.0
+            sensitivity = 1.0;
+
+            # must be >= 3
+            workspace_swipe_fingers = 3;
+
+            # switching workspaces by swiping from an edge, this is separate from workspace_swipe_fingers
+            # and can be used at the same time
+            # possible values: l, r, u, or d
+            # to disable it set it to anything else
+            workspace_swipe_edge = "d";
+
+            # in milliseconds
+            long_press_delay = 400;
+
+            # experimental {
+            #   # send proper cancel events to windows instead of hacky touch_up events,
+            #   # NOT recommended as it crashed a few times, once it's stabilized I'll make it the default
+            #   send_cancel = 0;
+            # }
           };
 
           "$mod" = "ALT";
