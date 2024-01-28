@@ -93,8 +93,8 @@ in {
         "$mod, b, layoutmsg, swapwithmaster"
 
         # focus the previous / next desktop in the current monitor (DE style)
-        "CTRL_ALT, Left, workspace, m-1"
-        "CTRL_ALT, Right, workspace, m+1"
+        "$mod_SHIFT_CTRL, h, workspace, m-1"
+        "$mod_SHIFT_CTRL, l, workspace, m+1"
 
         # monocle mode
         "$mod, z, fullscreen, 1"
@@ -113,27 +113,33 @@ in {
         "$mod, Left, focusmonitor, -1"
         "$mod, Right, focusmonitor, +1"
 
-        # move to next / previous monitor
-        "$mod_SHIFT, Left, movewindow, ${
-          if builtins.length displays < 3
-          then "mon:-1"
-          else "mon:l"
-        }"
-        "$mod_SHIFT, Right, movewindow, ${
-          if builtins.length displays < 3
-          then "mon:+1"
-          else "mon:r"
-        }"
-        "$mod_SHIFT, Up, movewindow, ${
-          if builtins.length displays < 3
-          then "mon:-1"
-          else "mon:u"
-        }"
-        "$mod_SHIFT, Down, movewindow, ${
-          if builtins.length displays < 3
-          then "mon:+1"
-          else "mon:d"
-        }"
+        # resize windows
+        "$mod SHIFT, right, resizeactive, 50 0"
+        "$mod SHIFT, left, resizeactive, -50 0"
+        "$mod SHIFT, up, resizeactive, 0 -50"
+        "$mod SHIFT, down, resizeactive, 0 50"
+
+        # # move to next / previous monitor
+        # "$mod_SHIFT, Left, movewindow, ${
+        #   if builtins.length displays < 3
+        #   then "mon:-1"
+        #   else "mon:l"
+        # }"
+        # "$mod_SHIFT, Right, movewindow, ${
+        #   if builtins.length displays < 3
+        #   then "mon:+1"
+        #   else "mon:r"
+        # }"
+        # "$mod_SHIFT, Up, movewindow, ${
+        #   if builtins.length displays < 3
+        #   then "mon:-1"
+        #   else "mon:u"
+        # }"
+        # "$mod_SHIFT, Down, movewindow, ${
+        #   if builtins.length displays < 3
+        #   then "mon:+1"
+        #   else "mon:d"
+        # }"
 
         "ALT, Tab, cyclenext"
         "ALT_SHIFT, Tab, cyclenext, prev"
@@ -157,8 +163,6 @@ in {
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
 
-        # turn monitors off
-        "$mod_SHIFT_CTRL, l, dpms, off"
 
         # dunst controls
         "$mod, grave, exec, dunstctl history-pop"
@@ -174,10 +178,11 @@ in {
         ",XF86AudioLowerVolume, exec, ${pamixer} -d 5"
         ",XF86AudioRaiseVolume, exec, ${pamixer} -i 5"
         ",XF86AudioMute, exec, ${pamixer} -t"
+
       ]
       ++ lib.optionals config.rot.wezterm.enable ["$mod, q, exec, wezterm start"]
       ++ lib.optionals config.rot.backlight.enable [
-        ",XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} set 5%-"
+      ",XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} set 5%-"
         ",XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brightnessctl} set +5%"
       ];
 

@@ -45,7 +45,7 @@
     LC_NUMERIC = "en_AU.UTF-8";
     LC_PAPER = "en_AU.UTF-8";
     LC_TELEPHONE = "en_AU.UTF-8";
-    # week starts on a Monday, for fuck's sake
+    # Still can't remember the names of the months in Ukranian, for fuck's sake
     LC_TIME = "uk_UA.UTF-8";
   };
 
