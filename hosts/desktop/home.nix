@@ -33,7 +33,7 @@
     k3b.enable = true;
     helix.enable = true;
 
-    blender.enable = true;
+    blender.enable = false;
     reaper.enable = false;
 
     discord.enable = true;

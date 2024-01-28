@@ -106,6 +106,16 @@
       cd - > /dev/null
     '';
   };
+  # build iso images
+  nbuild-iso = pkgs.writeShellApplication {
+    name = "nbuild-iso";
+    runtimeInputs = [nswitch pkgs.nixos-generators];
+    text = ''
+      cd ${rots}
+      nix build ".#nixosConfigurations.$1.config.system.build.isoImage"
+      cd - > /dev/null
+    '';
+  };
   json2nix = pkgs.writeShellApplication {
     name = "json2nix";
     runtimeInputs = with pkgs; [hjson alejandra];
@@ -172,6 +182,7 @@ in {
           nh
           ndefault
           nbuild
+          nbuild-iso
           nswitch
           nvfetcher
           nv-update

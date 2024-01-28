@@ -3,10 +3,15 @@
   isNixOS,
   lib,
   self,
+  system,
   user,
   ...
 }: let
   mkHost = host: let
+    pkgs = import inputs.nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
     extraSpecialArgs = {
       inherit self inputs isNixOS host user;
       isLaptop = host == "omen";
@@ -52,8 +57,8 @@
       }
     else
       inputs.home-manager.lib.homeManagerConfiguration {
-        inherit extraSpecialArgs;
-        pkgs = import inputs.nixpkgs {config.allowUnfree = true;};
+        inherit extraSpecialArgs pkgs;
+
         modules = homeManagerImports ++ [../overlays];
       };
 in
@@ -63,4 +68,4 @@ in
       then host
       else "${user}@#{host}";
     value = mkHost host;
-  }) ["desktop" "omen"])
+  }) [ "desktop" "omen" ])

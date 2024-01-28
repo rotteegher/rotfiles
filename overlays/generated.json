@@ -60,7 +60,7 @@
     },
     "waybar": {
         "cargoLocks": null,
-        "date": "2024-01-25",
+        "date": "2024-01-30",
         "extract": null,
         "name": "waybar",
         "passthru": null,
@@ -72,15 +72,15 @@
             "name": null,
             "owner": "Alexays",
             "repo": "Waybar",
-            "rev": "5f115785cf94599a57e5d396e71b3f6f85d56cfd",
-            "sha256": "sha256-yjA2vPca3X3ku50L8zrShPdBAnCKQmdfgw/U/IJFKEo=",
+            "rev": "fb6658e8fdae97ef1e1d6042b7fd15287ed046bc",
+            "sha256": "sha256-iO+lV7IFk312Q1c/adwSHhh4gvD1xmoQGKoPSg66ITA=",
             "type": "github"
         },
-        "version": "5f115785cf94599a57e5d396e71b3f6f85d56cfd"
+        "version": "fb6658e8fdae97ef1e1d6042b7fd15287ed046bc"
     },
     "wezterm": {
         "cargoLocks": null,
-        "date": "2024-01-27",
+        "date": "2024-01-30",
         "extract": null,
         "name": "wezterm",
         "passthru": null,
@@ -92,10 +92,10 @@
             "name": null,
             "owner": "wez",
             "repo": "wezterm",
-            "rev": "6de7c604526552eab6be355e31b0562e72c6dda0",
-            "sha256": "sha256-EIx+6He86mSCzLrufoDuLPuIQfOPju+Hp1dZTTTN4sI=",
+            "rev": "1479c7be644f9b21ebcb9de9e390389dfe55f8d5",
+            "sha256": "sha256-tS24MBhLW9E9gFl6s1CwQuTESet+Gp0Ak/CBXrno7xs=",
             "type": "github"
         },
-        "version": "6de7c604526552eab6be355e31b0562e72c6dda0"
+        "version": "1479c7be644f9b21ebcb9de9e390389dfe55f8d5"
     }
 }
