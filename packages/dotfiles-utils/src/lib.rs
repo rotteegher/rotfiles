@@ -4,13 +4,15 @@ use std::path::PathBuf;
 use std::process::Command;
 
 pub mod cli;
+pub mod fetch;
 pub mod monitor;
 pub mod nixinfo;
 pub mod wallpaper;
 pub mod wallust;
 
-/// shared structs / types
+pub const WAYBAR_CLASS: &str = ".waybar-wrapped";
 
+// shared structs / types
 type Coord = (i32, i32);
 
 #[derive(Clone, Default, Deserialize, Debug)]
@@ -22,10 +24,10 @@ pub fn full_path<P>(p: P) -> PathBuf
 where
     P: AsRef<std::path::Path>,
 {
-    let p = p.as_ref().to_str().unwrap();
+    let p = p.as_ref().to_str().expect("invalid path");
 
     match p.strip_prefix("~/") {
-        Some(p) => dirs::home_dir().unwrap().join(p),
+        Some(p) => dirs::home_dir().expect("invalid home directory").join(p),
         None => PathBuf::from(p),
     }
 }
@@ -82,7 +84,7 @@ pub enum CmdOutput {
     Stderr,
 }
 
-pub fn cmd_output<I, S>(cmd_args: I, from: CmdOutput) -> Vec<String>
+pub fn cmd_output<I, S>(cmd_args: I, from: &CmdOutput) -> Vec<String>
 where
     I: IntoIterator<Item = S>,
     S: AsRef<str>,
@@ -94,19 +96,25 @@ where
         CmdOutput::Stdout => &output.stdout,
         CmdOutput::Stderr => &output.stderr,
     })
-    .unwrap()
+    .expect("invalid utf8 from command")
     .lines()
     .map(String::from)
     .collect()
 }
 
 /// hyprctl dispatch
-pub fn hypr(hypr_args: &[&str]) {
-    Command::new("hyprctl")
-        .arg("dispatch")
-        .args(hypr_args)
-        .status()
-        .expect("failed to execute process");
+pub fn hypr<I, S>(hypr_args: I)
+where
+    I: IntoIterator<Item = S>,
+    S: AsRef<str>,
+{
+    let mut cmd = Command::new("hyprctl");
+    cmd.arg("dispatch");
+
+    for arg in hypr_args {
+        cmd.arg(arg.as_ref());
+    }
+    cmd.status().expect("failed to execute process");
 }
 
 /// hyprctl activewindow
@@ -120,7 +128,7 @@ pub struct ActiveWindow {
 }
 
 impl ActiveWindow {
-    pub fn new() -> ActiveWindow {
+    pub fn new() -> Self {
         hypr_json("activewindow")
     }
 
@@ -133,7 +141,6 @@ impl ActiveWindow {
 }
 
 /// hyprctl clients
-
 #[derive(Clone, Default, Deserialize, Debug)]
 pub struct Client {
     pub class: String,
@@ -143,12 +150,12 @@ pub struct Client {
 }
 
 impl Client {
-    pub fn clients() -> Vec<Client> {
+    pub fn clients() -> Vec<Self> {
         hypr_json("clients")
     }
 
-    pub fn filter_class(class: String) -> Vec<Client> {
-        Client::clients()
+    pub fn filter_class(class: &str) -> Vec<Self> {
+        Self::clients()
             .into_iter()
             .filter(|client| client.class == class)
             .collect()
@@ -165,7 +172,7 @@ pub struct Workspace {
 }
 
 impl Workspace {
-    pub fn workspaces() -> Vec<Workspace> {
+    pub fn workspaces() -> Vec<Self> {
         hypr_json("workspaces")
     }
 
@@ -176,15 +183,8 @@ impl Workspace {
             .expect("monitor not found")
     }
 
-    pub fn by_name(name: String) -> Workspace {
-        Workspace::workspaces()
-            .into_iter()
-            .find(|w| w.name == name)
-            .expect("workspace not found")
-    }
-
-    pub fn is_empty(&self) -> bool {
-        self.windows == 0
+    pub fn by_name(name: &str) -> Option<Self> {
+        Self::workspaces().into_iter().find(|w| w.name == name)
     }
 }
 
@@ -198,9 +198,9 @@ pub mod json {
     {
         let path = path.as_ref();
         let contents = std::fs::read_to_string(full_path(path))
-            .unwrap_or_else(|_| panic!("failed to load {:?}", path));
+            .unwrap_or_else(|_| panic!("failed to load {path:?}"));
         serde_json::from_str(&contents)
-            .unwrap_or_else(|_| panic!("failed to parse json for {:?}", path))
+            .unwrap_or_else(|_| panic!("failed to parse json for {path:?}"))
     }
 
     pub fn write<T, P>(path: P, data: T)
@@ -210,8 +210,8 @@ pub mod json {
     {
         let path = path.as_ref();
         let file = std::fs::File::create(full_path(path))
-            .unwrap_or_else(|_| panic!("failed to load {:?}", path));
+            .unwrap_or_else(|_| panic!("failed to load {path:?}"));
         serde_json::to_writer(file, &data)
-            .unwrap_or_else(|_| panic!("failed to write json to {:?}", path));
+            .unwrap_or_else(|_| panic!("failed to write json to {path:?}"));
     }
 }

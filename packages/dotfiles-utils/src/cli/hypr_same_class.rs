@@ -7,7 +7,7 @@ use dotfiles_utils::{
 fn main() {
     let args = HyprSameClassArgs::parse();
     let active = ActiveWindow::new();
-    let mut same_class = Client::filter_class(active.class);
+    let mut same_class = Client::filter_class(active.class.as_str());
 
     // sort by workspace then coordinates
     same_class.sort_by_key(|client| (client.workspace.id, client.at));
@@ -16,12 +16,12 @@ fn main() {
     let active_idx = addresses
         .iter()
         .position(|&addr| addr == &active.address)
-        .unwrap();
+        .expect("active window not found");
 
     let new_idx: usize = match args.direction {
         HyprSameClassDirection::Next => (active_idx + 1) % addresses.len(),
         HyprSameClassDirection::Prev => (active_idx - 1 + addresses.len()) % addresses.len(),
     };
 
-    hypr(&["focuswindow", &format!("address:{}", addresses[new_idx])]);
+    hypr(["focuswindow", &format!("address:{}", addresses[new_idx])]);
 }
