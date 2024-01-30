@@ -32,10 +32,6 @@ in {
       rot.minecraft-bedrock-server
     ];
 
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0770 rot users"
-    ];
-
     # Specify socket file to 'echo "command" > systemd.stdin'
     # systemd.sockets.minecraft-bedrock-server = {
     #   bindsTo = ["minecraft-bedrock-server.service"];

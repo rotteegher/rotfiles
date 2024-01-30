@@ -23,12 +23,9 @@
     wallust.enable = true;
     rofi.enable = true;
     rclip.enable = false;
-    waybar = {
-      enable = true;
-      theme = "transparent";
-      persistent-workspaces = true;
-    };
-    pathofbuilding.enable = true;
+    waybar.enable = true;
+    waybar.theme = "transparent";
+
     vlc.enable = true;
     k3b.enable = true;
     helix.enable = true;
