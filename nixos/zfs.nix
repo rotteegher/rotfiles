@@ -5,8 +5,8 @@
   pkgs,
   ...
 }: let
-  cfg = config.rot-nixos.zfs;
-  persistCfg = config.rot-nixos.persist;
+  cfg = config.custom-nixos.zfs;
+  persistCfg = config.custom-nixos.persist;
 in {
   config = lib.mkIf cfg.enable {
     # booting with zfs

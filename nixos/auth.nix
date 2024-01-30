@@ -92,7 +92,7 @@ in {
   };
 
   # persist keyring and misc other secrets
-  rot-nixos.persist.home = {
+  custom-nixos.persist.home = {
     directories = [
       ".gnupg"
       ".pki"

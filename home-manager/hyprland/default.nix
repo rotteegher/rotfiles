@@ -7,7 +7,7 @@
   inputs,
   ...
 }: let
-  displays = config.rot.displays;
+  displays = config.custom.displays;
 in {
   imports = [
     ./keybinds.nix
@@ -15,19 +15,22 @@ in {
     ./screenshot.nix
     ./startup.nix
     ./wallpaper.nix
-    ./waybar
+    ./waybar.nix
   ];
 
   config = lib.mkIf config.wayland.windowManager.hyprland.enable {
     home = {
       sessionVariables = {
-        # XCURSOR_SIZE = "${toString config.home.pointerCursor.size}";
+        XCURSOR_SIZE = "${toString config.home.pointerCursor.size}";
         HYPR_LOG = "/tmp/hypr/$(command ls -t /tmp/hypr/ | grep -v lock | head -n 1)/hyprland.log";
       };
 
       packages = with pkgs; [
         xdg-utils
+
+        # hyprland shaders
         hyprshade
+
         # clipboard history
         cliphist
         wl-clipboard
@@ -38,7 +41,8 @@ in {
 
     # Plugins
     wayland.windowManager.hyprland.plugins = [
-      inputs.hyprgrass.packages.${pkgs.system}.default
+      # touchscreen plugin
+      # inputs.hyprgrass.packages.${pkgs.system}.default
     ];
 
     wayland.windowManager.hyprland.settings = lib.mkMerge [
@@ -72,10 +76,11 @@ in {
           workspace_swipe_cancel_ratio = 0.15;
         };
 
-        plugin.touch_gestures = {
+        # hyprgrass touchscreen plugin settings
+        # plugin.touch_gestures = {
           # The default sensitivity is probably too low on tablet screens,
           # I recommend turning it up to 4.0
-          sensitivity = 3.0;
+          # sensitivity = 3.0;
 
           # must be >= 3
           # workspace_swipe_fingers = 3;
@@ -87,18 +92,18 @@ in {
           # workspace_swipe_edge = false;
 
           # in milliseconds
-          long_press_delay = 400;
+          # long_press_delay = 400;
 
           # experimental {
           #   # send proper cancel events to windows instead of hacky touch_up events,
           #   # NOT recommended as it crashed a few times, once it's stabilized I'll make it the default
           #   send_cancel = 0;
           # }
-        };
+        # };
 
         "$mod" = "ALT";
 
-        "$term" = "${config.rot.terminal.exec}";
+        "$term" = "${config.custom.terminal.exec}";
 
         general = let
           gap =
@@ -224,7 +229,7 @@ in {
     ];
 
     # hyprland crash reports
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         ".hyprland"
       ];

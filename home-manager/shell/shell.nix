@@ -23,6 +23,7 @@
       open = "xdg-open";
       opr = "openpr";
       rhx = "cd ~/pr/rotfiles & hx .";
+      dhx = "cd ~/pr/dotfiles & hx .";
       py = "python";
       tr = "eza --tree --level=3";
       l = "eza -lag --group-directories-first --git";
@@ -39,9 +40,9 @@
     }
     //
     # add shortcuts for quick cd in shell
-    lib.mapAttrs (_: value: "cd ${value}") config.rot.shortcuts;
+    lib.mapAttrs (_: value: "cd ${value}") config.custom.shortcuts;
 
-  rot.shell.functions = {
+  custom.shell.functions = {
     fdnix = {
       bashBody = ''fd "$@" /nix/store'';
       fishBody = ''fd $argv /nix/store'';

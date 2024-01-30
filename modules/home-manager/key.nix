@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  options.rot.git = {
+  options.custom.git = {
     enable = lib.mkEnableOption "git-keyid";
     git-keyid = lib.mkOption {
       type = lib.types.str;

@@ -7,7 +7,7 @@
 }: {
   xdg.configFile = {
     "mpv/script-opts/chapterskip.conf".text = "categories=sponsorblock>SponsorBlock";
-    "mpv/script-opts/sub-select.json".text = builtins.toJSON [
+    "mpv/script-opts/sub-select.json".text = lib.strings.toJSON [
       {
         alang = "jpn";
         slang = ["en" "eng"];
@@ -93,7 +93,7 @@
       #     thumbfast
       #   ]
       #   # custom packaged scripts
-      #   ++ (with pkgs.rot; [
+      #   ++ (with pkgs.custom; [
       #     mpv-deletefile
       #     mpv-dynamic-crop
       #     # mpv-modernx
@@ -105,11 +105,11 @@
     }
 
     # anime 4k
-    # (lib.optionalAttrs config.rot.anime4k.enable
+    # (lib.optionalAttrs config.custom.anime4k.enable
     #   (let
     #     shaderList = files: (
     #       lib.pipe (["Clamp_Highlights"] ++ files) [
-    #         (map (s: "${pkgs.rot.mpv-anime4k}/share/mpv/shaders/Anime4K_" + s + ".glsl"))
+    #         (map (s: "${pkgs.custom.mpv-anime4k}/share/mpv/shaders/Anime4K_" + s + ".glsl"))
     #         (arr: lib.concatStringsSep ":" arr)
     #       ]
     #     );
@@ -180,7 +180,7 @@
     subs = "subliminal download -l 'en' -l 'eng' -s";
   };
 
-  rot.persist = {
+  custom.persist = {
     home.directories = [
       ".local/state/mpv" # watch later
     ];

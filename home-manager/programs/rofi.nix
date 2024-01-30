@@ -3,143 +3,133 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  cfg = config.custom.rofi;
+  rofiThemes = "${pkgs.custom.rofi-themes}/files";
+  launcherType = 2;
+  launcherStyle = 2;
+  powermenuType = 4;
+  powermenuStyle = 3;
+  powermenuDir = "${rofiThemes}/powermenu/type-${toString powermenuType}";
+  themeStyles =
+    if cfg.theme != null
+    then ''@import "${rofiThemes}/colors/${cfg.theme}.rasi"''
+    else ''
+      * {
+          background:     {{background}};
+          background-alt: {{color0}};
+          foreground:     {{foreground}};
+          selected:       {{color4}};
+          active:         {{color6}};
+          urgent:         {{color1}};
+      }
+    '';
+
+  # replace the imports with preset theme / wallust
+  fixupRofiThemesRasi = rasiPath: additionalStyles: ''
+    ${themeStyles}
+    ${lib.replaceStrings ["@import"] ["// @import"] (lib.readFile rasiPath)}
+    window {
+      width: ${toString cfg.width}px;
+    }
+    ${additionalStyles}
+  '';
+  # NOTE: rofi-power-menu only works for powermenuType = 4!
+  rofi-power-menu = pkgs.writeShellApplication {
+    name = "rofi-power-menu";
+    runtimeInputs = with pkgs; [rofi custom.rofi-themes];
+    text = lib.replaceStrings ["@theme@"] [
+      (builtins.toFile "rofi-power-menu.rasi" ((lib.readFile "${powermenuDir}/style-${toString powermenuStyle}.rasi")
+        + ''
+          * { background-window: black/60%; } // darken background
+          window { border-radius: 12px; } // no rounded corners as it doesn't interact well with blur on hyprland
+        ''))
+    ] (lib.readFile ./rofi-power-menu.sh);
+  };
+in {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
   };
 
-  home.packages = with pkgs; [rofi-power-menu];
+  home.packages = [rofi-power-menu];
 
   xdg.configFile = {
-    "rofi/rofi-wifi-menu" = lib.mkIf config.rot.wifi.enable {
+    "rofi/rofi-wifi-menu" = lib.mkIf config.custom.wifi.enable {
+      # https://github.com/ericmurphyxyz/rofi-wifi-menu/blob/master/rofi-wifi-menu.sh
       source = ./rofi-wifi-menu.sh;
     };
 
     "rofi/config.rasi".text = ''
-      @theme "~/.cache/wallust/rofi.rasi"
+      @theme "${config.xdg.cacheHome}/wallust/rofi.rasi"
     '';
   };
 
-  rot.wallust.entries."rofi.rasi" = {
-    enable = config.programs.rofi.enable;
-    target = "~/.cache/wallust/rofi.rasi";
-    text = ''
-      * {
-          accent: {color4};
-          background: {background};
-          border-color: {color0};
-          button-text-color: {color0};
-          foreground: {foreground};
-          selected: {color1};
-          width: 600;
-      }
+  # add blur for rofi shutdown
+  wayland.windowManager.hyprland.settings = {
+    layerrule = [
+      "blur,rofi"
+      "ignorealpha 0,rofi"
+    ];
 
-      /*
-      configuration {
-          show-icons: true;
-      }
-      */
+    # force center rofi on monitor
+    windowrulev2 = [
+      "float,class:(Rofi)"
+      "center,class:(Rofi)"
+      "rounding 12,class:(Rofi)"
+    ];
+  };
 
-      button {
-          background-color: @background;
-          horizontal-align: 0.5;
-          padding: 10px;
-          text-color: @button-text-color;
-          vertical-align: 0.5;
-      }
+  custom.wallust.templates = {
+    # default launcher
+    "rofi.rasi" = {
+      inherit (config.programs.rofi) enable;
+      text = fixupRofiThemesRasi "${rofiThemes}/launchers/type-${toString launcherType}/style-${toString launcherStyle}.rasi" "";
+      target = "${config.xdg.cacheHome}/wallust/rofi.rasi";
+    };
 
-      button selected {
-          background-color: @background;
-          text-color: @accent;
-      }
+    # generic single column rofi menu
+    "rofi-menu.rasi" = {
+      inherit (config.programs.rofi) enable;
+      text = fixupRofiThemesRasi "${rofiThemes}/launchers/type-${toString launcherType}/style-${toString launcherStyle}.rasi" ''
+        listview {
+          columns: 1;
+          lines: 6;
+        }
+        prompt { enabled: false; }
+        textbox-prompt-colon { enabled: false; }
+      '';
+      target = "${config.xdg.cacheHome}/wallust/rofi-menu.rasi";
+    };
 
-      element {
-          background-color: @background;
-          padding: 5px;
-          text-color: @foreground;
-      }
+    "rofi-screenshot.rasi" = {
+      inherit (config.programs.rofi) enable;
+      text = fixupRofiThemesRasi "${rofiThemes}/launchers/type-${toString launcherType}/style-${toString launcherStyle}.rasi" ''
+        listview {
+          columns: 1;
+          lines: 6;
+        }
+        * { width: 1000; }
+        window { height: 625; }
+        mainbox {
+            children: [listview,message];
+        }
+        message {
+          padding:                     15px;
+          border:                      0px solid;
+          border-radius:               0px;
+          border-color:                @selected;
+          background-color:            @background;
+          text-color:                  @foreground;
+        }
+      '';
+      target = "${config.xdg.cacheHome}/wallust/rofi-screenshot.rasi";
+    };
 
-      element selected {
-          background-color: @background;
-          text-color: @selected;
-      }
-
-      element-icon {
-          size: 25px;
-      }
-
-      element-text, element-icon, mode-switcher {
-          background-color: inherit;
-          text-color: inherit;
-      }
-
-      entry {
-          background-color: @background;
-          margin: 20px 0px 0px 10px;
-          padding: 6px;
-          text-color: @foreground;
-      }
-
-      inputbar {
-          background-color: @background;
-          border-radius: 5px;
-          children: [prompt,entry];
-          padding: 2px;
-      }
-
-      listview {
-          background-color: @background;
-          border: 0px 0px 0px;
-          columns: 2;
-          lines: 5;
-          margin: 10px 0px 0px 20px;
-          padding: 6px 0px 0px;
-      }
-
-      mainbox {
-          background-color: @background;
-      }
-
-      message {
-          background-color: @background;
-          border-radius: 5px;
-          margin: 2px;
-          padding: 2px;
-      }
-
-      mode-switcher {
-          enabled: false;
-          spacing: 0;
-      }
-
-      prompt {
-          background-color: @accent;
-          border-radius: 3px;
-          margin: 20px 0px 0px 20px;
-          padding: 6px;
-          text-color: @background;
-      }
-
-      textbox {
-          background-color: @background;
-          margin: 20px 0px 0px 20px;
-          padding: 6px;
-          text-color: @accent;
-      }
-
-      textbox-prompt-colon {
-          expand: false;
-          str: ":";
-      }
-
-      window {
-          background-color: @background;
-          border: 3px;
-          border-color: @border-color;
-          border-radius: 12px;
-          height: 360px;
-      }
-    '';
+    "rofi-power-menu-confirm.rasi" = {
+      inherit (config.programs.rofi) enable;
+      text = fixupRofiThemesRasi "${powermenuDir}/shared/confirm.rasi" "";
+      target = "${config.xdg.cacheHome}/wallust/rofi-power-menu-confirm.rasi";
+    };
   };
 }

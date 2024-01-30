@@ -4,13 +4,13 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.rot.minecraft-launchers.enable {
+  config = lib.mkIf config.custom.minecraft-launchers.enable {
     home.packages = with pkgs; [
       # Launcher Java
       prismlauncher
     ];
 
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         ".local/share/PrismLauncher/"
       ];

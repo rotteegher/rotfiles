@@ -50,10 +50,10 @@
   dconf.settings = {
     # fix open in terminal
     "org/gnome/desktop/applications/terminal" = {
-      exec = config.rot.terminal.exec;
+      exec = config.custom.terminal.exec;
     };
     "org/cinnamon/desktop/applications/terminal" = {
-      exec = config.rot.terminal.exec;
+      exec = config.custom.terminal.exec;
     };
     "org/nemo/preferences" = {
       default-folder-viewer = "list-view";
@@ -73,7 +73,7 @@
     };
   };
 
-  rot.persist = {
+  custom.persist = {
     home.directories = [
       # folder preferences such as view mode and sort order
       ".local/share/gvfs-metadata"

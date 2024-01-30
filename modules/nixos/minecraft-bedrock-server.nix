@@ -1,6 +1,6 @@
 {lib, pkgs, ...}: {
     # MINECRAFT
-    options.rot-nixos.services.minecraft-bedrock-server = {
+    options.custom-nixos.services.minecraft-bedrock-server = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
@@ -103,7 +103,7 @@
 
       package = lib.mkOption {
         type = lib.types.package;
-        default = pkgs.rot.minecraft-bedrock-server;
+        default = pkgs.custom.minecraft-bedrock-server;
         defaultText = "pkgs.minecraft-bedrock-server";
         description = "Version of minecraft-bedrock-server to run.";
       };

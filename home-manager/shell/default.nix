@@ -1,17 +1,18 @@
 {pkgs, ...}: {
   imports = [
     ./bash.nix
-    # ./btop.nix
+    ./btop.nix
     ./direnv.nix
     ./fish.nix
     ./git.nix
     # ./neovim.nix
     ./nix.nix
-    ./rice
+    ./rice.nix
+    ./cava.nix
     ./shell.nix
     ./starship.nix
     ./tmux.nix
-    ./yazi
+    ./yazi.nix
   ];
 
   home.packages = with pkgs; [
@@ -50,7 +51,7 @@
     };
   };
 
-  rot.persist = {
+  custom.persist = {
     home.directories = [".local/share/zoxide"];
   };
 }

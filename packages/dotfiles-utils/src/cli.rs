@@ -91,11 +91,11 @@ pub struct RofiMpvArgs {
     pub media: RofiMpvMedia,
 }
 
-// ------------------ WAIFUFETCH ------------------
+// ------------------ WFETCH ------------------
 
 #[allow(clippy::struct_excessive_bools)]
 #[derive(Parser, Debug)]
-#[command(name = "waifufetch", about = "fetch, but more waifu")]
+#[command(name = "wfetch", about = "fetch, but more waifu")]
 pub struct WaifuFetchArgs {
     #[arg(long, action, help = "show hollow NixOS logo")]
     pub hollow: bool,

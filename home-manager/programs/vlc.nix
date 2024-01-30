@@ -4,12 +4,12 @@
   pkgs,
   ...
 }: let
-  cfg = config.rot.vlc;
+  cfg = config.custom.vlc;
 in {
   config = lib.mkIf cfg.enable {
     home.packages = [pkgs.vlc];
 
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         ".config/vlc"
       ];

@@ -94,13 +94,13 @@ in {
         m = "exec mv \"$imv_current_file\" ${wallpapers_proj}/in";
       };
     })
-    (lib.mkIf config.rot.rclip.enable {
+    (lib.mkIf config.custom.rclip.enable {
       home.packages = [
         imv-search
         pkgs.rclip
       ];
 
-      rot.persist = {
+      custom.persist = {
         home.directories = [
           ".cache/clip"
           ".local/share/rclip"

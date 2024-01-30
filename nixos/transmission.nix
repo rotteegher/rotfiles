@@ -9,7 +9,7 @@
   downloadDir = "/md/wdc-data/_SMALL/_ANIME";
   pendingDir = "${downloadDir}/_CURRENT";
 in {
-  config = lib.mkIf config.rot-nixos.bittorrent.enable {
+  config = lib.mkIf config.custom-nixos.bittorrent.enable {
     services.transmission = {
       enable = true;
       inherit user home;
@@ -112,7 +112,7 @@ in {
 
     hm.home.packages = with pkgs; [transmission-remote-gtk];
 
-    rot-nixos.persist.home.directories = [
+    custom-nixos.persist.home.directories = [
       ".config/transmission-daemon"
       ".config/transmission-remote-gtk"
     ];

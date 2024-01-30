@@ -4,7 +4,7 @@
   isNixOS,
   ...
 }: {
-  rot = {
+  custom = {
     displays = [
       {
         name = "HDMI-A-5";
@@ -20,11 +20,16 @@
     ];
     gradience.enable = false;
     firefox.enable = true;
-    wallust.enable = true;
+    wallust = {
+      enable = true;
+    };
     rofi.enable = true;
     rclip.enable = false;
-    waybar.enable = true;
-    waybar.theme = "transparent";
+    waybar = {
+      enable = true; 
+      persistent-workspaces = true;
+      hidden = false;
+    };
 
     vlc.enable = true;
     k3b.enable = true;

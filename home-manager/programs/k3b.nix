@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.rot.k3b.enable {
+  config = lib.mkIf config.custom.k3b.enable {
     home.packages = [pkgs.k3b];
   };
 }

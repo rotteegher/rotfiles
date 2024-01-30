@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.rot-nixos.steam.enable {
+  config = lib.mkIf config.custom-nixos.steam.enable {
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -27,7 +27,7 @@
       krb5
       keyutils
     ];
-    rot-nixos.persist = {
+    custom-nixos.persist = {
       home.directories = [
         ".local/share/Steam"
       ];

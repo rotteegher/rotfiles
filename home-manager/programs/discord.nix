@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.rot.discord.enable {
+  config = lib.mkIf config.custom.discord.enable {
     home.packages = [
       (pkgs.writeShellApplication {
         name = "discord-vesktop";
@@ -20,7 +20,7 @@
       })
     ];
 
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         ".config/discord"
         ".config/vesktop"

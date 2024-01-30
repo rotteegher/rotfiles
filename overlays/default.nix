@@ -23,12 +23,15 @@ in {
             });
       in {
         # include custom packages
-        rot =
-          (prev.rot or {})
+        custom =
+          (prev.custom or {})
           // (import ../packages {
             inherit (prev) pkgs;
             inherit inputs;
           });
+
+        # easier access to ghostty
+        # ghostty = inputs.ghostty.packages.${pkgs.system}.default;
 
         # patch imv to not repeat keypresses causing waybar to launch infinitely
         # https://github.com/eXeC64/imv/issues/207#issuecomment-604076888
@@ -41,9 +44,15 @@ in {
             ];
         });
 
-        viber = prev.viber.overrideAttrs (o: {permittedInsecurePackages = [
-          "openssl-1.1.1w"
-        ];});
+        # add default font to silence null font errors
+        lsix = prev.lsix.overrideAttrs (o: {
+          postFixup = ''
+            substituteInPlace $out/bin/lsix \
+              --replace '#fontfamily=Mincho' 'fontfamily="JetBrainsMono-NF-Regular"'
+            ${o.postFixup}
+          '';
+        });
+
 
         rclip = prev.rclip.overridePythonAttrs (o: {
           version = "1.7.24";
@@ -58,15 +67,6 @@ in {
           nativeBuildInputs = o.nativeBuildInputs ++ [pkgs.python3Packages.pythonRelaxDepsHook];
 
           pythonRelaxDeps = ["torch" "torchvision"];
-        });
-
-        # add default font to silence null font errors
-        lsix = prev.lsix.overrideAttrs (o: {
-          postFixup = ''
-            substituteInPlace $out/bin/lsix \
-              --replace '#fontfamily=Mincho' 'fontfamily="JetBrainsMono-NF-Regular"'
-            ${o.postFixup}
-          '';
         });
 
         # use latest commmit from git

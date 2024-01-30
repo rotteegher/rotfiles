@@ -20,7 +20,7 @@
       efiSupport = true;
       useOSProber = false;
       default = "saved";
-      theme = pkgs.rot.distro-grub-themes-nixos;
+      theme = pkgs.custom.distro-grub-themes-nixos;
       gfxmodeBios = "1920x1080";
       gfxmodeEfi = "1920x1080";
     };
@@ -76,7 +76,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Permit insecure packages
-  nixpkgs.config.permittedInsecurePackages = [] ++ (lib.optional config.hm.rot.viber.enable "openssl-1.1.1w");
+  nixpkgs.config.permittedInsecurePackages = [] ++ (lib.optional config.hm.custom.viber.enable "openssl-1.1.1w");
 
   # Cuda support
   nixpkgs.config.cudaSupport = true;

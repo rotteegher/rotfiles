@@ -3,11 +3,11 @@
   pkgs,
   ...
 }: {
-  options.rot = {
+  options.custom = {
     fonts = {
       regular = lib.mkOption {
         type = lib.types.str;
-        default = "Inter";
+        default = "Unifont";
         description = "The font to use for regular text";
       };
       monospace = lib.mkOption {

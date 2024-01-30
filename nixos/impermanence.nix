@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = config.rot-nixos.persist;
+  cfg = config.custom-nixos.persist;
 in {
   config = {
     # clear /tmp on boot
@@ -78,7 +78,7 @@ in {
     # setup persistence for home manager
     programs.fuse.userAllowOther = true;
     hm = {...} @ hmCfg: let
-      hmPersistCfg = hmCfg.config.rot.persist;
+      hmPersistCfg = hmCfg.config.custom.persist;
     in {
       systemd.user.startServices = true;
       home.persistence = {

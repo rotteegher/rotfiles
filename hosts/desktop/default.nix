@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  rot-nixos = {
+  custom-nixos = {
     # hardware
     hdds = {
       enable = true;
@@ -14,7 +14,7 @@
     nvidia.enable = true;
     zfs.encryption = false;
 
-    bluetooth.enable = true;
+    bluetooth.enable = false;
     hotspot = {
       enable = true;
       internet_iface = "eno1";
@@ -32,7 +32,7 @@
 
     services.minecraft-bedrock-server = {
       enable = true;
-      package = pkgs.rot.minecraft-bedrock-server;
+      package = pkgs.custom.minecraft-bedrock-server;
       dataDir = "/srv/minecraft-bedrock-server";
       permissions = [
         {

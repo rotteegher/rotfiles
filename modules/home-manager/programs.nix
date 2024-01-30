@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: {
-  options.rot = {
+  options.custom = {
     discord.enable = lib.mkEnableOption "discord" // {default = false;};
     firefox.enable = lib.mkEnableOption "firefox" // {default = true;};
     gradience.enable = lib.mkEnableOption "gradience";
@@ -31,18 +31,24 @@
     # WALLUST
     wallust = with lib.types; {
       enable = lib.mkEnableOption "wallust" // {default = true;};
+      colorscheme = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        description = "The colorscheme to use. If null, will use the default colorscheme from the wallpaper.";
+      };
+
       threshold = lib.mkOption {
         type = int;
         default = 20;
       };
 
-      entries = lib.mkOption {
+      templates = lib.mkOption {
         type = attrsOf (submodule {
           options = {
             enable = lib.mkOption {
               type = bool;
               default = false;
-              description = "Enable this entry";
+              description = "Enable this template";
             };
             text = lib.mkOption {
               type = str;
@@ -61,7 +67,7 @@
         });
         default = [];
         description = ''
-          Example entries, which are just a file you wish to apply `wallust` generated colors to.
+          Example templates, which are just a file you wish to apply `wallust` generated colors to.
           template = "dunstrc"
         '';
       };

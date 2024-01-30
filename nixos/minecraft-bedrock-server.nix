@@ -5,10 +5,10 @@
   user,
   ...
 }: let
-  cfg = config.rot-nixos.services.minecraft-bedrock-server;
+  cfg = config.custom-nixos.services.minecraft-bedrock-server;
 
   cfgToString = v:
-    if builtins.isBool v
+    if lib.isBool v
     then lib.boolToString v
     else toString v;
 
@@ -19,7 +19,7 @@
       (n: v: "${n}=${cfgToString v}")
       cfg.serverProperties));
 
-  permissionsFile = pkgs.writeText "permissions.json" (builtins.toJSON cfg.permissions);
+  permissionsFile = pkgs.writeText "permissions.json" (lib.strings.toJSON cfg.permissions);
 
   serverPort = cfg.serverProperties.server-port or 25575;
 in {
@@ -29,7 +29,7 @@ in {
       conspy
 
       # My bedrock server package
-      rot.minecraft-bedrock-server
+      custom.minecraft-bedrock-server
     ];
 
     # Specify socket file to 'echo "command" > systemd.stdin'
@@ -118,7 +118,7 @@ in {
       allowedUDPPorts = [serverPort 19132 19133];
       allowedTCPPorts = [serverPort 19132 19133];
     };
-    rot-nixos.persist = {
+    custom-nixos.persist = {
       root.directories = [
         # default dir is /srv/minecraft-bedrock
         cfg.dataDir

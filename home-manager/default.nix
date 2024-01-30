@@ -43,11 +43,11 @@
         libreoffice
         trash-cli
         # misc utilities for dotfiles written in rust
-        rot.dotfiles-utils
+        custom.dotfiles-utils
       ]
-      ++ (lib.optional config.rot.helix.enable helix)
+      ++ (lib.optional config.custom.helix.enable helix)
       # handle fonts
-      ++ (lib.optionals (!isNixOS) config.rot.fonts.packages);
+      ++ (lib.optionals (!isNixOS) config.custom.fonts.packages);
   };
 
   # stop bothering me
@@ -56,7 +56,7 @@
     "nixpkgs/config.nix".text = ''{ allowUnfree = true; }'';
   };
 
-  rot.persist = {
+  custom.persist = {
     home.directories = [
       # {
       #   directory = "Desktop";

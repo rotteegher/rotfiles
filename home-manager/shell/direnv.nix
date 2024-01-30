@@ -9,7 +9,7 @@
     DIRENV_LOG_FORMAT = "";
   };
 
-  rot.persist = {
+  custom.persist = {
     home.directories = [
       ".local/share/direnv"
     ];

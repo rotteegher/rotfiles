@@ -5,7 +5,7 @@
   isNixOS,
   ...
 }: let
-  gradienceCfg = config.rot.gradience;
+  gradienceCfg = config.custom.gradience;
 in {
   home = {
     packages = lib.optionals gradienceCfg.enable [pkgs.gradience];
@@ -49,8 +49,8 @@ in {
       package = pkgs.tela-icon-theme;
     };
     font = {
-      name = "${config.rot.fonts.regular} Regular";
-      # package = pkgs.rot.geist-font;
+      name = "${config.custom.fonts.regular} Regular";
+      # package = pkgs.custom.geist-font;
       size = 10;
     };
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";

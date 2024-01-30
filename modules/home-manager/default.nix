@@ -7,6 +7,7 @@
     ./shortcuts.nix
     ./terminal.nix
     ./wayland.nix
+    ./rofi.nix
     ./key.nix
   ];
 }
