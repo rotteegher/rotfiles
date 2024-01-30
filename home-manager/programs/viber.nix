@@ -4,14 +4,14 @@
   pkgs,
   ...
 }: let
-  cfg = config.rot.viber;
+  cfg = config.custom.viber;
 in {
   config = lib.mkIf cfg.enable {
     home.packages = [ 
       pkgs.viber
     ];
 
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         # ".config/viber"
       ];

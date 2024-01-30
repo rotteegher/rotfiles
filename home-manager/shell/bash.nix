@@ -4,7 +4,7 @@
   user,
   ...
 }: let
-  cfg = config.rot.shell;
+  cfg = config.custom.shell;
   bashFunctions = lib.concatStringsSep "\n" (lib.mapAttrsToList (name: value:
     if lib.isString value
     then ''
@@ -19,18 +19,18 @@
       ${value.bashCompletion}
     '')
   cfg.functions);
-  histFile = "/persist/home/${user}/.config/bash/.bash_history";
+  histFile = "/persist/.config/bash/.bash_history";
 in {
   # NOTE: see shell.nix for shared aliases and initExtra
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    # historyFile = histFile;
+    historyFile = histFile;
     # shellAliases = {
     #   ehistory = "nvim ${histFile}";
     # };
 
-    profileExtra = cfg.profileExtra;
+    inherit (cfg) profileExtra;
     initExtra =
       ''
         ${bashFunctions}
@@ -61,14 +61,14 @@ in {
         _set_underline_cursor
       ''
       # wallust colorscheme
-      + lib.optionalString (config.rot.wallust.enable) ''
+      + lib.optionalString (config.custom.wallust.enable) ''
         wallust_colors="/home/${user}/.cache/wallust/sequences"
         if [ -e "$wallust_colors" ]; then
           command cat "$wallust_colors"
         fi
       '';
   };
-  # rot.persist = {
+  # custom.persist = {
   #   home.directories = [
   #     ".config/bash"
   #   ];

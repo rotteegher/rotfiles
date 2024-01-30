@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  cfg = config.rot-nixos.keyd;
+  cfg = config.custom-nixos.keyd;
 in {
   config = lib.mkIf cfg.enable {
     services.keyd = {

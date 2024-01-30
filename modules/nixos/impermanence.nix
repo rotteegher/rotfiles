@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  options.rot-nixos.persist = {
+  options.custom-nixos.persist = {
     root = {
       directories = lib.mkOption {
         default = [];
@@ -28,12 +28,12 @@
     erase = {
       root = lib.mkOption {
         type = lib.types.bool;
-        default = config.rot-nixos.persist.tmpfs;
+        default = config.custom-nixos.persist.tmpfs;
         description = "Enable rollback to blank for /";
       };
       home = lib.mkOption {
         type = lib.types.bool;
-        default = config.rot-nixos.persist.tmpfs;
+        default = config.custom-nixos.persist.tmpfs;
         description = "Enable rollback to blank for /home";
       };
     };

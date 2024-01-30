@@ -6,18 +6,9 @@
 }:
 stdenvNoCC.mkDerivation (source
   // {
-    pname = "rofi-themes";
-    version = "0a55e154598466edb4352013798acc1d2f245306";
-    src = fetchFromGitHub {
-      owner = "adi1090x";
-      repo = "rofi";
-      rev = "0a55e154598466edb4352013798acc1d2f245306";
-      fetchSubmodules = false;
-      sha256 = "sha256-YjyrxappcLDoh3++mtZqCyxQV2qeoNhhUy2XGwlyTng=";
-    };
-    date = "2023-12-14";
+    version = "unstable-${source.date}";
 
-    buildInputs = [(nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka" "Monocraft"];})];
+    buildInputs = [(nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka"];})];
 
     installPhase = ''
       runHook preInstall

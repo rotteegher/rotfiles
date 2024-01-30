@@ -1,6 +1,6 @@
 {lib, pkgs, ...}: {
     # MINECRAFT
-    options.rot-nixos.services.minecraft-java-server = {
+    options.custom-nixos.services.minecraft-java-server = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

@@ -6,7 +6,7 @@
   ...
 }: let
   # Host specific Module Configuration
-  cfg = config.rot-nixos.services.minecraft-java-server;
+  cfg = config.custom-nixos.services.minecraft-java-server;
 
   # check every 20 seconds if the server
   # need to be stopped
@@ -187,7 +187,7 @@ in {
     #   '';
     # };
 
-    rot-nixos.persist = {
+    custom-nixos.persist = {
       root.directories = [
         # default dir is /srv/minecraft-java
         cfg.dataDir

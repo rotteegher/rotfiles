@@ -1,5 +1,5 @@
 {user, ...}: {
-  rot-nixos = {
+  custom-nixos = {
   };
 
   # by-id doesn't seem to work with amd mobo

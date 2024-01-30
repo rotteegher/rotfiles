@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  options.rot-nixos = {
+  options.custom-nixos = {
     nvidia.enable = lib.mkEnableOption "Nvidia GPU";
     bluetooth.enable = lib.mkEnableOption "Bluetooth" // {default = false;};
     hotspot = {

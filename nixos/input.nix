@@ -17,7 +17,7 @@
         ];
       };
     };
-    rot-nixos.persist = {
+    custom-nixos.persist = {
       home.directories = [
         ".config/fcitx/"
         ".config/fcitx5/"

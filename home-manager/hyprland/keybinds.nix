@@ -4,14 +4,14 @@
   pkgs,
   ...
 }: let
-  inherit (config.rot) displays;
+  inherit (config.custom) displays;
   rofi = lib.getExe pkgs.rofi;
   pamixer = lib.getExe pkgs.pamixer;
-  qtile_like = config.rot.hyprland.qtile;
+  qtile_like = config.custom.hyprland.qtile;
 in {
   wayland.windowManager.hyprland.settings = lib.mkIf config.wayland.windowManager.hyprland.enable {
     bind = let
-      workspace_keybinds = lib.flatten ((pkgs.rot.lib.mapWorkspaces ({
+      workspace_keybinds = lib.flatten ((pkgs.custom.lib.mapWorkspaces ({
         workspace,
         key,
         ...
@@ -42,12 +42,11 @@ in {
         "$mod_SHIFT, w, exec, brave --incognito"
         # "$mod, v, exec, $term nvim"
         "$mod_SHIFT, v, exec, code"
-        "$mod, period, exec, kitty --hold -d ~/pr/rotfiles hx"
 
         # exit hyprland
         "$mod_SHIFT, c, exit,"
 
-        ''CTRL_ALT, Delete, exec, rofi -show power-menu -font "${config.rot.fonts.monospace} 14" -modi power-menu:rofi-power-menu''
+        ''CTRL_ALT, Delete, exec, rofi -show power-menu -font "${config.custom.fonts.monospace} 14" -modi power-menu:rofi-power-menu''
         "$mod_CTRL, v, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
 
         # reset monitors
@@ -121,22 +120,22 @@ in {
 
         # # move to next / previous monitor
         # "$mod_SHIFT, Left, movewindow, ${
-        #   if builtins.length displays < 3
+        #   if lib.length displays < 3
         #   then "mon:-1"
         #   else "mon:l"
         # }"
         # "$mod_SHIFT, Right, movewindow, ${
-        #   if builtins.length displays < 3
+        #   if lib.length displays < 3
         #   then "mon:+1"
         #   else "mon:r"
         # }"
         # "$mod_SHIFT, Up, movewindow, ${
-        #   if builtins.length displays < 3
+        #   if lib.length displays < 3
         #   then "mon:-1"
         #   else "mon:u"
         # }"
         # "$mod_SHIFT, Down, movewindow, ${
-        #   if builtins.length displays < 3
+        #   if lib.length displays < 3
         #   then "mon:+1"
         #   else "mon:d"
         # }"
@@ -180,8 +179,8 @@ in {
         ",XF86AudioMute, exec, ${pamixer} -t"
 
       ]
-      ++ lib.optionals config.rot.wezterm.enable ["$mod, q, exec, wezterm start"]
-      ++ lib.optionals config.rot.backlight.enable [
+      ++ lib.optionals config.custom.wezterm.enable ["$mod, q, exec, wezterm start"]
+      ++ lib.optionals config.custom.backlight.enable [
       ",XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} set 5%-"
         ",XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brightnessctl} set +5%"
       ];

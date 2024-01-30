@@ -1,4 +1,5 @@
 use crate::{
+    asset_path,
     cli::WaifuFetchArgs,
     cmd_output, full_path, json,
     nixinfo::NixInfo,
@@ -10,7 +11,7 @@ use serde_json::{json, Value};
 use std::process::Command;
 
 fn create_output_image(filename: String) -> String {
-    let output_dir = full_path("~/.cache/waifufetch");
+    let output_dir = full_path("~/.cache/wfetch");
     std::fs::create_dir_all(&output_dir).expect("failed to create output dir");
 
     output_dir
@@ -21,7 +22,8 @@ fn create_output_image(filename: String) -> String {
 }
 
 fn create_nixos_logo(nix_info: &NixInfo, args: &WaifuFetchArgs) -> String {
-    let logo = &nix_info.logo;
+    let logo = asset_path("nixos.png");
+    let logo = logo.as_str();
     let hexless = &nix_info.colors;
     let c4 = hexless.get("color4").expect("invalid color");
     let c6 = hexless.get("color6").expect("invalid color");
@@ -31,9 +33,8 @@ fn create_nixos_logo(nix_info: &NixInfo, args: &WaifuFetchArgs) -> String {
 
     Command::new("convert")
         .args([
-            logo, // replace color 1
-            "-fuzz", "10%", "-fill", c4, "-opaque", "#5278c3", // replace color 2
-            "-fuzz", "10%", "-fill", c6, "-opaque", "#7fbae4",
+            logo, "-fuzz", "10%", "-fill", c4, "-opaque", "#5278c3", // replace color 1
+            "-fuzz", "10%", "-fill", c6, "-opaque", "#7fbae4", // replace color 2
         ])
         .args(["-resize", format!("{image_size}x{image_size}").as_str()])
         .arg(&output)
@@ -120,7 +121,7 @@ pub fn create_fastfetch_config(args: &WaifuFetchArgs, nix_info: &NixInfo, config
     let kernel = json!({ "type": "kernel", "key": " VER", });
     let uptime = json!({ "type": "uptime", "key": "󰅐 UP", });
     let packages = json!({ "type": "packages", "key": "󰏖 PKG", });
-    // HACK: fastfetch detects the process as waifufetch
+    // HACK: fastfetch detects the process as wfetch
     let shell_text = format!("echo \"fish {}\"", fish_version());
     let shell = json!({ "type": "command", "key": "󰈺 SH", "text": shell_text });
     let display = json!({ "type": "display", "key": "󰍹 RES", "compactType": "scaled" });
@@ -136,7 +137,8 @@ pub fn create_fastfetch_config(args: &WaifuFetchArgs, nix_info: &NixInfo, config
     let mut logo = json!({ "source": "nixos" });
 
     if args.hollow {
-        logo = json!({ "source": "nixos_old_small" });
+        let hollow = asset_path("nixos_hollow.txt");
+        logo = json!({ "source": hollow });
     } else if args.waifu {
         logo = json!({
             // ghostty supports kitty image protocol

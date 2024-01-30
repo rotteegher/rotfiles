@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  cfg = config.rot-nixos.virt-manager;
+  cfg = config.custom-nixos.virt-manager;
 in {
   config = lib.mkIf cfg.enable {
     virtualisation.libvirtd.enable = true;
@@ -17,7 +17,7 @@ in {
 
     users.users.${user}.extraGroups = ["libvirtd"];
 
-    rot-nixos.persist.root.directories = [
+    custom-nixos.persist.root.directories = [
       "/var/lib/libvirt"
     ];
   };

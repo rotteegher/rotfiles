@@ -4,7 +4,7 @@
   user,
   ...
 }: let
-  cfg = config.rot-nixos.hdds;
+  cfg = config.custom-nixos.hdds;
   wdc-blue-mountpoint = "/md/wdc-data";
   wdc-blue-dataset = "wdc-blue/data";
   stsea-mountpoint = "/md/stsea-okii";
@@ -16,7 +16,7 @@ in {
     # lib.optional cfg.wdc1tb "wdc-blue"
     # ++ (lib.optional cfg.stsea3tb "stsea-barra");
 
-    services.sanoid = lib.mkIf config.rot-nixos.zfs.snapshots {
+    services.sanoid = lib.mkIf config.custom-nixos.zfs.snapshots {
       enable = true;
 
       datasets = {

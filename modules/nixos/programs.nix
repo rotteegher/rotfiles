@@ -5,13 +5,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.rot-nixos;
+  cfg = config.custom-nixos;
 in {
   imports = [
     ./minecraft-bedrock-server.nix
     ./minecraft-java-server.nix
   ];
-  options.rot-nixos = {
+  options.custom-nixos = {
     ### NIXOS LEVEL OPTIONS ###
     distrobox.enable = lib.mkEnableOption "distrobox";
     docker.enable = lib.mkEnableOption "docker" // {default = cfg.distrobox.enable;};

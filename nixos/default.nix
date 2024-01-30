@@ -44,7 +44,7 @@
         "gitconfig".text = config.hm.xdg.configFile."git/config".text;
       };
       variables = {
-        TERMINAL = config.hm.rot.terminal.exec;
+        TERMINAL = config.hm.custom.terminal.exec;
         EDITOR = "hx";
         VISUAL = "hx";
         NIXPKGS_ALLOW_UNFREE = "1";
@@ -74,14 +74,14 @@
           zellij
           efibootmgr
         ]
-        ++ (lib.optional (!config.services.xserver.desktopManager.gnome.enable) config.hm.rot.terminal.fakeGnomeTerminal)
-        ++ (lib.optional config.rot-nixos.distrobox.enable pkgs.distrobox)
-        ++ (lib.optional config.hm.rot.helix.enable helix)
-        ++ (lib.optional config.hm.rot.discord.enable vesktop);
+        ++ (lib.optional (!config.services.xserver.desktopManager.gnome.enable) config.hm.custom.terminal.fakeGnomeTerminal)
+        ++ (lib.optional config.custom-nixos.distrobox.enable pkgs.distrobox)
+        ++ (lib.optional config.hm.custom.helix.enable helix)
+        ++ (lib.optional config.hm.custom.discord.enable vesktop);
     };
 
     # setup fonts
-    fonts.packages = config.hm.rot.fonts.packages;
+    fonts.packages = config.hm.custom.fonts.packages;
 
     # set up programs to use same config as home-manager
     programs.bash = {
@@ -101,8 +101,8 @@
       style = "adwaita-dark";
     };
 
-    rot-nixos.persist = {
-      root.directories = lib.mkIf config.hm.rot.wifi.enable [
+    custom-nixos.persist = {
+      root.directories = lib.mkIf config.hm.custom.wifi.enable [
         "/etc/NetworkManager"
       ];
 

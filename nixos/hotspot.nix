@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  cfg = config.rot-nixos.hotspot;
+  cfg = config.custom-nixos.hotspot;
 in {
   config = lib.mkIf cfg.enable {
     # Enable WIFi Hotspot

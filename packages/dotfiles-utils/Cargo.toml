@@ -42,8 +42,8 @@ name = "rofi-wallust-theme"
 path = "src/cli/rofi_wallust_theme.rs"
 
 [[bin]]
-name = "waifufetch"
-path = "src/cli/waifufetch.rs"
+name = "wfetch"
+path = "src/cli/wfetch.rs"
 
 [dependencies]
 chrono = "0.4.33"

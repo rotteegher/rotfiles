@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.rot.reaper.enable {
+  config = lib.mkIf config.custom.reaper.enable {
     home = {
       packages = [pkgs.reaper pkgs.helm];
       # persist plugins
@@ -16,7 +16,7 @@
         DSSI_PATH = "~/.nix-profile/lib/dssi/:~/.dssi:/nix/var/nix/profiles/default/lib/dssi:/var/run/current-system/sw/lib/dssi";
       };
     };
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         ".config/REAPER"
       ];

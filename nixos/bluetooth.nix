@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.rot-nixos.bluetooth;
+  cfg = config.custom-nixos.bluetooth;
 in {
   config = lib.mkIf cfg.enable {
     hardware.bluetooth = {
@@ -22,12 +22,12 @@ in {
       services.mpris-proxy.enable = true;
 
       # add bluetooth audio icon to waybar
-      rot.waybar.config.pulseaudio = lib.mkIf hmCfg.config.programs.waybar.enable {
+      custom.waybar.config.pulseaudio = lib.mkIf hmCfg.config.programs.waybar.enable {
         format-bluetooth = "  {volume}%";
       };
     };
 
-    rot-nixos.persist = {
+    custom-nixos.persist = {
       root.directories = [
         "/var/lib/bluetooth"
       ];

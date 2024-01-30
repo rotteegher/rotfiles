@@ -182,8 +182,8 @@ pub fn apply_colors() {
     // refresh cava
     cmd(["killall", "-SIGUSR2", "cava"]);
 
-    // refresh waifufetch
-    cmd(["killall", "-SIGUSR2", "waifufetch"]);
+    // refresh wfetch
+    cmd(["killall", "-SIGUSR2", "wfetch"]);
 
     if cfg!(feature = "hyprland") {
         // sleep to prevent waybar race condition

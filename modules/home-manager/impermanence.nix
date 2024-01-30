@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.rot.persist = {
+  options.custom.persist = {
     home = {
       directories = lib.mkOption {
         default = [];

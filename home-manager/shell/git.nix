@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = config.rot.git;
+  cfg = config.custom.git;
   git-reword = pkgs.writeShellApplication {
     name = "git-reword";
     text = ''
@@ -95,7 +95,7 @@ in {
   };
 
   # extra git functions
-  rot.shell.functions = {
+  custom.shell.functions = {
     # delete a remote branch
     grd = ''
       gb -D $1
@@ -142,7 +142,7 @@ in {
     mergeclean = "find . -type f -name '*.orig' -exec rm -f {} \;";
   };
 
-  rot.persist = {
+  custom.persist = {
     home.directories = [
       ".config/gh"
     ];

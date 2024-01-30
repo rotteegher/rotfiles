@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.rot.telegram.enable {
+  config = lib.mkIf config.custom.telegram.enable {
     home.packages = [pkgs.telegram-desktop];
 
     # fix mimetype associations
@@ -15,7 +15,7 @@
       };
     };
 
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         ".local/share/TelegramDesktop"
       ];

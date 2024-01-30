@@ -4,13 +4,13 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.rot.blender.enable {
+  config = lib.mkIf config.custom.blender.enable {
     home.packages = [
       pkgs.blender
-      # pkgs.rot.goo-engine # TODO! currently trying to compile in packages/goo-engine/default.nix
+      # pkgs.custom.goo-engine # TODO! currently trying to compile in packages/goo-engine/default.nix
     ];
 
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         ".config/blender"
       ];

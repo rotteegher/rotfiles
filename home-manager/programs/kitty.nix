@@ -1,40 +1,46 @@
 {
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
-}: {
-  config = lib.mkIf config.rot.kitty.enable {
-    programs.alacritty = {
-      enable = true;
-      settings = {
-        shell = "fish";
-      };
-    };
-    programs.kitty = with config.rot.terminal; {
+}: let
+  cfg = config.custom.kitty;
+  inherit (config.custom) terminal;
+in
+  lib.mkIf cfg.enable {
+    # open kitty from nemo
+    custom.terminal.fakeGnomeTerminal = lib.mkIf (terminal.package == pkgs.kitty) (pkgs.writeShellApplication {
+      name = "gnome-terminal";
+      text = ''
+        shift
+
+        TITLE="$(basename "$1")"
+        if [ -n "$TITLE" ]; then
+          ${terminal.exec} -T "$TITLE" "$@"
+        else
+          ${terminal.exec} "$@"
+        fi
+      '';
+    });
+
+    programs.kitty = {
       enable = true;
       theme = "Catppuccin-Mocha";
       font = {
-        name = font;
-        size = size;
+        name = terminal.font;
+        inherit (terminal) size;
       };
       settings = {
-        cursor_shape = "underline";
-        cursor_blink_interval = "0.5";
         enable_audio_bell = false;
         copy_on_select = "clipboard";
         scrollback_lines = 10000;
         update_check_interval = 0;
-        window_margin_width = padding;
-        single_window_margin_width = padding;
+        window_margin_width = terminal.padding;
+        single_window_margin_width = terminal.padding;
         tab_bar_edge = "top";
-        background_opacity = toString opacity;
+        background_opacity = terminal.opacity;
         confirm_os_window_close = 0;
-        # font_features = "JetBrainsMonoNerdFontComplete-Regular +zero";
-        shell =
-          if (config.rot.shell.interactive == "fish")
-          then "${pkgs.fish}/bin/fish"
-          else ".";
+        font_features = "+zero";
       };
       keybindings = {
         "ctrl+shift+equal" = "change_font_size all -2.0";
@@ -46,5 +52,4 @@
       # change color on ssh
       ssh = "kitten ssh --kitten=color_scheme=Dracula";
     };
-  };
-}
+  }

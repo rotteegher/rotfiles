@@ -3,12 +3,12 @@
   lib,
   ...
 }: let
-  cfg = config.rot.obs-studio;
+  cfg = config.custom.obs-studio;
 in {
   config = lib.mkIf cfg.enable {
     programs.obs-studio.enable = true;
 
-    rot.persist = {
+    custom.persist = {
       home.directories = [
         ".config/obs-studio"
       ];
