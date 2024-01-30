@@ -24,6 +24,7 @@
     ./transmission.nix
     # ./vercel.nix
     ./minecraft-bedrock-server.nix
+    ./minecraft-java-server.nix
     ./virt-manager.nix
     ./steam.nix
     ./zfs.nix

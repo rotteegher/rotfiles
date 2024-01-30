@@ -157,7 +157,7 @@ in {
     };
 
     rot.wallust.entries = {
-      "waybar.jsonc" = {
+      "waybar.json" = {
         enable = cfg.waybar.enable;
         text = builtins.toJSON cfg.waybar.config;
         target = "~/.config/waybar/config";
