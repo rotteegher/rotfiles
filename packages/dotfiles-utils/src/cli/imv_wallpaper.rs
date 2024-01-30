@@ -1,5 +1,6 @@
 use dotfiles_utils::{hypr, monitor::Monitor, wallpaper};
 
+#[allow(clippy::cast_possible_truncation, clippy::cast_precision_loss)]
 fn main() {
     const TARGET_PERCENT: f32 = 0.3;
 
@@ -19,7 +20,7 @@ fn main() {
         // bind esc to behave like rofi
         let esc_bind = "bind <Escape> quit";
 
-        hypr(&[
+        hypr([
             "exec",
             &format!(
                 "{float_rule} imv -c '{esc_bind}' {}",

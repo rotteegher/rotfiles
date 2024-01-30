@@ -1,7 +1,12 @@
 use rand::seq::SliceRandom;
+use serde::Deserialize;
 
-use crate::{cmd, cmd_output, full_path, json, nixinfo::NixInfo, CmdOutput};
-use std::{collections::HashMap, fs, path::PathBuf};
+use crate::{full_path, nixinfo::NixInfo, wallust};
+use std::{
+    collections::HashMap,
+    fs,
+    path::{Path, PathBuf},
+};
 
 pub fn dir() -> PathBuf {
     full_path("~/Pictures/Wallpapers")
@@ -11,10 +16,10 @@ pub fn current() -> Option<String> {
     let curr = NixInfo::after().wallpaper;
 
     let wallpaper = {
-        if curr != "./foo/bar.text" {
-            Some(curr)
-        } else {
+        if curr == "./foo/bar.text" {
             fs::read_to_string(full_path("~/.cache/current_wallpaper")).ok()
+        } else {
+            Some(curr)
         }
     };
 
@@ -31,14 +36,14 @@ pub fn all() -> Vec<String> {
 
     self::dir()
         .read_dir()
-        .unwrap()
+        .expect("could not read wallpaper dir")
         .flatten()
         .filter_map(|entry| {
             let path = entry.path();
             if path.is_file() {
                 if let Some(ext) = path.extension() {
                     match ext.to_str() {
-                        Some("jpg") | Some("jpeg") | Some("png") if curr != *path.to_str()? => {
+                        Some("jpg" | "jpeg" | "png") if curr != *path.to_str()? => {
                             return Some(path.to_str()?.to_string())
                         }
                         _ => return None,
@@ -66,7 +71,7 @@ pub fn random() -> String {
 /// creates a directory with randomly ordered wallpapers for imv to display
 pub fn randomize_wallpapers() -> String {
     let output_dir = full_path("~/.cache/wallpapers_random");
-    let output_dir = output_dir.to_str().unwrap();
+    let output_dir = output_dir.to_str().expect("invalid output dir");
 
     // delete existing dir and recreate it
     fs::remove_dir_all(output_dir).unwrap_or(());
@@ -79,8 +84,8 @@ pub fn randomize_wallpapers() -> String {
 
     let prefix_len = shuffled.len().to_string().len();
     for (idx, path) in shuffled.iter().enumerate() {
-        let (_, img) = path.rsplit_once('/').unwrap();
-        let new_path = format!("{output_dir}/{:0>1$}-{img}", idx, prefix_len);
+        let (_, img) = path.rsplit_once('/').expect("could not extract image name");
+        let new_path = format!("{output_dir}/{idx:0>prefix_len$}-{img}");
         // create symlinks
         std::os::unix::fs::symlink(path, new_path).expect("failed to create symlink");
     }
@@ -88,108 +93,66 @@ pub fn randomize_wallpapers() -> String {
     output_dir.to_string()
 }
 
-fn refresh_zathura() {
-    if let Some(zathura_pid_raw) = cmd_output(
-        [
-            "dbus-send",
-            "--print-reply",
-            "--dest=org.freedesktop.DBus",
-            "/org/freedesktop/DBus",
-            "org.freedesktop.DBus.ListNames",
-        ],
-        CmdOutput::Stdout,
-    )
-    .iter()
-    .find(|line| line.contains("org.pwmt.zathura"))
-    {
-        let zathura_pid = zathura_pid_raw.split('"').max_by_key(|s| s.len()).unwrap();
+#[derive(Debug, Default, Deserialize, Clone)]
+pub struct Face {
+    #[serde(rename = "0")]
+    pub xmin: u32,
+    #[serde(rename = "1")]
+    pub xmax: u32,
+    #[serde(rename = "2")]
+    pub ymin: u32,
+    #[serde(rename = "3")]
+    pub ymax: u32,
+}
 
-        // send message to zathura via dbus
-        cmd([
-            "dbus-send",
-            "--type=method_call",
-            &format!("--dest={zathura_pid}"),
-            "/org/pwmt/zathura",
-            "org.pwmt.zathura.ExecuteCommand",
-            "string:source",
-        ]);
+#[derive(Debug, Deserialize, Clone)]
+pub struct WallInfo {
+    pub faces: Vec<Face>,
+    #[serde(rename = "1440x2560")]
+    pub r1440x2560: String,
+    #[serde(rename = "2256x1504")]
+    pub r2256x1504: String,
+    #[serde(rename = "3440x1440")]
+    pub r3440x1440: String,
+    #[serde(rename = "1920x1080")]
+    pub r1920x1080: String,
+    #[serde(rename = "1x1")]
+    pub r1x1: String,
+    pub wallust: Option<wallust::Options>,
+}
+
+impl WallInfo {
+    pub const fn get_geometry(&self, width: i32, height: i32) -> Option<&String> {
+        match (width, height) {
+            (1440, 2560) => Some(&self.r1440x2560),
+            (2256, 1504) => Some(&self.r2256x1504),
+            (3440, 1440) => Some(&self.r3440x1440),
+            (1920, 1080) => Some(&self.r1920x1080),
+            (1, 1) => Some(&self.r1x1),
+            _ => None,
+        }
     }
 }
 
-/// applies the wallust colors to various applications
-pub fn wallust_apply_colors() {
-    let c = if full_path("~/.cache/wallust/nix.json").exists() {
-        NixInfo::after().hyprland_colors()
-    } else {
-        #[derive(serde::Deserialize)]
-        struct Colorscheme {
-            colors: HashMap<String, String>,
-        }
-
-        let cs_path = full_path("~/.config/wallust/catppuccin-mocha.json");
-        let cs: Colorscheme = json::load(cs_path);
-
-        (1..16)
-            .map(|n| {
-                let k = format!("color{n}");
-                format!("rgb({})", cs.colors.get(&k).unwrap().replace('#', ""))
-            })
-            .collect()
-    };
-
-    if cfg!(feature = "hyprland") {
-        // update borders
-        cmd([
-            "hyprctl",
-            "keyword",
-            "general:col.active_border",
-            &format!("{} {} 45deg", c[4], c[0]),
-        ]);
-        cmd(["hyprctl", "keyword", "general:col.inactive_border", &c[0]]);
-
-        // pink border for monocle windows
-        cmd([
-            "hyprctl",
-            "keyword",
-            "windowrulev2",
-            "bordercolor",
-            &format!("{},fullscreen:1", &c[5]),
-        ]);
-        // teal border for floating windows
-        cmd([
-            "hyprctl",
-            "keyword",
-            "windowrulev2",
-            "bordercolor",
-            &format!("{},floating:1", &c[6]),
-        ]);
-        // yellow border for sticky (must be floating) windows
-        cmd([
-            "hyprctl",
-            "keyword",
-            "windowrulev2",
-            "bordercolor",
-            &format!("{},pinned:1", &c[3]),
-        ]);
+/// reads the wallpaper info from wallpapers.json
+pub fn info(image: &String) -> Option<WallInfo> {
+    let wallpapers_json = full_path("~/Pictures/Wallpapers/wallpapers.json");
+    if !wallpapers_json.exists() {
+        return None;
     }
 
-    // refresh zathura
-    refresh_zathura();
+    // convert image to path
+    let image = Path::new(image);
+    let fname = image
+        .file_name()
+        .expect("invalid image path")
+        .to_str()
+        .expect("could not convert image path to str");
 
-    // refresh cava
-    cmd(["killall", "-SIGUSR2", "cava"]);
-
-    // refresh waifufetch
-    cmd(["killall", "-SIGUSR2", "waifufetch"]);
-
-    if cfg!(feature = "hyprland") {
-        // sleep to prevent waybar race condition
-        std::thread::sleep(std::time::Duration::from_secs(1));
-
-        // refresh waybar
-        cmd(["killall", "-SIGUSR2", ".waybar-wrapped"]);
-    }
-
-    // reload gtk theme
-    // reload_gtk()
+    let reader = std::io::BufReader::new(
+        std::fs::File::open(wallpapers_json).expect("could not open wallpapers.json"),
+    );
+    let mut crops: HashMap<String, WallInfo> =
+        serde_json::from_reader(reader).expect("could not parse wallpapers.json");
+    crops.remove(fname)
 }

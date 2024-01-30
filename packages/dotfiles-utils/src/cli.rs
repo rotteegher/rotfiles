@@ -19,7 +19,6 @@ pub struct HyprMonitorArgs {
 }
 
 // ------------------ HYPR SAME CLASS ------------------
-
 #[derive(Subcommand, Debug)]
 pub enum HyprSameClassDirection {
     Next,
@@ -70,21 +69,6 @@ pub struct HyprWallpaperArgs {
     )]
     pub transition_type: String,
 
-    #[arg(
-        long,
-        value_name = "FILTER",
-        value_parser = PossibleValuesParser::new([
-            // ignore non 16 colors colorschemes
-            "dark16",
-            "hard-dark",
-            "light16",
-            "soft-light",
-            "soft-dark", // available via dev branch
-        ]),
-        help = "filter type for swww"
-    )]
-    pub filter: Option<String>,
-
     // optional image to use, uses a random one otherwise
     pub image: Option<PathBuf>,
 }
@@ -109,11 +93,28 @@ pub struct RofiMpvArgs {
 
 // ------------------ WAIFUFETCH ------------------
 
+#[allow(clippy::struct_excessive_bools)]
 #[derive(Parser, Debug)]
-#[command(name = "waifufetch", about = "Neofetch, but more waifu")]
+#[command(name = "waifufetch", about = "fetch, but more waifu")]
 pub struct WaifuFetchArgs {
-    #[arg(long, action, help = "prints path to generated image")]
-    pub image: bool,
-    #[arg(short, long, action)]
-    pub exit: bool,
+    #[arg(long, action, help = "show hollow NixOS logo")]
+    pub hollow: bool,
+
+    #[arg(long, action, help = "show waifu NixOS logo")]
+    pub waifu: bool,
+
+    #[arg(long, action, help = "show section of wallpaper")]
+    pub wallpaper: bool,
+
+    #[arg(long, action, help = "show challenge progress")]
+    pub challenge: bool,
+
+    #[arg(long, action, help = "do not listen for SIGUSR2")]
+    pub no_socket: bool,
+
+    #[arg(long, action, help = "do not show colored keys")]
+    pub no_color_keys: bool,
+
+    #[arg(long, action, help = "image size")]
+    pub size: Option<i32>,
 }

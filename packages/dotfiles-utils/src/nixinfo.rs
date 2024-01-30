@@ -3,12 +3,6 @@ use serde::Deserialize;
 use std::collections::HashMap;
 
 #[derive(Debug, Clone, Default, Deserialize)]
-pub struct Neofetch {
-    pub logo: String,
-    pub conf: String,
-}
-
-#[derive(Debug, Clone, Default, Deserialize)]
 pub struct Special {
     pub background: String,
     pub foreground: String,
@@ -26,9 +20,10 @@ pub struct NixInfo {
     pub wallpaper: String,
     pub fallback: String,
     pub colorscheme: Option<String>,
-    pub neofetch: Neofetch,
+    pub logo: String,
     pub special: Special,
     pub persistent_workspaces: bool,
+    pub waybar_hidden: bool,
     pub monitors: Vec<NixMonitorInfo>,
     /// color0 - color15
     pub colors: HashMap<String, String>,
@@ -36,12 +31,12 @@ pub struct NixInfo {
 
 impl NixInfo {
     /// get nix info from ~/.config before wallust has processed it
-    pub fn before() -> NixInfo {
+    pub fn before() -> Self {
         json::load("~/.config/wallust/nix.json")
     }
 
     /// get nix info from ~/.cache after wallust has processed it
-    pub fn after() -> NixInfo {
+    pub fn after() -> Self {
         json::load("~/.cache/wallust/nix.json")
     }
 
@@ -50,7 +45,13 @@ impl NixInfo {
         (1..16)
             .map(|n| {
                 let k = format!("color{n}");
-                format!("rgb({})", self.colors.get(&k).unwrap().replace('#', ""))
+                format!(
+                    "rgb({})",
+                    self.colors
+                        .get(&k)
+                        .expect("color not found")
+                        .replace('#', "")
+                )
             })
             .collect()
     }

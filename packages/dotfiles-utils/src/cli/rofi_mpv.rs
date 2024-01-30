@@ -10,13 +10,13 @@ use std::{
 
 type Video = (PathBuf, String);
 
-fn latest_file(media_type: RofiMpvMedia) -> Video {
+fn latest_file(media_type: &RofiMpvMedia) -> Video {
     let mut latest = PathBuf::new();
     let mut latest_content = String::new();
 
     for watch_file in full_path("~/.local/state/mpv/watch_later")
         .read_dir()
-        .unwrap()
+        .expect("could not read watch_later dir")
         .flatten()
     {
         let content = read_to_string(watch_file.path()).expect("could not read watch_later file");
@@ -50,52 +50,59 @@ fn latest_file(media_type: RofiMpvMedia) -> Video {
 }
 
 /// gets the start time of a video in seconds
-fn get_start_time(content: String) -> f32 {
+fn get_start_time(content: &str) -> f32 {
     let start_line = content
         .lines()
         .find(|line| line.starts_with("start="))
         .expect("no start time found");
 
-    let (_, time) = start_line.rsplit_once('=').unwrap();
+    let (_, time) = start_line.rsplit_once('=').expect("invalid start time");
     time.parse().expect("invalid start time")
 }
 
 /// gets the duration of a video in seconds
 fn get_duration<P: AsRef<Path>>(vid_path: P) -> f32 {
     let ffmpeg = cmd_output(
-        ["ffmpeg", "-i", vid_path.as_ref().to_str().unwrap()],
-        CmdOutput::Stderr,
+        [
+            "ffmpeg",
+            "-i",
+            vid_path
+                .as_ref()
+                .to_str()
+                .expect("could not convert video path to str"),
+        ],
+        &CmdOutput::Stderr,
     );
     let duration = ffmpeg
         .iter()
         .find(|line| line.contains("Duration: "))
         .expect("no duration found")
         .rsplit_once("Duration: ")
-        .unwrap()
+        .expect("could not extract duration")
         .1;
 
     let duration: Vec<_> = duration
         .split_once(',')
-        .unwrap()
+        .expect("invalid duration")
         .0
         .split(':')
-        .map(|t| t.parse::<f32>().unwrap())
+        .map(|t| t.parse::<f32>().expect("invalid duration"))
         .collect();
 
     match duration.len() {
         1 => duration[0],
-        2 => duration[0] + duration[1] * 60.0,
-        3 => duration[0] + duration[1] * 60.0 + duration[2] * 60.0 * 60.0,
+        2 => duration[1].mul_add(60.0, duration[0]),
+        3 => (duration[2] * 60.0).mul_add(60.0, duration[1].mul_add(60.0, duration[0])),
         _ => panic!("invalid duration"),
     }
 }
 
 fn get_episode((path, content): Video) -> Option<PathBuf> {
-    // get start time in seconds
-    let start = get_start_time(content);
-    let duration = get_duration(&path);
-
     const WATCH_THRESHOLD: f32 = 0.95;
+
+    // get start time in seconds
+    let start = get_start_time(&content);
+    let duration = get_duration(&path);
 
     if start / duration < WATCH_THRESHOLD {
         return Some(path);
@@ -106,7 +113,7 @@ fn get_episode((path, content): Video) -> Option<PathBuf> {
     // get list of files in the current directory
     let mut current_files: Vec<_> = path
         .read_dir()
-        .unwrap()
+        .expect("could not read current directory")
         .flatten()
         .map(|e| e.path())
         .collect();
@@ -116,16 +123,18 @@ fn get_episode((path, content): Video) -> Option<PathBuf> {
     // get index of current file
     let current_index = current_files
         .iter()
-        .position(|path| path == &path.to_path_buf())
-        .unwrap();
+        .position(|path| path == &path.clone())
+        .expect("could not get index of current file");
 
-    current_files.get(current_index + 1).map(|p| p.to_owned())
+    current_files
+        .get(current_index + 1)
+        .map(std::borrow::ToOwned::to_owned)
 }
 
 fn main() {
     let args = RofiMpvArgs::parse();
 
-    let video = latest_file(args.media);
+    let video = latest_file(&args.media);
 
     if let Some(to_play) = get_episode(video) {
         println!("Playing {to_play:?}");
