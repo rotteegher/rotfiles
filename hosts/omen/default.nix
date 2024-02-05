@@ -1,18 +1,39 @@
-{user, ...}: {
+{
+  user,
+  pkgs,
+  ...
+}: {
   custom-nixos = {
+    nvidia.enable = true;
+    zfs.encryption = false;
+
+    bluetooth.enable = true;
+    # hotspot = {
+    #   enable = true;
+    #   internet_iface = "eno1";
+    #   wifi_iface = "wlp2s0";
+    # };
+
+  # software
+    distrobox.enable = true;
+    syncoid.enable = true;
+    bittorrent.enable = true;
+    vercel.enable = false; # was true at iynaix config
+    virt-manager.enable = false;
+    flatpak.enable = true;
+    steam.enable = true;
   };
 
-  # by-id doesn't seem to work with amd mobo
-  boot.zfs.devNodes = "/dev/disk/by-partuuid";
-
-  networking.hostId = "abb4d116"; # required for zfs
-
-  # Autologin
   services.xserver.displayManager.autoLogin.user = user;
 
-  # allow building and pushing of laptop config from desktop
-  nix.settings.trusted-users = [user];
+  networking.hostId = "aabb4d11"; # required for zfs
 
-  # touchpad support
-  services.xserver.libinput.enable = true;
+  # open ports for devices on the local network
+  networking.firewall.extraCommands = ''
+    iptables -A nixos-fw -p tcp --source 192.168.1.0/24 -j nixos-fw-accept
+  '';
+  networking.firewall.allowedTCPPorts = [ 4444 ];
+  networking.firewall.allowedUDPPorts = [ 4444 ];
+
+  # networking.firewall.enable = false;
 }

@@ -10,29 +10,49 @@
       modules = [
         "${nixpkgs}/nixos/modules/installer/cd-dvd/${isoPath}.nix"
         ({pkgs, ...}: {
+
+          nix = {
+            # use flakes
+            extraOptions = "experimental-features = nix-command flakes auto-allocate-uids";
+            package = pkgs.nixVersions.unstable;
+          };
+
+          networking.wireless.iwd.enable = true;
+
           environment.systemPackages =
             [
               (pkgs.writeShellApplication {
                 name = "rotos-install";
                 runtimeInputs = [pkgs.curl];
-                text = ''sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/main/install.sh)'';
+                text = ''sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/master/install.sh)'';
               })
-              # (pkgs.writeShellApplication {
-              #   name = "rotos-recover";
-              #   runtimeInputs = [pkgs.curl];
-              #   text = ''sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/main/recover.sh)'';
-              # })
-              # (pkgs.writeShellApplication {
-              #   name = "rotos-reinstall";
-              #   runtimeInputs = [pkgs.curl];
-              #   text = ''sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/main/recover.sh)''; # TODO recover script
-              # })
+              (pkgs.writeShellApplication {
+                name = "rotos-recover";
+                runtimeInputs = [pkgs.curl];
+                text = ''sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/master/recover.sh)'';
+              })
+              (pkgs.writeShellApplication {
+                name = "rotos-reinstall";
+                runtimeInputs = [pkgs.curl];
+                text = ''sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/master/recover.sh)'';
+              })
             ]
             ++ (with pkgs; [
               btop
               git
               helix
+              tmux
+              zellij
+              file
+              b3sum
+              ripgrep
+              jq
               yazi
+              dysk
+              cmus
+              bat
+              fzf
+              htop
             ]);
         })
       ];

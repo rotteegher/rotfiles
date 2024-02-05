@@ -10,7 +10,7 @@ This config is intended to be used with NixOS. There is *experimental* support f
 - Persistence via impermanence (both `/` and `/home`)
 - Automatic ZFS snapshots with rotation
 - Flexible NixOS / Home Manager config via feature flags
-- sops-nix for managing secrets
+- sops-nix for managing secrets [WIP]
 - Hyprland with waybar setup, with screen capture
 - Dynamic colorschemes using wallust (pywal, but maintained)
 
@@ -20,7 +20,7 @@ Run the following commands from a terminal on a NixOS live iso / from a tty on t
 The following install script partitions the disk, sets up the necessary datasets and installs NixOS.
 
 ```sh
-sh <(curl -L https://raw.githubusercontent.com/iynaix/dotfiles/main/install.sh)
+sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/master/install.sh)
 ```
 Reboot
 
@@ -57,5 +57,5 @@ Run the following commands from a terminal on a NixOS live iso / from a tty on t
 The following script optionally reformats the boot partition and / or /nix dataset, then reinstalls NixOS.
 
 ```sh
-sh <(curl -L https://raw.githubusercontent.com/iynaix/dotfiles/main/recover.sh)
+sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/master/recover.sh)
 ```

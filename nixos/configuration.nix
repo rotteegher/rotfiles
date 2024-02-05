@@ -7,7 +7,7 @@
   ...
 }: {
   # Bootloader.
-  boot.loader.systemd-boot.enable = false;
+  # boot.loader.systemd-boot.enable = false;
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -27,8 +27,6 @@
   };
 
   networking.hostName = "${host}";
-  networking.nameservers = ["8.8.8.8" "8.8.8.8"];
-
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -36,34 +34,35 @@
   time.timeZone = "Australia/Hobart";
 
   # Locale Extra
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_AU.UTF-8";
-    LC_IDENTIFICATION = "en_AU.UTF-8";
-    LC_MEASUREMENT = "en_AU.UTF-8";
-    LC_MONETARY = "en_AU.UTF-8";
-    LC_NAME = "en_AU.UTF-8";
-    LC_NUMERIC = "en_AU.UTF-8";
-    LC_PAPER = "en_AU.UTF-8";
-    LC_TELEPHONE = "en_AU.UTF-8";
-    # Still can't remember the names of the months in Ukranian, for fuck's sake
-    LC_TIME = "uk_UA.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_AU.UTF-8";
+      LC_IDENTIFICATION = "en_AU.UTF-8";
+      LC_MEASUREMENT = "en_AU.UTF-8";
+      LC_MONETARY = "en_AU.UTF-8";
+      LC_NAME = "en_AU.UTF-8";
+      LC_NUMERIC = "en_AU.UTF-8";
+      LC_PAPER = "en_AU.UTF-8";
+      LC_TELEPHONE = "en_AU.UTF-8";
+      # Still can't remember the names of the months in Ukranian, for fuck's sake
+      LC_TIME = "uk_UA.UTF-8";
+    };
   };
 
-  # Configure keymap in X11
+  # Configure X11
   services.xserver = {
-    layout = "jp";
-    xkbVariant = "";
-    xkbOptions = "japan:hztg_escape";
     # bye bye xterm
     excludePackages = [pkgs.xterm];
   };
 
   # Define a user account. Don't forget to set a pasword with 'passwd'.
-  users.users.${user} = {...}: {
-    isNormalUser = true;
-    initialPassword = "password";
-    extraGroups = ["networkmanager" "wheel"];
-  };
+  # users.users.${user} = {...}: {
+  #   isNormalUser = true;
+  #   initialPassword = "password";
+  #   extraGroups = ["networkmanager" "wheel"];
+  # };
+
   # Reboot/poweroff for unprivileged users
   # Grants permissions to reboot/poweroff machine to users in the users group.
   security = {
@@ -72,17 +71,8 @@
     sudo.extraConfig = "Defaults passwd_tries=10";
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Permit insecure packages
-  nixpkgs.config.permittedInsecurePackages = [] ++ (lib.optional config.hm.custom.viber.enable "openssl-1.1.1w");
-
-  # Cuda support
-  nixpkgs.config.cudaSupport = true;
-
   # enable sysrq in case for kernel panic
-  boot.kernel.sysctl."kernel.sysrq" = 1;
+  # boot.kernel.sysctl."kernel.sysrq" = 1;
 
   # enable opengl
   hardware.opengl = {

@@ -50,18 +50,26 @@
       ++ (lib.optionals (!isNixOS) config.custom.fonts.packages);
   };
 
+  # Let Home Manager install and manage itself
+  programs.home-manager.enable = true;
+
   # stop bothering me
-  xdg.configFile = {
-    "nix/nix.conf".text = "experimental-features = nix-command flakes";
-    "nixpkgs/config.nix".text = ''{ allowUnfree = true; }'';
+  xdg = {
+    enable = true;
+    userDirs.enable = true;
+    mimeApps.enable = true;
+    configFile = {
+      "nix/nix.conf".text = "experimental-features = nix-command flakes";
+      "nixpkgs/config.nix".text = ''{ allowUnfree = true; }'';
+    };
   };
 
   custom.persist = {
     home.directories = [
-      # {
-      #   directory = "Desktop";
-      #   method = "symlink";
-      # }
+      {
+        directory = "Desktop";
+        method = "symlink";
+      }
       {
         directory = "Documents";
         method = "symlink";

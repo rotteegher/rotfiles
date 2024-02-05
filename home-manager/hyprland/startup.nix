@@ -49,9 +49,9 @@ in {
       # "${lib.getExe pkgs.swayidle} -w timeout 480 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
 
       # focus the initial workspaces on startup
-      # "hyprctl dispatch workspace 1"
-      # "hyprctl dispatch workspace 2"
-      # "sleep 5 && hyprctl dispatch workspace 4"
+      "hyprctl dispatch workspace 1"
+      "hyprctl dispatch workspace 2"
+      "sleep 5 && hyprctl dispatch workspace 4"
 
       "sleep 1; swww init && hypr-wallpaper"
 

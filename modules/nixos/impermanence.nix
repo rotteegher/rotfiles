@@ -13,6 +13,10 @@
         default = [];
         description = "Files to persist in root filesystem";
       };
+      cache = lib.mkOption {
+        default = [ ];
+        description = "Directories to persist, but not to snapshot";
+      };
     };
     home = {
       directories = lib.mkOption {
@@ -24,7 +28,9 @@
         description = "Files to persist in home directory";
       };
     };
-    tmpfs = lib.mkEnableOption "Enable tmpfs for for persist instead of snapshots" // {default = true;};
+    tmpfs = lib.mkEnableOption "Enable tmpfs for for persist instead of snapshots" // {
+      default = true;
+    };
     erase = {
       root = lib.mkOption {
         type = lib.types.bool;

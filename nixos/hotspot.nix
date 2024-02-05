@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.custom-nixos.hotspot;
+  cfg =  config.custom-nixos.hotspot;
 in {
-  config = lib.mkIf cfg.enable {
+    config = lib.mkIf (config.hm.custom.wifi.enable && cfg.enable) {
     # Enable WIFi Hotspot
     services.create_ap = {
       enable = true;

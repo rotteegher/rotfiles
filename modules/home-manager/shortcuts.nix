@@ -18,7 +18,7 @@
       PC = "~/Pictures";
       Ps = "~/Pictures/Screenshots";
       Pw = "~/Pictures/Wallpapers";
-      dd = "~/Downloads";
+      dw = "~/Downloads";
       dp = "~/Downloads/pending";
       dus = "~/Downloads/pending/Unsorted";
       mw = "/md/wdc-data";

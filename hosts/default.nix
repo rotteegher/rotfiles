@@ -11,6 +11,12 @@
     pkgs = import inputs.nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      # Cuda support
+      config.cudaSupport = true;
+      # Permit insecure packages
+      config.permittedInsecurePackages = [
+       "openssl-1.1.1w" # make viber work
+      ];
     };
     extraSpecialArgs = {
       inherit self inputs isNixOS host user;
@@ -27,6 +33,7 @@
     then
       lib.nixosSystem {
         specialArgs = extraSpecialArgs;
+        inherit pkgs;
 
         modules = [
           ./${host} # host specific configuration
@@ -44,9 +51,6 @@
 
               users.${user} = {
                 imports = homeManagerImports ++ [inputs.impermanence.nixosModules.home-manager.impermanence];
-
-                # Let Home Manager install and manage itself
-                programs.home-manager.enable = true;
               };
             };
           }
@@ -61,11 +65,15 @@
 
         modules = homeManagerImports ++ [../overlays];
       };
-in
-  lib.listToAttrs (map (host: {
+  all_hosts = lib.listToAttrs (map (host: {
     name =
       if isNixOS
       then host
-      else "${user}@#{host}";
+      else "${user}@${host}";
     value = mkHost host;
-  }) [ "desktop" "omen" ])
+  }) [ "desktop" "omen" ]);
+in
+  all_hosts
+  # // {
+  #   omen = all_hosts.omen // {config.custom-nixos.hyprland.enable = true;};
+  # }
