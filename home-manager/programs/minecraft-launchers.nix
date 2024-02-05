@@ -8,6 +8,8 @@
     home.packages = with pkgs; [
       # Launcher Java
       prismlauncher
+      jdk8
+      jre8
     ];
 
     custom.persist = {

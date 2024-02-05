@@ -8,6 +8,7 @@
   ...
 }: let
   displays = config.custom.displays;
+  display = config.custom.display;
 in {
   imports = [
     ./keybinds.nix
@@ -61,8 +62,11 @@ in {
           accel_profile = "flat";
           repeat_delay = 300;
 
-          # Set second monitor as touchscreen monitor
-          touchdevice.output = (lib.elemAt displays 1).name;
+          # Set config.custom.display setting index to specify which monitor is a touchscreen device via host specific configuration
+          touchdevice = lib.mkIf display.touchDevice.enabled {
+            enabled = true;
+            output = (lib.elemAt displays display.touchDevice.devIndex).name;
+          };
 
           touchpad = {
             natural_scroll = true;

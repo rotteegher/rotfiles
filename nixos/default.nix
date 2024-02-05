@@ -22,12 +22,14 @@
     # ./sonarr.nix
     # ./syncoid.nix
     ./transmission.nix
+    ./users.nix
     # ./vercel.nix
     ./minecraft-bedrock-server.nix
     ./minecraft-java-server.nix
     ./virt-manager.nix
     ./steam.nix
     ./zfs.nix
+    ./sleep.nix
     ./input.nix
     ./bluetooth.nix
     ./hotspot.nix
@@ -73,6 +75,8 @@
           usbutils
           zellij
           efibootmgr
+          powertop
+          powerstat
         ]
         ++ (lib.optional (!config.services.xserver.desktopManager.gnome.enable) config.hm.custom.terminal.fakeGnomeTerminal)
         ++ (lib.optional config.custom-nixos.distrobox.enable pkgs.distrobox)

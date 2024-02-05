@@ -61,57 +61,63 @@ in {
     users.users.${user}.hashedPasswordFile = "/persist/etc/shadow/${user}";
 
     # setup persistence
-    environment.persistence."/persist" = {
-      hideMounts = true;
-
-      files = cfg.root.files;
-      directories =
-        [
+    environment.persistence = {
+      "/persist" = {
+        hideMounts = true;
+        files = [ "/etc/machine-id" ] ++ cfg.root.files;
+        directories = [
           # systemd journal is stored in /var/log/journal
           "/var/log"
-        ]
-        ++ cfg.root.directories;
+        ] ++ cfg.root.directories;
+      };
 
-      # DO NOT persist anything for home directory as it causes a race condition
+      "/persist/cache" = {
+        hideMounts = true;
+        directories = cfg.root.cache;
+      };
+      # NOTE: *DO NOT* persist anything for home directory as it causes a race condition
     };
 
     # setup persistence for home manager
     programs.fuse.userAllowOther = true;
-    hm = {...} @ hmCfg: let
-      hmPersistCfg = hmCfg.config.custom.persist;
-    in {
-      systemd.user.startServices = true;
-      home.persistence = {
-        "/persist/home/${user}" = {
-          allowOther = true;
-          removePrefixDirectory = false;
+    hm = 
+      hmCfg:
+      let
+        hmPersistCfg = hmCfg.config.custom.persist;
+      in
+      {
+        systemd.user.startServices = true;
+        home.persistence = {
+          "/persist/home/${user}" = {
+            allowOther = true;
+            removePrefixDirectory = false;
 
-          files = [".Xauthority"] ++ cfg.home.files ++ hmPersistCfg.home.files;
-          directories =
-            [
-              {
-                directory = "pr"; # project files
-                method = "symlink";
-              }
-              {
-                directory = ".steam";
-                method = "symlink";
-              }
-            ]
-            ++ lib.optionals config.programs.dconf.enable [
-              ".cache/dconf"
-              ".config/dconf"
-            ]
-            ++ cfg.home.directories
-            ++ hmPersistCfg.home.directories;
-        };
-        "/persist/cache" = {
-          allowOther = true;
-          removePrefixDirectory = false;
+            files = [".Xauthority"] ++ cfg.home.files ++ hmPersistCfg.home.files;
+            directories =
+              [
+                {
+                  directory = "pr"; # project files
+                  method = "symlink";
+                }
+                {
+                  directory = ".steam";
+                  method = "symlink";
+                }
+              ]
+              ++ lib.optionals config.programs.dconf.enable [
+                ".cache/dconf"
+                ".config/dconf"
+              ]
+              ++ cfg.home.directories
+              ++ hmPersistCfg.home.directories;
+          };
+          "/persist/cache" = {
+            allowOther = true;
+            removePrefixDirectory = false;
 
-          directories = hmPersistCfg.cache;
+            directories = hmPersistCfg.cache;
+          };
         };
       };
     };
-  };
 }

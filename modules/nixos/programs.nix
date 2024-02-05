@@ -7,10 +7,6 @@
 }: let
   cfg = config.custom-nixos;
 in {
-  imports = [
-    ./minecraft-bedrock-server.nix
-    ./minecraft-java-server.nix
-  ];
   options.custom-nixos = {
     ### NIXOS LEVEL OPTIONS ###
     distrobox.enable = lib.mkEnableOption "distrobox";
@@ -23,7 +19,5 @@ in {
     virt-manager.enable = lib.mkEnableOption "virt-manager";
     flatpak.enable = lib.mkEnableOption "flatpak";
     steam.enable = lib.mkEnableOption "steam";
-
-
   };
 }

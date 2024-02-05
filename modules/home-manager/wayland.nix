@@ -7,6 +7,18 @@
   hyprlandCfg = config.wayland.windowManager.hyprland;
 in {
   options.custom = {
+    display.touchDevice = {
+      enabled = lib.mkEnableOption "Enable Touchscreen device support" // {default = false;};
+      devIndex = lib.mkOption {
+        type = lib.types.int;
+        default = 0;
+        description = ''
+          (Starts from 0) specify which monitor in displays list
+          is to be considered touchdevice an input.touchdevice.output by hyprland
+          https://wiki.hyprland.org/Configuring/Variables/#touchdevice
+        '';
+      };
+    };
     displays = lib.mkOption {
       type = with lib.types;
         listOf (

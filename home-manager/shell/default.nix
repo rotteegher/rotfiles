@@ -19,11 +19,14 @@
     dysk # better disk info
     fd
     fx
+    jq
     htop
     btop
+    cmus
     sd
     ugrep
     file
+    b3sum
   ];
 
   programs = {

@@ -2,6 +2,10 @@
 
 set -e
 
+echo "Current latest commit:"
+git ls-remote -h https://github.com/rotteegher/rotfiles master
+echo
+
 function yesno() {
     local prompt="$1"
 
@@ -53,12 +57,12 @@ Introduction
 
 # in a vm, special case
 if [[ -b "/dev/vda" ]]; then
-DISK="/dev/vda"
+    DISK="/dev/vda"
     
-BOOTDISK="${DISK}3"
-SWAPDISK="${DISK}2"
-ZFSDISK="${DISK}1"
-# normal disk
+    BOOTDISK="${DISK}3"
+    SWAPDISK="${DISK}2"
+    ZFSDISK="${DISK}1"
+    # normal disk
 else
 cat << FormatWarning
 Please enter the disk by id to be formatted *without* the part number.
@@ -66,22 +70,29 @@ Please enter the disk by id to be formatted *without* the part number.
 
 FormatWarning
 
-ls -al /dev/disk/by-id
+    ls -al /dev/disk/by-id
 
-echo ""
+    echo ""
 
-read -r DISKINPUT
+    read -r DISKINPUT
 
-DISK="/dev/disk/by-id/${DISKINPUT}"
-
-BOOTDISK="${DISK}-part3"
-SWAPDISK="${DISK}-part2"
-ZFSDISK="${DISK}-part1"
+    DISK="/dev/disk/by-id/${DISKINPUT}"
+    # Check if the specified disk exists
+    if [ -e "$DISK" ]; then
+        BOOTDISK="${DISK}-part3"
+        SWAPDISK="${DISK}-part2"
+        ZFSDISK="${DISK}-part1"
+    else
+        echo "Error: Disk not found in /dev/disk/by-id directory."
+        exit
+    fi
 fi
 
 echo "Boot Partiton: $BOOTDISK"
 echo "SWAP Partiton: $SWAPDISK"
 echo "ZFS Partiton: $ZFSDISK"
+
+
 
 do_format=$(yesno "This irreversibly formats the entire disk. Are you sure?")
 if [[ $do_format == "n" ]]; then
@@ -115,11 +126,11 @@ fi
 # Check if zroot pool exists
 if zpool list zroot; then
     do_reinstall=$(yesno "'zroot' zfs pool already exists. Reinstall filesystem?")
-    if [[ $do_reinstall == "n" ]]; then
-        exit
-    else
+    if [[ $do_reinstall == "y" ]]; then
         echo "Destroying zroot"
         sudo zpool destroy zroot
+    else
+        exit
     fi
 fi
 
@@ -137,8 +148,7 @@ sync
 sleep 5
 
 echo "Creating Swap"
-sudo mkswap "$SWAPDISK"
-sudo swaplabel --label "SWAP" "$SWAPDISK"
+sudo mkswap "$SWAPDISK" -L "SWAP"
 sudo swapon "$SWAPDISK"
 
 echo "Creating Boot Disk"
@@ -208,6 +218,9 @@ else
     sudo zfs create -o mountpoint=legacy zroot/persist
 fi
 sudo mount --mkdir -t zfs zroot/persist /mnt/persist
+
+echo "Listing of block devices:"
+lsblk
 
 while true; do
     # read -rp "Which host to install? (desktop / framework / xps / vm / vm-amd) " host
