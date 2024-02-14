@@ -69,7 +69,7 @@
   programs.kitty.shellIntegration.enableBashIntegration = false;
 
   custom.persist = {
-    home.directories = [
+    home.cache = [
       ".cache/starship"
     ];
   };

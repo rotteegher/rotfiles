@@ -1,18 +1,19 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   options.custom.persist = {
     home = {
       directories = lib.mkOption {
-        default = [];
+        default = [ ];
         description = "Directories to persist in home directory";
       };
       files = lib.mkOption {
-        default = [];
+        default = [ ];
         description = "Files to persist in home directory";
       };
-    };
-    cache = lib.mkOption {
-      default = [];
-      description = "Directories to persist, but not to snapshot";
+      cache = lib.mkOption {
+        default = [ ];
+        description = "Directories to persist, but not to snapshot";
+      };
     };
   };
 }
