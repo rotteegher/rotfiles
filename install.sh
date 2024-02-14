@@ -64,17 +64,23 @@ if [[ -b "/dev/vda" ]]; then
     ZFSDISK="${DISK}1"
     # normal disk
 else
+
 cat << FormatWarning
-Please enter the disk by id to be formatted *without* the part number.
+YOUR DISK IS ABOUT TO BE FORMATTED
+
+Please select the disk by id to be formatted.
 (e.g. nvme-eui.0123456789). Your devices are shown below:
 
 FormatWarning
 
     ls -al /dev/disk/by-id
 
-    echo ""
+    # Use fzf for disk selection
+    DISKINPUT=$(ls /dev/disk/by-id/ | fzf --prompt="Select a disk to install nixos on: " | cut -d ' ' -f 1)
 
-    read -r DISKINPUT
+    echo "Your disk is: $DISKINPUT"
+
+    echo ""
 
     DISK="/dev/disk/by-id/${DISKINPUT}"
     # Check if the specified disk exists
@@ -99,6 +105,13 @@ if [[ $do_format == "n" ]]; then
     exit
 fi
 
+# warning countdown
+for i in {5..0}; do
+    echo -ne "Formatting in $i seconds... <Ctrl + C> to EXIT NOW\r"
+    sleep 1
+done
+
+echo "Checking mountpoint ''/mnt/boot':"
 # Check boot partition
 sudo mkdir -p /mnt/boot
 if mountpoint -q /mnt/boot; then
@@ -106,12 +119,11 @@ if mountpoint -q /mnt/boot; then
     sudo umount -f /mnt/boot || true
 fi
 
+echo "Checking swap status for: $SWAPDISK"
 # Check swap partition
 if [ -b "$SWAPDISK" ]; then
-    echo "Checking swap status for: $SWAPDISK"
-
     swap_device=$(readlink -f "$SWAPDISK")
-    echo "Swap device readlink: $swap_device"
+    echo "Swap device: $swap_device"
 
     # Check if the swap is currently on
     if swapon --show | grep -q "$swap_device"; then
@@ -123,6 +135,7 @@ if [ -b "$SWAPDISK" ]; then
     fi
 fi
 
+echo "Checking 'zroot' pool:"
 # Check if zroot pool exists
 if zpool list zroot; then
     do_reinstall=$(yesno "'zroot' zfs pool already exists. Reinstall filesystem?")
@@ -204,33 +217,34 @@ sudo mount --mkdir -t zfs zroot/cache /mnt/cache
 
 # handle persist, possibly from snapshot
 restore_snapshot=$(yesno "Do you want to restore from a persist snapshot?")
-if [[ $restore_snapshot == "y" ]]; then
-    echo "Enter full path to snapshot: "
-    read -r snapshot_file_path
-    echo
+if [[ "$restore_snapshot" == "y" ]]; then
+    snapshot_type=$(yesno "Is snapshot a file?")
+    if [[ "$snapshot_type" == "y" ]]; then
+        echo "Enter full path to snapshot: "
+        read -r snapshot_file_path
+        echo
 
-    echo "Creating /persist"
-    # shellcheck disable=SC2024 (sudo doesn't affect redirects)
-    sudo zfs receive -o mountpoint=legacy zroot/persist < "$snapshot_file_path"
-
+        echo "Creating /persist"
+        # shellcheck disable=SC2024 (sudo doesn't affect redirects)
+        sudo zfs receive -o mountpoint=legacy zroot/persist < "$snapshot_file_path"
+    else
+        snapshot_name=$(zfs list -t snapshot -r | fzf --prompt="Select snapshot to restore from: " | grep -v '^$'| cut -d ' ' -f 1)
+        echo "Selected snapshot: $snapshot_name"
+        echo "Creating /persist from snapshot"
+        sudo zfs send $snapshot_name | sudo zfs receive -o mountpoint=legacy zroot/persist
+    fi
 else
     echo "Creating /persist"
     sudo zfs create -o mountpoint=legacy zroot/persist
 fi
+echo "Mounting persist"
 sudo mount --mkdir -t zfs zroot/persist /mnt/persist
 
 echo "Listing of block devices:"
 lsblk
 
-while true; do
-    # read -rp "Which host to install? (desktop / framework / xps / vm / vm-amd) " host
-    read -rp "Which host to install? (desktop / omen ) " host
-    case $host in
-        # desktop|framework|xps|vm|vm-amd ) break;;
-        desktop|omen ) break;;
-        * ) echo "Invalid host. Please select a valid host.";;
-    esac
-done
+# use fzf to select host
+host=$(echo -e "desktop\nomen" | fzf --prompt="Select a host to install: ")
 
 read -rp "Enter git rev for flake (default: master): " git_rev
 echo "Installing NixOS"

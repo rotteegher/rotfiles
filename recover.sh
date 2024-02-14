@@ -85,27 +85,23 @@ if [[ "$restore_snapshot" == "y" ]]; then
         read -r snapshot_name
         echo
 
-        echo "Creating /persist"
+        echo "Creating /persist from snapshot"
         sudo zfs send $snapshot_name | sudo zfs receive -o mountpoint=legacy zroot/persist
     fi
 else
     echo "Creating /persist"
     sudo zfs create -o mountpoint=legacy zroot/persist
 fi
+echo "Mounting persist"
 sudo mount --mkdir -t zfs zroot/persist /mnt/persist
 
 
 echo "Listing of block devices:"
 lsblk
 
-while true; do
-    read -rp "Which host to install? (desktop / omen ) " host
-    case $host in
-        desktop|omen ) break;;
-        * ) echo "Invalid host. Please select a valid host.";;
-    esac
-done
+# use fzf to select host
+host=$(echo -e "desktop\nomen" | fzf --prompt="Select a host to install: ")
 
 read -rp "Enter git rev for flake (default: master): " git_rev
-echo "Reinstalling NixOS"
+echo "Reinstalling/Recovering NixOS..."
 sudo nixos-install --no-root-password --flake "github:rotteegher/rotfiles/${git_rev:-master}#$host"
