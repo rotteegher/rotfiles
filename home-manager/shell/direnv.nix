@@ -10,14 +10,16 @@
   };
 
   custom.persist = {
-    home.directories = [
-      ".local/share/direnv"
-    ];
-    cache = [
-      ".cargo"
-      ".cache/pip"
-      ".cache/torch" # pytorch models
-      ".cache/yarn"
-    ];
+    home = {
+      directories = [
+        ".local/share/direnv"
+      ];
+      cache = [
+        ".cargo"
+        ".cache/pip"
+        ".cache/torch" # pytorch models
+        ".cache/yarn"
+      ];
+    };
   };
 }

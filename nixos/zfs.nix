@@ -9,13 +9,17 @@
   persistCfg = config.custom-nixos.persist;
 in {
   config = lib.mkIf cfg.enable {
-    # booting with zfs
-    boot.supportedFilesystems = ["zfs"];
-    boot.initrd.supportedFilesystems = ["zfs"];
-    boot.zfs.devNodes = lib.mkDefault "/dev/disk/by-partuuid/";
-    # boot.zfs.enableUnstable = true;
-    boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-    boot.zfs.requestEncryptionCredentials = cfg.encryption;
+    boot = {
+      # booting with zfs
+      supportedFilesystems = ["zfs"];
+      initrd.supportedFilesystems = ["zfs"];
+      kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+      zfs = {
+        devNodes = lib.mkDefault "/dev/disk/by-partuuid/";
+        enableUnstable = true;
+        requestEncryptionCredentials = cfg.encryption;
+      };
+    };
 
     services.zfs = {
       autoScrub.enable = true;
@@ -43,6 +47,7 @@ in {
       "/" = {
         device = "zroot/root";
         fsType = "zfs";
+        neededForBoot = !persistCfg.tmpfs && cfg.erase.root;
       };
 
       "/nix" = {
@@ -58,6 +63,7 @@ in {
       "${homeMountPoint}" = {
         device = "zroot/home";
         fsType = "zfs";
+        neededForBoot = !persistCfg.tmpfs && cfg.erase.home;
       };
 
       "/persist" = {

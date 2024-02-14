@@ -17,8 +17,6 @@
             package = pkgs.nixVersions.unstable;
           };
 
-          networking.wireless.iwd.enable = true;
-
           environment.systemPackages =
             [
               (pkgs.writeShellApplication {

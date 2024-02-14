@@ -53,7 +53,7 @@
       enable = true;
       git-keyid = "92058DC9E2CF5F4C";
     };
-    terminal.exec = "kitty";
+    terminal.size = 12;
   };
 
   home = {
