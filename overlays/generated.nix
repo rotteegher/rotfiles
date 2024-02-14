@@ -3,15 +3,15 @@
 {
   swww = {
     pname = "swww";
-    version = "ad3d40616b0f22b428636c3f107dee06ea7807c7";
+    version = "58ce3293e9a32f528c8a701dbbcf6ad4a7ac8f1f";
     src = fetchFromGitHub {
       owner = "LGFae";
       repo = "swww";
-      rev = "ad3d40616b0f22b428636c3f107dee06ea7807c7";
+      rev = "58ce3293e9a32f528c8a701dbbcf6ad4a7ac8f1f";
       fetchSubmodules = false;
-      sha256 = "sha256-JLqyrrPBUQ/ZAuhg2vcFiCny5ZEOp+vtiurUhBxaaEM=";
+      sha256 = "sha256-+h3Z3Ta2MODAzxpQ9LwYQ6Q7ZubYaYgRAxfMP1JMrxE=";
     };
-    date = "2024-02-08";
+    date = "2024-02-14";
   };
   transmission-web-soft-theme = {
     pname = "transmission-web-soft-theme";
@@ -27,39 +27,39 @@
   };
   wallust = {
     pname = "wallust";
-    version = "8703b5e7df933879a435c8aa614d5388656c1a9b";
+    version = "7c52fb414745d486a4e4fd9c9e0a5aadb8c42012";
     src = fetchgit {
       url = "https://codeberg.org/explosion-mental/wallust.git";
-      rev = "8703b5e7df933879a435c8aa614d5388656c1a9b";
+      rev = "7c52fb414745d486a4e4fd9c9e0a5aadb8c42012";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "sha256-7pHRgQKrZpunSpBC43LJGyOwKDG8MVSDuNksUcIo/nk=";
+      sha256 = "sha256-ER9QXSlVkiZMQavEQxrm0LBdnpteT2NEMPSL1L97Il8=";
     };
-    date = "2024-02-08";
+    date = "2024-02-14";
   };
   waybar = {
     pname = "waybar";
-    version = "4d076a71f7f3dde877c436b171599422cf8b1afa";
+    version = "28cd9dff47fa586c2a7910e6c18eefb6a93a0dd0";
     src = fetchFromGitHub {
       owner = "Alexays";
       repo = "Waybar";
-      rev = "4d076a71f7f3dde877c436b171599422cf8b1afa";
+      rev = "28cd9dff47fa586c2a7910e6c18eefb6a93a0dd0";
       fetchSubmodules = false;
-      sha256 = "sha256-gAjtLlRSnbodhxeANXXhGf+4S0Uxy78ZxiSCdfnYhUA=";
+      sha256 = "sha256-goHgM2gDzlDcgxXKMQchAjmeuqaoWGPGwl4thC8V3Dg=";
     };
-    date = "2024-02-09";
+    date = "2024-02-13";
   };
   wezterm = {
     pname = "wezterm";
-    version = "a7d9cfd25f992c94b8cf03ba41711047c72da87d";
+    version = "22f9f8d288521508bd4cdc924d9f209d78b36483";
     src = fetchFromGitHub {
       owner = "wez";
       repo = "wezterm";
-      rev = "a7d9cfd25f992c94b8cf03ba41711047c72da87d";
+      rev = "22f9f8d288521508bd4cdc924d9f209d78b36483";
       fetchSubmodules = true;
-      sha256 = "sha256-BfsA3G4DpkFaxXtdqOAb7P6HscC6UexVl4GQY4tzwYs=";
+      sha256 = "sha256-rn5iGkJlhDSVW/J8Nl/8dTFgFEe3a2dYWvX30S4wiXA=";
     };
-    date = "2024-02-08";
+    date = "2024-02-12";
   };
 }
