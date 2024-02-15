@@ -57,7 +57,6 @@ else
     sudo mount --mkdir "$BOOTDISK" /mnt/boot
     sudo mount --mkdir -t zfs zroot/nix /mnt/nix
     sudo mount --mkdir -t zfs zroot/tmp /mnt/tmp
-    sudo mount --mkdir -t zfs zroot/home /mnt/home
     # sudo mount --mkdir -t zfs zroot/persist /mnt/persist
     sudo mount --mkdir -t zfs zroot/cache /mnt/cache
 fi
@@ -89,8 +88,12 @@ if [[ "$restore_snapshot" == "y" ]]; then
         sudo zfs send $snapshot_name | sudo zfs receive -o mountpoint=legacy zroot/persist
     fi
 else
-    echo "Creating /persist"
-    sudo zfs create -o mountpoint=legacy zroot/persist
+    if zfs list zroot/persist &> /dev/null; then
+        echo "'zroot/persist' already exists"
+    else
+        echo "Creating /persist"
+        sudo zfs create -o mountpoint=legacy zroot/persist
+    fi
 fi
 echo "Mounting persist"
 sudo mount --mkdir -t zfs zroot/persist /mnt/persist
