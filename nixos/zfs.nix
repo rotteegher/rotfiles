@@ -32,15 +32,10 @@ in {
       }
     ];
 
-    fileSystems = let
-      homeMountPoint =
-        if persistCfg.erase.home
-        then "/home/${user}"
-        else "/home";
-    in {
+    fileSystems = {
       # boot partition
       "/boot" = {
-        device = "/dev/disk/by-id/nvme-eui.32333033363336334ce0001835313730-part1";
+        device = "/dev/disk/by-label/NIXBOOT";
         fsType = "vfat";
       };
       # zfs datasets
@@ -58,12 +53,6 @@ in {
       "/tmp" = {
         device = "zroot/tmp";
         fsType = "zfs";
-      };
-
-      "${homeMountPoint}" = {
-        device = "zroot/home";
-        fsType = "zfs";
-        neededForBoot = !persistCfg.tmpfs && cfg.erase.home;
       };
 
       "/persist" = {
@@ -86,13 +75,6 @@ in {
       enable = true;
 
       datasets = {
-        "zroot/home" = lib.mkIf (!persistCfg.erase.home) {
-          hourly = 50;
-          daily = 20;
-          weekly = 6;
-          monthly = 3;
-        };
-
         "zroot/persist" = {
           hourly = 50;
           daily = 20;
@@ -101,11 +83,11 @@ in {
         };
       };
     };
-    systemd.tmpfiles.rules = [
-      "d /persist/home/${user}/Documents 755 ${user} users - "
-      "d /persist/home/${user}/Downloads 755 ${user} users - "
-      "d /persist/home/${user}/Pictures  755 ${user} users - "
-    ];
+    # systemd.tmpfiles.rules = [
+    #   "d /persist/home/${user}/Documents 755 ${user} users - "
+    #   "d /persist/home/${user}/Downloads 755 ${user} users - "
+    #   "d /persist/home/${user}/Pictures  755 ${user} users - "
+    # ];
     # SYNOPSIS - https://www.mankier.com/5/tmpfiles.d
     # Type  Path                                     Mode User Group Age         Argument
     # f     /file/to/create                          mode user group -           content
