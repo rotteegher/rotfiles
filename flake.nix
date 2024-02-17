@@ -50,33 +50,19 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # NOTE: This will require your git SSH access to the repo.
-    # disable ghostty by commenting out the following input and setting
-    # the hm option config.custom.ghostty.enable = false
-    #
-    # WARNING: Do NOT pin the `nixpkgs` input, as that will
-    # declare the cache useless. If you do, you will have
-    # to compile LLVM, Zig and Ghostty itself on your machine,
-    # which will take a very very long time.
-    # ghostty = {
-    #   # url = "git+ssh://git@github.com/mitchellh/ghostty";
-    #   url = "git+https://github.com/mitchellh/ghostty";
-    # };
   };
 
   # flake-utils is unnecessary
   # https://ayats.org/blog/no-flake-utils/
   outputs = inputs @ {
     nixpkgs,
-    self,
     ...
   }: let
     forAllSystems = function:
       nixpkgs.lib.genAttrs ["x86_64-linux"] (system: function nixpkgs.legacyPackages.${system});
     commonInherits = {
       inherit (nixpkgs) lib;
-      inherit self inputs nixpkgs;
+      inherit inputs nixpkgs;
       user = "rot";
       system = "x86_64-linux";
     };
@@ -89,30 +75,28 @@
     homeConfigurations = import ./hosts (commonInherits // {isNixOS = false;});
 
     # devenv for working on rotfiles, provides rust environment
-    devShells = forAllSystems (pkgs: {
-      default = inputs.devenv.lib.mkShell {
-        inherit inputs pkgs;
-        modules = [
-          ({pkgs, ...}: {
-            # devenv configuration
-            packages = [pkgs.alejandra];
+    # devShells = forAllSystems (pkgs: {
+    #   default = inputs.devenv.lib.mkShell {
+    #     inherit inputs pkgs;
+    #     modules = [
+    #       ({pkgs, ...}: {
+    #         # devenv configuration
+    #         packages = [pkgs.alejandra];
 
-            languages.rust = {
-              enable = true;
-              channel = "stable";
-            };
-          })
-        ];
-      };
-    });
+    #         languages.rust = {
+    #           enable = true;
+    #           channel = "stable";
+    #         };
+    #       })
+    #     ];
+    #   };
+    # });
 
     packages = forAllSystems (
       pkgs: (import ./packages {inherit pkgs inputs;})
     );
 
-    inherit self;
-
     # templates for devenv
-    templates = import ./templates;
+    # templates = import ./templates;
   };
 }

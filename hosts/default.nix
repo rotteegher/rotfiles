@@ -2,7 +2,6 @@
   inputs,
   isNixOS,
   lib,
-  self,
   system,
   user,
   ...
@@ -19,7 +18,7 @@
       ];
     };
     extraSpecialArgs = {
-      inherit self inputs isNixOS host user;
+      inherit inputs isNixOS host user;
       isLaptop = host == "omen";
     };
     homeManagerImports = [

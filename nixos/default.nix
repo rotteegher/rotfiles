@@ -55,6 +55,9 @@
 
       systemPackages = with pkgs;
         [
+          gcc
+          libgcc
+          stdmanpages
           helix
           neovim
           curl
