@@ -200,12 +200,6 @@ in {
     nsw = "nswitch";
   };
 
-  # add symlink of configuration flake to nixos closure
-  # https://blog.thalheim.io/2022/12/17/hacking-on-kernel-modules-in-nixos/
-  # system.extraSystemBuilderCmds = ''
-  #   ln -s ${self} $out/flake
-  # '';
-
   nix = {
     # use flakes
     extraOptions = "experimental-features = nix-command flakes auto-allocate-uids";

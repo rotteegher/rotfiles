@@ -51,6 +51,7 @@ in {
     '';
 
     systemd.services.minecraft-bedrock-server = {
+      enable = cfg.do-run;
       description = "Minecraft Bedrock Server Service";
       wantedBy = ["multi-user.target"];
       conflicts = ["getty@tty4.service"];

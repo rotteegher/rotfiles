@@ -1,6 +1,7 @@
 {lib, pkgs, ...}: {
     # MINECRAFT
     options.custom-nixos.services.minecraft-java-server = {
+      do-run = lib.mkEnableOption "Stop minecraft server?" // { default = true;};
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;

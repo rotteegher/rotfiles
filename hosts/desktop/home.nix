@@ -67,7 +67,6 @@
         feh
         mupdf
         ffmpeg
-        libgcc
         glibc
         zola
       ]
