@@ -75,28 +75,28 @@
     homeConfigurations = import ./hosts (commonInherits // {isNixOS = false;});
 
     # devenv for working on rotfiles, provides rust environment
-    # devShells = forAllSystems (pkgs: {
-    #   default = inputs.devenv.lib.mkShell {
-    #     inherit inputs pkgs;
-    #     modules = [
-    #       ({pkgs, ...}: {
-    #         # devenv configuration
-    #         packages = [pkgs.alejandra];
+    devShells = forAllSystems (pkgs: {
+      default = inputs.devenv.lib.mkShell {
+        inherit inputs pkgs;
+        modules = [
+          ({pkgs, ...}: {
+            # devenv configuration
+            packages = [pkgs.alejandra];
 
-    #         languages.rust = {
-    #           enable = true;
-    #           channel = "stable";
-    #         };
-    #       })
-    #     ];
-    #   };
-    # });
+            languages.rust = {
+              enable = true;
+              channel = "stable";
+            };
+          })
+        ];
+      };
+    });
 
     packages = forAllSystems (
       pkgs: (import ./packages {inherit pkgs inputs;})
     );
 
     # templates for devenv
-    # templates = import ./templates;
+    templates = import ./templates;
   };
 }

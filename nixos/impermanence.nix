@@ -45,7 +45,9 @@ in
   environment.persistence = {
     "/persist" = {
       hideMounts = true;
-      files = [ "/etc/machine-id" ] ++ cfg.root.files;
+      # persist machine-id so zfs zpools mount correctly each reboot
+      # and zfs don't think it is different machine becasue of impermanence erasure
+      files = ["/etc/machine-id"] ++ cfg.root.files;
       directories = [
         "/var/log" # systemd journal is stored in /var/log/journal
       ] ++ cfg.root.directories;
@@ -57,9 +59,8 @@ in
           ".cache/dconf"
           ".config/dconf"
           ".local/state/nix/profiles"
-        ]
-          ++ lib.optionals config.programs.steam.enable [ ".steam"]
-          ++ cfg.home.directories ++ hmPersistCfg.home.directories;
+          ( lib.optionals config.programs.steam.enable ".steam" )
+        ] ++ cfg.home.directories ++ hmPersistCfg.home.directories;
       };
     };
 

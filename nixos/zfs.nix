@@ -66,10 +66,10 @@ in {
         fsType = "zfs";
         neededForBoot = true;
       };
-      "/backup" = {
-        device = "zroot/backup";
-        fsType = "zfs";
-      };
+      # "/backup" = {
+      #   device = "zroot/backup";
+      #   fsType = "zfs";
+      # };
     };
     services.sanoid = lib.mkIf cfg.snapshots {
       enable = true;

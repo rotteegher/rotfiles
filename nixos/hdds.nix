@@ -55,7 +55,7 @@ in {
         mkOutOfStoreSymlink = hmCfg.config.lib.file.mkOutOfStoreSymlink;
       in {
         Downloads.source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Downloads");
-        # Videos.source = lib.mkIf cfg.wdred6 (mkOutOfStoreSymlink "${wdred}"); #TODO
+        # Videos.source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Videos"); #TODO
       };
     };
 
@@ -64,6 +64,8 @@ in {
     systemd.tmpfiles.rules = lib.optionals (cfg.wdc1tb && cfg.stsea3tb) [
       "L+ ${wdc-blue-mountpoint}/Wallpapers            - - - - /home/${user}/Pictures/Wallpapers"
       "L+ ${wdc-blue-mountpoint}/pr/rustpr             - - - - /home/${user}/pr/rustpr/ln/"
+      "L+ ${wdc-blue-mountpoint}/_SMALL                - - - - /home/${user}/_SMALL"
+      "L+ ${wdc-blue-mountpoint}/_MAIN                - - - - /home/${user}/_MAIN"
       # "L+ ${stsea-mountpoint}/Movies           - - - - ${wdc-blue-mountpoint}/Movies"
       # "L+ ${stsea-mountpoint}/TV               - - - - ${wdc-blue-mountpoint}/TV"
     ];
