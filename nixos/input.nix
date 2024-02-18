@@ -30,16 +30,12 @@
 
     # KEYMAPS
     console = {
-      # font = "ruscii_8x8";
-      # font = "drdos8x14";
-      # packages = with pkgs; [terminus_font];
-      # keyMap = "jp106";
-
       # seems to break virtual-console service because it can't find the font
       # https://github.com/NixOS/nixpkgs/issues/257904
-      # font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
-      # useXkbConfig = true; # use xkb.options in tty.
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
+      useXkbConfig = true; # use xkb.options in tty.
+      keyMap = "jp106";
     };
     services.gpm.enable = true;
 

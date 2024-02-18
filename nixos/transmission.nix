@@ -6,7 +6,7 @@
   ...
 }: let
   home = "/persist/home/${user}";
-  downloadDir = "/md/wdc-data/_SMALL/_ANIME";
+  downloadDir = config.custom-nixos.bittorrent.downloadDir;
   pendingDir = "${downloadDir}/_CURRENT";
 in {
   config = lib.mkIf config.custom-nixos.bittorrent.enable {
@@ -106,6 +106,10 @@ in {
         watch-dir-enabled = false;
       };
     };
+
+    systemd.tmpfiles.rules = [
+      "d ${pendingDir} 755 ${user} users - "
+    ];
 
     # setup port forwarding
     networking.firewall.allowedTCPPorts = [51413];

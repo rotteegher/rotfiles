@@ -18,7 +18,7 @@
     hotspot = {
       enable = true;
       internet_iface = "eno1";
-      wifi_iface = "wlp2s0";
+      wifi_iface = "wlp4s0";
     };
 
     # software
@@ -76,7 +76,7 @@
     };
 
     services.minecraft-java-server = {
-      enable = true;
+      enable = false;
       do-run = true;
       package = pkgs.minecraft-server;
       dataDir = "/srv/minecraft-java-server";

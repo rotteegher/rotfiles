@@ -27,13 +27,13 @@ in
         # and use "/persists/etc/shadow/${user}" for user respectively
         users = {
           root = {
-            initialPassword = "password";
-            hashedPasswordFile = "/persist/etc/shadow/root";
+            initialHashedPassword = "$y$j9T$Of1ghqVhpNyW8X8UrgnCK/$nTI6HicGdSww9bYNisfuwzD0khDXX3TKitqqd/S0QyC";
+            # hashedPasswordFile = "/persist/etc/shadow/root";
           };
           ${user} = {
             isNormalUser = true;
-            initialPassword = "password";
-            hashedPasswordFile = "/persist/etc/shadow/${user}";
+            initialHashedPassword = "$y$j9T$IAlkbRYYo1xS/Q87Pxskc.$vjj0j0egsgM0tNwFOzDgnmV1whQJseuslkXPaBfigK6";
+            # hashedPasswordFile = "/persist/etc/shadow/${user}";
             extraGroups = ["networkmanager" "wheel"];
           };
         };

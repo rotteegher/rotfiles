@@ -25,6 +25,7 @@
       gfxmodeEfi = "1920x1080";
     };
   };
+  systemd.enableEmergencyMode = false;
 
   networking.hostName = "${host}";
   # Enable networking
