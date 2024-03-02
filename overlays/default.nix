@@ -5,8 +5,16 @@
   ...
 }: let
   # include generated sources from nvfetcher
-  sources = import ./generated.nix {inherit (pkgs) fetchFromGitHub fetchurl fetchgit dockerTools;};
-in {
+  sources = import ./generated.nix {
+    inherit (pkgs)
+      fetchFromGitHub
+      fetchurl
+      fetchgit
+      dockerTools
+      ;
+    };
+in 
+{
   nixpkgs.overlays = [
     (
       final: prev: let
@@ -85,34 +93,35 @@ in {
             '';
           });
 
-        # use dev branch
-        # wallust = overrideRustPackage "wallust";
-
         # use latest commmit from git
-        # waybar = prev.waybar.overrideAttrs (o:
-        #   sources.waybar
-        #   // {
-        #     version = "${o.version}-${sources.waybar.version}";
-        #   });
-        waybar = let
-          version = "3.5.1";
-          catch2_3 = assert (lib.assertMsg (prev.catch2_3.version != version) "catch2: override is no longer needed");
-            prev.catch2_3.overrideAttrs (_: {
-              inherit version;
-              src = prev.fetchFromGitHub {
-                owner = "catchorg";
-                repo = "Catch2";
-                rev = "v${version}";
-                hash = "sha256-OyYNUfnu6h1+MfCF8O+awQ4Usad0qrdCtdZhYgOY+Vw=";
+        waybar =
+          let
+            # Derived from subprojects/cava.wrap
+            libcava = rec {
+              version = "0.10.1";
+              src = pkgs.fetchFromGitHub {
+                owner = "LukashonakV";
+                repo = "cava";
+                rev = version;
+                hash = "sha256-iIYKvpOWafPJB5XhDOSIW9Mb4I3A4pcgIIPQdQYEqUw=";
               };
-            });
-        in
-          (prev.waybar.override {inherit catch2_3;}).overrideAttrs (o:
+            };
+          in
+          assert (lib.assertMsg (prev.waybar.version == "0.9.24") "waybar: use waybar from nixpkgs?");
+          prev.waybar.overrideAttrs (
+            o:
             sources.waybar
             // {
               version = "${o.version}-${sources.waybar.version}";
-            });
-
+              mesonFlags = lib.remove "-Dgtk-layer-shell=enabled" o.mesonFlags;
+              postUnpack = ''
+                pushd "$sourceRoot"
+                cp -R --no-preserve=mode,ownership ${libcava.src} subprojects/cava-${libcava.version}
+                patchShebangs .
+                popd
+              '';
+            }
+          );
         # TODO: remove on new wezterm release
         # fix wezterm crashing instantly
         # https://github.com/wez/wezterm/issues/4483

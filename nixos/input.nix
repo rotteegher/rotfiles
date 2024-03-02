@@ -25,7 +25,7 @@
     services.xserver.xkb = {
       layout = "jp";
       variant = "";
-      # options = "japan:hztg_escape";
+      options = "compose:ralt,shift:breaks_caps,shift:both_capslock,ctrl:swap_rwin_rctl,lv3:lwin_switch";
     };
 
     # KEYMAPS

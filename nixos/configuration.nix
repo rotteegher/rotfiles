@@ -53,6 +53,7 @@
 
   # Configure X11
   services.xserver = {
+    # exportConfiguration = true;
     # bye bye xterm
     excludePackages = [pkgs.xterm];
   };
