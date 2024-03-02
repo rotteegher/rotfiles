@@ -1,7 +1,7 @@
 {
     "swww": {
         "cargoLocks": null,
-        "date": "2024-02-14",
+        "date": "2024-02-27",
         "extract": null,
         "name": "swww",
         "passthru": null,
@@ -13,11 +13,11 @@
             "name": null,
             "owner": "LGFae",
             "repo": "swww",
-            "rev": "58ce3293e9a32f528c8a701dbbcf6ad4a7ac8f1f",
-            "sha256": "sha256-+h3Z3Ta2MODAzxpQ9LwYQ6Q7ZubYaYgRAxfMP1JMrxE=",
+            "rev": "f77d1e0b4f36c0219270a953411c8edc0c7379bb",
+            "sha256": "sha256-I0umponNdG0c9QIC6pxnlNA+pvRGc/jFtKLOvBS/CEY=",
             "type": "github"
         },
-        "version": "58ce3293e9a32f528c8a701dbbcf6ad4a7ac8f1f"
+        "version": "f77d1e0b4f36c0219270a953411c8edc0c7379bb"
     },
     "transmission-web-soft-theme": {
         "cargoLocks": null,
@@ -41,7 +41,7 @@
     },
     "wallust": {
         "cargoLocks": null,
-        "date": "2024-02-14",
+        "date": "2024-03-01",
         "extract": null,
         "name": "wallust",
         "passthru": null,
@@ -51,16 +51,16 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "7c52fb414745d486a4e4fd9c9e0a5aadb8c42012",
-            "sha256": "sha256-ER9QXSlVkiZMQavEQxrm0LBdnpteT2NEMPSL1L97Il8=",
+            "rev": "c3017f48ac2efd027f6fe063f94bc51102f191c2",
+            "sha256": "sha256-7fcaSNqgZt9nE1onMd8Yg7FgHsqjBgqSk2sclCcsLvA=",
             "type": "git",
             "url": "https://codeberg.org/explosion-mental/wallust.git"
         },
-        "version": "7c52fb414745d486a4e4fd9c9e0a5aadb8c42012"
+        "version": "c3017f48ac2efd027f6fe063f94bc51102f191c2"
     },
     "waybar": {
         "cargoLocks": null,
-        "date": "2024-02-13",
+        "date": "2024-03-01",
         "extract": null,
         "name": "waybar",
         "passthru": null,
@@ -72,15 +72,15 @@
             "name": null,
             "owner": "Alexays",
             "repo": "Waybar",
-            "rev": "28cd9dff47fa586c2a7910e6c18eefb6a93a0dd0",
-            "sha256": "sha256-goHgM2gDzlDcgxXKMQchAjmeuqaoWGPGwl4thC8V3Dg=",
+            "rev": "bdff489850931798814da82e797ff10d71b89670",
+            "sha256": "sha256-BWdD+bfz/J2fyoC/oy+PR6JrRAsCkKori5wrt0yllaQ=",
             "type": "github"
         },
-        "version": "28cd9dff47fa586c2a7910e6c18eefb6a93a0dd0"
+        "version": "bdff489850931798814da82e797ff10d71b89670"
     },
     "wezterm": {
         "cargoLocks": null,
-        "date": "2024-02-12",
+        "date": "2024-02-26",
         "extract": null,
         "name": "wezterm",
         "passthru": null,
@@ -92,10 +92,10 @@
             "name": null,
             "owner": "wez",
             "repo": "wezterm",
-            "rev": "22f9f8d288521508bd4cdc924d9f209d78b36483",
-            "sha256": "sha256-rn5iGkJlhDSVW/J8Nl/8dTFgFEe3a2dYWvX30S4wiXA=",
+            "rev": "22424c3280cb21af43317cb58ef7bc34a8cbcc91",
+            "sha256": "sha256-EQb0gNAb98e4IFwBv5XODtq9Er519wM/h5EglD8Lrhc=",
             "type": "github"
         },
-        "version": "22f9f8d288521508bd4cdc924d9f209d78b36483"
+        "version": "22424c3280cb21af43317cb58ef7bc34a8cbcc91"
     }
 }

@@ -6,6 +6,7 @@
 }: {
   config = lib.mkIf config.custom.discord.enable {
     home.packages = [
+      pkgs.discord
       (pkgs.writeShellApplication {
         name = "discord-vesktop";
         text = ''

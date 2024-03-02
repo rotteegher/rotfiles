@@ -78,7 +78,7 @@
     services.minecraft-java-server = {
       enable = false;
       do-run = true;
-      package = pkgs.minecraft-server;
+      package = pkgs.papermc;
       dataDir = "/srv/minecraft-java-server";
       jvmOpts = "-Xms8192M -Xmx8192M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
       public-port = 25565;

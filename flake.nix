@@ -50,6 +50,10 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    wfetch = {
+      url = "github:iynaix/wfetch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # flake-utils is unnecessary

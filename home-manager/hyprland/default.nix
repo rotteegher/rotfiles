@@ -198,6 +198,8 @@ in {
         displays;
 
         windowrulev2 = [
+          # fix discord not detecting keyboard input
+          "forceinput, class:^(discord)$, xwayland:0"
           # "dimaround,floating:1"
           "bordersize 5,fullscreen:1" # monocle mode
           "float,class:(wlroots)" # hyprland debug session
