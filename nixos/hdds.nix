@@ -12,9 +12,10 @@
 in {
   config = lib.mkIf cfg.enable {
     # non os zfs disks
-    boot.zfs.extraPools = ["wdc-blue" "stsea-barra"];
-    # lib.optional cfg.wdc1tb "wdc-blue"
-    # ++ (lib.optional cfg.stsea3tb "stsea-barra");
+    boot.zfs.extraPools = [
+      (lib.optionalString cfg.wdc1tb "wdc-blue")
+      (lib.optionalString cfg.stsea3tb "stsea-barra")
+    ];
 
     services.sanoid = lib.mkIf config.custom-nixos.zfs.snapshots {
       enable = true;
@@ -37,18 +38,18 @@ in {
 
     # add bookmarks for gtk
     hm = {...} @ hmCfg: {
-      gtk.gtk3.bookmarks = lib.mkIf cfg.wdc1tb [
-        "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/_CURRENT/ _CURRENT"
-        # "file://${wdc-blue-mountpoint}/TV/Current TV Current"
+      gtk.gtk3.bookmarks = lib.optionals cfg.wdc1tb [
         "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
-        # "file://${wdc-blue-mountpoint}/TV TV"
         "file://${wdc-blue-mountpoint}/_SMALL/ _SMALL"
         "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
         "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
         "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
         "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
         "file://${wdc-blue-mountpoint}/papers papers"
-      ];
+        "file://${wdc-blue-mountpoint}/ wdc-blue/data"
+      ] ++ (lib.optionals cfg.stsea3tb [
+        "file://${stsea-mountpoint}/ stsea-barra/okii"
+      ]);
 
       # create symlinks for locations with ~
       home.file = let

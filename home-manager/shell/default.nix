@@ -27,6 +27,8 @@
     ugrep
     file
     b3sum
+    tldr
+    coreutils-full
   ];
 
   programs = {

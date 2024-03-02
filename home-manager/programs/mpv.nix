@@ -54,8 +54,8 @@
         "6" = "ignore";
         "7" = "ignore";
         "8" = "ignore";
-        "9" = "ignore";
-        "0" = "ignore";
+        # "9" = "ignore";
+        # "0" = "ignore";
         "/" = "ignore";
         "*" = "ignore";
         "Alt+left" = "ignore";

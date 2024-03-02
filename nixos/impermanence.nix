@@ -59,7 +59,7 @@ in
           ".cache/dconf"
           ".config/dconf"
           ".local/state/nix/profiles"
-          ( lib.optionals config.programs.steam.enable ".steam" )
+          (lib.optionalString config.programs.steam.enable ".steam")
         ] ++ cfg.home.directories ++ hmPersistCfg.home.directories;
       };
     };
