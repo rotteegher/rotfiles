@@ -80,10 +80,14 @@ sudo zpool import -f -l zroot
 reformat_nix=$(yesno "Reformat nix?")
 if [[ $reformat_nix == "y" ]]; then
     for i in {5..0}; do
-        echo -ne "Destroying 'zroot/nix' in $i seconds... <Ctrl + C> to EXIT NOW!\r"
+        message="Destroying 'zroot/nix' in $i seconds... <Ctrl + C> to EXIT NOW!\r"
+        echo -e "\x1b[30;47m $message \x1b[0m"
         sleep 1
     done
-
+    echo ""
+    if mountpoint /mnt; then
+        sudo umount -R -f /mnt/nix
+    fi
     sudo zfs destroy -r zroot/nix
 
     sudo zfs create -o mountpoint=legacy zroot/nix
@@ -127,7 +131,7 @@ snapshot_name=$(zfs list -H -t snapshot -r | fzf --prompt="Select snapshot to re
         echo "Selected snapshot: $snapshot_name"
         if zfs list "zroot/persist" &> /dev/null; then
             for i in {5..0}; do
-                echo -ne "Destroying 'zroot/persist' in $i seconds... <Ctrl + C> to EXIT NOW!\r"
+                echo -e "Destroying 'zroot/persist' in $i seconds... <Ctrl + C> to EXIT NOW!\r"
                 sleep 1
             done
             echo ""
