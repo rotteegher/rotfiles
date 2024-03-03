@@ -13,7 +13,7 @@ in {
 
     custom.persist = {
       home.directories = [
-        # ".config/viber"
+        ".config/viber"
       ];
     };
   };

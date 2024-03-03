@@ -4,6 +4,7 @@
   ...
 }: {
   custom-nixos = {
+    # xkbLayout = "us";
     nvidia.enable = true;
     zfs.encryption = false;
 
@@ -15,6 +16,7 @@
     # };
 
   # software
+    keyd.enable = true;
     distrobox.enable = true;
     syncoid.enable = true;
     bittorrent.enable = true;

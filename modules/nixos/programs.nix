@@ -12,7 +12,9 @@ in {
     ### NIXOS LEVEL OPTIONS ###
     distrobox.enable = lib.mkEnableOption "distrobox";
     docker.enable = lib.mkEnableOption "docker" // {default = cfg.distrobox.enable;};
-    hyprland.enable = lib.mkEnableOption "hyprland (nixos)" // {default = true;};
+    hyprland = {
+      enable = lib.mkEnableOption "hyprland (nixos)" // {default = true;};
+    };
     keyd.enable = lib.mkEnableOption "keyd" // {default = isLaptop;};
     syncoid.enable = lib.mkEnableOption "syncoid";
     bittorrent = {

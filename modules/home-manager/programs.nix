@@ -6,6 +6,14 @@
   ...
 }: {
   options.custom = {
+
+    hyprland = {
+      modkey = lib.mkOption {
+        type = lib.types.str;
+        default = "ALT";
+      };
+    };
+
     discord.enable = lib.mkEnableOption "discord" // {default = false;};
     firefox.enable = lib.mkEnableOption "firefox" // {default = true;};
     gradience.enable = lib.mkEnableOption "gradience";

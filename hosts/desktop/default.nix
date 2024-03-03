@@ -5,6 +5,7 @@
 }: {
   custom-nixos = {
     # hardware
+    xkbLayout = "jp";
     hdds = {
       enable = true;
       stsea3tb = true;

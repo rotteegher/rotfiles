@@ -8,7 +8,7 @@
     ./audio.nix
     ./auth.nix
     ./configuration.nix
-    # ./keyd.nix # TODO
+    ./keyd.nix
     # ./docker.nix
     # ./filezilla.nix
     # ./gnome3.nix # TODO
@@ -72,6 +72,9 @@
           dig
           lsof
           nmap
+          arp-scan
+          wireshark
+          netdiscover
           aria2
           inetutils
           htop

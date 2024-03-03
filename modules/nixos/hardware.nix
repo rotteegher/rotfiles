@@ -4,6 +4,10 @@
   ...
 }: {
   options.custom-nixos = {
+    xkbLayout = lib.mkOption {
+      type = lib.types.str;
+      default = "us";
+    };
     nvidia.enable = lib.mkEnableOption "Nvidia GPU";
     bluetooth.enable = lib.mkEnableOption "Bluetooth" // {default = false;};
     hotspot = {

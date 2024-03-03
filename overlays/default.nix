@@ -38,9 +38,6 @@ in
             inherit inputs;
           });
 
-        # easier access to ghostty
-        # ghostty = inputs.ghostty.packages.${pkgs.system}.default;
-
         # patch imv to not repeat keypresses causing waybar to launch infinitely
         # https://github.com/eXeC64/imv/issues/207#issuecomment-604076888
         imv = prev.imv.overrideAttrs (o: {
