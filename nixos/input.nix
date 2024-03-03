@@ -23,9 +23,9 @@
       ];
     };
     services.xserver.xkb = {
-      layout = "jp";
+      layout = config.custom-nixos.xkbLayout;
       variant = "";
-      options = "compose:ralt,shift:breaks_caps,shift:both_capslock,ctrl:swap_rwin_rctl,lv3:lwin_switch";
+      options = "ctrl:swapcaps,shift:breaks_caps,shift:both_capslock,ctrl:swap_rwin_rctl,lv3:lwin_switch";
     };
 
     # KEYMAPS
@@ -37,7 +37,7 @@
 
       useXkbConfig = true; # use xkb.options in tty.
     };
-    services.gpm.enable = true;
+    # services.gpm.enable = true;
 
     # piper
     services.ratbagd.enable = true;

@@ -5,6 +5,7 @@
   ...
 }: {
   custom = {
+    kbLayout = "jp";
     wifi.enable = true;
     displays = [
       {

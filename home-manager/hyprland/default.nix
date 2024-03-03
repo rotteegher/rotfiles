@@ -57,7 +57,7 @@ in {
           ++ (lib.optional (host != "desktop") ",preferred,auto,auto");
 
         input = {
-          kb_layout = "jp";
+          kb_layout = config.custom.kbLayout;
           follow_mouse = 1;
           accel_profile = "flat";
           repeat_delay = 300;
@@ -105,7 +105,7 @@ in {
           # }
         # };
 
-        "$mod" = "ALT";
+        "$mod" = config.custom.hyprland.modkey;
 
         "$term" = "${config.custom.terminal.exec}";
 

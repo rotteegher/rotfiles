@@ -10,11 +10,12 @@
     backlight.enable = true;
     displays = [
       {
-        name = "eDP-0";
+        name = "eDP-1";
         hyprland = "1920x1080@144,0x0,1";
         workspaces = [1 2 3 4 5 6 7 8 9 10];
       }
     ];
+    hyprland.modkey = "SUPER";
     display.touchDevice = {
       enabled = false;
       # (Starts from 0) devIndex 0 is first monitor in "displays" list
@@ -40,11 +41,11 @@
     # blender.enable = true;
     # reaper.enable = false;
 
-    # discord.enable = true;
-    # telegram.enable = true;
+    discord.enable = true;
+    telegram.enable = true;
     # viber.enable = true;
 
-    # minecraft-launchers.enable = true;
+    minecraft-launchers.enable = true;
 
     # To list the gpg signing keyid run:
     # gpg --list-secret-keys --keyid-format=long
