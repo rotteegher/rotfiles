@@ -125,10 +125,10 @@ DISKINPUT=$(ls -r /dev/disk/by-id/ | fzf --prompt="Select disk to install nixos 
 
         # warning countdown
         for i in {5..0}; do
-            echo -ne "Formatting in $i seconds... <Ctrl + C> to EXIT NOW!\r"
+            message="Formatting in $i seconds... <Ctrl + C> to EXIT NOW!\r"
+            echo -e "\x1b[30;47m $message \x1b[0m"
             sleep 1
         done
-
         echo ""
 
         # DO INSTALL FULL DISK
@@ -167,9 +167,14 @@ DISKINPUT=$(ls -r /dev/disk/by-id/ | fzf --prompt="Select disk to install nixos 
             else
                 # warning countdown
                 for i in {5..0}; do
-                    echo -ne "Destroying zpool 'zroot' in $i seconds... <Ctrl + C> to EXIT NOW\r"
+                    message="Destroying zpool 'zroot' in $i seconds... <Ctrl + C> to EXIT NOW\r"
+                    echo -e "\x1b[30;47m $message \x1b[0m"
                     sleep 1
                 done
+                echo ""
+                if mountpoint /mnt; then
+                    sudo umount -R -f /mnt
+                fi
                 sudo zpool destroy zroot
             fi
         fi
@@ -255,10 +260,11 @@ DISKINPUT=$(ls -r /dev/disk/by-id/ | fzf --prompt="Select disk to install nixos 
 
         # warning countdown
         for i in {5..0}; do
-            echo -ne "Formatting in $i seconds... <Ctrl + C> to EXIT NOW\r"
+            message="Formatting in $i seconds... <Ctrl + C> to EXIT NOW\r"
+            echo -e "\x1b[30;47m $message \x1b[0m"
             sleep 1
         done
-
+        echo ""
 
         # DO INSTALL MANUAL SELECTION
 
@@ -296,9 +302,14 @@ DISKINPUT=$(ls -r /dev/disk/by-id/ | fzf --prompt="Select disk to install nixos 
             else
                 # warning countdown
                 for i in {5..0}; do
-                    echo -ne "Destroying zpool 'zroot' in $i seconds... <Ctrl + C> to EXIT NOW\r"
+                    message="Destroying zpool 'zroot' in $i seconds... <Ctrl + C> to EXIT NOW\r"
+                    echo -e "\x1b[30;47m $message \x1b[0m"
                     sleep 1
                 done
+                echo ""
+                if mountpoint /mnt; then
+                    sudo umount -R -f /mnt
+                fi
                 sudo zpool destroy zroot
             fi
         fi
@@ -392,7 +403,8 @@ snapshot_name=$(zfs list -H -t snapshot -r | fzf --prompt="Select snapshot to re
         echo "Selected snapshot: $snapshot_name"
         if zfs list "zroot/persist" &> /dev/null; then
             for i in {5..0}; do
-                echo -ne "Destroying 'zroot/persist' in $i seconds... <Ctrl + C> to EXIT NOW!\r"
+                message="Destroying 'zroot/persist' in $i seconds... <Ctrl + C> to EXIT NOW!\r"
+                echo -e "\x1b[30;47m $message \x1b[0m"
                 sleep 1
             done
             echo ""
