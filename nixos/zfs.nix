@@ -16,7 +16,6 @@ in {
       kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
       zfs = {
         devNodes = lib.mkDefault "/dev/disk/by-partuuid/";
-        enableUnstable = true;
         requestEncryptionCredentials = cfg.encryption;
       };
     };

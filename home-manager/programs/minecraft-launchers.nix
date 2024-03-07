@@ -8,6 +8,7 @@
     home.packages = with pkgs; [
       # Launcher Java
       prismlauncher
+      cubiomes-viewer
       jdk8
       jre8
     ];
