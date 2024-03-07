@@ -52,11 +52,10 @@
         difficulty = "hard";
         allow-cheats = true;
         max-players = 10;
-        online-mode = false;
+        online-mode = true;
         white-list = false;
         server-ip = "";
         server-port = 25575;
-        server-portv6 = 19177;
         emit-server-telemetry = true;
         view-distance = 32;
         tick-distance = 4;
@@ -77,12 +76,11 @@
     };
 
     services.minecraft-java-server = {
-      enable = false;
-      do-run = true;
+      enable = true;
+      do-run = false;
       package = pkgs.papermc;
       dataDir = "/srv/minecraft-java-server";
       jvmOpts = "-Xms8192M -Xmx8192M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
-      public-port = 25565;
       serverProperties = {
         enable-jmx-monitoring = false;
         "rcon.port" = 25585;
@@ -113,7 +111,7 @@
         server-ip = "";
         resource-pack-prompt = "";
         allow-nether = true;
-        server-port = 25564;
+        server-port = 25544;
         enable-rcon = false;
         sync-chunk-writes = true;
         op-permission-level = 4;

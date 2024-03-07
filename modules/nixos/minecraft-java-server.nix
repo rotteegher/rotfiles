@@ -11,11 +11,6 @@
           services.minecraft-java-server.dataDir
         '';
       };
-      public-port = lib.mkOption {
-        type = lib.types.int;
-        default = 25565;
-        description = ''Self-explanatory. Port of the server that is open to public'';
-      };
       jvmOpts = lib.mkOption {
         type = lib.types.str;
         default = "-Xmx2048M -Xms2048M";

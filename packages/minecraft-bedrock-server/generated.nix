@@ -5,8 +5,8 @@
     pname = "minecraft-bedrock-server";
     version = "1.20.51.01";
     src = fetchurl {
-      url = "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.20.51.01.zip";
-      sha256 = "sha256-x9WyFFLZCxt4KuBZe7OsDbsMbfywpYoUoCwwGNZ9epA=";
+      url = "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.20.62.03.zip";
+      sha256 = "sha256-KAxOVT8y6cZBTBpUY94jILBrfqdKI3z3mJaZEDoPqtc=";
     };
   };
 }

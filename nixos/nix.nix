@@ -49,13 +49,13 @@
       fi
 
       if [ "$#" -eq 0 ]; then
-          nh os switch --nom --hostname "${host}" -- --option eval-cache false
+          nh os switch --hostname "${host}" -- --option eval-cache false
       else
           # force host to be current host
           # disable shellcheck (substition syntax)
           # shellcheck disable=SC2001
           cleaned_args=$(echo "$@" | sed 's/\(--hostname\) [^[:space:]]*/\1 ${host}/')
-          nh os switch --nom "$cleaned_args" -- --option eval-cache false
+          nh os switch "$cleaned_args" -- --option eval-cache false
       fi
 
       # only relevant if --dry is passed
