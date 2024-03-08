@@ -40,7 +40,6 @@ in
         tab_bar_edge = "top";
         background_opacity = terminal.opacity;
         confirm_os_window_close = 0;
-        font_features = "+zero";
       };
       keybindings = {
         "ctrl+shift+equal" = "change_font_size all -2.0";
