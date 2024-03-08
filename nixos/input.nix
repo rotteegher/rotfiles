@@ -33,9 +33,9 @@
       packages = [ pkgs.terminus_font ];
       # seems to break virtual-console service because it can't find the font
       # https://github.com/NixOS/nixpkgs/issues/257904
-      font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-120n.psf.gz";
 
-      useXkbConfig = true; # use xkb.options in tty.
+      # useXkbConfig = true; # use xkb.options in tty.
     };
     # services.gpm.enable = true;
 
