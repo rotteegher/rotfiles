@@ -96,7 +96,7 @@
           cd $argv[1]
         end
       '';
-      fishCompletion = ''find "$HOME/pr/" -maxdepth 1 -type d -exec basename {} \;'';
+      fishCompletion = ''find "$HOME/pr" -maxdepth 1 -type d -exec basename {} \;'';
     };
     renamer = {
       bashBody = ''

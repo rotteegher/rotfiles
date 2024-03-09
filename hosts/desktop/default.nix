@@ -24,7 +24,8 @@
 
     # software
     distrobox.enable = true;
-    syncoid.enable = true;
+    surrealdb.enable = true;
+    # syncoid.enable = true; # TODO
     bittorrent.enable = true;
     vercel.enable = false;
     virt-manager.enable = false;
