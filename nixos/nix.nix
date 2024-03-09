@@ -65,6 +65,36 @@
       cd - > /dev/null
     '';
   };
+  # test via nix flake (note you have to pass --hostname to test a different host)
+  ntest = pkgs.writeShellApplication {
+    name = "ntest";
+    runtimeInputs = with pkgs; [git nix-current-generation nh];
+    text = ''
+      cd ${rots}
+
+      # stop bothering me about untracked files
+      untracked_files=$(git ls-files --exclude-standard --others .)
+      if [ -n "$untracked_files" ]; then
+          git add "$untracked_files"
+      fi
+
+      if [ "$#" -eq 0 ]; then
+          nh os test --hostname "${host}" -- --option eval-cache false
+      else
+          # force host to be current host
+          # disable shellcheck (substition syntax)
+          # shellcheck disable=SC2001
+          cleaned_args=$(echo "$@" | sed 's/\(--hostname\) [^[:space:]]*/\1 ${host}/')
+          nh os test "$cleaned_args" -- --option eval-cache false
+      fi
+
+      # only relevant if --dry is passed
+      if [[ "$*" == *"--dry"* ]]; then
+        echo -e "Test Generation \033[1m$(nix-current-generation)\033[0m"
+      fi
+      cd - > /dev/null
+    '';
+  };
   # update all nvfetcher overlays and packages
   nv-update = pkgs.writeShellApplication {
     name = "nv-update";
@@ -184,6 +214,7 @@ in {
           nbuild
           nbuild-iso
           nswitch
+          ntest
           nvfetcher
           nv-update
           upd8
@@ -198,6 +229,7 @@ in {
 
   hm.home.shellAliases = {
     nsw = "nswitch";
+    nts = "ntest";
   };
 
   nix = {
