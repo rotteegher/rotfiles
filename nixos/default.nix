@@ -10,8 +10,7 @@
     ./configuration.nix
     ./keyd.nix
     # ./docker.nix
-    # ./filezilla.nix
-    # ./gnome3.nix # TODO
+    ./filezilla.nix
     ./flatpak.nix
     ./hdds.nix
     ./hyprland.nix
@@ -19,7 +18,6 @@
     ./nix.nix
     ./nvidia.nix
     ./plasma.nix
-    # ./sonarr.nix
     # ./syncoid.nix
     ./transmission.nix
     ./users.nix
