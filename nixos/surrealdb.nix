@@ -5,7 +5,7 @@
   ...
 }: 
 lib.mkIf config.custom-nixos.surrealdb.enable {
-  environment.systemPackages = [pkgs.surrealdb pkgs.insomnia];
+  environment.systemPackages = [pkgs.surrealdb];
 
   services.surrealdb = {
     enable = true;

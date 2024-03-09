@@ -15,6 +15,7 @@
     };
 
     discord.enable = lib.mkEnableOption "discord" // {default = false;};
+    insomnia.enable = lib.mkEnableOption "discord" // {default = true;};
     firefox.enable = lib.mkEnableOption "firefox" // {default = true;};
     gradience.enable = lib.mkEnableOption "gradience";
     rofi.enable = lib.mkEnableOption "rofi" // {default = true;};
