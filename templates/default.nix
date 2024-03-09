@@ -29,6 +29,11 @@ in rec {
     path = ./rust;
     description = "Rust dev environment";
   };
+  empty = {
+    inherit welcomeText;
+    path = ./empty;
+    description = "Default empty dev environment";
+  };
 
   js = javascript;
   ts = javascript;
