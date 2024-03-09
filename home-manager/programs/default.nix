@@ -20,6 +20,7 @@
     # ./vscode.nix
     ./wallust
     # ./wezterm.nix
+    ./insomnia.nix
     ./yt-dlp.nix
     ./zathura.nix
     ./telegram.nix

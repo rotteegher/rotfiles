@@ -48,6 +48,7 @@
     telegram.enable = true;
     viber.enable = true;
 
+    insomnia.enable = true;
     minecraft-launchers.enable = true;
 
     # To list the gpg signing keyid run:
@@ -65,6 +66,7 @@
       with pkgs; [
         # gimp
         # kdenlive
+        st
         feh
         mupdf
         ffmpeg
