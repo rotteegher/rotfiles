@@ -29,6 +29,11 @@
     b3sum
     tldr
     coreutils-full
+
+    marksman
+    vscode-langservers-extracted
+    yaml-language-server
+    taplo
   ];
 
   programs = {
