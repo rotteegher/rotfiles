@@ -22,6 +22,7 @@
     ./transmission.nix
     ./users.nix
     # ./vercel.nix
+    ./surrealdb.nix
     ./minecraft-bedrock-server.nix
     ./minecraft-java-server.nix
     ./virt-manager.nix
