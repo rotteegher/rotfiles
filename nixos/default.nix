@@ -9,7 +9,7 @@
     ./auth.nix
     ./configuration.nix
     ./keyd.nix
-    # ./docker.nix
+    ./docker.nix
     ./filezilla.nix
     ./flatpak.nix
     ./hdds.nix
