@@ -9,10 +9,10 @@ lib.mkIf config.custom-nixos.surrealdb.enable {
 
   services.surrealdb = {
     enable = true;
-    dbPath = "file:///var/lib/surrealdb/";
+    dbPath = "file:///var/lib/private/surrealdb";
     extraFlags = [
       "--auth"
-      "--allow-all"
+      # "--allow-all"
       "--user" "root"
       "--pass" "root"
       "--log" "debug"
@@ -21,6 +21,6 @@ lib.mkIf config.custom-nixos.surrealdb.enable {
   };
     
   custom-nixos.persist = {
-    root.directories = [ "/var/lib/surrealdb" ];
+    root.directories = [ "/var/lib/private" ];
   };
 }
