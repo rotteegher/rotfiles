@@ -10,7 +10,7 @@
     hyprland = {
       modkey = lib.mkOption {
         type = lib.types.str;
-        default = "ALT";
+        default = "SUPER";
       };
     };
 

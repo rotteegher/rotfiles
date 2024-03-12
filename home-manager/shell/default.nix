@@ -28,6 +28,7 @@
     file
     b3sum
     tldr
+    ent
     coreutils-full
 
     marksman

@@ -19,6 +19,7 @@
         workspaces = [2 4 5 9 10];
       }
     ];
+    hyprland.modkey = "SUPER";
     display.touchDevice = {
       enabled = true;
       # (Starts from 0) devIndex 0 is first monitor in "displays" list
