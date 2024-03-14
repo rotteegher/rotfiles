@@ -178,6 +178,11 @@ in {
         ",XF86AudioRaiseVolume, exec, ${pamixer} -i 5"
         ",XF86AudioMute, exec, ${pamixer} -t"
 
+        # waybar
+        "$mod, C, exec, pkill -SIGUSR1 waybar"
+        "$mod, V, exec, launch-waybar"
+        "$mod, N, exec, hypr-wallpaper"
+
       ]
       ++ lib.optionals config.custom.wezterm.enable ["$mod, q, exec, wezterm start"]
       ++ lib.optionals config.custom.backlight.enable [
