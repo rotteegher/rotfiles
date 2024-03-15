@@ -10,6 +10,7 @@
     ./configuration.nix
     ./keyd.nix
     ./docker.nix
+    ./llm.nix
     ./filezilla.nix
     ./flatpak.nix
     ./hdds.nix

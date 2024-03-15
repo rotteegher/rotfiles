@@ -24,6 +24,7 @@
 
     # software
     distrobox.enable = true;
+    llm.enable = true;
     docker.enable = true;
     surrealdb.enable = true;
     # syncoid.enable = true; # TODO

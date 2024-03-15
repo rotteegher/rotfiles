@@ -11,6 +11,7 @@ in {
   options.custom-nixos = {
     ### NIXOS LEVEL OPTIONS ###
     distrobox.enable = lib.mkEnableOption "distrobox";
+    llm.enable = lib.mkEnableOption "large language model" // {default = false;};
     docker.enable = lib.mkEnableOption "docker" // {default = cfg.distrobox.enable;};
     surrealdb.enable = lib.mkEnableOption "docker" // {default = false;};
     hyprland = {
