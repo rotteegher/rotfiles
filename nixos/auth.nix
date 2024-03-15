@@ -14,6 +14,7 @@ in
         enable = true;
         settings.PasswordAuthentication = false;
         settings.KbdInteractiveAuthentication = false;
+        allowSFTP = true;
       };
 
       users.users = let
