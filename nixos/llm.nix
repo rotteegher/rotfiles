@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  user,
   ...
 }: lib.mkIf config.custom-nixos.llm.enable {
   environment.systemPackages = with pkgs; [
@@ -9,6 +10,7 @@
   ];
   # setup port forwarding
   networking.firewall.allowedTCPPorts = [8080];
+  users.users.${user}.extraGroups = ["render" "video"];
 
   custom-nixos.persist = {
     home.directories = [

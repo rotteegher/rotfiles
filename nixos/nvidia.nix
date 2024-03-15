@@ -22,7 +22,14 @@ in {
     };
 
     environment = {
-      systemPackages = [pkgs.nvtop pkgs.glxinfo pkgs.vulkan-tools];
+      systemPackages = with pkgs; [
+        nvtop 
+        glxinfo 
+        vulkan-tools 
+        cudaPackages.cudatoolkit
+        cudaPackages.cudnn
+        cudaPackages.cuda_cudart
+      ];
       sessionVariables =
         {
           NIXOS_OZONE_WL = "1";
