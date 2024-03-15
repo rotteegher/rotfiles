@@ -84,7 +84,12 @@
           powertop
           powerstat
         ]
-        ++ (lib.optional (!config.services.xserver.desktopManager.gnome.enable) config.hm.custom.terminal.fakeGnomeTerminal)
+        ++
+          # install gtk theme for root, some apps like gparted only run as root
+          (with config.hm.gtk; [
+            theme.package
+            iconTheme.package
+          ])
         ++ (lib.optional config.custom-nixos.distrobox.enable pkgs.distrobox)
         ++ (lib.optional config.hm.custom.helix.enable helix)
         ++ (lib.optional config.hm.custom.discord.enable vesktop);
