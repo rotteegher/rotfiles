@@ -4,11 +4,24 @@
   lib,
   isNixOS,
   ...
-}: {
+}: let
+# create a fake gnome-terminal shell script so xdg terminal applications open in the correct terminal
+# https://unix.stackexchange.com/a/642886
+fakeGnomeTerminal = pkgs.writeShellApplication {
+  name = "gnome-terminal";
+  text = ''${config.custom.terminal.exec} "$@"'';
+};
+nemo-patched = pkgs.cinnamon.nemo-with-extensions.overrideAttrs (_: {
+  postFixup = ''
+    wrapProgram $out/bin/nemo \
+      --prefix PATH : "${lib.makeBinPath [ fakeGnomeTerminal ]}"
+  '';
+});
+in {
   home = {
-    packages = with pkgs; [
-      cinnamon.nemo-with-extensions
-      cinnamon.nemo-fileroller
+    packages = [
+      pkgs.cinnamon.nemo-fileroller
+      nemo-patched
     ];
   };
 
