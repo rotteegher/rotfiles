@@ -21,8 +21,8 @@ in {
 
     programs.hyprland = {
       enable = true;
-      portalPackage = inputs.xdph.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-      # portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      # portalPackage = inputs.xdph.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
 
     # set here as legacy linux won't be able to set these
