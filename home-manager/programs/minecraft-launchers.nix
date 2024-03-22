@@ -9,8 +9,8 @@
       # Launcher Java
       prismlauncher
       cubiomes-viewer
-      jdk8
-      jre8
+      jdk21
+      jdt-language-server
     ];
 
     custom.persist = {
