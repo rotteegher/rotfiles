@@ -1,11 +1,19 @@
-use dotfiles_utils::{cmd, full_path, json, monitor::Monitor, nixinfo::NixInfo, WAYBAR_CLASS};
-use std::process::Command;
+use std::process::Stdio;
+
+use dotfiles_utils::{
+    execute_wrapped_process, full_path, json, monitor::Monitor, nixinfo::NixInfo,
+};
+use execute::Execute;
 
 fn main() {
-    cmd(["killall", "-q", WAYBAR_CLASS]);
+    execute_wrapped_process("waybar", |process| {
+        execute::command_args!("killall", "-q", process)
+            .execute()
+            .ok();
+    });
 
     // add / remove persistent workspaces config to waybar config before launching
-    let config_path = full_path("~/.config/waybar/config");
+    let config_path = full_path("~/.config/waybar/config.jsonc");
     let config_path = config_path
         .to_str()
         .expect("could not convert config path to str");
@@ -33,7 +41,8 @@ fn main() {
     }
 
     // open waybar in the background
-    Command::new("waybar")
+    execute::command!("waybar")
+        .stdout(Stdio::null())
         .spawn()
         .expect("failed to execute waybar");
 }

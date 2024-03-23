@@ -46,11 +46,6 @@
         description = "The colorscheme to use. If null, will use the default colorscheme from the wallpaper.";
       };
 
-      threshold = lib.mkOption {
-        type = int;
-        default = 20;
-      };
-
       templates = lib.mkOption {
         type = attrsOf (submodule {
           options = {

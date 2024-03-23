@@ -26,9 +26,7 @@
       curl
       krb5
       keyutils
-      glfw-wayland
       glfw-wayland-minecraft
-      glfw2
     ];
     custom-nixos.persist = {
       home.directories = [

@@ -179,7 +179,7 @@ in {
         ",XF86AudioMute, exec, ${pamixer} -t"
 
         # waybar
-        "$mod, C, exec, pkill -SIGUSR1 waybar"
+        "$mod, a, exec, killall -SIGUSR1 .waybar-wrapped"
         "$mod, V, exec, launch-waybar"
         "$mod, N, exec, hypr-wallpaper"
 

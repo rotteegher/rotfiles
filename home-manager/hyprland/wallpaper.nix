@@ -9,13 +9,6 @@
 }: let
   wallpapers_proj = "/persist/home/${user}/pr/wallpaper-utils";
   # crop wallpaper before displaying with swww
-  swww-crop = pkgs.writeShellApplication {
-    name = "swww-crop";
-    runtimeInputs = with pkgs; [swww imagemagick];
-    text = ''
-      convert "$1" -crop "$2" - | swww img --outputs "$3" "''${@:4}" -;
-    '';
-  };
   imv-search = pkgs.writeShellApplication {
     name = "imv-search";
     runtimeInputs = with pkgs; [imv rclip];
@@ -110,7 +103,6 @@ in {
     (lib.mkIf isNixOS {
       home.packages = [
         pkgs.swww
-        swww-crop
       ];
     })
     {

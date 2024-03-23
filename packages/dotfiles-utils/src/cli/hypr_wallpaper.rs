@@ -1,17 +1,18 @@
 use clap::Parser;
 use dotfiles_utils::{
     cli::HyprWallpaperArgs,
-    cmd, full_path,
-    monitor::Monitor,
+    execute_wrapped_process, full_path,
     nixinfo::NixInfo,
     wallpaper::{self, WallInfo},
-    wallust, WAYBAR_CLASS,
+    wallust,
 };
-use std::{collections::HashMap, path::Path, process::Command};
+use execute::Execute;
+use std::path::Path;
 
+/// reads the wallpaper info from wallpapers.csv
 fn get_wallpaper_info(image: &String) -> Option<WallInfo> {
-    let wallpapers_json = full_path("~/Pictures/Wallpapers/wallpapers.json");
-    if !wallpapers_json.exists() {
+    let wallpapers_csv = full_path("~/Pictures/Wallpapers/wallpapers.csv");
+    if !wallpapers_csv.exists() {
         return None;
     }
 
@@ -24,65 +25,30 @@ fn get_wallpaper_info(image: &String) -> Option<WallInfo> {
         .expect("could not convert image path to str");
 
     let reader = std::io::BufReader::new(
-        std::fs::File::open(wallpapers_json).expect("could not open wallpapers.json"),
+        std::fs::File::open(wallpapers_csv).expect("could not open wallpapers.csv"),
     );
-    let mut crops: HashMap<String, WallInfo> =
-        serde_json::from_reader(reader).expect("could not parse wallpapers.json");
-    crops.remove(fname)
-}
 
-fn swww_crop(swww_args: &[&str], image: &String, wall_info: &Option<WallInfo>) {
-    let set_wallpapers = || {
-        // write image path to ~/.cache/current_wallpaper
-        std::fs::write(full_path("~/.cache/current_wallpaper"), image)
-            .expect("failed to write ~/.cache/current_wallpaper");
-
-        match wall_info {
-            Some(info) => Monitor::monitors().iter().for_each(|m| {
-                match info.get_geometry(m.width, m.height) {
-                    Some(geometry) => {
-                        // use custom swww-crop defined in wallpaper.nix
-                        Command::new("swww-crop")
-                            .arg(image)
-                            .arg(geometry)
-                            .arg(&m.name)
-                            .args(swww_args)
-                            .spawn()
-                            .expect("failed to set wallpaper");
-                    }
-                    None => {
-                        Command::new("swww")
-                            .arg("img")
-                            .args(swww_args)
-                            .arg(image)
-                            .spawn()
-                            .expect("failed to execute process");
-                    }
-                }
-            }),
-            _ => {
-                Command::new("swww")
-                    .arg("img")
-                    .args(swww_args)
-                    .arg(image)
-                    .spawn()
-                    .expect("failed to execute process");
-            }
-        }
-    };
-
-    set_wallpapers();
+    let mut rdr = csv::Reader::from_reader(reader);
+    rdr.deserialize::<WallInfo>()
+        .flatten()
+        .find(|line| line.filename == fname)
 }
 
 fn main() {
     let args = HyprWallpaperArgs::parse();
 
-    let random_wallpaper = match args.image {
-        Some(image) => std::fs::canonicalize(image)
-            .expect("invalid image path")
-            .to_str()
-            .expect("could not convert image path to str")
-            .to_string(),
+    let random_wallpaper = match args.image_or_dir {
+        Some(image_or_dir) => {
+            if image_or_dir.is_dir() {
+                wallpaper::random_from_dir(&image_or_dir)
+            } else {
+                std::fs::canonicalize(image_or_dir)
+                    .expect("invalid path")
+                    .to_str()
+                    .expect("could not convert path to str")
+                    .to_string()
+            }
+        }
         None => {
             if full_path("~/.cache/wallust/nix.json").exists() {
                 wallpaper::random()
@@ -98,27 +64,38 @@ fn main() {
         random_wallpaper
     };
 
+    // write current wallpaper to $XDG_RUNTIME_DIR/current_wallpaper
+    std::fs::write(
+        dirs::runtime_dir()
+            .expect("could not get XDG_RUNTIME_DIR")
+            .join("current_wallpaper"),
+        &wallpaper,
+    )
+    .expect("failed to write $XDG_RUNTIME_DIR/current_wallpaper");
+
     let wallpaper_info = get_wallpaper_info(&wallpaper);
 
     // use colorscheme set from nix if available
     if let Some(cs) = NixInfo::before().colorscheme {
-        wallust::apply_theme(cs.as_str());
+        wallust::apply_theme(&cs);
     } else {
         wallust::from_wallpaper(&wallpaper_info, &wallpaper);
     }
 
+    // do wallust earlier to create the necessary templates
+    wallust::apply_colors();
+
     if cfg!(feature = "hyprland") {
         if args.reload {
-            swww_crop(&[], &wallpaper, &wallpaper_info);
-            cmd(["killall", "-SIGUSR2", WAYBAR_CLASS]);
-        } else {
-            swww_crop(
-                &["--transition-type", &args.transition_type],
-                &wallpaper,
-                &wallpaper_info,
-            );
+            execute_wrapped_process("waybar", |process| {
+                execute::command_args!("killall", "-SIGUSR2", process)
+                    .execute()
+                    .ok();
+            });
         }
+        execute::command!("swww-crop")
+            .arg(&wallpaper)
+            .execute()
+            .ok();
     }
-
-    wallust::apply_colors();
 }

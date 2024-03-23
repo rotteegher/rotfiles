@@ -138,7 +138,6 @@ in
       "custom/nix" = {
         format = "󱄅";
         on-click = "hypr-wallpaper";
-        on-click-right = "imv-wallpaper";
         tooltip = false;
       };
 
@@ -157,7 +156,7 @@ in
       "waybar.jsonc" = {
         inherit (cfg) enable;
         text = lib.strings.toJSON cfg.config;
-        target = "${config.xdg.configHome}/waybar/config";
+        target = "${config.xdg.configHome}/waybar/config.jsonc";
       };
       "waybar.css" = let
         baseModuleCss = ''

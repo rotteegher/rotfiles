@@ -51,11 +51,11 @@ in {
       # focus the initial workspaces on startup
       "hyprctl dispatch workspace 1"
       "hyprctl dispatch workspace 2"
-      "sleep 5 && hyprctl dispatch workspace 4"
 
-      "sleep 1; swww init && hypr-wallpaper"
+      # FIXME: weird race condition with swww init, need to sleep for a second
+      # https://github.com/Horus645/swww/issues/144
+      "sleep 1; swww init && hypr-wallpaper && launch-waybar"
 
-      "sleep 5 && launch-waybar"
 
       # fix gparted "cannot open display: :0" error
       "${lib.getExe pkgs.xorg.xhost} +local:${user}"
