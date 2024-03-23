@@ -1,28 +1,44 @@
-{lib, pkgs, ...}: {
-    # MINECRAFT
-    options.custom-nixos.services.minecraft-java-server = {
+{lib, pkgs, ...}:
+with lib;
+let
+  mkOpt = type: default:
+    mkOption { inherit type default; };
+
+  mkOpt' = type: default: description:
+    mkOption { inherit type default description; };
+in {
+  # MINECRAFT
+  options.custom-nixos.services.minecraft-java-servers = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = ''
+        Enable the whole Minecraft Java Servers thing.
+      '';
+    };
+    environmentFile = mkOpt' (lib.types.nullOr lib.types.path) null ''
+      File consisting of lines in the form varname=value to define environment
+      variables for the minecraft servers.
+
+      Secrets (database passwords, secret keys, etc.) can be provided to server
+      files without adding them to the Nix store by defining them in the
+      environment file and referring to them in option
+      <option>services.minecraft-servers.servers.<name>.files</option> with the
+      syntax @varname@.
+    '';
+    fabric-latest = {
       do-run = lib.mkEnableOption "Stop minecraft server?" // { default = true;};
+      autoStart = lib.mkEnableOption "Auto start minecraft server on boot?" // { default = true;};
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
         description = ''
-          If enabled, start a Minecraft Java Server. The server
-          data will be loaded from and saved to
-          services.minecraft-java-server.dataDir
+          Enable Fabric Server
         '';
       };
-      jvmOpts = lib.mkOption {
-        type = lib.types.str;
-        default = "-Xmx2048M -Xms2048M";
-        example = "-Xms4096M -Xmx4096M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
-      };
-      dataDir = lib.mkOption {
-        type = lib.types.path;
-        default = "/srv/minecraft-java";
-        description = ''
-          Directory to store Minecraft Java database and other state/data files.
-        '';
-      };
+      jvmOpts = mkOpt' (types.separatedString " ") "-Xmx12G -Xms12G" "JVM options for this server.";
+      # example = "-Xms4096M -Xmx4096M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
+
       # Whitelisted players,
       # only has an effect when services.minecraft-server.declarative is true
       # and the whitelist is enabled via by setting serverProperties.white-list to true.
@@ -104,13 +120,7 @@
           Minecraft Java server properties for the server.properties file.
         '';
       };
-
-      package = lib.mkOption {
-        type = lib.types.package;
-        default = pkgs.minecraft-server;
-        defaultText = "pkgs.minecraft-server";
-        description = "Version of minecraft-server to run.";
-      };
-    }; # Minecraft Bedrock Server
+    }; # Minecraft Fabric Server
+  };
 }
 

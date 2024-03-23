@@ -78,12 +78,11 @@
       };
     };
 
-    services.minecraft-java-server = {
+    services.minecraft-java-servers.fabric-latest = {
       enable = true;
-      do-run = false;
-      package = pkgs.papermc;
-      dataDir = "/srv/minecraft-java-server";
-      jvmOpts = "-Xms8192M -Xmx8192M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
+      do-run = true;
+      autoStart = true;
+      # jvmOpts = "-Xms8192M -Xmx8192M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
       serverProperties = {
         enable-jmx-monitoring = false;
         "rcon.port" = 25585;
@@ -114,7 +113,7 @@
         server-ip = "";
         resource-pack-prompt = "";
         allow-nether = true;
-        server-port = 25544;
+        server-port = 25565;
         enable-rcon = false;
         sync-chunk-writes = true;
         op-permission-level = 4;

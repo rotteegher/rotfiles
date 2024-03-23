@@ -54,6 +54,8 @@
       url = "github:iynaix/wfetch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   # flake-utils is unnecessary
