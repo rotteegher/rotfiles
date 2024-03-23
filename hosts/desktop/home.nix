@@ -25,12 +25,15 @@
       # (Starts from 0) devIndex 0 is first monitor in "displays" list
       devIndex = 1;
     };
-    gradience.enable = false;
+    gradience.enable = true;
     firefox.enable = true;
     wallust = {
       enable = true;
     };
-    rofi.enable = true;
+    rofi = {
+      enable = true;
+      theme = "onedark";
+    };
     rclip.enable = false;
     waybar = {
       enable = true; 

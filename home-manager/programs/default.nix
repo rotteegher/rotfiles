@@ -18,7 +18,7 @@
     ./rofi.nix
     ./vlc.nix
     # ./vscode.nix
-    ./wallust
+    ./wallust.nix
     # ./wezterm.nix
     ./insomnia.nix
     ./yt-dlp.nix

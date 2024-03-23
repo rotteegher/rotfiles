@@ -1,15 +1,13 @@
 use crate::monitor::Monitor;
+use execute::Execute;
 use serde::{de::DeserializeOwned, Deserialize};
-use std::{env, path::PathBuf, process::Command};
+use std::{path::PathBuf, process::Stdio};
 
 pub mod cli;
-pub mod fetch;
 pub mod monitor;
 pub mod nixinfo;
 pub mod wallpaper;
 pub mod wallust;
-
-pub const WAYBAR_CLASS: &str = ".waybar-wrapped";
 
 // shared structs / types
 type Coord = (i32, i32);
@@ -36,69 +34,42 @@ pub fn hypr_json<T>(cmd: &str) -> T
 where
     T: DeserializeOwned,
 {
-    let output = Command::new("hyprctl")
-        .args(["-j", cmd])
-        .output()
+    let output = execute::command_args!("hyprctl", "-j", cmd)
+        .stdout(Stdio::piped())
+        .execute_output()
         .expect("failed to execute process");
 
     serde_json::from_slice(&output.stdout).expect("failed to parse json")
 }
 
-/// returns a command to be executed, and the command as a string
-fn create_cmd<I, S>(cmd_args: I) -> (Command, String)
-where
-    I: IntoIterator<Item = S>,
-    S: AsRef<str>,
-{
-    let mut args = cmd_args.into_iter();
-    let first = args.next().expect("empty command");
-    let first = first.as_ref();
+fn command_output_to_lines(output: &[u8]) -> Vec<String> {
+    String::from_utf8(output.to_vec())
+        .expect("invalid utf8 from command")
+        .lines()
+        .map(String::from)
+        .collect()
+}
 
-    let mut cmd_str = vec![first.to_string()];
-    let mut cmd = Command::new(first);
+pub trait CommandUtf8 {
+    fn execute_stdout_lines(&mut self) -> Vec<String>;
 
-    for arg in args {
-        let arg = arg.as_ref();
-        cmd_str.push(arg.to_string());
-        cmd.arg(arg);
+    fn execute_stderr_lines(&mut self) -> Vec<String>;
+}
+
+impl CommandUtf8 for std::process::Command {
+    fn execute_stdout_lines(&mut self) -> Vec<String> {
+        self.stdout(Stdio::piped()).execute_output().map_or_else(
+            |_| Vec::new(),
+            |output| command_output_to_lines(&output.stdout),
+        )
     }
 
-    (
-        cmd,
-        format!("failed to execute {first} {}", cmd_str.join(" ")),
-    )
-}
-
-pub fn cmd<I, S>(cmd_args: I)
-where
-    I: IntoIterator<Item = S>,
-    S: AsRef<str>,
-{
-    let (mut cmd, cmd_str) = create_cmd(cmd_args);
-    cmd.status().unwrap_or_else(|_| panic!("{cmd_str}"));
-}
-
-pub enum CmdOutput {
-    Stdout,
-    Stderr,
-}
-
-pub fn cmd_output<I, S>(cmd_args: I, from: &CmdOutput) -> Vec<String>
-where
-    I: IntoIterator<Item = S>,
-    S: AsRef<str>,
-{
-    let (mut cmd, cmd_str) = create_cmd(cmd_args);
-    let output = cmd.output().unwrap_or_else(|_| panic!("{cmd_str}"));
-
-    std::str::from_utf8(match from {
-        CmdOutput::Stdout => &output.stdout,
-        CmdOutput::Stderr => &output.stderr,
-    })
-    .expect("invalid utf8 from command")
-    .lines()
-    .map(String::from)
-    .collect()
+    fn execute_stderr_lines(&mut self) -> Vec<String> {
+        self.stderr(Stdio::piped()).execute_output().map_or_else(
+            |_| Vec::new(),
+            |output| command_output_to_lines(&output.stderr),
+        )
+    }
 }
 
 /// hyprctl dispatch
@@ -107,13 +78,12 @@ where
     I: IntoIterator<Item = S>,
     S: AsRef<str>,
 {
-    let mut cmd = Command::new("hyprctl");
-    cmd.arg("dispatch");
+    let mut cmd = execute::command_args!("hyprctl", "dispatch");
 
     for arg in hypr_args {
         cmd.arg(arg.as_ref());
     }
-    cmd.status().expect("failed to execute process");
+    cmd.execute().expect("failed to execute hyprctl");
 }
 
 /// hyprctl activewindow
@@ -209,26 +179,22 @@ pub mod json {
     {
         let path = path.as_ref();
         let file = std::fs::File::create(full_path(path))
-            .unwrap_or_else(|_| panic!("failed to load {path:?}"));
+            .unwrap_or_else(|_| panic!("failed to create {path:?}"));
         serde_json::to_writer(file, &data)
             .unwrap_or_else(|_| panic!("failed to write json to {path:?}"));
     }
 }
 
-pub fn asset_path(filename: &str) -> String {
-    let out_path = PathBuf::from(env::var("CARGO_MANIFEST_DIR").unwrap_or_else(|_| {
-        env::current_exe()
-            .expect("could not get current dir")
-            .ancestors()
-            .nth(2)
-            .expect("could not get base package dir")
-            .to_str()
-            .expect("could not convert base package dir to str")
-            .to_string()
-    }));
-    let asset = out_path.join("assets").join(filename);
-    asset
-        .to_str()
-        .unwrap_or_else(|| panic!("could not get asset {}", &filename))
-        .to_string()
+pub fn execute_wrapped_process<F>(unwrapped_name: &str, process_fn: F)
+where
+    F: Fn(&str),
+{
+    let wrapped_name = &format!(".{unwrapped_name}-wrapped");
+    let sys = sysinfo::System::new_all();
+
+    if sys.processes_by_exact_name(wrapped_name).next().is_some() {
+        process_fn(wrapped_name);
+    } else {
+        process_fn(unwrapped_name);
+    }
 }

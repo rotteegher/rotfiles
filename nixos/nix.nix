@@ -27,6 +27,7 @@
     name = "nbuild";
     runtimeInputs = [nswitch];
     text = ''
+      sudo -l > /dev/null
       if [ "$#" -eq 0 ]; then
           nswitch --dry --hostname "${host}"
       else
@@ -40,6 +41,7 @@
     name = "nswitch";
     runtimeInputs = with pkgs; [git nix-current-generation nh];
     text = ''
+      sudo -l > /dev/null
       cd ${rots}
 
       # stop bothering me about untracked files
