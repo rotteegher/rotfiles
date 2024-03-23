@@ -10,7 +10,6 @@ lib.mkIf (config.custom-nixos.docker.enable || config.custom-nixos.distrobox.ena
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
-    enableNvidia = true;
     storageDriver = lib.mkIf (config.fileSystems."/".fsType == "zfs") "zfs";
   };
 
