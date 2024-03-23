@@ -41,6 +41,7 @@
           ../modules/nixos
           ../overlays
           inputs.home-manager.nixosModules.home-manager
+          inputs.nix-minecraft.nixosModules.minecraft-servers
           {
             home-manager = {
               useGlobalPkgs = true;

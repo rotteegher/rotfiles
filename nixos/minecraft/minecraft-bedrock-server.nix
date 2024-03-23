@@ -15,7 +15,7 @@
   serverPropertiesFile = pkgs.writeText "server.properties" (''
       # server.properties managed by NixOS configuration
     ''
-    + lib.concatStringsSep "\n" (lib.mapAttrsToList
+   + lib.concatStringsSep "\n" (lib.mapAttrsToList
       (n: v: "${n}=${cfgToString v}")
       cfg.serverProperties));
 
@@ -26,24 +26,12 @@ in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       # USE "sudo conspy 4" command to enter server console
+      # NOTE: press ESC three times quickly to exit
       conspy
 
       # My bedrock server package
       custom.minecraft-bedrock-server
     ];
-
-    # Specify socket file to 'echo "command" > systemd.stdin'
-    # systemd.sockets.minecraft-bedrock-server = {
-    #   bindsTo = ["minecraft-bedrock-server.service"];
-    #   socketConfig = {
-    #     ListenFIFO = "${cfg.dataDir}/systemd.stdin";
-    #     Service = "minecraft-bedrock-server.service";
-    #     # SocketUser = user;
-    #     # SocketGroup = "users";
-    #     RemoveOnStop = true;
-    #     # SocketMode = "0770";
-    #   };
-    # };
 
     # make sure the tty4 is not overrun by getty
     services.logind.extraConfig = ''
@@ -86,13 +74,6 @@ in {
         ExecStart = "/bin/sh -c '${cfg.package}/bin/bedrock_server > /dev/tty4 < /dev/tty4'";
         # PLEASE ISSUE a "stop" command to the server manually
         # before shutting down systemd service
-
-        # Works only with
-        # StandardInput = "socket";
-        # ExecStop = ''
-        #   /bin/sh -c "echo stop > ${cfg.dataDir}/systemd.stdin"
-        # '';
-        # KillSignal = "SIGCONT";
       };
 
       preStart = ''
@@ -118,12 +99,6 @@ in {
     networking.firewall = {
       allowedUDPPorts = [serverPort 19132 19133];
       allowedTCPPorts = [serverPort 19132 19133];
-    };
-    custom-nixos.persist = {
-      root.directories = [
-        # default dir is /srv/minecraft-bedrock
-        cfg.dataDir
-      ];
     };
   };
 }

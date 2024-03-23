@@ -125,5 +125,6 @@ in
         wezterm = overrideRustPackage "wezterm";
       }
     )
+    inputs.nix-minecraft.overlay
   ];
 }

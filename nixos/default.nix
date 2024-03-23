@@ -24,8 +24,7 @@
     ./users.nix
     # ./vercel.nix
     ./surrealdb.nix
-    ./minecraft-bedrock-server.nix
-    ./minecraft-java-server.nix
+    ./minecraft
     ./virt-manager.nix
     ./steam.nix
     ./zfs.nix
