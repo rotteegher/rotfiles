@@ -29,6 +29,11 @@ in rec {
     path = ./rust;
     description = "Rust dev environment";
   };
+  rust-toolchain = {
+    inherit welcomeText;
+    path = ./rust-toolchain;
+    description = "Rust dev environment, but from toolchain.toml";
+  };
   empty = {
     inherit welcomeText;
     path = ./empty;
