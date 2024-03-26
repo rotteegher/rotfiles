@@ -74,7 +74,6 @@ in
       ];
 
       modules-left = [
-        "custom/nix"
         "custom/shade"
         "tray"
         "hyprland/window"
@@ -211,11 +210,6 @@ in
 
           #workspaces button {
             ${baseModuleCss}
-          }
-
-          #custom-nix {
-            margin-left: 20px;
-            font-size: 18px;
           }
 
           #custom-shade {
