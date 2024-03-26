@@ -44,6 +44,8 @@
         trash-cli
         # misc utilities for dotfiles written in rust
         custom.dotfiles-utils
+
+        dioxus-cli
       ]
       ++ (lib.optional config.custom.helix.enable helix)
       # handle fonts

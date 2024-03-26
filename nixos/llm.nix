@@ -9,7 +9,7 @@
     ollama
   ];
   # setup port forwarding
-  networking.firewall.allowedTCPPorts = [8080];
+  networking.firewall.allowedTCPPorts = [9000];
   users.users.${user}.extraGroups = ["render" "video"];
 
   virtualisation.docker.enableNvidia = true;
@@ -42,12 +42,14 @@
   virtualisation.oci-containers.containers = {
     open-webui = {
       image = "ghcr.io/open-webui/open-webui";
-      ports = ["3000:8080"];
+      ports = ["3000:9000"];
+      # dependsOn = [ "ollama" ];
       volumes = [
         "open-webui:/app/backend/data"
       ];
       environment = {
         OLLAMA_BASE_URL = "http://127.0.0.1:11434";
+        PORT = "9000";
       };
       extraOptions = [
         "--network=host"
