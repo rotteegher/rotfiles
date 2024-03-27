@@ -27,6 +27,9 @@
             # we can just use `rustToolchain` here:
             nativeBuildInputs = [
               rustToolchain
+              pkgs.bacon
+              pkgs.openssl
+              pkgs.pkg-config
             ];
           };
         }

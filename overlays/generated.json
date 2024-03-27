@@ -1,7 +1,7 @@
 {
     "swww": {
         "cargoLocks": null,
-        "date": "2024-03-23",
+        "date": "2024-03-26",
         "extract": null,
         "name": "swww",
         "passthru": null,
@@ -13,11 +13,11 @@
             "name": null,
             "owner": "LGFae",
             "repo": "swww",
-            "rev": "dcf0d4e481b13c19f2490d730cb45c03d4e8b77b",
-            "sha256": "sha256-HfK9AOTsTO0JnrD6e6g/LtwukOjDhf9ZeC6/TmNZqDc=",
+            "rev": "815f637fe58e32ea2d397c2aa6304046248b1233",
+            "sha256": "sha256-fDCCMsVvk8OaNQNTzV9Rb90jtkArjndleiKV4J0JfXY=",
             "type": "github"
         },
-        "version": "dcf0d4e481b13c19f2490d730cb45c03d4e8b77b"
+        "version": "815f637fe58e32ea2d397c2aa6304046248b1233"
     },
     "transmission-web-soft-theme": {
         "cargoLocks": null,
@@ -60,7 +60,7 @@
     },
     "waybar": {
         "cargoLocks": null,
-        "date": "2024-03-24",
+        "date": "2024-03-25",
         "extract": null,
         "name": "waybar",
         "passthru": null,
@@ -72,15 +72,15 @@
             "name": null,
             "owner": "Alexays",
             "repo": "Waybar",
-            "rev": "487ab2325996b922b5f62e1930040b6d71bfd39f",
-            "sha256": "sha256-xxGx5ortDMIQIdVAYn/vtakiLjNdgNKUNkUc8b5wBbc=",
+            "rev": "b652b4296d4e953b08c4886467fb521f8ae716be",
+            "sha256": "sha256-mDP36IuJJAIYzzqbmKJWWZuCJtvjRtt87W5aLlipDGU=",
             "type": "github"
         },
-        "version": "487ab2325996b922b5f62e1930040b6d71bfd39f"
+        "version": "b652b4296d4e953b08c4886467fb521f8ae716be"
     },
     "wezterm": {
         "cargoLocks": null,
-        "date": "2024-03-16",
+        "date": "2024-03-25",
         "extract": null,
         "name": "wezterm",
         "passthru": null,
@@ -92,10 +92,10 @@
             "name": null,
             "owner": "wez",
             "repo": "wezterm",
-            "rev": "889f8a9cd71a2b3552f28f6d1864aa3cd9461fdf",
+            "rev": "e5ac32f297cf3dd8f6ea280c130103f3cac4dddb",
             "sha256": "sha256-H8c7oSJufX2AEgcBk7eMrlFw+x0SgI9vI4iKlNojvMk=",
             "type": "github"
         },
-        "version": "889f8a9cd71a2b3552f28f6d1864aa3cd9461fdf"
+        "version": "e5ac32f297cf3dd8f6ea280c130103f3cac4dddb"
     }
 }
