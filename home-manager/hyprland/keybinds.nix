@@ -53,7 +53,9 @@ in {
         "CTRL_SHIFT, Escape, exec, hypr-monitors"
 
         # reset input language
-        "$mod, Escape, exec, fcitx5-remote -s keyboard-jp"
+        # "$mod, Escape, exec, fcitx5-remote -s keyboard-jp"
+
+        "$mod, Escape, killactive"
 
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"
