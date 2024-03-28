@@ -42,6 +42,7 @@
         home-manager
         libreoffice
         trash-cli
+        vmpk # piano
         # misc utilities for dotfiles written in rust
         custom.dotfiles-utils
 

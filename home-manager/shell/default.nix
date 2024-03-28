@@ -31,6 +31,7 @@
     ent
     coreutils-full
 
+    typora
     marksman
     vscode-langservers-extracted
     yaml-language-server
@@ -63,6 +64,9 @@
   };
 
   custom.persist = {
-    home.directories = [".local/share/zoxide"];
+    home.directories = [
+      ".local/share/zoxide"
+      ".config/Typora"
+    ];
   };
 }
