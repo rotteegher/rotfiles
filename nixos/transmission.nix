@@ -5,7 +5,7 @@
   config,
   ...
 }: let
-  home = "/persist/home/${user}";
+  home = "/home/${user}";
   downloadDir = config.custom-nixos.bittorrent.downloadDir;
   pendingDir = "${downloadDir}/_CURRENT";
 in {
