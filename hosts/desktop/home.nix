@@ -46,7 +46,7 @@
     helix.enable = true;
 
     blender.enable = true;
-    reaper.enable = false;
+    reaper.enable = true;
 
     discord.enable = true;
     telegram.enable = true;
