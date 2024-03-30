@@ -67,8 +67,6 @@
 
   custom.persist = {
     home.directories = [
-      "Desktop"
-      "Documents"
       "Pictures"
     ];
   };

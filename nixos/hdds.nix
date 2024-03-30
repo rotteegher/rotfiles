@@ -55,8 +55,9 @@ in {
       home.file = let
         mkOutOfStoreSymlink = hmCfg.config.lib.file.mkOutOfStoreSymlink;
       in {
-        Downloads.source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Downloads");
-        # Videos.source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Videos"); #TODO
+        "Downloads".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Downloads");
+        "Videos".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Videos");
+        "Documents".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Documents");
       };
     };
 
@@ -65,10 +66,11 @@ in {
     systemd.tmpfiles.rules = lib.optionals (cfg.wdc1tb && cfg.stsea3tb) [
       "L+ ${wdc-blue-mountpoint}/Wallpapers            - - - - /home/${user}/Pictures/Wallpapers"
       "L+ ${wdc-blue-mountpoint}/pr/rustpr             - - - - /home/${user}/pr/rustpr/ln/"
-      # "L+ ${wdc-blue-mountpoint}/_SMALL                - - - - /home/${user}/_SMALL"
-      # "L+ ${wdc-blue-mountpoint}/_MAIN                - - - - /home/${user}/_MAIN"
-      # "L+ ${stsea-mountpoint}/Movies           - - - - ${wdc-blue-mountpoint}/Movies"
-      # "L+ ${stsea-mountpoint}/TV               - - - - ${wdc-blue-mountpoint}/TV"
+      "L+ /home/${user}/_MAIN                          - - - - ${wdc-blue-mountpoint}/_MAIN"
+      "L+ /home/${user}/_SMALL                         - - - - ${wdc-blue-mountpoint}/_SMALL"
+      "L+ /home/${user}/_SMALL/_MUSIC                  - - - - ${wdc-blue-mountpoint}/_MUSIC"
+      "L+ /home/${user}/_SMALL/_FILM                   - - - - ${wdc-blue-mountpoint}/_FILM"
+      "L+ /home/${user}/_SMALL/_ANIME                  - - - - ${wdc-blue-mountpoint}/_ANIME"
     ];
 
     # dual boot windows
