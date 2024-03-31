@@ -9,21 +9,27 @@
     wifi.enable = true;
     displays = [
       {
-        name = "HDMI-A-5";
-        hyprland = "1920x1080@60,0x0,1";
-        workspaces = [1 3 6 7 8];
-      }
-      {
-        name = "HDMI-A-4";
-        hyprland = "1920x1080@60,1910x1080,1.333";
-        workspaces = [2 4 5 9 10];
+        name = "HDMI-A-2";
+        hyprland = "1920x1080@60,0x0,1.3333";
+        workspaces = [
+          1
+          2
+          3
+          4
+          5
+          6
+          7
+          8
+          9
+          10
+        ];
       }
     ];
     hyprland.modkey = "SUPER";
     display.touchDevice = {
       enabled = true;
       # (Starts from 0) devIndex 0 is first monitor in "displays" list
-      devIndex = 1;
+      devIndex = 0;
     };
     gradience.enable = true;
     firefox.enable = true;
