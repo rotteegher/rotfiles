@@ -10,7 +10,7 @@
     displays = [
       {
         name = "HDMI-A-2";
-        hyprland = "1920x1080@60,0x0,1.3333";
+        hyprland = "1920x1080@60,0x0,1.2,transform,1";
         workspaces = [
           1
           2

@@ -25,7 +25,7 @@
     services.xserver.xkb = {
       layout = config.custom-nixos.xkbLayout;
       variant = "";
-      options = "ctrl:swapcaps,shift:breaks_caps,shift:both_capslock,ctrl:swap_rwin_rctl,lv3:lwin_switch";
+      options = "ctrl:swapcaps,shift:breaks_caps,shift:both_capslock,ctrl:swap_rwin_rctl,lv3:lwin_switch,compose:ralt";
     };
 
     # KEYMAPS

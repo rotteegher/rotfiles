@@ -24,6 +24,7 @@
     btop
     cmus
     sd
+    libnotify
     ugrep
     file
     b3sum

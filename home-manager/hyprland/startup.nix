@@ -41,7 +41,7 @@ in {
       # (openOnWorkspace 10 "hyprctl dispatch layoutmsg orientationcycle left top")
 
       # Telegram
-      (openOnWorkspace 5 "telegram-desktop")
+      (openOnWorkspace 7 "telegram-desktop")
 
       (openOnWorkspace 3 ''nix run nixpkgs#st fish'')
 
