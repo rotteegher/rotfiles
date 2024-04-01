@@ -42,5 +42,11 @@ in {
           WLR_RENDERER_ALLOW_SOFTWARE = "1";
         };
     };
+    custom-nixos.persist = {
+      home.directories = [
+        ".config/nvtop"
+      ];
+    };
+
   };
 }
