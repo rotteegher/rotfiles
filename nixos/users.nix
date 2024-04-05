@@ -2,6 +2,7 @@
   config,
   lib,
   user,
+  pkgs,
   ...
 }: let
   autoLoginUser = config.services.xserver.displayManager.autoLogin.user;
@@ -18,6 +19,8 @@ in
         getty.autologinUser = autoLoginUser;
       };
 
+      programs.fish.enable = true;
+
       users = {
         mutableUsers = false;
         # setup users with persistent passwords
@@ -31,6 +34,7 @@ in
             # hashedPasswordFile = "/persist/etc/shadow/root";
           };
           ${user} = {
+            shell = pkgs.fish;
             isNormalUser = true;
             initialHashedPassword = "$y$j9T$IAlkbRYYo1xS/Q87Pxskc.$vjj0j0egsgM0tNwFOzDgnmV1whQJseuslkXPaBfigK6";
             # hashedPasswordFile = "/persist/etc/shadow/${user}";
