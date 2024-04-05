@@ -199,8 +199,8 @@ in {
         "$mod_CTRL, r, exec, hyprctl reload"
 
         # Scroll through existing workspaces with mainMod + scroll
-        "$mod, mouse_down, workspace, e+1"
-        "$mod, mouse_up, workspace, e-1"
+        "$mod, mouse_down, workspace, e-1"
+        "$mod, mouse_up, workspace, e+1"
 
 
         # dunst controls
