@@ -118,7 +118,7 @@ in {
 
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "$mod, backslash, exec, grimblast --notify copy area"
+        "$mod, backslash, exec, grimblast --notify --freeze copy area"
         "$mod_SHIFT, backslash, exec, hypr-screenshot"
         "$mod_CTRL, backslash, exec, hypr-ocr"
       ];
