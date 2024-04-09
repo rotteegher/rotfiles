@@ -10,8 +10,26 @@ let
 in
 {
   options.custom = {
-      display.touchDevice = {
+    display.touchDevice = {
       enabled = lib.mkEnableOption "Enable Touchscreen device support" // {default = false;};
+      transform = lib.mkOption {
+        type = lib.types.int;
+        default = 0;
+        description = ''
+          Transform the input of a touchscreen to match the monitor rotation
+          This will be done automatically when #3544 lands.
+          https://github.com/hyprwm/Hyprland/pull/3544
+
+          normal (no transforms) -> 0
+          90 degrees -> 1
+          180 degrees -> 2
+          270 degrees -> 3
+          flipped -> 4
+          flipped + 90 degrees -> 5
+          flipped + 180 degrees -> 6
+          flipped + 270 degrees -> 7
+        '';
+      };
       devIndex = lib.mkOption {
         type = lib.types.int;
         default = 0;
