@@ -65,6 +65,7 @@ in {
           # Set config.custom.display setting index to specify which monitor is a touchscreen device via host specific configuration
           touchdevice = lib.mkIf display.touchDevice.enabled {
             enabled = true;
+            transform = display.touchDevice.transform;
             output = (lib.elemAt displays display.touchDevice.devIndex).name;
           };
 
