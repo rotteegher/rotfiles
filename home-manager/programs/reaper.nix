@@ -13,7 +13,17 @@
         oxefmsynth
         aether-lv2
         bespokesynth
+        x42-gmsynth
+        fluidsynth
+        airwindows-lv2
+        mda_lv2
+        tunefish
       ];
+      # NOTE: plugins are installed into these directories:
+      # `/etc/profiles/per-user/${user}/lib/lv2`
+      # `/etc/profiles/per-user/${user}/lib/lxvst`
+
+
       # persist plugins
       # sessionVariables = {
       #   LV2_PATH = "~/.nix-profile/lib/lv2/:~/.lv2:/nix/var/nix/profiles/default/lib/lv2:/var/run/current-system/sw/lib/lv2";
