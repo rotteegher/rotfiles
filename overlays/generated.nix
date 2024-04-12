@@ -3,15 +3,15 @@
 {
   swww = {
     pname = "swww";
-    version = "8a7a00a49ca446abebafa517d843522bed683c8f";
+    version = "01540d77cef95aa71547cbbec317a644f78317ea";
     src = fetchFromGitHub {
       owner = "LGFae";
       repo = "swww";
-      rev = "8a7a00a49ca446abebafa517d843522bed683c8f";
+      rev = "01540d77cef95aa71547cbbec317a644f78317ea";
       fetchSubmodules = false;
-      sha256 = "sha256-17dpTHRpACiWfwT1vBblFRc1X8yzUdBwbPe+zOJIbsw=";
+      sha256 = "sha256-Nj84ZoGJy/iKLJj5mHOBhlO8YDc0rY47jOO+TjWk5LM=";
     };
-    date = "2024-04-06";
+    date = "2024-04-11";
   };
   transmission-web-soft-theme = {
     pname = "transmission-web-soft-theme";
@@ -27,28 +27,28 @@
   };
   wallust = {
     pname = "wallust";
-    version = "104d99fcb4ada743d45de76caa48cd899b021601";
+    version = "7d2a3a08f5b6d59d375fb38dcd0a5a6397278808";
     src = fetchgit {
       url = "https://codeberg.org/explosion-mental/wallust.git";
-      rev = "104d99fcb4ada743d45de76caa48cd899b021601";
+      rev = "7d2a3a08f5b6d59d375fb38dcd0a5a6397278808";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
-      sha256 = "sha256-gGyxRdv2I/3TQWrTbUjlJGsaRv4SaNE+4Zo9LMWmxk8=";
+      sha256 = "sha256-zf9NJLqSkf+VrNjkZywA8OdVm6K7viVdk/7Qt3LqNCQ=";
     };
-    date = "2024-03-08";
+    date = "2024-04-11";
   };
   waybar = {
     pname = "waybar";
-    version = "42dc9cb85f27e3db02da83cd13624cfc5a7191d3";
+    version = "e8038ef9f3d85f41821a93fcc6de3310ececab2c";
     src = fetchFromGitHub {
       owner = "Alexays";
       repo = "Waybar";
-      rev = "42dc9cb85f27e3db02da83cd13624cfc5a7191d3";
+      rev = "e8038ef9f3d85f41821a93fcc6de3310ececab2c";
       fetchSubmodules = false;
-      sha256 = "sha256-R3yPS5ktvzhUI+TeHTDkbKgiA8SDvozu33azFUeMVoo=";
+      sha256 = "sha256-ft0ETC6x4noYnZcWJOn+zSQbQNKfZhtPGgeMxleBLZE=";
     };
-    date = "2024-04-03";
+    date = "2024-04-10";
   };
   wezterm = {
     pname = "wezterm";
