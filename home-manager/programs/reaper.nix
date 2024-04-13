@@ -7,17 +7,39 @@
   config = lib.mkIf config.custom.reaper.enable {
     home = {
       packages = with pkgs; [ 
+        # The DAW
         reaper 
-        helm
 
+        # Plugins
+        helm
+        sorcer
         oxefmsynth
+        fmsynth
         aether-lv2
         bespokesynth
-        x42-gmsynth
+        x42-plugins
         fluidsynth
         airwindows-lv2
         mda_lv2
         tunefish
+        soundfont-generaluser
+        soundfont-ydp-grand
+        noise-repellent
+        speech-denoiser
+        mod-distortion
+        midi-trigger
+        distrho
+        bshapr
+        bchoppr
+        fomp
+        gxplugins-lv2
+        fverb
+        mooSpace
+        boops
+        artyFX
+        zam-plugins
+        molot-lite
+        bankstown-lv2
       ];
       # NOTE: plugins are installed into these directories:
       # `/etc/profiles/per-user/${user}/lib/lv2`

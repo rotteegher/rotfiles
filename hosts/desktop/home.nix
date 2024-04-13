@@ -33,7 +33,7 @@
       enabled = true;
       # (Starts from 0) devIndex 0 is first monitor in "displays" list
       devIndex = 0;
-      transform = 3;
+      transform = 0;
     };
     gradience.enable = true;
     firefox.enable = true;
