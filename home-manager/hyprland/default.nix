@@ -31,6 +31,7 @@ in {
 
         # hyprland shaders
         hyprshade
+        hyprpaper
 
         # clipboard history
         cliphist
