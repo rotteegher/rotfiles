@@ -39,6 +39,7 @@
     firefox.enable = true;
     wallust = {
       enable = true;
+      colorscheme = "base16-onedark";
     };
     rofi = {
       enable = true;
