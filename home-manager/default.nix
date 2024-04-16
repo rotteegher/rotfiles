@@ -42,6 +42,9 @@
         home-manager
         libreoffice
         trash-cli
+
+        mcomix
+
         # misc utilities for dotfiles written in rust
         custom.dotfiles-utils
 
