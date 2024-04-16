@@ -3,15 +3,15 @@
 {
   swww = {
     pname = "swww";
-    version = "01540d77cef95aa71547cbbec317a644f78317ea";
+    version = "132bde3ae00731cc59253611aa4f4223f1111966";
     src = fetchFromGitHub {
       owner = "LGFae";
       repo = "swww";
-      rev = "01540d77cef95aa71547cbbec317a644f78317ea";
+      rev = "132bde3ae00731cc59253611aa4f4223f1111966";
       fetchSubmodules = false;
-      sha256 = "sha256-Nj84ZoGJy/iKLJj5mHOBhlO8YDc0rY47jOO+TjWk5LM=";
+      sha256 = "sha256-xZyUFunPaat7WlNEmjYP2ddX6bApvmznYnuSRDKHOOw=";
     };
-    date = "2024-04-11";
+    date = "2024-04-14";
   };
   transmission-web-soft-theme = {
     pname = "transmission-web-soft-theme";
@@ -40,15 +40,15 @@
   };
   waybar = {
     pname = "waybar";
-    version = "e8038ef9f3d85f41821a93fcc6de3310ececab2c";
+    version = "3efebc282294c78f7312b70d2f18e3df3daacd91";
     src = fetchFromGitHub {
       owner = "Alexays";
       repo = "Waybar";
-      rev = "e8038ef9f3d85f41821a93fcc6de3310ececab2c";
+      rev = "3efebc282294c78f7312b70d2f18e3df3daacd91";
       fetchSubmodules = false;
-      sha256 = "sha256-ft0ETC6x4noYnZcWJOn+zSQbQNKfZhtPGgeMxleBLZE=";
+      sha256 = "sha256-X8bn+q9/lcTmODxqLF9jm/ZuakRWgATrEJLPDsYO3dc=";
     };
-    date = "2024-04-10";
+    date = "2024-04-15";
   };
   wezterm = {
     pname = "wezterm";
