@@ -49,11 +49,17 @@ in {
   };
 
   gtk.gtk3.bookmarks = [
-    "file:///home/rot/Downloads"
-    "file:///home/rot/pr"
-    "file:///home/rot/pr/rotfiles"
-    "file:///home/rot/Pictures/Wallpapers"
-    "file:///persist Persist"
+    "file:///home/rot/Documents Documents"
+    "file:///home/rot/Downloads Downloads"
+    "file:///home/rot/Videos Videos"
+    "file:///home/rot/Pictures Pictures"
+    "file:///home/rot/Pictures/Wallpapers WALLPAPERS"
+    "file:///home/rot/pr PR"
+    "file:///home/rot/pr/rotfiles ROTS"
+    "file:///persist PERSIST"
+    "smb://192.168.1.101/wdc-data smbLAPwdc"
+    "smb://192.168.1.101/stsea-okii smbLAPstsea"
+    "smb://192.168.1.101/persist smbLAPpersist"
   ];
 
   # other OSes seem to override this file

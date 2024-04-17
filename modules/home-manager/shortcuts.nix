@@ -19,8 +19,6 @@
       Ps = "~/Pictures/Screenshots";
       Pw = "~/Pictures/Wallpapers";
       dw = "~/Downloads";
-      dp = "~/Downloads/pending";
-      dus = "~/Downloads/pending/Unsorted";
       mw = "/md/wdc-data";
       ms = "/md/stsea-okii";
     };

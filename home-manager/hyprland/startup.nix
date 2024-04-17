@@ -36,7 +36,8 @@ in {
       # (openOnWorkspace 9 "easyeffects")
 
       # download desktop
-      (openOnWorkspace 10 "$term /md/wdc-data/_SMALL/_ANIME")
+      (openOnWorkspace 10 "$term ~/Downloads")
+      (openOnWorkspace 10 "nemo ~/Downloads")
       (openOnWorkspace 10 "transmission-remote-gtk")
       # (openOnWorkspace 10 "hyprctl dispatch layoutmsg orientationcycle left top")
 

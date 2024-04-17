@@ -7,7 +7,6 @@
 }: let
   home = "/home/${user}";
   downloadDir = config.custom-nixos.bittorrent.downloadDir;
-  pendingDir = "${downloadDir}/_CURRENT";
 in {
   config = lib.mkIf config.custom-nixos.bittorrent.enable {
     services.transmission = {
@@ -30,7 +29,7 @@ in {
         details-window-height = 525;
         details-window-width = 700;
         dht-enabled = true;
-        download-dir = pendingDir;
+        download-dir = downloadDir;
         download-queue-enabled = true;
         download-queue-size = 3;
         encryption = 1;
@@ -59,7 +58,7 @@ in {
         queue-stalled-minutes = 30;
         ratio-limit = 0.1000;
         ratio-limit-enabled = true;
-        recent-download-dir-1 = pendingDir;
+        recent-download-dir-1 = downloadDir;
         rename-partial-files = true;
         rpc-authentication-required = false;
         rpc-bind-address = "0.0.0.0";
@@ -108,7 +107,7 @@ in {
     };
 
     systemd.tmpfiles.rules = [
-      "d ${pendingDir} 755 ${user} users - "
+      "d ${downloadDir} 755 ${user} users - "
     ];
 
     # setup port forwarding
