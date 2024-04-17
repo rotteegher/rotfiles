@@ -7,6 +7,7 @@
   imports = [
     ./audio.nix
     ./auth.nix
+    ./samba.nix
     ./configuration.nix
     ./keyd.nix
     ./docker.nix

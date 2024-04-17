@@ -55,6 +55,9 @@
       git-keyid = "92058DC9E2CF5F4C";
     };
     terminal.size = 12;
+    persist = {
+      home.directories = [ "Downloads" "Documents" "Videos" ];
+    };
   };
 
   home = {

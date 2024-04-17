@@ -82,11 +82,6 @@ in {
         };
       };
     };
-    # systemd.tmpfiles.rules = [
-    #   "d /persist/home/${user}/Documents 755 ${user} users - "
-    #   "d /persist/home/${user}/Downloads 755 ${user} users - "
-    #   "d /persist/home/${user}/Pictures  755 ${user} users - "
-    # ];
     # SYNOPSIS - https://www.mankier.com/5/tmpfiles.d
     # Type  Path                                     Mode User Group Age         Argument
     # f     /file/to/create                          mode user group -           content
