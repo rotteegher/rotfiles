@@ -54,19 +54,14 @@
 
       systemPackages = with pkgs;
         [
-          gcc
-          libgcc
           stdmanpages
-          helix
-          neovim
           curl
           eza
           killall
-          du-dust
           ntfs3g
           procps
           ripgrep
-          tree # for root, normal user has an eza alias
+          htop
           wget
           dig
           lsof
@@ -76,7 +71,6 @@
           netdiscover
           aria2
           inetutils
-          htop
           usbutils
           zellij
           efibootmgr
@@ -89,10 +83,21 @@
             theme.package
             iconTheme.package
           ])
-        ++ (lib.optional config.custom-nixos.distrobox.enable pkgs.distrobox)
+        # add custom user created shell packages
+        ++ (lib.attrValues config.custom-nixos.shell.finalPackages)
         ++ (lib.optional config.hm.custom.helix.enable helix)
         ++ (lib.optional config.hm.custom.discord.enable vesktop);
     };
+
+    # add custom user created shell packages to pkgs.custom.shell
+    nixpkgs.overlays = [
+      (_: prev: {
+        custom = prev.custom // {
+          shell = config.custom-nixos.shell.finalPackages // config.hm.custom.shell.finalPackages;
+        };
+      })
+    ];
+
 
     # setup fonts
     fonts.packages = config.hm.custom.fonts.packages;

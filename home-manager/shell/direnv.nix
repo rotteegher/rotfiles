@@ -1,25 +1,22 @@
-{...}: {
+_: {
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
   };
 
-  home.sessionVariables = {
+  home = {
     # silence direnv
-    DIRENV_LOG_FORMAT = "";
+    sessionVariables.DIRENV_LOG_FORMAT = "";
+  };
+
+  custom.shell.packages = {
+    mkdevenv = ''nix flake init --template github:iynaix/dotfiles#"$1"'';
   };
 
   custom.persist = {
     home = {
-      directories = [
-        ".local/share/direnv"
-      ];
-      cache = [
-        ".cargo"
-        ".cache/pip"
-        ".cache/torch" # pytorch models
-        ".cache/yarn"
-      ];
+      directories = [ ".local/share/direnv" ];
+      cache = [ ".cache/pip" ];
     };
   };
 }

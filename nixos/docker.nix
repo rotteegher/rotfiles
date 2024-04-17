@@ -2,9 +2,12 @@
   user,
   lib,
   config,
+  pkgs,
   ...
 }:
 lib.mkIf (config.custom-nixos.docker.enable || config.custom-nixos.distrobox.enable) {
+  environment.systemPackages = lib.mkIf config.custom-nixos.distrobox.enable [ pkgs.distrobox ];
+
   users.users.${user}.extraGroups = [ "docker" ];
 
   virtualisation.docker = {

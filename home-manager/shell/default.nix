@@ -2,28 +2,29 @@
   imports = [
     ./bash.nix
     ./btop.nix
+    ./cava.nix
     ./direnv.nix
+    ./eza.nix
     ./fish.nix
     ./git.nix
     # ./neovim.nix
     ./nix.nix
     ./rice.nix
-    ./cava.nix
+    ./rust.nix # TODO
     ./shell.nix
     ./starship.nix
     ./tmux.nix
+    # ./typescript.nix # TODO
     ./yazi.nix
   ];
 
   home.packages = with pkgs; [
     dysk # better disk info
-    fd
-    fx
-    jq
+    fd # better find
+    fx # terminal json viewer and processor
     htop
-    btop
-    cmus
-    sd
+    jq
+    sd # better sed
     libnotify
     ugrep
     file
@@ -32,22 +33,17 @@
     ent
     coreutils-full
 
-    typora
-    marksman
-    vscode-langservers-extracted
-    yaml-language-server
-    taplo
+    cmus
+
+    typora # md viewer
+    marksman # mv lsp
+    vscode-langservers-extracted # lldb-vscode
+    yaml-language-server # yaml lsp
+    taplo # toml lsp
   ];
 
   programs = {
     bat.enable = true;
-
-    eza = {
-      enable = true;
-      enableBashIntegration = true;
-      icons = true;
-      extraOptions = ["--group-directories-first" "--header" "--octal-permissions"];
-    };
 
     fzf = {
       enable = true;

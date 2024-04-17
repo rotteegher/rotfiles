@@ -1,9 +1,10 @@
 {
   inputs,
-  pkgs,
   lib,
+  pkgs,
   ...
-}: let
+}:
+let
   # include generated sources from nvfetcher
   sources = import ./generated.nix {
     inherit (pkgs)
@@ -12,119 +13,96 @@
       fetchgit
       dockerTools
       ;
-    };
-in 
+  };
+in
 {
   nixpkgs.overlays = [
-    (
-      final: prev: let
-        overrideRustPackage = pkgname:
-          prev.${pkgname}.overrideAttrs (o:
-            sources.${pkgname}
-            // {
-              # creating an overlay for buildRustPackage overlay
-              # https://discourse.nixos.org/t/is-it-possible-to-override-cargosha256-in-buildrustpackage/4393/3
-              cargoDeps = prev.rustPlatform.importCargoLock {
-                lockFile = sources.${pkgname}.src + "/Cargo.lock";
-                allowBuiltinFetchGit = true;
-              };
-            });
-      in {
-        # include custom packages
-        custom =
-          (prev.custom or {})
-          // (import ../packages {
-            inherit (prev) pkgs;
-            inherit inputs;
-          });
-
-        # patch imv to not repeat keypresses causing waybar to launch infinitely
-        # https://github.com/eXeC64/imv/issues/207#issuecomment-604076888
-        imv = prev.imv.overrideAttrs (o: {
-          patches =
-            (o.patches or [])
-            ++ [
-              # https://lists.sr.ht/~exec64/imv-devel/patches/39476
-              ./imv-fix-repeated-keypresses.patch
-            ];
+    (_: prev: {
+      # include custom packages
+      custom =
+        (prev.custom or { })
+        // {
+          lib = pkgs.callPackage ./lib.nix { inherit (prev) pkgs; };
+        }
+        // (import ../packages {
+          inherit (prev) pkgs;
+          inherit inputs;
         });
 
-        # add default font to silence null font errors
-        lsix = prev.lsix.overrideAttrs (o: {
-          postFixup = ''
-            substituteInPlace $out/bin/lsix \
-              --replace '#fontfamily=Mincho' 'fontfamily="JetBrainsMono-NF-Regular"'
-            ${o.postFixup}
-          '';
-        });
+      # nixos-small logo looks like ass
+      fastfetch = prev.fastfetch.overrideAttrs (o: {
+        patches = (o.patches or [ ]) ++ [ ./fastfetch-nixos-old-small.patch ];
+      });
 
+      hyprcursor =
+        # assert (
+        #   lib.assertMsg (prev.hyprcursor.version == "0.1.5") "hyprcursor: source overlay still needed?"
+        # );
+        prev.hyprcursor.overrideAttrs (
+          o: sources.hyprcursor // { buildInputs = (o.buildInputs or [ ]) ++ [ prev.tomlplusplus ]; }
+        );
 
-        rclip = prev.rclip.overridePythonAttrs (o: {
-          version = "1.7.24";
+      hyprlock = prev.hyprlock.overrideAttrs (_: sources.hyprlock);
 
-          src = prev.fetchFromGitHub {
-            owner = "yurijmikhalevich";
-            repo = "rclip";
-            rev = "v1.7.24";
-            hash = "sha256-JWtKgvSP7oaPg19vWnnCDfm7P5Uew+v9yuvH7y2eHHM=";
+      # add default font to silence null font errors
+      lsix = prev.lsix.overrideAttrs (o: {
+        postFixup = ''
+          substituteInPlace $out/bin/lsix \
+            --replace '#fontfamily=Mincho' 'fontfamily="JetBrainsMono-NF-Regular"'
+          ${o.postFixup}
+        '';
+      });
+
+      # nixos-small logo looks like ass
+      neofetch = prev.neofetch.overrideAttrs (o: {
+        patches = (o.patches or [ ]) ++ [ ./neofetch-nixos-small.patch ];
+      });
+
+      # fix nix package count for nitch
+      nitch = prev.nitch.overrideAttrs (o: {
+        patches = (o.patches or [ ]) ++ [ ./nitch-nix-pkgs-count.patch ];
+      });
+
+      # use latest commmit from git
+      swww = prev.swww.overrideAttrs (
+        _:
+        sources.swww
+        // {
+          # creating an overlay for buildRustPackage overlay
+          # https://discourse.nixos.org/t/is-it-possible-to-override-cargosha256-in-buildrustpackage/4393/3
+          cargoDeps = prev.rustPlatform.importCargoLock {
+            lockFile = sources.swww.src + "/Cargo.lock";
+            allowBuiltinFetchGit = true;
           };
+        }
+      );
 
-          nativeBuildInputs = o.nativeBuildInputs ++ [pkgs.python3Packages.pythonRelaxDepsHook];
+      wallust =
+        assert (lib.assertMsg (prev.wallust.version == "2.10.0") "wallust: use wallust from nixpkgs?");
+        prev.wallust.overrideAttrs (
+          o:
+          sources.wallust
+          // {
+            nativeBuildInputs = (o.nativeBuildInputs or [ ]) ++ [ prev.installShellFiles ];
 
-          pythonRelaxDeps = ["torch" "torchvision"];
-        });
-
-        # use latest commmit from git
-        swww = overrideRustPackage "swww";
-
-        # transmission dark mode, the default theme is hideous
-        transmission = let
-          themeSrc = sources.transmission-web-soft-theme.src;
-        in
-          prev.transmission.overrideAttrs (o: {
-            # sed command taken from original install.sh script
             postInstall = ''
-              ${o.postInstall}
-              cp -RT ${themeSrc}/web/ $out/share/transmission/web/
-              sed -i '21i\\t\t<link href="./style/transmission/soft-theme.min.css" type="text/css" rel="stylesheet" />\n\t\t<link href="style/transmission/soft-dark-theme.min.css" type="text/css" rel="stylesheet" />\n' $out/share/transmission/web/index.html;
+              installManPage man/wallust*
+              installShellCompletion --cmd wallust \
+                --bash completions/wallust.bash \
+                --zsh completions/_wallust \
+                --fish completions/wallust.fish
             '';
-          });
 
-        # use latest commmit from git
-        # waybar =
-        #   let
-        #     # Derived from subprojects/cava.wrap
-        #     libcava = rec {
-        #       version = "0.10.1";
-        #       src = pkgs.fetchFromGitHub {
-        #         owner = "LukashonakV";
-        #         repo = "cava";
-        #         rev = version;
-        #         hash = "sha256-iIYKvpOWafPJB5XhDOSIW9Mb4I3A4pcgIIPQdQYEqUw=";
-        #       };
-        #     };
-        #   in
-        #   assert (lib.assertMsg (prev.waybar.version == "0.9.24") "waybar: use waybar from nixpkgs?");
-        #   prev.waybar.overrideAttrs (
-        #     o:
-        #     sources.waybar
-        #     // {
-        #       version = "${o.version}-${sources.waybar.version}";
-        #       mesonFlags = lib.remove "-Dgtk-layer-shell=enabled" o.mesonFlags;
-        #       postUnpack = ''
-        #         pushd "$sourceRoot"
-        #         cp -R --no-preserve=mode,ownership ${libcava.src} subprojects/cava-${libcava.version}
-        #         patchShebangs .
-        #         popd
-        #       '';
-        #     }
-        #   );
-        # TODO: remove on new wezterm release
-        # fix wezterm crashing instantly
-        # https://github.com/wez/wezterm/issues/4483
-        wezterm = overrideRustPackage "wezterm";
-      }
-    )
+            # creating an overlay for buildRustPackage overlay
+            # https://discourse.nixos.org/t/is-it-possible-to-override-cargosha256-in-buildrustpackage/4393/3
+            cargoDeps = prev.rustPlatform.importCargoLock {
+              lockFile = sources.wallust.src + "/Cargo.lock";
+              allowBuiltinFetchGit = true;
+            };
+          }
+        );
+
+    })
     inputs.nix-minecraft.overlay
   ];
 }

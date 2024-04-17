@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     devenv.url = "github:cachix/devenv";
+    fenix.url = "github:nix-community/fenix";
   };
 
   outputs =
@@ -28,6 +29,11 @@
             dotenv.disableHint = true;
 
             packages = with pkgs; [ ];
+
+            languages.rust = {
+              enable = true;
+              channel = "stable";
+            };
           };
         };
     };
