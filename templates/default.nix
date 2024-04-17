@@ -1,33 +1,22 @@
 let
-  welcomeText = ''
-    # `.devenv` and `direnv` should be added to `.gitignore`
-    ```sh
-      echo .devenv >> .gitignore
-      echo .direnv >> .gitignore
-    ```
-  '';
-in rec {
-  c = {
-    inherit welcomeText;
-    path = ./c;
-    description = "testing compiling stuff (and blender)";
-  };
   javascript = {
-    inherit welcomeText;
     path = ./javascript;
     description = "Javascript / Typescript dev environment";
   };
 
   python = {
-    inherit welcomeText;
     path = ./python;
     description = "Python dev environment";
   };
 
   rust = {
-    inherit welcomeText;
     path = ./rust;
     description = "Rust dev environment";
+  };
+
+  rust-stable = {
+    path = ./rust-stable;
+    description = "Rust (latest stable from fenix) dev environment";
   };
   rust-toolchain = {
     inherit welcomeText;
@@ -40,9 +29,19 @@ in rec {
     description = "Default empty dev environment";
   };
 
+in
+{
+  inherit
+    javascript
+    python
+    rust
+    rust-stable
+    rust-toolchain
+    empty
+    ;
   js = javascript;
   ts = javascript;
   py = python;
   rs = rust;
-  clang = c;
+  rs-stable = rust-stable;
 }

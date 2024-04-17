@@ -8,23 +8,6 @@
     home.packages = [pkgs.lldb pkgs.clang-tools];
     programs.helix = {
       enable = true;
-      languages = {
-        language = [
-          {
-            name = "rust";
-            auto-format = true;
-            scope = "source.rs";
-            file-types = ["rs"];
-            indent = {
-              tab-width = 4;
-              unit = "    ";
-            };
-            language-id = "rust";
-            roots = ["Cargo.lock" "Cargo.toml"];
-            language-servers = ["rust-analyzer"];
-          }
-        ];
-      };
       themes = {
         mtr = {
           # "inherits" = "mellow";
@@ -55,7 +38,7 @@
           C-p = ["move_line_up" "scroll_up"];
           C-n = ["move_line_down" "scroll_down"];
           C-y = "yank_to_clipboard";
-          # esc = ["collapse_selection" "keep_primary_selection"];
+          esc = ["collapse_selection" "keep_primary_selection"]; # FIXME
         };
         editor.cursor-shape = {
           insert = "bar";

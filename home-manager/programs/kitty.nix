@@ -25,6 +25,7 @@ lib.mkIf cfg.enable {
     keybindings = {
       "ctrl+shift+equal" = "change_font_size all -2.0";
       "ctrl+shift+^" = "change_font_size all +2.0";
+      "ctrl+shift+0" = "change_font_size all +2.0";
     };
   };
 

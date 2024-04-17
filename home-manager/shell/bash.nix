@@ -1,40 +1,21 @@
-{
-  config,
-  lib,
-  user,
-  ...
-}: let
+{ config, ... }: 
+let
   cfg = config.custom.shell;
-  bashFunctions = lib.concatStringsSep "\n" (lib.mapAttrsToList (name: value:
-    if lib.isString value
-    then ''
-      function ${name}() {
-      ${value}
-      }
-    ''
-    else ''
-      function ${name}() {
-      ${value.bashBody}
-      }
-      ${value.bashCompletion}
-    '')
-  cfg.functions);
   histFile = "/persist/.config/bash/.bash_history";
-in {
+in 
+{
   # NOTE: see shell.nix for shared aliases and initExtra
   programs.bash = {
     enable = true;
     enableCompletion = true;
     historyFile = histFile;
     # shellAliases = {
-    #   ehistory = "nvim ${histFile}";
+    #   ehistory = "hx ${histFile}";
     # };
 
     inherit (cfg) profileExtra;
     initExtra =
       ''
-        ${bashFunctions}
-
         # Change cursor with support for inside/outside tmux
         function _set_cursor() {
             if [[ $TMUX = "" ]]; then
@@ -59,18 +40,6 @@ in {
 
         # set cursor with function
         _set_underline_cursor
-      ''
-      # wallust colorscheme
-      + lib.optionalString (config.custom.wallust.enable) ''
-        wallust_colors="/home/${user}/.cache/wallust/sequences"
-        if [ -e "$wallust_colors" ]; then
-          command cat "$wallust_colors"
-        fi
       '';
   };
-  # custom.persist = {
-  #   home.directories = [
-  #     ".config/bash"
-  #   ];
-  # };
 }

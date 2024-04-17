@@ -1,17 +1,23 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   home = {
     packages = with pkgs; [
+      asciiquarium
       cbonsai
       cmatrix
       fastfetch
       imagemagick
       nitch
       pipes-rs
+      scope-tui
+      tenki
+      inputs.wfetch.packages.${pkgs.system}.wfetch
     ];
 
     shellAliases = {
@@ -36,4 +42,3 @@
     };
   };
 }
-

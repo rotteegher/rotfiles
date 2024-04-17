@@ -45,16 +45,12 @@ in {
 
       (openOnWorkspace 3 ''nix run nixpkgs#st fish'')
 
-      # Idle
-      # "${lib.getExe pkgs.swayidle} -w timeout 480 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
-
       # focus the initial workspaces on startup
       "hyprctl dispatch workspace 1"
       "hyprctl dispatch workspace 4"
 
-      # FIXME: weird race condition with swww init, need to sleep for a second
-      # https://github.com/Horus645/swww/issues/144
-      "sleep 1; swww init && hypr-wallpaper && launch-waybar"
+      "swww-daemon &"
+      "sleep 1; hypr-wallpaper && launch-waybar"
 
 
       # fix gparted "cannot open display: :0" error
@@ -62,15 +58,14 @@ in {
       # fix Authorization required, but no authorization pcustomocol specified error
       # "${pkgs.xorg.xhost}/bin/xhost si:localuser:root"
 
+      # stop fucking with my cursors
+      "hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}"
+
       # start polkit agent
       "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &"
 
-
       # Start input engine fcitx5
       "fcitx5 &"
-
-      # Start Bluetooth
-      # "blueman-applet &"
     ];
   };
 }

@@ -30,5 +30,30 @@ in {
     virt-manager.enable = lib.mkEnableOption "virt-manager";
     flatpak.enable = lib.mkEnableOption "flatpak";
     steam.enable = lib.mkEnableOption "steam";
+
+    shell = {
+      packages = lib.mkOption {
+        type = with lib.types; attrsOf (either str package);
+        default = { };
+        description = "Attrset of extra shell packages to install and add to pkgs.custom overlay, strings will be converted to writeShellApplication.";
+      };
+
+      finalPackages = lib.mkOption {
+        type = with lib.types; attrsOf package;
+        readOnly = true;
+        default = lib.mapAttrs (
+          name: pkg:
+          if lib.isString pkg then
+            pkgs.writeShellApplication {
+              inherit name;
+              text = pkg;
+            }
+          else
+            pkg
+        ) config.custom-nixos.shell.packages;
+        description = "Extra shell packages to install after all entries have been converted to packages.";
+      };
+    };
+
   };
 }

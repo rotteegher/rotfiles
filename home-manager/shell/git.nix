@@ -95,23 +95,20 @@ in {
   };
 
   # extra git functions
-  custom.shell.functions = {
+  custom.shell.packages = {
+      # create a new branch and push it to origin
+    gbc = ''
+      git branch "$1"
+      git checkout "$1"
+    '';
     # delete a remote branch
     grd = ''
-      gb -D $1
-      gp origin --delete $1
+      git branch -D "$1"
+      git push origin --delete "$1"
     '';
     # searches git history, can never remember this stupid thing
-    gsearch = {
-      bashBody = ''
-        # 2nd argument is target path and subsequent arguments are passed through
-        git log -S$1 -- ''${2:-.} $*[2,-1]
-      '';
-      fishBody = ''
-        # 2nd argument is target path and subsequent arguments are passed through
-        git log -S$argv[1] -- $argv[2] $argv[3..-1]
-      '';
-    };
+    # 2nd argument is target path and subsequent arguments are passed through
+    gsearch = ''git log -S"$1" -- "\${"2:-."}" "$*"[2,-1]'';
   };
 
   home.shellAliases = {
@@ -145,6 +142,7 @@ in {
   custom.persist = {
     home.directories = [
       ".config/gh"
+      ".config/systemd"
     ];
   };
 }

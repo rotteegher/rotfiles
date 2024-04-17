@@ -73,17 +73,27 @@ in {
         default = "";
         description = "Extra shell agnostic commands that should be run when initializing a login shell.";
       };
-      functions = lib.mkOption {
-        type = lib.types.attrsOf (lib.types.either lib.types.lines functionModule);
-        example = lib.literalExpression ''
-          foo = "echo foo";
-          bar = {
-            bashBody = "echo bar";
-            fishBody = "echo bar";
-          };
-        '';
-        default = {};
-        description = "Extra shell agnostic functions.";
+
+      packages = lib.mkOption {
+        type = with lib.types; attrsOf (either str package);
+        default = { };
+        description = "Attrset of extra shell packages to install and add to pkgs.custom overlay, strings will be converted to writeShellApplication.";
+      };
+
+      finalPackages = lib.mkOption {
+        type = with lib.types; attrsOf package;
+        readOnly = true;
+        default = lib.mapAttrs (
+          name: pkg:
+          if lib.isString pkg then
+            pkgs.writeShellApplication {
+              inherit name;
+              text = pkg;
+            }
+          else
+            pkg
+        ) config.custom.shell.packages;
+        description = "Extra shell packages to install after all entries have been converted to packages.";
       };
     };
   };
