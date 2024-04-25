@@ -32,7 +32,7 @@ in
         rhx = "cd ~/pr/rotfiles & hx .";
         dhx = "cd ~/pr/dotfiles & hx .";
 
-        hy = "Hyprland";
+        hy = "exec Hyprland &> /dev/null";
 
         # cd aliases
         ".." = "cd ..";
