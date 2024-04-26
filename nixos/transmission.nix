@@ -116,6 +116,7 @@ in {
     hm.home.packages = with pkgs; [transmission-remote-gtk];
 
     custom-nixos.persist.home.directories = [
+      "_CURRENT"
       ".config/transmission-daemon"
       ".config/transmission-remote-gtk"
     ];

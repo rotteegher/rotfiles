@@ -23,7 +23,7 @@ in {
       enable = lib.mkEnableOption "Torrenting Applications";
       downloadDir = lib.mkOption {
         type = lib.types.str;
-        default = "/persist/home/${user}/Downloads";
+        default = "/home/${user}/_CURRENT/";
       };
     };
     vercel.enable = lib.mkEnableOption "Vercel Backups";
