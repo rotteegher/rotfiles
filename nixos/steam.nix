@@ -27,6 +27,7 @@
       krb5
       keyutils
       glfw-wayland-minecraft
+      path-of-building
     ];
     custom-nixos.persist = {
       home.directories = [

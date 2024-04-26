@@ -28,6 +28,13 @@
   systemd.enableEmergencyMode = false;
 
   networking.hostName = "${host}";
+
+  networking.hosts = {
+    "192.168.1.101" = ["desktop"];
+    "192.168.1.104" = ["omen"];
+    "192.168.1.105" = ["omen-wlan"];
+  };
+  
   # Enable networking
   networking.networkmanager.enable = true;
 
