@@ -9,8 +9,8 @@
     wifi.enable = true;
     displays = [
       {
-        name = "HDMI-A-2";
-        hyprland = "1920x1080@60,0x0,1,transform,1";
+        name = "HDMI-A-2";                           # ====== 2
+        hyprland = "1920x1080@60,0x0,1,transform,2"; # |||||| 1
         workspaces = [
           1
           2
@@ -34,6 +34,8 @@
       # (Starts from 0) devIndex 0 is first monitor in "displays" list
       devIndex = 0;
       transform = 0;
+      # ====== 0
+      # |||||| 1
     };
     gradience.enable = true;
     firefox.enable = true;
