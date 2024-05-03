@@ -28,6 +28,7 @@
     hyprland = {
       modkey = "SUPER";
       autostart = false;
+      lock = true;
     };
     display.touchDevice = {
       enabled = true;

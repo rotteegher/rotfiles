@@ -15,6 +15,7 @@ in {
       bind = [
         "$mod, x, exec, hypr-lock"
       ];
+      bindl = [ ",switch:power-button-1, exec, hypr-lock" ",switch:power-button, exec, hypr-lock" ];
     };
 
     custom.wallust.templates = {

@@ -45,7 +45,7 @@ in {
         "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
         "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
         "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
-        "file://${wdc-blue-mountpoint}/papers papers"
+        "file://${wdc-blue-mountpoint}/Documents/papers papers"
         "file://${wdc-blue-mountpoint}/ wdc-blue/data"
       ] ++ (lib.optionals cfg.stsea3tb [
         "file://${stsea-mountpoint}/ stsea-barra/okii"

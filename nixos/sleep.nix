@@ -1,5 +1,6 @@
 {
   lib,
+  user,
   ...
 }: {
     # boot.resumeDevice = "/dev/disk/by-label/SWAP";
@@ -8,11 +9,20 @@
     boot.zfs.allowHibernation = true;
     boot.zfs.forceImportRoot = false;
 
+    # disable power button turning off the system
+    services.logind.extraConfig = ''
+      # don’t shutdown when power button is short-pressed
+      HandlePowerKey=lock
+      HandleSuspendKey=lock
+      HandleHibernateKey=lock
+      IdleAction=lock
+    '';
+
     systemd.sleep.extraConfig = ''
-      AllowSuspend=yes
-      AllowHibernation=yes
-      AllowSuspendThenHibernate=yes
-      AllowHybridSleep=yes
+      AllowSuspend=no
+      AllowHibernation=no
+      AllowSuspendThenHibernate=no
+      AllowHybridSleep=no
       #SuspendMode=
       SuspendState=mem standby freeze
       # Configure suspend as hybrid-sleep
@@ -26,9 +36,21 @@
     '';
 
     systemd.targets = {
-      sleep.enable = true;
-      suspend.enable = true;
-      hibernate.enable = true;
-      "hybrid-sleep".enable = true;
+      sleep.enable = false;
+      suspend.enable = false;
+      hibernate.enable = false;
+      "hybrid-sleep".enable = false;
+    };
+    services.acpid = {
+      enable = true;
+      lidEventCommands =
+        ''
+          /etc/profiles/per-user/${user}/bin/hypr-lock
+        '';
+
+      powerEventCommands =
+        ''
+          /etc/profiles/per-user/${user}/bin/hypr-lock
+        '';
     };
 }
