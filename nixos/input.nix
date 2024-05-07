@@ -16,21 +16,21 @@
         ];
       };
     };
-    custom-nixos.persist = {
+    custom.persist = {
       home.directories = [
         ".config/fcitx/"
         ".config/fcitx5/"
       ];
     };
     services.xserver.xkb = {
-      layout = config.custom-nixos.xkbLayout;
+      layout = config.custom.xkbLayout;
       variant = "";
       options = "compose:ralt";
     };
 
     # KEYMAPS
     console = {
-      packages = [ pkgs.terminus_font ];
+      packages = [pkgs.terminus_font];
       # seems to break virtual-console service because it can't find the font
       # https://github.com/NixOS/nixpkgs/issues/257904
       font = "${pkgs.terminus_font}/share/consolefonts/ter-112n.psf.gz";

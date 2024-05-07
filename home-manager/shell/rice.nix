@@ -12,6 +12,8 @@
       cbonsai
       cmatrix
       fastfetch
+      fortune
+      cowsay
       imagemagick
       nitch
       pipes-rs

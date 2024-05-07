@@ -6,9 +6,9 @@
   user,
   ...
 }: let
-  cfg = config.custom-nixos;
+  cfg = config.custom;
 in {
-  options.custom-nixos = {
+  options.custom = {
     ### NIXOS LEVEL OPTIONS ###
     distrobox.enable = lib.mkEnableOption "distrobox";
     llm.enable = lib.mkEnableOption "large language model" // {default = false;};
@@ -26,34 +26,33 @@ in {
         default = "/home/${user}/_CURRENT/";
       };
     };
-    vercel.enable = lib.mkEnableOption "Vercel Backups";
-    virt-manager.enable = lib.mkEnableOption "virt-manager";
     flatpak.enable = lib.mkEnableOption "flatpak";
     steam.enable = lib.mkEnableOption "steam";
 
     shell = {
       packages = lib.mkOption {
         type = with lib.types; attrsOf (either str package);
-        default = { };
+        default = {};
         description = "Attrset of extra shell packages to install and add to pkgs.custom overlay, strings will be converted to writeShellApplication.";
       };
 
       finalPackages = lib.mkOption {
         type = with lib.types; attrsOf package;
         readOnly = true;
-        default = lib.mapAttrs (
-          name: pkg:
-          if lib.isString pkg then
-            pkgs.writeShellApplication {
-              inherit name;
-              text = pkg;
-            }
-          else
-            pkg
-        ) config.custom-nixos.shell.packages;
+        default =
+          lib.mapAttrs (
+            name: pkg:
+              if lib.isString pkg
+              then
+                pkgs.writeShellApplication {
+                  inherit name;
+                  text = pkg;
+                }
+              else pkg
+          )
+          config.custom.shell.packages;
         description = "Extra shell packages to install after all entries have been converted to packages.";
       };
     };
-
   };
 }

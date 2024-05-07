@@ -5,10 +5,10 @@
   pkgs,
   ...
 }:
-lib.mkIf (config.custom-nixos.docker.enable || config.custom-nixos.distrobox.enable) {
-  environment.systemPackages = lib.mkIf config.custom-nixos.distrobox.enable [ pkgs.distrobox ];
+lib.mkIf (config.custom.docker.enable || config.custom.distrobox.enable) {
+  environment.systemPackages = lib.mkIf config.custom.distrobox.enable [pkgs.distrobox];
 
-  users.users.${user}.extraGroups = [ "docker" ];
+  users.users.${user}.extraGroups = ["docker"];
 
   virtualisation.docker = {
     enable = true;
@@ -17,10 +17,9 @@ lib.mkIf (config.custom-nixos.docker.enable || config.custom-nixos.distrobox.ena
   };
 
   # store docker images on zroot/cache
-  custom-nixos.persist = {
+  custom.persist = {
     root = {
-      cache = [ "/var/lib/docker" ];
+      cache = ["/var/lib/docker"];
     };
   };
 }
-

@@ -1,5 +1,8 @@
-{ config, user, ... }:
 {
+  config,
+  user,
+  ...
+}: {
   # use centralized cargo cache
   home.sessionVariables = {
     CARGO_HOME = "/persist/cache/${config.xdg.dataHome}/.cargo";
@@ -52,4 +55,3 @@
     };
   };
 }
-

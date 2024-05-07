@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf config.custom-nixos.steam.enable {
+  config = lib.mkIf config.custom.steam.enable {
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -29,7 +29,7 @@
       glfw-wayland-minecraft
       path-of-building
     ];
-    custom-nixos.persist = {
+    custom.persist = {
       home.directories = [
         ".local/share/Steam"
       ];

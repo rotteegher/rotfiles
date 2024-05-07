@@ -3,41 +3,20 @@
   lib,
   pkgs,
   ...
-}: let
-  inherit (config.custom) displays;
-  rofi = lib.getExe pkgs.rofi;
+}:
+let
   pamixer = lib.getExe pkgs.pamixer;
-  qtile_like = config.custom.hyprland.qtile;
-in {
+in
+{
   wayland.windowManager.hyprland.settings = lib.mkIf config.wayland.windowManager.hyprland.enable {
-    bind = let
-      workspace_keybinds = lib.flatten ((pkgs.custom.lib.mapWorkspaces ({
-        workspace,
-        key,
-        ...
-      }:
-        if qtile_like
-        then [
-          # Switch workspaces with mainMod + [0-9]
-          "$mod, ${key}, focusworkspaceoncurrentmonitor, ${workspace}"
-          # Move active window to a workspace with mainMod + SHIFT + [0-9]
-          "$mod_SHIFT, ${key}, movetoworkspace, ${workspace}"
-          "$mod_SHIFT, ${key}, focusworkspaceoncurrentmonitor, ${workspace}"
-        ]
-        else [
-          # Switch workspaces with mainMod + [0-9]
-          "$mod, ${key}, workspace, ${workspace}"
-          # Move active window to a workspace with mainMod + SHIFT + [0-9]
-          "$mod_SHIFT, ${key}, movetoworkspace, ${workspace}"
-        ]))
-      displays);
-    in
+    bind =
       [
         # Exec
         "$mod, Return, exec, $term"
         "$mod_SHIFT, Return, exec, rofi -show drun"
         # Kill
         "$mod, BackSpace, killactive,"
+        "$mod_CTRL, BackSpace, exec, hyprctl kill"
         # File
         "$mod, b, exec, nemo ~/Downloads"
         "$mod_SHIFT, b, exec, $term yazi ~/Downloads"
@@ -68,7 +47,6 @@ in {
         "$mod_SHIFT, l, movewindow, r"
         "$mod_SHIFT, k, movewindow, u"
         "$mod_SHIFT, j, movewindow, d"
-
 
         # Switch workspaces with mainMod
         # +
@@ -143,17 +121,17 @@ in {
         "$mod, g, togglefloating"
 
         # sticky
-        "$mod, s, pin"
+        "$mod_CTRL, s, pin"
 
         # focus next / previous monitor
         "$mod, Left, focusmonitor, -1"
         "$mod, Right, focusmonitor, +1"
 
         # resize windows
-        "$mod SHIFT, right, resizeactive, 50 0"
-        "$mod SHIFT, left, resizeactive, -50 0"
-        "$mod SHIFT, up, resizeactive, 0 -50"
-        "$mod SHIFT, down, resizeactive, 0 50"
+        "$mod_SHIFT, right, resizeactive, 50 0"
+        "$mod_SHIFT, left, resizeactive, -50 0"
+        "$mod_SHIFT, up, resizeactive, 0 -50"
+        "$mod_SHIFT, down, resizeactive, 0 50"
 
         # # move to next / previous monitor
         # "$mod_SHIFT, Left, movewindow, ${
@@ -202,7 +180,6 @@ in {
         "$mod, mouse_down, workspace, e-1"
         "$mod, mouse_up, workspace, e+1"
 
-
         # dunst controls
         "$mod, grave, exec, dunstctl history-pop"
 
@@ -218,15 +195,11 @@ in {
         ",XF86AudioRaiseVolume, exec, ${pamixer} -i 5"
         ",XF86AudioMute, exec, ${pamixer} -t"
 
-        # waybar
-        "$mod, c, exec, killall -SIGUSR1 .waybar-wrapped"
-        "$mod, v, exec, launch-waybar"
         "$mod, n, exec, hypr-wallpaper"
-
       ]
-      ++ lib.optionals config.custom.wezterm.enable ["$mod, q, exec, wezterm start"]
+      ++ lib.optionals config.custom.wezterm.enable [ "$mod, q, exec, wezterm start" ]
       ++ lib.optionals config.custom.backlight.enable [
-      ",XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} set 5%-"
+        ",XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} set 5%-"
         ",XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brightnessctl} set +5%"
       ];
 

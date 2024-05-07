@@ -30,7 +30,6 @@ in {
           ];
         };
       };
-
     };
 
     custom.persist = {

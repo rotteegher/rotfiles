@@ -22,8 +22,7 @@
     ];
 
     custom.persist = {
-      home.directories = [ ".config/Insomnia"];
+      home.directories = [".config/Insomnia"];
     };
   };
 }
-

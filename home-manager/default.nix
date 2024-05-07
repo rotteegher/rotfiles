@@ -5,7 +5,8 @@
   config,
   isNixOS,
   ...
-}: {
+}:
+{
   imports = [
     ./hyprland
     ./programs
@@ -22,32 +23,28 @@
     stateVersion = "23.05";
 
     sessionVariables = {
-      __IS_NIXOS =
-        if isNixOS
-        then "1"
-        else "0";
+      __IS_NIXOS = if isNixOS then "1" else "0";
       NIXPKGS_ALLOW_UNFREE = "1";
     };
 
-    packages = with pkgs;
+    packages =
+      with pkgs;
       [
         curl
         gzip
+        wget
         killall
         rar # includes unrar
         zip # not includes unzip
-        unzip
         ripgrep
-        wget
-        home-manager
         libreoffice
         trash-cli
+        xdg-utils
 
         mcomix
 
         # misc utilities for dotfiles written in rust
         custom.dotfiles-utils
-
       ]
       ++ (lib.optional config.custom.helix.enable helix)
       # home-manager executable only on non-nixos
@@ -56,7 +53,6 @@
       ++ (lib.optionals (!isNixOS) config.custom.fonts.packages)
       # add custom user created shell packages
       ++ (lib.attrValues config.custom.shell.finalPackages);
-
   };
 
   # add custom user created shell packages to pkgs.custom.shell
@@ -67,7 +63,6 @@
       };
     })
   ];
-
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
@@ -84,8 +79,6 @@
   };
 
   custom.persist = {
-    home.directories = [
-      "Pictures"
-    ];
+    home.directories = [ "Pictures" ];
   };
 }

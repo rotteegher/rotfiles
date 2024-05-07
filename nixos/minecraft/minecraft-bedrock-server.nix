@@ -5,7 +5,7 @@
   user,
   ...
 }: let
-  cfg = config.custom-nixos.services.minecraft-bedrock-server;
+  cfg = config.custom.services.minecraft-bedrock-server;
 
   cfgToString = v:
     if lib.isBool v
@@ -15,7 +15,7 @@
   serverPropertiesFile = pkgs.writeText "server.properties" (''
       # server.properties managed by NixOS configuration
     ''
-   + lib.concatStringsSep "\n" (lib.mapAttrsToList
+    + lib.concatStringsSep "\n" (lib.mapAttrsToList
       (n: v: "${n}=${cfgToString v}")
       cfg.serverProperties));
 

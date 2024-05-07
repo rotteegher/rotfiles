@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = config.custom-nixos.hdds;
+  cfg = config.custom.hdds;
 in {
   services.samba = {
     enable = true;
@@ -14,7 +14,7 @@ in {
       workgroup = WORKGROUP
       server string = smbnix
       netbios name = smbnix
-      security = user 
+      security = user
       #use sendfile = yes
       #max protocol = smb2
       # note: localhost is the ipv6 localhost ::1

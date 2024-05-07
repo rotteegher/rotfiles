@@ -6,9 +6,9 @@
   ...
 }: let
   home = "/home/${user}";
-  downloadDir = config.custom-nixos.bittorrent.downloadDir;
+  downloadDir = config.custom.bittorrent.downloadDir;
 in {
-  config = lib.mkIf config.custom-nixos.bittorrent.enable {
+  config = lib.mkIf config.custom.bittorrent.enable {
     services.transmission = {
       enable = true;
       inherit user home;
@@ -115,7 +115,7 @@ in {
 
     hm.home.packages = with pkgs; [transmission-remote-gtk];
 
-    custom-nixos.persist.home.directories = [
+    custom.persist.home.directories = [
       "_CURRENT"
       ".config/transmission-daemon"
       ".config/transmission-remote-gtk"

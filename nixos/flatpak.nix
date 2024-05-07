@@ -4,11 +4,11 @@
   config,
   ...
 }: {
-  config = lib.mkIf config.custom-nixos.flatpak.enable {
+  config = lib.mkIf config.custom.flatpak.enable {
     services.flatpak.enable = true;
     environment.systemPackages = [pkgs.flatpak pkgs.gnome.gnome-software];
 
-    custom-nixos.persist = {
+    custom.persist = {
       home.directories = [
         ".local/share/flatpak"
         ".var"

@@ -1,42 +1,48 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
-}: let
-  cfg = config.custom-nixos.hyprland;
-in {
-  config = lib.mkIf cfg.enable {
-    services.xserver.desktopManager.gnome.enable = lib.mkForce false;
-    services.xserver.displayManager.lightdm.enable = lib.mkForce false;
-    # services.xserver.displayManager.sddm.enable = lib.mkForce true;
+}:
+lib.mkIf config.custom.hyprland.enable {
+  services.xserver.desktopManager.gnome.enable = lib.mkForce false;
+  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
+  # services.xserver.displayManager.sddm.enable = lib.mkForce true;
 
-    # locking with swaylock
-    security.pam.services.swaylock = {
-      text = "auth include login";
-    };
-
-    programs.bash.shellAliases = {H = "Hyprland";};
-
-    programs.hyprland = {
+  programs.hyprland =
+    #   assert (
+    #     lib.assertMsg (pkgs.hyprland.version == "0.39.1") "hyprland: updated, sync with hyprnstack?"
+    #   );
+    {
       enable = true;
-      # portalPackage = inputs.xdph.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
 
-    # set here as legacy linux won't be able to set these
-    hm.wayland.windowManager.hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      # package = pkgs.hyprland; # lock to stable version
-    };
+  # set here as legacy linux won't be able to set these
+  hm.wayland.windowManager.hyprland.enable = true;
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-      ];
-    };
+  # lock hyprland to 0.38.1 until workspace switching is resolved
+  nixpkgs.overlays = [
+    (_: prev: {
+      hyprland =
+        assert (
+          lib.assertMsg (prev.hyprland.version == "0.39.1") "hyprland: updated, sync with hyprnstack?"
+        );
+        prev.hyprland.overrideAttrs (_: rec {
+          version = "0.38.1";
+
+          src = prev.fetchFromGitHub {
+            owner = "hyprwm";
+            repo = "hyprland";
+            rev = "v${version}";
+            hash = "sha256-6y422rx8ScSkjR1dNYGYUxBmFewRYlCz9XZZ+XrVZng=";
+          };
+        });
+    })
+  ];
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 }

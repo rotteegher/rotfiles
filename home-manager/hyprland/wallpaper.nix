@@ -6,109 +6,115 @@
   pkgs,
   user,
   ...
-}: let
-  wallpapers_proj = "/persist/home/${user}/pr/wallpaper-utils";
-  # crop wallpaper before displaying with swww
-  imv-search = pkgs.writeShellApplication {
-    name = "imv-search";
-    runtimeInputs = with pkgs; [imv rclip];
-    text = ''
-      rclip -f "$@" | imv;
-    '';
-  };
-  # backup wallpapers to secondary drive
-  wallpapers-backup = pkgs.writeShellApplication {
-    name = "wallpapers-backup";
-    runtimeInputs = with pkgs; [rsync];
-    text = ''
-      rsync -aP --delete --no-links "$HOME/Pictures/Wallpapers" "/md/wdc-data/"
-    '';
-  };
-  # sync wallpapers with laptop
-  wallpapers-remote = pkgs.writeShellApplication {
-    name = "wallpapers-remote";
-    runtimeInputs = with pkgs; [rsync wallpapers-backup];
-    text = ''
-      wallpapers-backup
-      rsync -aP --delete --no-links -e "ssh -o StrictHostKeyChecking=no" "$HOME/Pictures/Wallpapers" "${user}@''${1:-rot-omen}:$HOME/Pictures"
-    '';
-  };
-  # process wallpapers with upscaling and vertical crop
-  wallpapers-process = pkgs.writeShellApplication {
-    name = "wallpapers-process";
-    runtimeInputs = [wallpapers-backup];
-    text = ''
-      wallpapers-backup
-
-      cd ${wallpapers_proj}
-      # activate direnv
-      direnv allow && eval "$(direnv export bash)"
-      python main.py "$@"
-      cd - > /dev/null
-    '';
-  };
-  # choose vertical crop for wallpapper
-  wallpapers-choose = pkgs.writeShellApplication {
-    name = "wallpapers-choose";
-    text = ''
-      cd ${wallpapers_proj}
-      # activate direnv
-      direnv allow && eval "$(direnv export bash)"
-      python choose.py "$@"
-      cd - > /dev/null
-    '';
-  };
-  # delete current wallpaper
-  wallpaper-delete = pkgs.writeShellApplication {
-    name = "wallpaper-delete";
-    runtimeInputs = with pkgs; [swww];
-    text = ''
-      wall=$(cat "$HOME/.cache/current_wallpaper")
-      if [ -n "$wall" ]; then rm "$wall"; fi
-    '';
-  };
-in {
-  config = lib.mkMerge [
-    (lib.mkIf (host == "desktop") {
-      home.packages = [
-        # TODO
-        # wallpapers-backup
-        # wallpapers-choose
-        # wallpapers-remote
-        # wallpapers-process
-        # wallpaper-delete
-      ];
-
-      # gtk.gtk3.bookmarks = [
-      #   "file://${wallpapers_proj}/in Walls In"
-      # ];
-
-      programs.imv.settings.binds = {
-        m = "exec mv \"$imv_current_file\" ${wallpapers_proj}/in";
+}:
+let
+  wallpapers_dir = "${config.xdg.userDirs.pictures}/Wallpapers";
+  walls_in_dir = "${config.xdg.userDirs.pictures}/wallpapers_in";
+  wallpapers_proj = "/persist${config.home.homeDirectory}/pr/wallpaper-ui";
+in
+lib.mkMerge [
+  (lib.mkIf (host == "desktop") {
+    custom.shell.packages = {
+      # backup wallpapers to secondary drive
+      wallpapers-backup = pkgs.writeShellApplication {
+        name = "wallpapers-backup";
+        runtimeInputs = with pkgs; [ rsync ];
+        text = ''
+          rsync -aP --delete --no-links "${wallpapers_dir}" "/media/6TBRED"
+          # update rclip database
+          ${lib.optionalString config.custom.rclip.enable ''
+            cd "${wallpapers_dir}"
+            rclip -f "cat" >  /dev/null
+            cd - > /dev/null
+          ''}
+        '';
       };
-    })
-    (lib.mkIf config.custom.rclip.enable {
-      home.packages = [
-        imv-search
-        pkgs.rclip
-      ];
-
-      custom.persist = {
-        home.directories = [
-          ".cache/clip"
-          ".local/share/rclip"
+      # sync wallpapers with laptop
+      wallpapers-remote = pkgs.writeShellApplication {
+        name = "wallpapers-remote";
+        runtimeInputs = with pkgs; [
+          rsync
+          custom.shell.wallpapers-backup
         ];
+        text =
+          let
+            rsync = ''rsync -aP --delete --no-links -e "ssh -o StrictHostKeyChecking=no"'';
+            remote = "\${1:-${user}-framework}";
+            rclip_dir = "${config.xdg.dataHome}/rclip";
+          in
+          ''
+            wallpapers-backup
+            ${rsync} "${wallpapers_dir}/" "${user}@${remote}:${wallpapers_dir}/"
+
+            if [ "${remote}" == "iynaix-framework" ]; then
+                ${rsync} "${rclip_dir}/" "${user}@${remote}:${rclip_dir}/"
+            fi
+          '';
       };
-    })
-    (lib.mkIf isNixOS {
-      home.packages = [
-        pkgs.swww
-      ];
-    })
-    {
-      home.shellAliases = {
-        current-wallpaper = "command cat $HOME/.cache/current_wallpaper";
+      # process wallpapers with upscaling and vertical crop
+      wallpapers-pipeline = pkgs.writeShellApplication {
+        name = "wallpapers-pipeline";
+        runtimeInputs = [ pkgs.custom.shell.wallpapers-backup ];
+        text = ''
+          ${pkgs.custom.lib.useDirenv wallpapers_proj ''
+            cargo run --release --bin pipeline "$@"
+          ''}
+          wallpapers-backup
+        '';
       };
-    }
-  ];
-}
+      # choose custom crops for wallpapers
+      wallpapers-ui = pkgs.custom.lib.useDirenv wallpapers_proj ''
+        cargo run --release --bin wallpaper-ui "$@"
+      '';
+    };
+
+    gtk.gtk3.bookmarks = [ "file://${walls_in_dir} Walls In" ];
+
+    home.shellAliases = {
+      # edit the current wallpaper
+      wallpapers-edit = "${lib.getExe pkgs.custom.shell.wallpapers-ui} $(command cat $XDG_RUNTIME_DIR/current_wallpaper)";
+    };
+
+    programs.pqiv.extraConfig = lib.mkAfter ''
+      m { command(mv $1 ${walls_in_dir}) }
+    '';
+  })
+
+  # TODO: rofi rclip?
+  (lib.mkIf config.custom.rclip.enable {
+    home.packages = [ pkgs.rclip ];
+
+    custom.shell.packages = {
+      # search wallpapers with rclip
+      wallpapers-search = pkgs.writeShellApplication {
+        name = "wallpapers-search";
+        runtimeInputs = with pkgs; [
+          rclip
+          pqiv
+        ];
+        text = ''
+          cd "${wallpapers_dir}"
+          rclip --filepath-only "$@" | pqiv --additional-from-stdin
+          cd - > /dev/null
+        '';
+      };
+    };
+
+    home.shellAliases = {
+      wallrg = "wallpapers-search -t 50";
+    };
+
+    custom.persist = {
+      home = {
+        directories = [ ".cache/clip" ];
+        cache = [ ".local/share/rclip" ];
+      };
+    };
+  })
+  (lib.mkIf isNixOS { home.packages = [ pkgs.swww ]; })
+  {
+    home.shellAliases = {
+      current-wallpaper = "command cat $XDG_RUNTIME_DIR/current_wallpaper";
+    };
+  }
+]

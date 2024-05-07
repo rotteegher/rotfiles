@@ -3,7 +3,8 @@
   lib,
   isNixOS,
   ...
-}: {
+}:
+{
   custom = {
     wifi.enable = true;
     battery.enable = true;
@@ -12,10 +13,25 @@
       {
         name = "eDP-1";
         hyprland = "1920x1080@144,0x0,1";
-        workspaces = [1 2 3 4 5 6 7 8 9 10];
+        workspaces = [
+          1
+          2
+          3
+          4
+          5
+          6
+          7
+          8
+          9
+          10
+        ];
       }
     ];
-    hyprland.modkey = "SUPER";
+    hyprland = {
+      modkey = "SUPER";
+      autostart = false;
+      lock = false;
+    };
     display.touchDevice = {
       enabled = false;
       # (Starts from 0) devIndex 0 is first monitor in "displays" list
@@ -29,7 +45,7 @@
     rofi.enable = true;
     # rclip.enable = false;
     waybar = {
-      enable = true; 
+      enable = true;
       persistent-workspaces = true;
       hidden = false;
     };
@@ -56,13 +72,18 @@
     };
     terminal.size = 12;
     persist = {
-      home.directories = [ "Downloads" "Documents" "Videos" ];
+      home.directories = [
+        "Downloads"
+        "Documents"
+        "Videos"
+      ];
     };
   };
 
   home = {
     packages = lib.mkIf isNixOS (
-      with pkgs; [
+      with pkgs;
+      [
         # gimp
         # kdenlive
         feh

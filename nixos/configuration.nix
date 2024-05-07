@@ -1,11 +1,5 @@
+{ pkgs, host, ... }:
 {
-  pkgs,
-  user,
-  host,
-  lib,
-  config,
-  ...
-}: {
   # Bootloader.
   # boot.loader.systemd-boot.enable = false;
   boot.loader = {
@@ -15,7 +9,7 @@
     };
     grub = {
       enable = true;
-      devices = ["nodev"];
+      devices = [ "nodev" ];
       zfsSupport = true;
       efiSupport = true;
       useOSProber = false;
@@ -25,16 +19,17 @@
       gfxmodeEfi = "1920x1080";
     };
   };
+
   systemd.enableEmergencyMode = false;
 
   networking.hostName = "${host}";
 
   networking.hosts = {
-    "192.168.1.101" = ["desktop"];
-    "192.168.1.104" = ["omen"];
-    "192.168.1.105" = ["omen-wlan"];
+    "192.168.1.101" = [ "desktop" ];
+    "192.168.1.104" = [ "omen" ];
+    "192.168.1.105" = [ "omen-wlan" ];
   };
-  
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -60,17 +55,9 @@
 
   # Configure X11
   services.xserver = {
-    # exportConfiguration = true;
     # bye bye xterm
-    excludePackages = [pkgs.xterm];
+    excludePackages = [ pkgs.xterm ];
   };
-
-  # Define a user account. Don't forget to set a pasword with 'passwd'.
-  # users.users.${user} = {...}: {
-  #   isNormalUser = true;
-  #   initialPassword = "password";
-  #   extraGroups = ["networkmanager" "wheel"];
-  # };
 
   # Reboot/poweroff for unprivileged users
   # Grants permissions to reboot/poweroff machine to users in the users group.

@@ -1,12 +1,8 @@
+{ user, ... }:
 {
-  user,
-  pkgs,
-  ...
-}: {
-  custom-nixos = {
+  custom = {
     # xkbLayout = "us";
     nvidia.enable = true;
-    zfs.encryption = false;
 
     bluetooth.enable = true;
     # hotspot = {
@@ -15,18 +11,16 @@
     #   wifi_iface = "wlp2s0";
     # };
 
-  # software
+    # software
     keyd.enable = true;
     distrobox.enable = true;
     syncoid.enable = true;
     bittorrent.enable = true;
-    vercel.enable = false; # was true at iynaix config
-    virt-manager.enable = false;
     flatpak.enable = true;
     steam.enable = true;
   };
 
-  services.xserver.displayManager.autoLogin.user = user;
+  services.displayManager.autoLogin.user = user;
 
   networking.hostId = "aabb4d11"; # required for zfs
 

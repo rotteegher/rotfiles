@@ -5,18 +5,18 @@
   isNixOS,
   ...
 }: let
-# create a fake gnome-terminal shell script so xdg terminal applications open in the correct terminal
-# https://unix.stackexchange.com/a/642886
-fakeGnomeTerminal = pkgs.writeShellApplication {
-  name = "gnome-terminal";
-  text = ''${config.custom.terminal.exec} "$@"'';
-};
-nemo-patched = pkgs.cinnamon.nemo-with-extensions.overrideAttrs (_: {
-  postFixup = ''
-    wrapProgram $out/bin/nemo \
-      --prefix PATH : "${lib.makeBinPath [ fakeGnomeTerminal ]}"
-  '';
-});
+  # create a fake gnome-terminal shell script so xdg terminal applications open in the correct terminal
+  # https://unix.stackexchange.com/a/642886
+  fakeGnomeTerminal = pkgs.writeShellApplication {
+    name = "gnome-terminal";
+    text = ''${config.custom.terminal.exec} "$@"'';
+  };
+  nemo-patched = pkgs.cinnamon.nemo-with-extensions.overrideAttrs (_: {
+    postFixup = ''
+      wrapProgram $out/bin/nemo \
+        --prefix PATH : "${lib.makeBinPath [fakeGnomeTerminal]}"
+    '';
+  });
 in {
   home = {
     packages = [
@@ -65,32 +65,6 @@ in {
   # other OSes seem to override this file
   xdg.configFile."mimeapps.list".force = !isNixOS;
   xdg.configFile."gtk-3.0/bookmarks".force = !isNixOS;
-
-  dconf.settings = {
-    # fix open in terminal
-    "org/gnome/desktop/applications/terminal" = {
-      exec = config.custom.terminal.exec;
-    };
-    "org/cinnamon/desktop/applications/terminal" = {
-      exec = config.custom.terminal.exec;
-    };
-    "org/nemo/preferences" = {
-      default-folder-viewer = "list-view";
-      show-hidden-files = true;
-      start-with-dual-pane = true;
-      date-format-monospace = true;
-      # needs to be a uint64!
-      thumbnail-limit = lib.hm.gvariant.mkUint64 (100 * 1024 * 1024); # 100 mb
-    };
-    "org/nemo/window-state" = {
-      sidebar-bookmark-breakpoint = 0;
-    };
-    "org/nemo/preferences/menu-config" = {
-      selection-menu-make-link = true;
-      selection-menu-copy-to = true;
-      selection-menu-move-to = true;
-    };
-  };
 
   custom.persist = {
     home.directories = [

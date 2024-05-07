@@ -8,6 +8,7 @@
     home.packages = [pkgs.lldb pkgs.clang-tools];
     programs.helix = {
       enable = true;
+      defaultEditor = config.custom.shell.defaultEditor == "hx";
       themes = {
         mtr = {
           # "inherits" = "mellow";

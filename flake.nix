@@ -7,13 +7,13 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    fenix = {
-      url = "github:nix-community/fenix";
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    fenix = {
+      url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -21,29 +21,13 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      # inputs.nixpkgs.follows = "nixpkgs"; # commented twice
-    };
-
-    hyprgrass = {
-      url = "github:horriblename/hyprgrass";
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    xdph = {
-      url = "github:hyprwm/xdg-desktop-portal-hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nh = {
-      url = "github:viperML/nh";
-      inputs.nixpkgs.follows = "nixpkgs";
+    hyprgrass = {
+      url = "github:horriblename/hyprgrass";
     };
 
     firefox-addons = {
@@ -60,49 +44,44 @@
 
   # flake-utils is unnecessary
   # https://ayats.org/blog/no-flake-utils/
-  outputs = inputs @ {
-    nixpkgs,
-    ...
-  }: let
-    forAllSystems = function:
-      nixpkgs.lib.genAttrs ["x86_64-linux"] (system: function nixpkgs.legacyPackages.${system});
-    commonInherits = {
-      inherit (nixpkgs) lib;
-      inherit inputs nixpkgs;
-      user = "rot";
+  outputs =
+    inputs@{ nixpkgs, self, ... }:
+    let
       system = "x86_64-linux";
-    };
-  in {
-    nixosConfigurations = 
-      import ./hosts (commonInherits // {isNixOS = true;})
-      // (import ./hosts/iso (commonInherits // {isNixOS = true;}));
-
-
-    homeConfigurations = import ./hosts (commonInherits // {isNixOS = false;});
-
-    # devenv for working on rotfiles, provides rust environment
-    devShells = forAllSystems (pkgs: {
-      default = inputs.devenv.lib.mkShell {
-        inherit inputs pkgs;
-        modules = [
-          ({pkgs, ...}: {
-            # devenv configuration
-            packages = [pkgs.alejandra];
-
-            languages.rust = {
-              enable = true;
-              channel = "stable";
-            };
-          })
-        ];
+      forAllSystems =
+        function:
+        nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: function nixpkgs.legacyPackages.${system});
+      commonArgs = {
+        inherit (nixpkgs) lib;
+        inherit self inputs nixpkgs;
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          config.permittedInsecurePackages = [
+            "openssl-1.1.1w" # make viber work
+          ];
+        };
+        specialArgs = {
+          inherit self inputs;
+        };
       };
-    });
+    in
+    {
+      nixosConfigurations = (import ./hosts/nixos.nix commonArgs) // (import ./hosts/iso commonArgs);
 
-    packages = forAllSystems (
-      pkgs: (import ./packages {inherit pkgs inputs;})
-    );
+      homeConfigurations = import ./hosts/hm.nix commonArgs;
 
-    # templates for devenv
-    templates = import ./templates;
-  };
+      # devenv for working on rotfiles, provides rust environment
+      devShells = forAllSystems (pkgs: {
+        default = import ./devenv.nix {
+          inherit inputs;
+          inherit (pkgs) system;
+        };
+      });
+
+      packages = forAllSystems (pkgs: (import ./packages { inherit pkgs inputs; }));
+
+      # templates for devenvs
+      templates = import ./templates;
+    };
 }

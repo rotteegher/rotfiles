@@ -1,65 +1,139 @@
 {
+  config,
   host,
-  inputs,
   isNixOS,
   lib,
   pkgs,
-  user,
   ...
 }: let
-  rots = "/persist/home/${user}/pr/rotfiles";
-  nh = inputs.nh.packages.${pkgs.system}.default;
-  # home manager utilities
-  # build flake but don't switch
-  hmbuild = pkgs.writeShellApplication {
-    name = "hmbuild";
-    runtimeInputs = [hmswitch];
-    text = ''
-      if [ "$#" -eq 0 ]; then
-          hmswitch --dry --configuration "${host}"
-      else
-          # provide hostname as the first argument
-          hmswitch --dry --hostname "$@"
-      fi
-    '';
-  };
-  # switch home-manager via nix flake (note you have to switch to a different host)
-  hmswitch = pkgs.writeShellApplication {
-    name = "hmswitch";
-    runtimeInputs = with pkgs; [git nh];
-    text = ''
-      cd ${rots}
+  rots = "/persist${config.home.homeDirectory}/pr/rotfiles";
+in {
+  home = {
+    packages = with pkgs; [
+      nh
+      nil
+      nix-output-monitor
+      nixfmt-rfc-style
+      nvfetcher
+    ];
 
-      # stop bothering me about untracked files
-      untracked_files=$(git ls-files --exclude-standard --others .)
-      if [ -n "$untracked_files" ]; then
-          git add "$untracked_files"
-      fi
-
-      if [ "$#" -eq 0 ]; then
-          nh home switch --nom --configuration "${host}"
-      else
-          nh home switch --nom "$@"
-      fi
-
-      cd - > /dev/null
-    '';
+    shellAliases = {
+      nvfetcher-flat = "nvfetcher --build-dir .";
+      nsh = "nix-shell --command fish -p";
+      nix-update-input = "nix flake lock --update-input";
+    };
   };
-  # update home-manager via nix flake
-  hmupd8 = pkgs.writeShellApplication {
-    name = "hmupd8";
-    runtimeInputs = [hmswitch];
-    text = ''
-      cd ${rots}
-      nix flake update
-      hmswitch "$@"
-      cd - > /dev/null
+
+  custom.shell.packages = {
+    # outputs the current nixos generation
+    nix-current-generation = ''
+      GENERATIONS=$(sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | grep current | awk '{print $1}')
+      # add generation number from before desktop format
+      echo $(( GENERATIONS + ${
+        if host == "desktop"
+        then "1196"
+        else "0"
+      }))
     '';
-  };
-  # nix garbage collection
-  ngc = pkgs.writeShellApplication {
-    name = "ngc";
-    text = ''
+    # build flake but don't switch
+    nbuild = pkgs.writeShellApplication {
+      name = "nbuild";
+      runtimeInputs = with pkgs; [custom.shell.nsw];
+      text = ''
+        if [ "$#" -eq 0 ]; then
+            nsw --dry --hostname "${host}"
+        else
+            # provide hostname as the first argument
+            nsw --dry --hostname "$@"
+        fi
+      '';
+    };
+    # switch via nix flake
+    nsw = pkgs.writeShellApplication {
+      name = "nsw";
+      runtimeInputs = with pkgs; [
+        git
+        nh
+        ripgrep
+        custom.shell.nix-current-generation
+      ];
+      text = let
+        subcmd =
+          if isNixOS
+          then "os"
+          else "home";
+        hostFlag =
+          if isNixOS
+          then "hostname"
+          else "configuration";
+      in ''
+        cd ${rots}
+
+        # stop bothering me about untracked files
+        untracked_files=$(git ls-files --exclude-standard --others .)
+        if [ -n "$untracked_files" ]; then
+            git add "$untracked_files"
+        fi
+
+        # force switch to always use current host
+        if [[ "$*" == *"--${hostFlag}"* ]]; then
+            # Replace the word after "--${hostFlag}" with host using parameter expansion
+            cleaned_args=("''${@/--${hostFlag} [^[:space:]]*/--${hostFlag} ${host}}")
+            nh ${subcmd} switch "''${cleaned_args[@]}" ${rots} -- --option eval-cache false
+        else
+            nh ${subcmd} switch "$@" --${hostFlag} ${host} ${rots} -- --option eval-cache false
+        fi
+
+        ${lib.optionalString isNixOS ''
+          # only relevant if --dry is not passed
+          if [[ "$*" != *"--dry"* ]]; then
+            echo -e "Switched to Generation \033[1m$(nix-current-generation)\033[0m"
+          fi
+        ''}
+        cd - > /dev/null
+      '';
+    };
+    # update all nvfetcher overlays and packages
+    nv-update = pkgs.writeShellApplication {
+      name = "nv-update";
+      runtimeInputs = with pkgs; [
+        fd
+        nvfetcher
+      ];
+      text = ''
+        cd ${rots}
+
+        # run nvfetcher for overlays
+        nvfetcher --config overlays/nvfetcher.toml --build-dir overlays
+
+        # run nvfetcher for packages
+        mapfile -t pkg_tomls < <(fd nvfetcher.toml packages)
+
+        for pkg_toml in "''${pkg_tomls[@]}"; do
+            pkg_dir=$(dirname "$pkg_toml")
+            nvfetcher --config "$pkg_toml" --build-dir "$pkg_dir"
+        done
+        cd - > /dev/null
+      '';
+    };
+    # update via nix flake
+    upd8 = pkgs.writeShellApplication {
+      name = "upd8";
+      runtimeInputs = with pkgs; [
+        nvfetcher
+        custom.shell.nsw
+        custom.shell.nv-update
+      ];
+      text = ''
+        cd ${rots}
+        nix flake update
+        nv-update
+        nsw "$@"
+        cd - > /dev/null
+      '';
+    };
+    # nix garbage collection
+    ngc = ''
       # sudo rm /nix/var/nix/gcroots/auto/*
       if [ "$#" -eq 0 ]; then
         sudo nix-collect-garbage -d
@@ -67,40 +141,143 @@
         sudo nix-collect-garbage "$@"
       fi
     '';
-  };
-  nr = pkgs.writeShellApplication {
-    name = "nr";
-    runtimeInputs = [pkgs.nixFlakes];
-    text = ''
+    # utility for creating a nix repl, allows editing within the repl.nix
+    # https://bmcgee.ie/posts/2023/01/nix-and-its-slow-feedback-loop/
+    nrepl = ''
+      if [[ -f repl.nix ]]; then
+        nix repl --arg host '"${host}"' --file ./repl.nix "$@"
+      # use flake repl if not in a nix project
+      elif [[ $(find . -maxdepth 1 -name "*.nix" | wc -l) -eq 0 ]]; then
+        cd ${rots}
+        nix repl --arg host '"${host}"' --file ./repl.nix "$@"
+        cd - > /dev/null
+      else
+        nix repl "$@"
+      fi
+    '';
+    # build local package if possible, otherwise build config
+    nb = pkgs.writeShellApplication {
+      name = "nb";
+      runtimeInputs = with pkgs; [
+        nom
+        custom.shell.nbuild
+      ];
+      text = ''
+        if [[ $1 == ".#"* ]]; then
+            nom build "$@"
+        # using nix build with nixpkgs is very slow as it has to copy nixpkgs to the store
+        elif [[ $(pwd) =~ /nixpkgs$ ]]; then
+            nix-build -A "$1"
+        # dotfiles, build local package
+        elif [[ $(pwd) =~ /dotfiles$ ]] && [[ -d "./packages/$1" ]]; then
+            nom build ".#$1"
+        # nix repo, build package within flake
+        elif [[ -f flake.nix ]]; then
+            nom build ".#$1"
+        else
+            nbuild "$@"
+        fi
+      '';
+    };
+    # build and run local package if possible, otherwise run from nixpkgs
+    nr = ''
       if [ "$#" -eq 0 ]; then
           echo "no package specified."
           exit 1
-      elif [ "$#" -eq 1 ]; then
-          nix run nixpkgs#"$1"
+      fi
+
+      # assume building packages in local nixpkgs if possible
+      src="nixpkgs"
+      if [[ $(pwd) =~ /nixpkgs$ ]]; then
+          src="."
+      # dotfiles, custom package exists, build it
+      elif [[ $(pwd) =~ /dotfiles$ ]] && [[ -d "./packages/$1" ]]; then
+          src="."
+      # flake
+      elif [[ -f flake.nix ]]; then
+          src="."
+      fi
+
+      if [ "$#" -eq 1 ]; then
+          nix run "$src#$1"
       else
-          nix run nixpkgs#"$1" -- "''${@:2}"
+          nix run "$src#$1" -- "''${@:2}"
       fi
     '';
-  };
-in {
-  config = lib.mkMerge [
-    (lib.mkIf (!isNixOS) {
-      home.packages = [
-        hmbuild
-        hmswitch
-        hmupd8
-        nh # nh is installed by nixos anyway
-      ];
+    npath = ''
+      if [ "$#" -eq 0 ]; then
+          echo "no package specified."
+          exit 1
+      fi
 
-      home.shellAliases = {
-        hsw = "hswitch";
-      };
-    })
-    {
-      home.packages = [ngc nr];
-      home.shellAliases = {
-        nsh = "nix-shell --command fish -p";
-      };
-    }
-  ];
+      PKG_DIR=$(nix eval --raw "nixpkgs#$1.outPath")
+      if [ -e "$PKG_DIR" ]; then
+          echo "$PKG_DIR"
+      else
+          # path not found, build it
+          nix build "nixpkgs#hyprland" --print-out-paths | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2- | head -n1
+      fi
+    '';
+    ynpath = pkgs.writeShellApplication {
+      name = "ynpath";
+      runtimeInputs = with pkgs; [
+        yazi
+        custom.shell.npath
+      ];
+      text = ''yazi "$(npath "$@")"'';
+    };
+    # what depends on the given package in the current nixos install?
+    nix-depends = pkgs.writeShellApplication {
+      name = "nix-depends";
+      runtimeInputs = with pkgs; [custom.shell.npath];
+      text = ''
+        if [ "$#" -eq 0 ]; then
+            echo "package not found."
+            exit 1
+        fi
+
+        parent="/run/current-system"
+        child="$(npath "$1")"
+
+        if [ "$#" -eq 2 ]; then
+          parent="$(npath "$1")"
+          child="$(npath "$2")"
+        fi
+
+        nix why-depends "$parent" "$child"
+      '';
+    };
+    json2nix = pkgs.writeShellApplication {
+      name = "json2nix";
+      runtimeInputs = with pkgs; [
+        hjson
+        nixfmt-rfc-style
+      ];
+      text = ''
+        json=$(cat - | hjson -j 2> /dev/null)
+        nix eval --expr "lib.strings.fromJSON '''$json'''" | nixfmt -q
+      '';
+    };
+    yaml2nix = pkgs.writeShellApplication {
+      name = "yaml2nix";
+      runtimeInputs = with pkgs; [
+        yq
+        nixfmt-rfc-style
+      ];
+      text = ''
+        yaml=$(cat - | yq)
+        nix eval --expr "lib.strings.fromJSON '''$yaml'''" | nixfmt -q
+      '';
+    };
+  };
+
+  programs = {
+    nix-index.enable = true;
+  };
+
+  custom.persist = {
+    home = {
+      cache = [".cache/nix-index"];
+    };
+  };
 }

@@ -33,6 +33,8 @@
     ent
     coreutils-full
 
+    ffmpeg
+
     cmus
 
     typora # md viewer
