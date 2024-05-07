@@ -1,8 +1,5 @@
+{ config, lib, ... }:
 {
-  config,
-  user,
-  ...
-}: {
   programs = {
     zathura = {
       enable = true;
@@ -18,7 +15,7 @@
         i = "recolor";
       };
       extraConfig = ''
-        include "/home/${user}/.cache/wallust/zathurarc"
+        include "${config.xdg.cacheHome}/wallust/zathurarc"
       '';
       options = {
         statusbar-h-padding = 0;
@@ -30,8 +27,7 @@
     };
   };
 
-  custom.wallust.templates.zathurarc = {
-    enable = config.programs.zathura.enable;
+  custom.wallust.templates.zathurarc = lib.mkIf config.programs.zathura.enable {
     text = ''
       set default-bg                  "{{color0}}"
       set default-fg                  "{{color10}}"
@@ -66,6 +62,6 @@
       set recolor                     "false"
       set recolor-keephue             "false"
     '';
-    target = "~/.cache/wallust/zathurarc";
+    target = "${config.xdg.cacheHome}/wallust/zathurarc";
   };
 }

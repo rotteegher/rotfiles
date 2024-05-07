@@ -36,13 +36,13 @@ in {
       # (openOnWorkspace 9 "easyeffects")
 
       # download desktop
-      (openOnWorkspace 10 "$term ~/Downloads")
-      (openOnWorkspace 10 "nemo ~/Downloads")
+      (openOnWorkspace 10 "$term ~/_CURRENT")
+      (openOnWorkspace 10 "nemo ~/_CURRENT")
       (openOnWorkspace 10 "transmission-remote-gtk")
       # (openOnWorkspace 10 "hyprctl dispatch layoutmsg orientationcycle left top")
 
       # Telegram
-      (openOnWorkspace 7 "telegram-desktop")
+      (openOnWorkspace 8 "telegram-desktop")
 
       (openOnWorkspace 3 ''nix run nixpkgs#st fish'')
 
@@ -52,7 +52,6 @@ in {
 
       "swww-daemon &"
       "sleep 1; hypr-wallpaper && launch-waybar"
-
 
       # fix gparted "cannot open display: :0" error
       "${lib.getExe pkgs.xorg.xhost} +local:${user}"

@@ -5,19 +5,19 @@
   pkgs,
   ...
 }: let
-  cfg-java = config.custom-nixos.services.minecraft-java-servers;
-  cfg-bedrock = config.custom-nixos.services.minecraft-bedrock-server;
+  cfg-java = config.custom.services.minecraft-java-servers;
+  cfg-bedrock = config.custom.services.minecraft-bedrock-server;
 in {
   imports = [
     ./minecraft-java-servers.nix
     ./minecraft-bedrock-server.nix
   ];
   config = lib.mkIf (cfg-java.enable || cfg-bedrock) {
-    users.users.${user}.extraGroups = [ "minecraft" ];
+    users.users.${user}.extraGroups = ["minecraft"];
     environment.systemPackages = with pkgs; [
       packwiz
     ];
-    custom-nixos.persist.root.directories = [
+    custom.persist.root.directories = [
       "/srv"
     ];
   };

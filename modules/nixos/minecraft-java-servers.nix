@@ -1,14 +1,17 @@
-{lib, pkgs, ...}:
-with lib;
-let
+{
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   mkOpt = type: default:
-    mkOption { inherit type default; };
+    mkOption {inherit type default;};
 
   mkOpt' = type: default: description:
-    mkOption { inherit type default description; };
+    mkOption {inherit type default description;};
 in {
   # MINECRAFT
-  options.custom-nixos.services.minecraft-java-servers = {
+  options.custom.services.minecraft-java-servers = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -27,8 +30,8 @@ in {
       syntax @varname@.
     '';
     fabric-latest = {
-      do-run = lib.mkEnableOption "Stop minecraft server?" // { default = true;};
-      autoStart = lib.mkEnableOption "Auto start minecraft server on boot?" // { default = true;};
+      do-run = lib.mkEnableOption "Stop minecraft server?" // {default = true;};
+      autoStart = lib.mkEnableOption "Auto start minecraft server on boot?" // {default = true;};
       enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
@@ -42,7 +45,7 @@ in {
       # Whitelisted players,
       # only has an effect when services.minecraft-server.declarative is true
       # and the whitelist is enabled via by setting serverProperties.white-list to true.
-      # This is a mapping from Minecraft usernames to UUIDs. 
+      # This is a mapping from Minecraft usernames to UUIDs.
       # You can use https://mcuuid.net/ to get a Minecraft UUID for a username.
       whitelist = lib.mkOption {
         type = lib.types.attrs;
@@ -123,4 +126,3 @@ in {
     }; # Minecraft Fabric Server
   };
 }
-

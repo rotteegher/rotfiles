@@ -5,30 +5,30 @@
   ...
 }: {
   imports = [
+    # hardware
+    ./hdds.nix
+    ./nvidia.nix
+    ./zfs.nix
     ./audio.nix
+    ./keyd.nix
+
     ./auth.nix
     ./samba.nix
     ./configuration.nix
-    ./keyd.nix
     ./docker.nix
     ./llm.nix
     ./filezilla.nix
     ./flatpak.nix
-    ./hdds.nix
     ./hyprland.nix
     ./impermanence.nix
     ./nix.nix
-    ./nvidia.nix
     ./plasma.nix
     # ./syncoid.nix
     ./transmission.nix
     ./users.nix
-    # ./vercel.nix
     ./surrealdb.nix
     ./minecraft
-    ./virt-manager.nix
     ./steam.nix
-    ./zfs.nix
     ./sleep.nix
     ./input.nix
     ./bluetooth.nix
@@ -39,19 +39,52 @@
     # automount disks
     services.gvfs.enable = true;
     # services.devmon.enable = true;
+    programs.dconf.enable = true;
 
     environment = {
       etc = {
         # git
         "gitconfig".text = config.hm.xdg.configFile."git/config".text;
+        # get gparted to use system theme
+        "xdg/gtk-3.0/settings.ini".text = config.hm.xdg.configFile."gtk-3.0/settings.ini".text;
       };
+
+      # install fish completions for fish
+      # https://github.com/nix-community/home-manager/pull/2408
+      pathsToLink = ["/share/fish"];
+
       variables = {
-        TERMINAL = config.hm.custom.terminal.exec;
-        EDITOR = "hx";
-        VISUAL = "hx";
+        TERMINAL = lib.getExe config.hm.custom.terminal.package;
+        EDITOR = config.hm.custom.shell.defaultEditor;
+        VISUAL = config.hm.custom.shell.defaultEditor;
         NIXPKGS_ALLOW_UNFREE = "1";
         STARSHIP_CONFIG = "${config.hm.xdg.configHome}/starship.toml";
       };
+
+      # use some shell aliases from home manager
+      shellAliases =
+        {
+          inherit
+            (config.hm.programs.bash.shellAliases)
+            eza
+            ls
+            ll
+            la
+            lla
+            ;
+        }
+        // {
+          inherit
+            (config.hm.home.shellAliases)
+            # eza related
+            
+            t
+            tree
+            # yazi
+            
+            y
+            ;
+        };
 
       systemPackages = with pkgs;
         [
@@ -79,13 +112,13 @@
           powerstat
         ]
         ++
-          # install gtk theme for root, some apps like gparted only run as root
-          (with config.hm.gtk; [
-            theme.package
-            iconTheme.package
-          ])
+        # install gtk theme for root, some apps like gparted only run as root
+        (with config.hm.gtk; [
+          theme.package
+          iconTheme.package
+        ])
         # add custom user created shell packages
-        ++ (lib.attrValues config.custom-nixos.shell.finalPackages)
+        ++ (lib.attrValues config.custom.shell.finalPackages)
         ++ (lib.optional config.hm.custom.helix.enable helix)
         ++ (lib.optional config.hm.custom.discord.enable vesktop);
     };
@@ -93,26 +126,32 @@
     # add custom user created shell packages to pkgs.custom.shell
     nixpkgs.overlays = [
       (_: prev: {
-        custom = prev.custom // {
-          shell = config.custom-nixos.shell.finalPackages // config.hm.custom.shell.finalPackages;
-        };
+        custom =
+          prev.custom
+          // {
+            shell = config.custom.shell.finalPackages // config.hm.custom.shell.finalPackages;
+          };
       })
     ];
 
-
     # setup fonts
-    fonts.packages = config.hm.custom.fonts.packages;
+    fonts.packages = config.hm.custom.fonts.packages ++ [pkgs.custom.rofi-themes];
 
-    # set up programs to use same config as home-manager
-    programs.bash = {
-      interactiveShellInit = config.hm.programs.bash.initExtra;
-      loginShellInit = config.hm.programs.bash.profileExtra;
+    programs = {
+      # use same config as home-manager
+      bash = {
+        interactiveShellInit = config.hm.programs.bash.initExtra;
+        loginShellInit = config.hm.programs.bash.profileExtra;
+      };
+
+      # bye bye nano
+      nano.enable = lib.mkForce false;
+
+      file-roller.enable = true;
     };
 
-    # bye bye nano
-    programs.nano.enable = lib.mkForce false;
-
-    programs.file-roller.enable = true;
+    # faster boot times
+    # systemd.services.NetworkManager-wait-online.enable = false;
 
     # use gtk theme on qt apps
     qt = {
@@ -121,7 +160,7 @@
       style = "adwaita-dark";
     };
 
-    custom-nixos.persist = {
+    custom.persist = {
       root.directories = lib.mkIf config.hm.custom.wifi.enable [
         "/etc/NetworkManager"
       ];

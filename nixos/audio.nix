@@ -30,7 +30,7 @@
     # };
 
     users.users.${user} = {...}: {
-      extraGroups = [ "jackaudio" ];
+      extraGroups = ["jackaudio"];
     };
 
     environment.systemPackages = with pkgs; [

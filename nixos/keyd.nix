@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom-nixos.keyd;
+  cfg = config.custom.keyd;
 in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [

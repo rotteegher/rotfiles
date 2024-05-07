@@ -3,8 +3,8 @@
   lib,
   pkgs,
   ...
-}: 
-lib.mkIf config.custom-nixos.surrealdb.enable {
+}:
+lib.mkIf config.custom.surrealdb.enable {
   environment.systemPackages = [pkgs.surrealdb];
 
   services.surrealdb = {
@@ -13,14 +13,17 @@ lib.mkIf config.custom-nixos.surrealdb.enable {
     extraFlags = [
       "--auth"
       # "--allow-all"
-      "--user" "root"
-      "--pass" "root"
-      "--log" "debug"
+      "--user"
+      "root"
+      "--pass"
+      "root"
+      "--log"
+      "debug"
     ];
     package = pkgs.surrealdb;
   };
-    
-  custom-nixos.persist = {
-    root.directories = [ "/var/lib/private" ];
+
+  custom.persist = {
+    root.directories = ["/var/lib/private"];
   };
 }

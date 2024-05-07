@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.custom-nixos.bluetooth;
+  cfg = config.custom.bluetooth;
 in {
   config = lib.mkIf cfg.enable {
     hardware.bluetooth = {
@@ -27,7 +27,7 @@ in {
       };
     };
 
-    custom-nixos.persist = {
+    custom.persist = {
       root.directories = [
         "/var/lib/bluetooth"
       ];

@@ -19,16 +19,13 @@ let
     description = "Rust (latest stable from fenix) dev environment";
   };
   rust-toolchain = {
-    inherit welcomeText;
     path = ./rust-toolchain;
     description = "Rust dev environment, but from toolchain.toml";
   };
   empty = {
-    inherit welcomeText;
     path = ./empty;
     description = "Default empty dev environment";
   };
-
 in
 {
   inherit

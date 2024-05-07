@@ -1,15 +1,21 @@
 {
   lib,
+  isLaptop,
   config,
   ...
 }: {
-  options.custom-nixos = {
+  options.custom = {
     xkbLayout = lib.mkOption {
       type = lib.types.str;
       default = "us";
     };
     nvidia.enable = lib.mkEnableOption "Nvidia GPU";
-    bluetooth.enable = lib.mkEnableOption "Bluetooth" // {default = false;};
+    bluetooth.enable =
+      lib.mkEnableOption "Bluetooth"
+      // {
+        default = isLaptop;
+      };
+
     hotspot = {
       enable = lib.mkEnableOption "WiFI Broadcast HotSpot" // {default = false;};
       internet_iface = lib.mkOption {
@@ -33,6 +39,7 @@
         description = "Hotspot password";
       };
     };
+
     hdds = {
       enable = lib.mkEnableOption "Desktop HDDs" // {default = false;};
       stsea3tb = lib.mkEnableOption "stsea-barra" // {default = false;}; #  Seagate Barracuda 3TB ST3000DM007
@@ -41,9 +48,16 @@
     };
 
     zfs = {
-      enable = lib.mkEnableOption "zfs" // {default = true;};
-      encryption = lib.mkEnableOption "zfs encryption" // {default = false;}; # default was true at iynaix config
-      snapshots = lib.mkEnableOption "zfs snapshots" // {default = true;};
+      encryption =
+        lib.mkEnableOption "zfs encryption"
+        // {
+          default = true;
+        };
+      snapshots =
+        lib.mkEnableOption "zfs snapshots"
+        // {
+          default = true;
+        };
     };
   };
 }

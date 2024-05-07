@@ -2,24 +2,28 @@
   config,
   lib,
   user,
-  pkgs,
   ...
-}: let
-  autoLoginUser = config.services.xserver.displayManager.autoLogin.user;
-in
-  lib.mkMerge [
+}:
+{
+  # silence warning about setting multiple user password options
+  # https://github.com/NixOS/nixpkgs/pull/287506#issuecomment-1950958990
+  options = {
+    warnings = lib.mkOption {
+      apply = lib.filter (
+        w: !(lib.strings.hasInfix "The options silently discard others by the order of precedence" w)
+      );
+    };
+  };
+
+  config = lib.mkMerge [
     {
       # autologin
       services = {
-        xserver.displayManager.autoLogin.user = lib.mkDefault (
-          if config.boot.zfs.requestEncryptionCredentials
-          then user
-          else null
+        displayManager.autoLogin.user = lib.mkDefault (
+          if config.boot.zfs.requestEncryptionCredentials then user else null
         );
-        getty.autologinUser = autoLoginUser;
+        getty.autologinUser = config.services.displayManager.autoLogin.user;
       };
-
-      programs.fish.enable = true;
 
       users = {
         mutableUsers = false;
@@ -27,21 +31,47 @@ in
         # https://reddit.com/r/NixOS/comments/o1er2p/tmpfs_as_root_but_without_hardcoding_your/h22f1b9/
         # create a password with for root and $user with:
         # mkpasswd -m sha-512 'PASSWORD' | sudo tee -a /persist/etc/shadow/root
-        # and use "/persists/etc/shadow/${user}" for user respectively
         users = {
           root = {
-            initialHashedPassword = "$y$j9T$Of1ghqVhpNyW8X8UrgnCK/$nTI6HicGdSww9bYNisfuwzD0khDXX3TKitqqd/S0QyC";
-            # hashedPasswordFile = "/persist/etc/shadow/root";
+            initialPassword = "password";
+            hashedPasswordFile = "/persist/etc/shadow/root";
           };
           ${user} = {
-            shell = pkgs.fish;
             isNormalUser = true;
-            initialHashedPassword = "$y$j9T$IAlkbRYYo1xS/Q87Pxskc.$vjj0j0egsgM0tNwFOzDgnmV1whQJseuslkXPaBfigK6";
-            # hashedPasswordFile = "/persist/etc/shadow/${user}";
-            extraGroups = ["networkmanager" "wheel"];
+            initialPassword = "password";
+            hashedPasswordFile = "/persist/etc/shadow/${user}";
+            extraGroups = [
+              "networkmanager"
+              "wheel"
+            ];
           };
         };
       };
     }
-  ]
 
+    # FIXME sops
+    # # use sops for user passwords if enabled
+    # (lib.mkIf config.custom.sops.enable (
+    #   let
+    #     inherit (config.sops) secrets;
+    #   in
+    #   {
+    #     # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
+    #     sops.secrets = {
+    #       rp.neededForUsers = true;
+    #       up.neededForUsers = true;
+    #     };
+
+    #     users = {
+    #       mutableUsers = false;
+    #       # create a password with for root and $user with:
+    #       # mkpasswd -m sha-512 'PASSWORD' and place in secrets.json under the appropriate key
+    #       users = {
+    #         root.hashedPasswordFile = lib.mkForce secrets.rp.path;
+    #         ${user}.hashedPasswordFile = lib.mkForce secrets.up.path;
+    #       };
+    #     };
+    #   }
+    # ))
+  ];
+}

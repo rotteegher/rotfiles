@@ -7,7 +7,7 @@
   cfg = config.custom.viber;
 in {
   config = lib.mkIf cfg.enable {
-    home.packages = [ 
+    home.packages = [
       pkgs.viber
     ];
 
@@ -18,4 +18,3 @@ in {
     };
   };
 }
-

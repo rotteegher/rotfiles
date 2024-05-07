@@ -4,7 +4,8 @@
   pkgs,
   user,
   ...
-}: lib.mkIf config.custom-nixos.llm.enable {
+}:
+lib.mkIf config.custom.llm.enable {
   environment.systemPackages = with pkgs; [
     ollama
   ];
@@ -58,7 +59,7 @@
     };
   };
 
-  custom-nixos.persist = {
+  custom.persist = {
     home.directories = [
       ".ollama"
     ];

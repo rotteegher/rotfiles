@@ -96,7 +96,7 @@ in {
 
   # extra git functions
   custom.shell.packages = {
-      # create a new branch and push it to origin
+    # create a new branch and push it to origin
     gbc = ''
       git branch "$1"
       git checkout "$1"

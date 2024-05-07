@@ -6,9 +6,9 @@
 }: {
   config = lib.mkIf config.custom.reaper.enable {
     home = {
-      packages = with pkgs; [ 
+      packages = with pkgs; [
         # The DAW
-        reaper 
+        reaper
 
         # Plugins
         helm
@@ -45,7 +45,6 @@
       # `/etc/profiles/per-user/${user}/lib/lv2`
       # `/etc/profiles/per-user/${user}/lib/lxvst`
 
-
       # persist plugins
       # sessionVariables = {
       #   LV2_PATH = "~/.nix-profile/lib/lv2/:~/.lv2:/nix/var/nix/profiles/default/lib/lv2:/var/run/current-system/sw/lib/lv2";
@@ -63,12 +62,12 @@
           ])
           + ":$HOME/.${format}";
       in {
-        DSSI_PATH   = makePluginPath "dssi";
+        DSSI_PATH = makePluginPath "dssi";
         LADSPA_PATH = makePluginPath "ladspa";
-        LV2_PATH    = makePluginPath "lv2";
-        LXVST_PATH  = makePluginPath "lxvst";
-        VST_PATH    = makePluginPath "vst";
-        VST3_PATH   = makePluginPath "vst3";
+        LV2_PATH = makePluginPath "lv2";
+        LXVST_PATH = makePluginPath "lxvst";
+        VST_PATH = makePluginPath "vst";
+        VST3_PATH = makePluginPath "vst3";
       };
     };
     custom.persist = {

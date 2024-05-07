@@ -4,7 +4,7 @@
   user,
   ...
 }: let
-  cfg = config.custom-nixos.hdds;
+  cfg = config.custom.hdds;
   wdc-blue-mountpoint = "/md/wdc-data";
   wdc-blue-dataset = "wdc-blue/data";
   stsea-mountpoint = "/md/stsea-okii";
@@ -17,7 +17,7 @@ in {
       (lib.optionalString cfg.stsea3tb "stsea-barra")
     ];
 
-    services.sanoid = lib.mkIf config.custom-nixos.zfs.snapshots {
+    services.sanoid = lib.mkIf config.custom.zfs.snapshots {
       enable = true;
 
       datasets = {
@@ -38,18 +38,20 @@ in {
 
     # add bookmarks for gtk
     hm = {...} @ hmCfg: {
-      gtk.gtk3.bookmarks = lib.optionals cfg.wdc1tb [
-        "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
-        "file://${wdc-blue-mountpoint}/_SMALL/ _SMALL"
-        "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
-        "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
-        "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
-        "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
-        "file://${wdc-blue-mountpoint}/Documents/papers papers"
-        "file://${wdc-blue-mountpoint}/ wdc-blue/data"
-      ] ++ (lib.optionals cfg.stsea3tb [
-        "file://${stsea-mountpoint}/ stsea-barra/okii"
-      ]);
+      gtk.gtk3.bookmarks =
+        lib.optionals cfg.wdc1tb [
+          "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
+          "file://${wdc-blue-mountpoint}/_SMALL/ _SMALL"
+          "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
+          "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
+          "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
+          "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
+          "file://${wdc-blue-mountpoint}/Documents/papers papers"
+          "file://${wdc-blue-mountpoint}/ wdc-blue/data"
+        ]
+        ++ (lib.optionals cfg.stsea3tb [
+          "file://${stsea-mountpoint}/ stsea-barra/okii"
+        ]);
 
       # create symlinks for locations with ~
       home.file = let
