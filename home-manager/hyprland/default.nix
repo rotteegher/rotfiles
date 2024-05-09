@@ -3,7 +3,6 @@
   host,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 let
@@ -54,10 +53,6 @@ in
         "HYPRCURSOR_THEME,${config.home.pointerCursor.name}"
         "HYPRCURSOR_SIZE,${toString config.home.pointerCursor.size}"
 
-        # set which gpu `card` to use from /dev/dri/by-path 
-        # use lspci | grep -E 'VGA|3D' to determine which gpu is which in /dev/dri/by-path
-        # NOTE: use only by-path as the names like /dev/dri/card0 could change dynamically without notice after reboot
-        "WLR_DRM_DEVICES,/dev/dri/by-path/pci-0000:00:02.0-card"
       ];
 
       input = {
@@ -103,7 +98,6 @@ in
       #   send_cancel = 0;
       # }
       # };
-
 
       # touchscreen
       gestures = {
@@ -217,9 +211,9 @@ in
 
       windowrule = [
         # do not idle while watching videos
-        # "idleinhibit fullscreen,firefox"
-        # "idleinhibit focus,YouTube"
-        # "idleinhibit focus,mpv"
+        "idleinhibit fullscreen,firefox"
+        "idleinhibit focus,YouTube"
+        "idleinhibit focus,mpv"
       ];
 
       exec-once = [

@@ -150,7 +150,7 @@ lib.mkIf cfg.enable {
           "custom/nix"
         ] ++ (lib.optional cfg.idle-inhibitor "idle_inhibitor") ++ [ "hyprland/window" ];
 
-        tray = {};
+        tray = { };
 
         modules-right =
           [

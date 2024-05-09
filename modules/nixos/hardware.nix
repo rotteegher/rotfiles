@@ -1,23 +1,29 @@
+{ lib, isLaptop, ... }:
 {
-  lib,
-  isLaptop,
-  config,
-  ...
-}: {
   options.custom = {
     xkbLayout = lib.mkOption {
       type = lib.types.str;
       default = "us";
     };
     nvidia.enable = lib.mkEnableOption "Nvidia GPU";
-    bluetooth.enable =
-      lib.mkEnableOption "Bluetooth"
-      // {
-        default = isLaptop;
+    bluetooth.enable = lib.mkEnableOption "Bluetooth" // {
+      default = isLaptop;
+    };
+
+    hyprSelectGpu = {
+      enable = lib.mkEnableOption "Select gpu to use for hyprland" // {
+        default = false;
       };
+      device = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+      };
+    };
 
     hotspot = {
-      enable = lib.mkEnableOption "WiFI Broadcast HotSpot" // {default = false;};
+      enable = lib.mkEnableOption "WiFI Broadcast HotSpot" // {
+        default = false;
+      };
       internet_iface = lib.mkOption {
         type = lib.types.str;
         default = "eno1";
@@ -41,23 +47,27 @@
     };
 
     hdds = {
-      enable = lib.mkEnableOption "Desktop HDDs" // {default = false;};
-      stsea3tb = lib.mkEnableOption "stsea-barra" // {default = false;}; #  Seagate Barracuda 3TB ST3000DM007
-      wdc1tb = lib.mkEnableOption "wdc-blue" // {default = false;}; # WDC Blue 1TB WD10SPZX
-      windows = lib.mkEnableOption "Windows" // {default = false;};
+      enable = lib.mkEnableOption "Desktop HDDs" // {
+        default = false;
+      };
+      stsea3tb = lib.mkEnableOption "stsea-barra" // {
+        default = false;
+      }; # Seagate Barracuda 3TB ST3000DM007
+      wdc1tb = lib.mkEnableOption "wdc-blue" // {
+        default = false;
+      }; # WDC Blue 1TB WD10SPZX
+      windows = lib.mkEnableOption "Windows" // {
+        default = false;
+      };
     };
 
     zfs = {
-      encryption =
-        lib.mkEnableOption "zfs encryption"
-        // {
-          default = true;
-        };
-      snapshots =
-        lib.mkEnableOption "zfs snapshots"
-        // {
-          default = true;
-        };
+      encryption = lib.mkEnableOption "zfs encryption" // {
+        default = true;
+      };
+      snapshots = lib.mkEnableOption "zfs snapshots" // {
+        default = true;
+      };
     };
   };
 }

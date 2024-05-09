@@ -20,9 +20,7 @@ in {
           # search.engines = [ ];
 
           extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-            bitwarden
             darkreader
-            screenshot-capture-annotate
             sponsorblock
             ublock-origin
             tab-session-manager

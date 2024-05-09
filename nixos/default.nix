@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     # hardware
     ./hdds.nix
@@ -17,6 +18,7 @@
     ./configuration.nix
     ./docker.nix
     ./llm.nix
+    ./jellyfin.nix
     ./filezilla.nix
     ./flatpak.nix
     ./hyprland.nix
@@ -51,7 +53,7 @@
 
       # install fish completions for fish
       # https://github.com/nix-community/home-manager/pull/2408
-      pathsToLink = ["/share/fish"];
+      pathsToLink = [ "/share/fish" ];
 
       variables = {
         TERMINAL = lib.getExe config.hm.custom.terminal.package;
@@ -64,8 +66,7 @@
       # use some shell aliases from home manager
       shellAliases =
         {
-          inherit
-            (config.hm.programs.bash.shellAliases)
+          inherit (config.hm.programs.bash.shellAliases)
             eza
             ls
             ll
@@ -74,19 +75,19 @@
             ;
         }
         // {
-          inherit
-            (config.hm.home.shellAliases)
+          inherit (config.hm.home.shellAliases)
             # eza related
-            
+
             t
             tree
             # yazi
-            
+
             y
             ;
         };
 
-      systemPackages = with pkgs;
+      systemPackages =
+        with pkgs;
         [
           stdmanpages
           curl
@@ -112,11 +113,11 @@
           powerstat
         ]
         ++
-        # install gtk theme for root, some apps like gparted only run as root
-        (with config.hm.gtk; [
-          theme.package
-          iconTheme.package
-        ])
+          # install gtk theme for root, some apps like gparted only run as root
+          (with config.hm.gtk; [
+            theme.package
+            iconTheme.package
+          ])
         # add custom user created shell packages
         ++ (lib.attrValues config.custom.shell.finalPackages)
         ++ (lib.optional config.hm.custom.helix.enable helix)
@@ -126,16 +127,14 @@
     # add custom user created shell packages to pkgs.custom.shell
     nixpkgs.overlays = [
       (_: prev: {
-        custom =
-          prev.custom
-          // {
-            shell = config.custom.shell.finalPackages // config.hm.custom.shell.finalPackages;
-          };
+        custom = prev.custom // {
+          shell = config.custom.shell.finalPackages // config.hm.custom.shell.finalPackages;
+        };
       })
     ];
 
     # setup fonts
-    fonts.packages = config.hm.custom.fonts.packages ++ [pkgs.custom.rofi-themes];
+    fonts.packages = config.hm.custom.fonts.packages ++ [ pkgs.custom.rofi-themes ];
 
     programs = {
       # use same config as home-manager
@@ -161,13 +160,9 @@
     };
 
     custom.persist = {
-      root.directories = lib.mkIf config.hm.custom.wifi.enable [
-        "/etc/NetworkManager"
-      ];
+      root.directories = lib.mkIf config.hm.custom.wifi.enable [ "/etc/NetworkManager" ];
 
-      home.directories = [
-        ".local/state/wireplumber"
-      ];
+      home.directories = [ ".local/state/wireplumber" ];
     };
   };
 }
