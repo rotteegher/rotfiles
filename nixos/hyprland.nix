@@ -21,6 +21,14 @@ lib.mkIf config.custom.hyprland.enable {
   # set here as legacy linux won't be able to set these
   hm.wayland.windowManager.hyprland.enable = true;
 
+  # set which gpu `card` to use from /dev/dri/by-path 
+  # use lspci | grep -E 'VGA|3D' to determine which gpu is which in /dev/dri/by-path
+
+  # NOTE: use only by-path as the names like /dev/dri/card0 could change dynamically without notice after reboot
+  environment.variables.WLR_DRM_DEVICES = lib.mkIf config.custom.hyprSelectGpu.enable (
+    config.custom.hyprSelectGpu.device
+  );
+
   # lock hyprland to 0.38.1 until workspace switching is resolved
   nixpkgs.overlays = [
     (_: prev: {

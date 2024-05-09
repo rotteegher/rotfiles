@@ -22,6 +22,7 @@
 
     # software
     distrobox.enable = true;
+    jellyfin.enable = true;
     llm.enable = true;
     docker.enable = true;
     surrealdb.enable = true;
@@ -30,6 +31,9 @@
     flatpak.enable = true;
     steam.enable = true;
   };
+
+  # Select gpu for hyprland by pcie adress
+  custom.hyprSelectGpu.device = "/dev/dri/by-path/pci-0000:01:00.0-card";
 
   services.displayManager.autoLogin.user = user;
 
