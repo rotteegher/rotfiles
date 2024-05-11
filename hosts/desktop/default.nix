@@ -32,9 +32,6 @@
     steam.enable = true;
   };
 
-  # Select gpu for hyprland by pcie adress
-  custom.hyprSelectGpu.device = "/dev/dri/by-path/pci-0000:01:00.0-card";
-
   services.displayManager.autoLogin.user = user;
 
   networking.hostId = "83efa833"; # required for zfs

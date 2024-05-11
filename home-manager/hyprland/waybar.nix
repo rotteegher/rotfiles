@@ -99,6 +99,16 @@ lib.mkIf cfg.enable {
           tooltip-format = "<tt><small>{calendar}</small></tt>";
         };
 
+        memory = {
+          interval = 0.5;
+          format = "{used:0.1f}G|{total:0.1f}G ";
+        };
+        cpu = {
+          interval = 0.5;
+          format = "{usage}|{load} ";
+        };
+
+
         "custom/nix" = {
           format = "󱄅";
           on-click = "hypr-wallpaper";
@@ -154,6 +164,8 @@ lib.mkIf cfg.enable {
 
         modules-right =
           [
+            "memory"
+            "cpu"
             "tray"
             "network"
             "pulseaudio"

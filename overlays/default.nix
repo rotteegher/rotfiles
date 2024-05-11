@@ -33,6 +33,8 @@ in {
         patches = (o.patches or []) ++ [./fastfetch-nixos-old-small.patch];
       });
 
+      blender = prev.blender.override { cudaSupport = true; };
+
       hyprcursor =
         # assert (
         #   lib.assertMsg (prev.hyprcursor.version == "0.1.5") "hyprcursor: source overlay still needed?"

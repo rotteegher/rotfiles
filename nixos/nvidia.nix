@@ -14,13 +14,8 @@ in
     services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.nvidia = {
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
-      # prevents crashes with nvidia on resuming, see:
-      # https://github.com/hyprwm/Hyprland/issues/804#issuecomment-1369994379
-      powerManagement.enable = false;
-
-      open = false;
     };
 
     environment = {

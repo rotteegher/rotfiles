@@ -10,16 +10,6 @@
       default = isLaptop;
     };
 
-    hyprSelectGpu = {
-      enable = lib.mkEnableOption "Select gpu to use for hyprland" // {
-        default = false;
-      };
-      device = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-      };
-    };
-
     hotspot = {
       enable = lib.mkEnableOption "WiFI Broadcast HotSpot" // {
         default = false;
