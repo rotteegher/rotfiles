@@ -9,6 +9,7 @@
   firefoxPkg = pkgs.firefox-wayland;
 in {
   config = {
+    home.packages = with pkgs; [ librewolf ];
     programs = lib.mkIf config.custom.firefox.enable {
       # firefox
       firefox = {
