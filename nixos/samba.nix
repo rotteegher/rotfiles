@@ -6,7 +6,7 @@
 }: let
   cfg = config.custom.hdds;
 in {
-  services.samba = {
+  services.samba = lib.mkIf cfg.enable {
     enable = true;
     securityType = "user";
     openFirewall = true;
@@ -44,6 +44,18 @@ in {
         "force user" = "${user}";
         "force group" = "users";
       };
+      farmtasker = lib.mkIf cfg.wdc1tb {
+        path = "/md/wdc-data/_SMALL/_MOM/";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "${user}";
+        "force group" = "users";
+      };
+
+
       stsea-okii = lib.mkIf cfg.stsea3tb {
         path = "/md/stsea-okii/";
         browseable = "yes";
@@ -62,8 +74,6 @@ in {
     openFirewall = true;
   };
 
-  networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
   custom.persist = {
     root.directories = ["/var/lib/samba"];
   };
