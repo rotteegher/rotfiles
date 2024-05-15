@@ -64,4 +64,7 @@ in {
 
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;
+  custom.persist = {
+    root.directories = ["/var/lib/samba"];
+  };
 }

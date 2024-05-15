@@ -76,6 +76,7 @@
     packages = lib.mkIf isNixOS (
       with pkgs;
       [
+        guvcview
         feh
         mupdf
       ]

@@ -40,6 +40,7 @@
       pavucontrol
       helvum
       easyeffects
+      pulseaudio
       qjackctl
       jack2
       vmpk # piano
