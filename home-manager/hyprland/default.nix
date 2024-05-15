@@ -191,7 +191,7 @@ in
         key_press_enables_dpms = true;
         enable_swallow = false;
         swallow_regex = "^([Kk]itty|[Ww]ezterm)$";
-        focus_on_activate = true;
+        focus_on_activate = false;
       };
 
       debug.disable_logs = false;

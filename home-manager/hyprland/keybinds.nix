@@ -104,7 +104,7 @@ in
         "$mod_SHIFT, 0, movetoworkspacesilent, 10" # 10
         "$mod_SHIFT, d, movetoworkspacesilent, 10" # d for 10
 
-        "$mod_SHIFT, b, layoutmsg, swapwithmaster"
+        # "$mod_SHIFT, b, layoutmsg, swapwithmaster"
 
         # focus the previous / next desktop in the current monitor (DE style)
         "$mod_SHIFT_CTRL, h, workspace, m-1"
