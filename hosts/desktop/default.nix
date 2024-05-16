@@ -30,6 +30,7 @@
     bittorrent.enable = true;
     flatpak.enable = true;
     steam.enable = true;
+    lutris.enable = true;
   };
 
   services.displayManager.autoLogin.user = user;

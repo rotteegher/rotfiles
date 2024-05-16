@@ -43,6 +43,7 @@ in
     };
     flatpak.enable = lib.mkEnableOption "flatpak";
     steam.enable = lib.mkEnableOption "steam";
+    lutris.enable = lib.mkEnableOption "lutris";
 
     shell = {
       packages = lib.mkOption {

@@ -7,7 +7,6 @@
 }: let
   # Host specific Module Configuration
   cfg = config.custom.services.minecraft-java-servers;
-  # dataDir = "/srv/minecraft";
 in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
@@ -19,7 +18,7 @@ in {
       enable = true;
       eula = true;
       openFirewall = true;
-      # dataDir = dataDir;
+      dataDir = "/srv/minecraft";
       environmentFile = cfg.environmentFile;
       servers = {
         fabric-latest = let
