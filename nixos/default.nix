@@ -32,6 +32,7 @@
     ./surrealdb.nix
     ./minecraft
     ./steam.nix
+    ./lutris.nix
     ./sleep.nix
     ./input.nix
     ./bluetooth.nix

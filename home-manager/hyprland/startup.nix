@@ -24,7 +24,7 @@ in {
       # (openOnWorkspace 1 "brave --profile-directory=Default")
 
       # firefox
-      (openOnWorkspace 1 "firefox")
+      (openOnWorkspace 1 "librewolf")
 
       # Open Discord
       (openOnWorkspace 4 "discord-vesktop")
