@@ -5,21 +5,25 @@
   ...
 }:
 lib.mkIf config.custom.lutris.enable {
+  virtualisation.waydroid.enable = true;
   environment.systemPackages = with pkgs; [
     (lutris.override {
-      extraPkgs = pkgs: [
+      extraPkgs = _pkgs: [
         # List package dependencies here
       ];
-      extraLibraries =  pkgs: [
+      extraLibraries = _pkgs: [
         # List library dependencies here
       ];
     })
   ];
   custom.persist = {
-      home.directories = [
-        ".local/share/lutris"
-        "Games"
-      ];
-    };
-
+    root.directories = [
+      "/var/lib/waydroid"
+    ];
+    home.directories = [
+      ".local/share/lutris"
+      ".local/share/waydroid"
+      "Games"
+    ];
+  };
 }

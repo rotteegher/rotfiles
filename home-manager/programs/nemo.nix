@@ -30,6 +30,11 @@ in {
     enable = true;
     defaultApplications =
       {
+        "text/html" = "librewolf.desktop";
+        "x-scheme-handler/http" = "librewolf.desktop";
+        "x-scheme-handler/https" = "librewolf.desktop";
+        "x-scheme-handler/about" = "librewolf.desktop";
+        "x-scheme-handler/unknown" = "librewolf.desktop";
         "inode/directory" = "nemo.desktop";
         # wtf zathura registers itself to open archives
         "application/zip" = "org.gnome.FileRoller.desktop";

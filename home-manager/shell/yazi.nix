@@ -55,6 +55,10 @@
             run = "cd ${loc}";
             desc = "cd to ${loc}";
           }
+          {
+            on = [ "g" "z" ];
+            run = "cd ~/_MAIN/_NT_STUDIO/_ZIRKA";
+          }
           # new tab
           {
             on = [ "t" ] ++ lib.stringToCharacters keys;
