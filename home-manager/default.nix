@@ -37,6 +37,7 @@
         rar # includes unrar
         zip # not includes unzip
         unzip
+        lzip
         ripgrep
         libreoffice
         trash-cli

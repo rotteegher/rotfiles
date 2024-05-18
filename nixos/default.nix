@@ -91,6 +91,7 @@
       systemPackages =
         with pkgs;
         [
+          iptables-legacy
           stdmanpages
           curl
           eza
