@@ -22,6 +22,10 @@ let
     path = ./rust-toolchain;
     description = "Rust dev environment, but from toolchain.toml";
   };
+  bevy = {
+    path = ./bevy;
+    description = "Rust dev environment, but from toolchain.toml";
+  };
   empty = {
     path = ./empty;
     description = "Default empty dev environment";
@@ -34,6 +38,7 @@ in
     rust
     rust-stable
     rust-toolchain
+    bevy
     empty
     ;
   js = javascript;
