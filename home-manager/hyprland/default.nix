@@ -117,7 +117,7 @@ in
           gaps_in = gap;
           gaps_out = gap;
           border_size = 2;
-          layout = "dwindle";
+          layout = "master";
         };
 
       decoration = {

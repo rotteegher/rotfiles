@@ -23,6 +23,7 @@
     fd # better find
     fx # terminal json viewer and processor
     htop
+    dust # better du
     jq
     sd # better sed
     libnotify
