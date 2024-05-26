@@ -15,7 +15,7 @@
 
     ./auth.nix
     ./samba.nix
-    ./sws.nix
+    # ./sws.nix # TODO
     ./configuration.nix
     ./docker.nix
     ./llm.nix
