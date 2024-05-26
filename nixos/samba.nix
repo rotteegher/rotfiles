@@ -24,28 +24,28 @@ in {
       map to guest = bad user
     '';
     shares = {
-      persist = {
-        path = "/persist/";
-        browseable = "yes";
-        "read only" = "no";
-        "guest ok" = "no";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "${user}";
-        "force group" = "users";
-      };
-      wdc-data = lib.mkIf cfg.wdc1tb {
-        path = "/md/wdc-data/";
-        browseable = "yes";
-        "read only" = "no";
-        "guest ok" = "no";
-        "create mask" = "0644";
-        "directory mask" = "0755";
-        "force user" = "${user}";
-        "force group" = "users";
-      };
-      farmtasker = lib.mkIf cfg.wdc1tb {
-        path = "/md/wdc-data/_SMALL/_MOM/";
+      # persist = {
+      #   path = "/persist/";
+      #   browseable = "yes";
+      #   "read only" = "no";
+      #   "guest ok" = "no";
+      #   "create mask" = "0644";
+      #   "directory mask" = "0755";
+      #   "force user" = "${user}";
+      #   "force group" = "users";
+      # };
+      # wdc-data = lib.mkIf cfg.wdc1tb {
+      #   path = "/md/wdc-data/";
+      #   browseable = "yes";
+      #   "read only" = "no";
+      #   "guest ok" = "no";
+      #   "create mask" = "0644";
+      #   "directory mask" = "0755";
+      #   "force user" = "${user}";
+      #   "force group" = "users";
+      # };
+      korobka = lib.mkIf cfg.wdc1tb {
+        path = "/md/wdc-data/_KOROBKA";
         browseable = "yes";
         "read only" = "no";
         "guest ok" = "no";

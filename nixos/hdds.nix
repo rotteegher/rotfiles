@@ -3,13 +3,15 @@
   config,
   user,
   ...
-}: let
+}:
+let
   cfg = config.custom.hdds;
   wdc-blue-mountpoint = "/md/wdc-data";
   wdc-blue-dataset = "wdc-blue/data";
   stsea-mountpoint = "/md/stsea-okii";
   stsea-dataset = "stsea-barra/okii";
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     # non os zfs disks
     boot.zfs.extraPools = [
@@ -37,32 +39,35 @@ in {
     };
 
     # add bookmarks for gtk
-    hm = {...} @ hmCfg: {
-      gtk.gtk3.bookmarks =
-        lib.optionals cfg.wdc1tb [
-          "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
-          "file://${wdc-blue-mountpoint}/_SMALL/ _SMALL"
-          "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
-          "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
-          "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
-          "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
-          "file://${wdc-blue-mountpoint}/Documents/papers papers"
-          "file://${wdc-blue-mountpoint}/ wdc-blue/data"
-        ]
-        ++ (lib.optionals cfg.stsea3tb [
-          "file://${stsea-mountpoint}/ stsea-barra/okii"
-        ]);
+    hm =
+      { ... }@hmCfg:
+      {
+        gtk.gtk3.bookmarks =
+          lib.optionals cfg.wdc1tb [
+            "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
+            "file://${wdc-blue-mountpoint}/_SMALL/ _SMALL"
+            "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
+            "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
+            "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
+            "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
+            "file://${wdc-blue-mountpoint}/Documents/papers papers"
+            "file://${wdc-blue-mountpoint}/ wdc-blue/data"
+          ]
+          ++ (lib.optionals cfg.stsea3tb [ "file://${stsea-mountpoint}/ stsea-barra/okii" ]);
 
-      # create symlinks for locations with ~
-      home.file = let
-        mkOutOfStoreSymlink = hmCfg.config.lib.file.mkOutOfStoreSymlink;
-      in {
-        "Downloads".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Downloads");
-        "Videos".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Videos");
-        "Documents".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Documents");
-        # "Desktop".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Desktop");
+        # create symlinks for locations with ~
+        home.file =
+          let
+            mkOutOfStoreSymlink = hmCfg.config.lib.file.mkOutOfStoreSymlink;
+          in
+          {
+            "Downloads".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Downloads");
+            "Videos".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Videos");
+            "Documents".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Documents");
+            # causes error for some reason vvvvvvvvvvvvvv
+            # "Desktop".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Desktop");
+          };
       };
-    };
 
     # symlinks from hdds
     # dest src
@@ -78,16 +83,18 @@ in {
 
     # dual boot windows
     boot.loader.grub = {
-      extraEntries = lib.concatStringsSep "\n" (lib.optional cfg.windows ''
-        menuentry "Windows 10" {
-          insmod part_gpt
-          insmod ntfs
-          insmod search_fs_uuid
-          insmod chain
-          search --fs-uuid --set=root 14A1-3DF5
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
-      '');
+      extraEntries = lib.concatStringsSep "\n" (
+        lib.optional cfg.windows ''
+          menuentry "Windows 10" {
+            insmod part_gpt
+            insmod ntfs
+            insmod search_fs_uuid
+            insmod chain
+            search --fs-uuid --set=root 14A1-3DF5
+            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+          }
+        ''
+      );
     };
 
     fileSystems = {
