@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    musnix = {
+      url = "github:musnix/musnix";
+    };
+
     hyprland.url = "github:hyprwm/hyprland/v0.38.1";
 
     devenv.url = "github:cachix/devenv";

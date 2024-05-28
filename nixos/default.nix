@@ -17,6 +17,7 @@
     ./samba.nix
     # ./sws.nix # TODO
     ./configuration.nix
+    ./wine.nix
     ./docker.nix
     ./llm.nix
     ./jellyfin.nix

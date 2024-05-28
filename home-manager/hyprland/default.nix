@@ -212,7 +212,7 @@ in
 
       windowrule = [
         # do not idle while watching videos
-        "idleinhibit fullscreen,firefox"
+        "idleinhibit fullscreen,librewolf"
         "idleinhibit focus,YouTube"
         "idleinhibit focus,mpv"
       ];

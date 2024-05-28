@@ -37,7 +37,6 @@
       # (Starts from 0) devIndex 0 is first monitor in "displays" list
       devIndex = 0;
     };
-    gradience.enable = false;
     firefox.enable = true;
     wallust = {
       enable = true;
