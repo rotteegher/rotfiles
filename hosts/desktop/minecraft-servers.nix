@@ -45,7 +45,7 @@
     };
 
     services.minecraft-java-servers.fabric-latest = {
-      enable = true;
+      enable = false;
       do-run = true;
       autoStart = true;
       # jvmOpts = "-Xms8192M -Xmx8192M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
