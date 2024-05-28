@@ -12,7 +12,7 @@ in {
     ./minecraft-java-servers.nix
     ./minecraft-bedrock-server.nix
   ];
-  config = lib.mkIf (cfg-java.enable || cfg-bedrock) {
+  config = lib.mkIf (cfg-java.enable or cfg-bedrock) {
     users.users.${user}.extraGroups = ["minecraft"];
     environment.systemPackages = with pkgs; [
       packwiz
