@@ -1,6 +1,8 @@
 {
   pkgs,
   user,
+  lib,
+  config,
   ...
 }: {
   config = {
@@ -29,8 +31,9 @@
     #   # };
     # };
 
+    musnix.enable = true;
     users.users.${user} = {...}: {
-      extraGroups = ["jackaudio"];
+      extraGroups = ["jackaudio" "audio" ];
     };
 
     environment.systemPackages = with pkgs; [

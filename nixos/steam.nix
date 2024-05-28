@@ -13,8 +13,8 @@
     environment.systemPackages = with pkgs; [
       steam
 
-      steamcmd
-      steam-tui
+      # steamcmd
+      # steam-tui
       gcc
       cxxtools
       libcxx

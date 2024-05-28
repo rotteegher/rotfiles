@@ -30,6 +30,28 @@ in {
         };
       };
     };
+    # set default browser
+    xdg.mimeApps = let 
+      browser = "librewolf.desktop";
+    in {
+      defaultApplications = {
+        "x-scheme-handler/http" = browser;
+        "text/html" = browser;
+        "text/xml" = browser;
+        "application/xhtml_xml" = browser;
+        "image/webp" = browser;
+        "x-scheme-handler/https" = browser;
+        "x-scheme-handler/ftp" = browser;
+      };
+      associations.added = {
+        "text/html" = browser;
+        "text/xml" = browser;
+        "application/xhtml_xml" = browser;
+        "image/webp" = browser;
+        "x-scheme-handler/https" = browser;
+        "x-scheme-handler/ftp" = browser;
+      };
+    };
 
     custom.persist = {
       home.directories = [

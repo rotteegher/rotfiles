@@ -12,6 +12,7 @@ in
 {
   options.custom = {
     ### NIXOS LEVEL OPTIONS ###
+    wine.enable = lib.mkEnableOption "wine";
     distrobox.enable = lib.mkEnableOption "distrobox";
     llm.enable = lib.mkEnableOption "large language model" // {
       default = false;

@@ -21,6 +21,7 @@
     };
 
     # software
+    wine.enable = true;
     distrobox.enable = true;
     jellyfin.enable = true;
     llm.enable = true;
