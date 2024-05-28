@@ -24,6 +24,7 @@
 
     shellAliases = {
       neofetch = "${lib.getExe pkgs.fastfetch} --config neofetch";
+      hw = "hypr-wallpaper";
     };
   };
 

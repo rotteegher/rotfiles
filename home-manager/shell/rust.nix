@@ -6,7 +6,7 @@
   # use centralized cargo cache
   home.sessionVariables = {
     CARGO_HOME = "/persist/cache/${config.xdg.dataHome}/.cargo";
-    CARGO_TARGET_DIR = "/persist/cache/home/${user}/cargo/target";
+    # CARGO_TARGET_DIR = "/persist/cache/home/${user}/cargo/target";
   };
 
   # setup helix for rust
