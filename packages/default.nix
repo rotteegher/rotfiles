@@ -33,5 +33,7 @@ in
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/games/path-of-building/default.nix
   rofi-themes = w pkgs.callPackage ./rofi-themes { };
 
-  vv = w pkgs.callPackage ./vv { };
+  vv =
+  assert (lib.assertMsg (!lib.hasAttr "vv" pkgs) "vv: vv is in nixpkgs");
+  (w callPackage ./vv { });
 }
