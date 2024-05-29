@@ -77,7 +77,8 @@
       with pkgs;
       [
         guvcview
-        feh
+        # USE imv INSTEAD!
+        # feh 
         mupdf
       ]
     );
