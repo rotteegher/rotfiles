@@ -1,7 +1,7 @@
 {
     "hyprcursor": {
         "cargoLocks": null,
-        "date": "2024-05-24",
+        "date": "2024-05-31",
         "extract": null,
         "name": "hyprcursor",
         "passthru": null,
@@ -13,15 +13,15 @@
             "name": null,
             "owner": "hyprwm",
             "repo": "hyprcursor",
-            "rev": "57298fc4f13c807e50ada2c986a3114b7fc2e621",
-            "sha256": "sha256-FIN1wMoyePBTtibCbaeJaoKNLuAYIGwLCWAYC1DJanw=",
+            "rev": "9e27a2c2ceb1e0b85bd55b0afefad196056fe87c",
+            "sha256": "sha256-yv+QZWsusu/NWjydkxixHC2g+tIJ9v+xkE2EiVpJj6g=",
             "type": "github"
         },
-        "version": "57298fc4f13c807e50ada2c986a3114b7fc2e621"
+        "version": "9e27a2c2ceb1e0b85bd55b0afefad196056fe87c"
     },
     "hyprlock": {
         "cargoLocks": null,
-        "date": "2024-05-26",
+        "date": "2024-05-29",
         "extract": null,
         "name": "hyprlock",
         "passthru": null,
@@ -33,11 +33,11 @@
             "name": null,
             "owner": "hyprwm",
             "repo": "hyprlock",
-            "rev": "768cd3ea525bbd1ed2dde5928b0843129274b50d",
-            "sha256": "sha256-seOWIKi6jXE1BIQ6FLXUMe0h54cLwAxCCiL8bXFx60Q=",
+            "rev": "e07d4110dc0b9d1786403aa760232564ad28b6fa",
+            "sha256": "sha256-l8aa+XPDbM3Mf3W4ukC/tBBHVZE8A3att4KLXrnyKSI=",
             "type": "github"
         },
-        "version": "768cd3ea525bbd1ed2dde5928b0843129274b50d"
+        "version": "e07d4110dc0b9d1786403aa760232564ad28b6fa"
     },
     "swww": {
         "cargoLocks": null,
