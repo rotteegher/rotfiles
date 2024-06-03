@@ -77,3 +77,8 @@ sh <(curl -L https://raw.githubusercontent.com/rotteegher/rotfiles/master/recove
 # Check out `iynaix/dotfiles`
 
 This repo was forked from my friend [Iynaix's config](https://github.com/iynaix/dotfiles)
+
+# Screenshots of the rice
+
+![Rice1](https://github.com/rotteegher/rotfiles/blob/master/rice.png?raw=true)
+![Rice2](https://github.com/rotteegher/rotfiles/blob/master/rice2.png?raw=true)

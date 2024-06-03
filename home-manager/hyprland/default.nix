@@ -58,6 +58,7 @@ in
       input = {
         kb_layout = config.custom.kbLayout;
         follow_mouse = 0;
+        mouse_refocus = false;
         accel_profile = "flat";
         repeat_delay = 300;
 
