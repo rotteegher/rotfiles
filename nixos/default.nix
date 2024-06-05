@@ -12,6 +12,7 @@
     ./zfs.nix
     ./audio.nix
     ./keyd.nix
+    ./sensors.nix
 
     ./auth.nix
     ./samba.nix

@@ -108,6 +108,11 @@ lib.mkIf cfg.enable {
           format = "{usage}|{load} ";
         };
 
+        temperature = {
+          hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+          interval = 0.5;
+          format = "{temperatureC}°C ";
+        };
 
         "custom/nix" = {
           format = "󱄅";
@@ -165,6 +170,7 @@ lib.mkIf cfg.enable {
         modules-right =
           [
             "memory"
+            "temperature"
             "cpu"
             "tray"
             "network"

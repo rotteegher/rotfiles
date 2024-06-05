@@ -57,7 +57,6 @@ in
       env = [
         "HYPRCURSOR_THEME,${config.home.pointerCursor.name}"
         "HYPRCURSOR_SIZE,${toString config.home.pointerCursor.size}"
-
       ];
 
       input = {
@@ -214,6 +213,7 @@ in
         "bordersize 5,fullscreen:1" # monocle mode
         "float,class:(wlroots)" # hyprland debug session
         "float,class:(Waydroid)"
+        "float,class:(ayaka-gui)"
       ];
 
       windowrule = [
