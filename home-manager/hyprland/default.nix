@@ -20,6 +20,7 @@ in
   ];
 
   config = lib.mkIf config.wayland.windowManager.hyprland.enable {
+
     home = {
       sessionVariables = {
         HYPR_LOG = "/tmp/hyprland.log";
@@ -36,6 +37,10 @@ in
 
       # shaders location config
       file.".config/hypr/shaders".source = ./shaders;
+
+      # FIX bug with input
+      # https://github.com/hyprwm/Hyprland/issues/5815
+      file.".config/fcitx5/conf/waylandim.conf".text = "PreferKeyEvent=False";
     };
 
     # Hyprland plugins go here
@@ -57,7 +62,7 @@ in
 
       input = {
         kb_layout = config.custom.kbLayout;
-        follow_mouse = 0;
+        follow_mouse = 2;
         mouse_refocus = false;
         accel_profile = "flat";
         repeat_delay = 300;
