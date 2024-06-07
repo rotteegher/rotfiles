@@ -90,6 +90,11 @@ in
       enable = lib.mkEnableOption "waybar" // {
         default = hyprlandCfg.enable;
       };
+      hwmon = lib.mkOption {
+        type = lib.types.str;
+        default = "/sys/class/hwmon/hwmon0/temp1_input";
+        description = "Temperature monitor device file";
+      };
       config = lib.mkOption {
         type = lib.types.submodule { freeformType = (pkgs.formats.json { }).type; };
         default = { };

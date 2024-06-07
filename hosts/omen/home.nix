@@ -47,6 +47,7 @@
       enable = true;
       persistent-workspaces = true;
       hidden = false;
+      hwmon = "/sys/class/hwmon/hwmon7/temp1_input";
     };
 
     # vlc.enable = true;
