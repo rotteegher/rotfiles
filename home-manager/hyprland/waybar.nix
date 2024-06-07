@@ -124,7 +124,8 @@ lib.mkIf cfg.enable {
         "custom/shade" = {
           format = "";
           on-click = "hyprshade on blue-light-filter";
-          on-click-right = "hyprshade on vibrance";
+          # on-click-right = "hyprshade on vibrance";
+          on-click-right = "hyprshade on blue-light-filter2";
           on-click-middle = "hyprshade off";
           tooltip = false;
         };
