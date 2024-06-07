@@ -214,6 +214,7 @@ in
         "float,class:(wlroots)" # hyprland debug session
         "float,class:(Waydroid)"
         "float,class:(ayaka-gui)"
+        "float,class:(org.fcitx.)"
       ];
 
       windowrule = [
