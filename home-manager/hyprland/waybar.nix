@@ -91,26 +91,26 @@ lib.mkIf cfg.enable {
             mode-mon-col = 3;
             on-scroll = 1;
           };
-          format = "󰥔   {:%H:%M}";
+          format = "󰥔   {:%H:%M:%S}";
           format-alt = "󰸗   {:%a, %d %b %Y}";
           # format = "󰥔   {:%H:%M}";
           # format-alt = "  {:%a, %d %b %Y}";
-          interval = 10;
+          interval = 1;
           tooltip-format = "<tt><small>{calendar}</small></tt>";
         };
 
         memory = {
-          interval = 0.5;
+          interval = 1;
           format = "{used:0.1f}G|{total:0.1f}G ";
         };
         cpu = {
-          interval = 0.5;
+          interval = 1;
           format = "{usage}|{load} ";
         };
 
         temperature = {
-          hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
-          interval = 0.5;
+          hwmon-path = cfg.hwmon;
+          interval = 1;
           format = "{temperatureC}°C ";
         };
 

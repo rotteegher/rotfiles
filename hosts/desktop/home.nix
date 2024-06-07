@@ -35,6 +35,7 @@
       enable = true;
       persistent-workspaces = true;
       hidden = false;
+      hwmon = "/sys/class/hwmon/hwmon2/temp1_input";
     };
 
     # Select touchscreen monitor by id
