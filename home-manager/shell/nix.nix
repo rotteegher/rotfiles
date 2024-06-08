@@ -93,6 +93,51 @@ in {
         cd - > /dev/null
       '';
     };
+    # test via nix flake
+    nts = pkgs.writeShellApplication {
+      name = "nts";
+      runtimeInputs = with pkgs; [
+        git
+        nh
+        ripgrep
+        custom.shell.nix-current-generation
+      ];
+      text = let
+        subcmd =
+          if isNixOS
+          then "os"
+          else "home";
+        hostFlag =
+          if isNixOS
+          then "hostname"
+          else "configuration";
+      in ''
+        cd ${rots}
+
+        # stop bothering me about untracked files
+        untracked_files=$(git ls-files --exclude-standard --others .)
+        if [ -n "$untracked_files" ]; then
+            git add "$untracked_files"
+        fi
+
+        # force test to always use current host
+        if [[ "$*" == *"--${hostFlag}"* ]]; then
+            # Replace the word after "--${hostFlag}" with host using parameter expansion
+            cleaned_args=("''${@/--${hostFlag} [^[:space:]]*/--${hostFlag} ${host}}")
+            nh ${subcmd} test "''${cleaned_args[@]}" ${rots} -- --option eval-cache false
+        else
+            nh ${subcmd} test "$@" --${hostFlag} ${host} ${rots} -- --option eval-cache false
+        fi
+
+        ${lib.optionalString isNixOS ''
+          # only relevant if --dry is not passed
+          if [[ "$*" != *"--dry"* ]]; then
+            echo -e "tested to Generation \033[1m$(nix-current-generation)\033[0m"
+          fi
+        ''}
+        cd - > /dev/null
+      '';
+    };
     # update all nvfetcher overlays and packages
     nv-update = pkgs.writeShellApplication {
       name = "nv-update";
