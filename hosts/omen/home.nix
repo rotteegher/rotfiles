@@ -27,6 +27,7 @@
         ];
       }
     ];
+    mouse_sensitivity = 0.75;
     hyprland = {
       modkey = "SUPER";
       autostart = false;
@@ -89,8 +90,6 @@
         feh
         mupdf
         ffmpeg
-        libgcc
-        glibc
       ]
     );
   };

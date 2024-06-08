@@ -60,6 +60,7 @@ in
       ];
 
       input = {
+        sensitivity = config.custom.mouse_sensitivity;
         kb_layout = config.custom.kbLayout;
         follow_mouse = 2;
         mouse_refocus = false;
