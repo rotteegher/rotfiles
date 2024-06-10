@@ -1,41 +1,154 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
+    devenv.url = "github:cachix/devenv";
+    fenix.url = "github:nix-community/fenix";
   };
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-    rust-overlay,
-  }:
-    flake-utils.lib.eachDefaultSystem
-    (
-      system: let
-        overlays = [(import rust-overlay)];
-        pkgs = import nixpkgs {
-          inherit system overlays;
-        };
-        # NOTE that it refers to the path ./rust-toolchain.toml
-        rustToolchain = pkgs.pkgsBuildHost.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
-      in
-        with pkgs; {
-          devShells.default = mkShell {
-            # we can just use `rustToolchain` here:
-            nativeBuildInputs = [
-              rustToolchain
-              pkgs.bacon
-              pkgs.openssl
-              pkgs.pkg-config
-            ];
+
+  outputs =
+    inputs@{ flake-parts, nixpkgs, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ inputs.devenv.flakeModule ];
+      systems = nixpkgs.lib.systems.flakeExposed;
+
+      perSystem =
+        {
+          config,
+          self',
+          inputs',
+          pkgs,
+          system,
+          ...
+        }: let         
+          libraries = with pkgs;[
+            # webkitgtk
+            webkitgtk_4_1
+            # webkitgtk_6_0
+            gtk3
+            cairo
+            gdk-pixbuf
+            glib
+            dbus
+            openssl_3
+            librsvg
+
+            # Bevy
+            alsa-lib
+            vulkan-tools
+            vulkan-headers
+            vulkan-loader
+            vulkan-validation-layers
+            udev
+            clang
+            lld
+            libsoup
+            libsoup_3
+
+            libGL
+             xorg.libX11
+             xorg.libX11
+             xorg.libXcursor
+             xorg.libXi
+             xorg.libXrandr
+             libxkbcommon
+             wayland
+
+            # Video/Audio data composition framework tools like "gst-inspect", "gst-launch" ...
+            gst_all_1.gstreamer
+            # Common plugins like "filesrc" to combine within e.g. gst-launch
+            gst_all_1.gst-plugins-base
+            # Specialized plugins separated by quality
+            gst_all_1.gst-plugins-good
+            gst_all_1.gst-plugins-bad
+            gst_all_1.gst-plugins-ugly
+            # Plugins to reuse ffmpeg to play almost every video format
+            gst_all_1.gst-libav
+            # Support the Video Audio (Hardware) Acceleration API
+            gst_all_1.gst-vaapi
+          ];
+
+          packages = with pkgs; [
+            # Video/Audio data composition framework tools like "gst-inspect", "gst-launch" ...
+            gst_all_1.gstreamer
+            # Common plugins like "filesrc" to combine within e.g. gst-launch
+            gst_all_1.gst-plugins-base
+            # Specialized plugins separated by quality
+            gst_all_1.gst-plugins-good
+            gst_all_1.gst-plugins-bad
+            gst_all_1.gst-plugins-ugly
+            # Plugins to reuse ffmpeg to play almost every video format
+            gst_all_1.gst-libav
+            # Support the Video Audio (Hardware) Acceleration API
+            gst_all_1.gst-vaapi
+
+            # Bevy
+            alsa-lib
+            vulkan-tools
+            vulkan-headers
+            vulkan-loader
+            vulkan-validation-layers
+            udev
+            clang
+            lld
+
+            libGL
+             xorg.libX11
+             xorg.libX11
+             xorg.libXcursor
+             xorg.libXi
+             xorg.libXrandr
+             libxkbcommon
+             wayland
+
+            curl
+            wget
+            pkg-config
+            dbus
+            openssl_3
+            glib
+            gtk3
+            libsoup
+            libsoup_3
+            # webkitgtk
+            webkitgtk_4_1
+            # webkitgtk_6_0
+            librsvg
+
+            bacon
+          ];
+        in
+        {
+          devenv.shells.default = {
+            # https://devenv.sh/reference/options/
+            dotenv.disableHint = true;
+
+            packages = packages;
+
+            languages.javascript = {
+              enable = true;
+              corepack.enable = true;
+              npm = {
+                enable = true;
+                install.enable = true;
+              };
+            };
+            languages.typescript.enable = true;
+
+            languages.rust = {
+              enable = true;
+              channel = "nightly";
+              toolchain = {
+                rustc = pkgs.rustc-wasm32;
+              };
+              targets = [ "wasm32-unknown-unknown" ];
+            };
+
+            env = {
+              CARGO_TARGET_DIR = null;
+              LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath libraries}:$LD_LIBRARY_PATH";
+              XDG_DATA_DIRS = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:$XDG_DATA_DIRS";
+            };
           };
-        }
-    );
+        };
+    };
 }
