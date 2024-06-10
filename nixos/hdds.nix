@@ -71,7 +71,7 @@ in
 
     # symlinks from hdds
     # dest src
-    systemd.tmpfiles.rules = lib.optionals (cfg.wdc1tb && cfg.stsea3tb) [
+    systemd.tmpfiles.rules = lib.optionals cfg.enable [
       "L+ ${wdc-blue-mountpoint}/Wallpapers            - - - - /home/${user}/Pictures/Wallpapers"
       "L+ ${wdc-blue-mountpoint}/pr/rustpr             - - - - /home/${user}/pr/rustpr/ln/"
       "L+ /home/${user}/_MAIN                          - - - - ${wdc-blue-mountpoint}/_MAIN"
@@ -97,19 +97,19 @@ in
       );
     };
 
-    fileSystems = {
-      "/windows" = {
+    fileSystems = lib.mkIf cfg.enable {
+      "/windows" = lib.mkIf cfg.windows {
         device = "/dev/disk/by-label/WINDOWS";
         fsType = "ntfs";
         neededForBoot = false;
       };
 
-      "/md/wdc-data" = {
+      "/md/wdc-data" = lib.mkIf cfg.wdc1tb {
         device = "wdc-blue/data";
         fsType = "zfs";
         neededForBoot = false;
       };
-      "/md/stsea-okii" = {
+      "/md/stsea-okii" = lib.mkIf cfg.stsea3tb {
         device = "stsea-barra/okii";
         fsType = "zfs";
         neededForBoot = false;
