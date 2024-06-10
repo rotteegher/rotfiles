@@ -111,7 +111,7 @@ in {
     ];
 
     # setup port forwarding
-    networking.firewall.allowedTCPPorts = [51413];
+    networking.firewall.allowedTCPPorts = [51413 9091];
 
     hm.home.packages = with pkgs; [transmission-remote-gtk];
 
