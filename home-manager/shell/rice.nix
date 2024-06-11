@@ -12,12 +12,14 @@
       cbonsai
       cmatrix
       fastfetch
+      cpufetch
       fortune
       cowsay
       imagemagick
       nitch
       pipes-rs
       scope-tui
+      tokei
       tenki
       inputs.wfetch.packages.${pkgs.system}.wfetch
     ];
