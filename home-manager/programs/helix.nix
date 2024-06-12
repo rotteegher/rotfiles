@@ -11,10 +11,11 @@
       defaultEditor = config.custom.shell.defaultEditor == "hx";
       themes = {
         mtr = {
-          # "inherits" = "mellow";
+          "inherits" = "mellow";
           # "inherits" = "ferra";
           # "inherits" = "vim_dark_high_contrast";
-          "inherits" = "catppuccin_mocha";
+          # "inherits" = "catppuccin_mocha";
+          # "inherits" = "catppuccin_latte";
           "ui.background" = {fg = "none";};
         };
       };

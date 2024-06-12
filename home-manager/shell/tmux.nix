@@ -1,4 +1,23 @@
 {...}: {
+  programs.zellij = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      theme = "catpuccin-mocha";
+
+      on_force_close = "quit";
+      simplified_ui = true;
+      default_shell = "fish";
+      pane_frames = false;
+      copy_command = "wl-copy";
+      ui = {
+        pane_frames = {
+          hide_session_name = true;
+          rounded_corners = true;
+        };
+      };
+    };
+  };
   programs.tmux = {
     enable = true;
     prefix = "C-b";

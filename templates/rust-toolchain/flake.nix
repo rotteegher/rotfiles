@@ -19,8 +19,9 @@
           pkgs,
           system,
           ...
-        }: let         
-          libraries = with pkgs;[
+        }:
+        let
+          libraries = with pkgs; [
             # webkitgtk
             webkitgtk_4_1
             # webkitgtk_6_0
@@ -45,13 +46,13 @@
             libsoup_3
 
             libGL
-             xorg.libX11
-             xorg.libX11
-             xorg.libXcursor
-             xorg.libXi
-             xorg.libXrandr
-             libxkbcommon
-             wayland
+            xorg.libX11
+            xorg.libX11
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXrandr
+            libxkbcommon
+            wayland
 
             # Video/Audio data composition framework tools like "gst-inspect", "gst-launch" ...
             gst_all_1.gstreamer
@@ -92,13 +93,13 @@
             lld
 
             libGL
-             xorg.libX11
-             xorg.libX11
-             xorg.libXcursor
-             xorg.libXi
-             xorg.libXrandr
-             libxkbcommon
-             wayland
+            xorg.libX11
+            xorg.libX11
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXrandr
+            libxkbcommon
+            wayland
 
             curl
             wget
