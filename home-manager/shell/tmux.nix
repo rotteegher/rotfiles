@@ -9,6 +9,7 @@
       simplified_ui = true;
       default_shell = "fish";
       pane_frames = false;
+      default_layout = "compact";
       copy_command = "wl-copy";
       ui = {
         pane_frames = {
