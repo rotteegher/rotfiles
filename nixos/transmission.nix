@@ -68,8 +68,8 @@ in {
         rpc-password = "{de6b0bebaa67b3a3b4f657633598cfd765d0f09a9/fP1YP.";
         rpc-port = 9091;
         rpc-url = "/transmission/";
-        rpc-username = "";
-        rpc-whitelist = "127.0.0.1";
+        rpc-username = "rot";
+        rpc-whitelist = "127.0.0.1,192.168.12.1,192.168.12.22,192.168.1.101,192.168.1.104,192.168.1.105";
         rpc-whitelist-enabled = true;
         scrape-paused-torrents-enabled = true;
         script-torrent-done-enabled = false;

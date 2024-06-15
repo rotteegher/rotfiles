@@ -46,6 +46,7 @@
     # rclip.enable = false;
     waybar = {
       enable = true;
+      idle-inhibitor = true;
       persistent-workspaces = true;
       hidden = false;
       hwmon = "/sys/class/hwmon/hwmon7/temp1_input";
@@ -57,6 +58,8 @@
 
     # blender.enable = true;
     # reaper.enable = false;
+
+    obs-studio.enable = true;
 
     discord.enable = true;
     telegram.enable = true;

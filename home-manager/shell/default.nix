@@ -41,6 +41,8 @@
     typora # md viewer
     marksman # mv lsp
     vscode-langservers-extracted # lldb-vscode
+    javascript-typescript-langserver # web js
+    nodePackages.typescript-language-server
     yaml-language-server # yaml lsp
     taplo # toml lsp
   ];
