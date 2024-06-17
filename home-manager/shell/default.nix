@@ -33,7 +33,6 @@
     tldr
     ent
     coreutils-full
-
     ffmpeg
 
     cmus
