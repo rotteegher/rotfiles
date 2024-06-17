@@ -216,6 +216,7 @@ in
         "float,class:(Waydroid)"
         "float,class:(ayaka-gui)"
         "float,class:(org.fcitx.)"
+        "float,class:(fl64.exe)"
       ];
 
       windowrule = [
