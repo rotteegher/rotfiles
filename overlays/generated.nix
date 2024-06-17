@@ -3,15 +3,15 @@
 {
   hyprcursor = {
     pname = "hyprcursor";
-    version = "9e27a2c2ceb1e0b85bd55b0afefad196056fe87c";
+    version = "66d5b46ff94efbfa6fa3d1d1b66735f1779c34a6";
     src = fetchFromGitHub {
       owner = "hyprwm";
       repo = "hyprcursor";
-      rev = "9e27a2c2ceb1e0b85bd55b0afefad196056fe87c";
+      rev = "66d5b46ff94efbfa6fa3d1d1b66735f1779c34a6";
       fetchSubmodules = false;
-      sha256 = "sha256-yv+QZWsusu/NWjydkxixHC2g+tIJ9v+xkE2EiVpJj6g=";
+      sha256 = "sha256-jpsns6buS4bK+1sF8sL8AaixAiCRjA+nldTKvcwmvUs=";
     };
-    date = "2024-05-31";
+    date = "2024-06-15";
   };
   hyprlock = {
     pname = "hyprlock";
