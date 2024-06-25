@@ -77,6 +77,7 @@ in
         touchpad = {
           natural_scroll = true;
           disable_while_typing = true;
+          scroll_factor = 0.2;
         };
       };
 
@@ -117,17 +118,17 @@ in
 
       general =
         let
-          gap = if host == "desktop" then 2 else 1;
+          gap = if host == "desktop" then 5 else 4;
         in
         {
           gaps_in = gap;
           gaps_out = gap;
-          border_size = 2;
+          border_size = 1;
           layout = "master";
         };
 
       decoration = {
-        rounding = 4;
+        rounding = 0;
         drop_shadow = host != "vm";
         shadow_range = 4;
         shadow_render_power = 3;

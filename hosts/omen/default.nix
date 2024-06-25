@@ -29,8 +29,8 @@
   networking.firewall.extraCommands = ''
     iptables -A nixos-fw -p tcp --source 192.168.1.0/24 -j nixos-fw-accept
   '';
-  networking.firewall.allowedTCPPorts = [ 4444 ];
-  networking.firewall.allowedUDPPorts = [ 4444 ];
+  networking.firewall.allowedTCPPorts = [ 4444 8080 8000 8001 3000 ];
+  networking.firewall.allowedUDPPorts = [ 4444 8080 8000 8001 3000 ];
 
   # networking.firewall.enable = false;
 }

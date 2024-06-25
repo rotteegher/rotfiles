@@ -31,6 +31,7 @@
     file
     b3sum
     tldr
+    hwatch
     ent
     coreutils-full
     ffmpeg

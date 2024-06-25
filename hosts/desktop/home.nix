@@ -52,6 +52,8 @@
     vlc.enable = true;
     k3b.enable = true;
 
+    kiwix.enable = true;
+
     blender.enable = true;
     reaper.enable = true;
 

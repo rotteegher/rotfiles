@@ -29,6 +29,9 @@
     k3b.enable = lib.mkEnableOption "k3b" // {
       default = false;
     };
+    kiwix.enable = lib.mkEnableOption "k3b" // {
+      default = false;
+    };
     telegram.enable = lib.mkEnableOption "telegram-desktop" // {
       default = false;
     };
