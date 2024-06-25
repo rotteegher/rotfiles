@@ -52,9 +52,11 @@
       hwmon = "/sys/class/hwmon/hwmon7/temp1_input";
     };
 
-    # vlc.enable = true;
+    vlc.enable = true;
     # k3b.enable = true;
     helix.enable = true;
+
+    kiwix.enable = true;
 
     # blender.enable = true;
     # reaper.enable = false;
