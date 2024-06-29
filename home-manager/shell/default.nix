@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./bash.nix
     ./btop.nix
@@ -33,6 +34,7 @@
     tldr
     hwatch
     ent
+    busybox
     coreutils-full
     ffmpeg
 
