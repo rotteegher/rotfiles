@@ -4,7 +4,8 @@
   lib,
   isNixOS,
   ...
-}: let
+}:
+let
   # create a fake gnome-terminal shell script so xdg terminal applications open in the correct terminal
   # https://unix.stackexchange.com/a/642886
   fakeGnomeTerminal = pkgs.writeShellApplication {
@@ -14,10 +15,11 @@
   nemo-patched = pkgs.cinnamon.nemo-with-extensions.overrideAttrs (_: {
     postFixup = ''
       wrapProgram $out/bin/nemo \
-        --prefix PATH : "${lib.makeBinPath [fakeGnomeTerminal]}"
+        --prefix PATH : "${lib.makeBinPath [ fakeGnomeTerminal ]}"
     '';
   });
-in {
+in
+{
   home = {
     packages = [
       pkgs.cinnamon.nemo-fileroller
@@ -29,11 +31,11 @@ in {
   xdg = {
     # fix mimetype associations
     mimeApps.defaultApplications = {
-        "inode/directory" = "nemo.desktop";
-        # wtf zathura registers itself to open archives
-        "application/zip" = "org.gnome.FileRoller.desktop";
-        "application/vnd.rar" = "org.gnome.FileRoller.desktop";
-        "application/x-7z-compressed" = "org.gnome.FileRoller.desktop";
+      "inode/directory" = "nemo.desktop";
+      # wtf zathura registers itself to open archives
+      "application/zip" = "org.gnome.FileRoller.desktop";
+      "application/vnd.rar" = "org.gnome.FileRoller.desktop";
+      "application/x-7z-compressed" = "org.gnome.FileRoller.desktop";
     };
     # other OSes seem to override this file
     configFile = lib.mkIf (!isNixOS) {
@@ -51,6 +53,7 @@ in {
     "file:///home/rot/pr PR"
     "file:///home/rot/pr/rotfiles ROTS"
     "file:///persist PERSIST"
+    "sftp://192.168.12.1 sftpLAP"
     "smb://192.168.1.101/wdc-data smbLAPwdc"
     "smb://192.168.1.101/stsea-okii smbLAPstsea"
     "smb://192.168.1.101/persist smbLAPpersist"

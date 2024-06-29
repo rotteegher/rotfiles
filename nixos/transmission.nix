@@ -4,10 +4,12 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   home = "/home/${user}";
   downloadDir = config.custom.bittorrent.downloadDir;
-in {
+in
+{
   config = lib.mkIf config.custom.bittorrent.enable {
     services.transmission = {
       enable = true;
@@ -33,8 +35,8 @@ in {
         download-queue-enabled = true;
         download-queue-size = 3;
         encryption = 1;
-        idle-seeding-limit = 30;
-        idle-seeding-limit-enabled = false;
+        idle-seeding-limit = 0;
+        idle-seeding-limit-enabled = true;
         incomplete-dir = downloadDir;
         incomplete-dir-enabled = false;
         inhibit-desktop-hibernation = false;
@@ -56,7 +58,7 @@ in {
         prefetch-enabled = true;
         queue-stalled-enabled = true;
         queue-stalled-minutes = 30;
-        ratio-limit = 0.1000;
+        ratio-limit = 0.1;
         ratio-limit-enabled = true;
         recent-download-dir-1 = downloadDir;
         rename-partial-files = true;
@@ -106,14 +108,15 @@ in {
       };
     };
 
-    systemd.tmpfiles.rules = [
-      "d ${downloadDir} 755 ${user} users - "
-    ];
+    systemd.tmpfiles.rules = [ "d ${downloadDir} 755 ${user} users - " ];
 
     # setup port forwarding
-    networking.firewall.allowedTCPPorts = [51413 9091];
+    networking.firewall.allowedTCPPorts = [
+      51413
+      9091
+    ];
 
-    hm.home.packages = with pkgs; [transmission-remote-gtk];
+    hm.home.packages = with pkgs; [ transmission-remote-gtk ];
 
     custom.persist.home.directories = [
       "_CURRENT"
