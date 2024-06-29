@@ -28,7 +28,10 @@
     docker.enable = true;
     surrealdb.enable = true;
     # syncoid.enable = true; # TODO
-    bittorrent.enable = true;
+    bittorrent = {
+      enable = true;
+      downloadDir = "/md/stsea-okii/_STSEA";
+    };
     flatpak.enable = true;
     steam.enable = true;
     lutris.enable = true;

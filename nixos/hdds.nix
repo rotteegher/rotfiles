@@ -79,6 +79,8 @@ in
       "L+ /home/${user}/_SMALL/_MUSIC                  - - - - ${wdc-blue-mountpoint}/_MUSIC"
       "L+ /home/${user}/_SMALL/_FILM                   - - - - ${wdc-blue-mountpoint}/_FILM"
       "L+ /home/${user}/_SMALL/_ANIME                  - - - - ${wdc-blue-mountpoint}/_ANIME"
+    ] ++ lib.optionals cfg.stsea3tb [
+      "L+ /home/${user}/_STSEA                         - - - - ${stsea-mountpoint}/_STSEA"
     ];
 
     # dual boot windows
