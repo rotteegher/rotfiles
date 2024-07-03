@@ -30,7 +30,7 @@
     # syncoid.enable = true; # TODO
     bittorrent = {
       enable = true;
-      downloadDir = "/md/stsea-okii/_STSEA";
+      downloadDir = "/home/${user}/_CURRENT";
     };
     flatpak.enable = true;
     steam.enable = true;

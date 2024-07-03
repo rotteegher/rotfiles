@@ -27,7 +27,7 @@
         ];
       }
     ];
-    mouse_sensitivity = 0.75;
+    mouse_sensitivity = 0.50;
     hyprland = {
       modkey = "SUPER";
       autostart = false;

@@ -1,4 +1,8 @@
-{ pkgs, host, ... }:
+{
+  host,
+  pkgs,
+  ...
+}:
 {
   # Bootloader.
   # boot.loader.systemd-boot.enable = false;
