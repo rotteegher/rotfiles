@@ -19,14 +19,6 @@ in {
         profiles.${user} = {
           # TODO: define keyword searches here?
           # search.engines = [ ];
-
-          extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
-            darkreader
-            sponsorblock
-            ublock-origin
-            tab-session-manager
-            # 10ten-ja-reader
-          ];
         };
       };
     };
