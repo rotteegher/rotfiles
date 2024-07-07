@@ -3,27 +3,27 @@
 {
   hyprcursor = {
     pname = "hyprcursor";
-    version = "66d5b46ff94efbfa6fa3d1d1b66735f1779c34a6";
+    version = "a5c0d57325c5f0814c39110a70ca19c070ae9486";
     src = fetchFromGitHub {
       owner = "hyprwm";
       repo = "hyprcursor";
-      rev = "66d5b46ff94efbfa6fa3d1d1b66735f1779c34a6";
+      rev = "a5c0d57325c5f0814c39110a70ca19c070ae9486";
       fetchSubmodules = false;
-      sha256 = "sha256-jpsns6buS4bK+1sF8sL8AaixAiCRjA+nldTKvcwmvUs=";
+      sha256 = "sha256-AxRkTJlbB8r7aG6gvc7IaLhc2T9TO4/8uqanKRxukBQ=";
     };
-    date = "2024-06-15";
+    date = "2024-07-04";
   };
   hyprlock = {
     pname = "hyprlock";
-    version = "0f66aeac03ae4dda5223768c31ce720b9272e1db";
+    version = "43f2b7441b94fefb93dc9efc8f587b6a2de7e820";
     src = fetchFromGitHub {
       owner = "hyprwm";
       repo = "hyprlock";
-      rev = "0f66aeac03ae4dda5223768c31ce720b9272e1db";
+      rev = "43f2b7441b94fefb93dc9efc8f587b6a2de7e820";
       fetchSubmodules = false;
-      sha256 = "sha256-0dPNNBou9g5Pii9N06OCxJy/fS74Tjckqr9HAkEn730=";
+      sha256 = "sha256-HyxlZEYJHjNKgztnQ9MxtLUA+/dfTnYZ/0VNyaL6ofs=";
     };
-    date = "2024-06-28";
+    date = "2024-07-07";
   };
   swww = {
     pname = "swww";

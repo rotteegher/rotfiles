@@ -40,6 +40,8 @@
 
     cmus
 
+    stripe-cli
+
     typora # md viewer
     marksman # mv lsp
     vscode-langservers-extracted # lldb-vscode

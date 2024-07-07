@@ -27,7 +27,7 @@
         ];
       }
     ];
-    mouse_sensitivity = 0.50;
+    mouse_sensitivity = 0.5;
     hyprland = {
       modkey = "SUPER";
       autostart = false;
@@ -49,7 +49,7 @@
       idle-inhibitor = true;
       persistent-workspaces = true;
       hidden = false;
-      hwmon = "/sys/class/hwmon/hwmon7/temp1_input";
+      hwmon = "/sys/class/hwmon/hwmon6/temp1_input";
     };
 
     vlc.enable = true;
