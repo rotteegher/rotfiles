@@ -113,28 +113,28 @@ in {
 
   home.shellAliases = {
     lg = "lazygit";
-    gaa = "git add --all";
-    gb = "git branch";
-    gbtr = "git bisect reset";
+    gaa = "git --no-pager  add --all";
+    gb = "git --no-pager  branch";
+    gbtr = "git --no-pager  bisect reset";
     gcaam = "gaa && gcam";
-    gcam = "git commit --amend";
-    gco = "git checkout";
-    gdc = "git diff --cached";
-    gdi = "git diff";
-    gl = "git pull";
-    glg = "git log";
-    gm = "git merge";
-    gp = "git push";
-    gpf = "git push --force";
-    glc = ''gl origin "$(git rev-parse --abbrev-ref HEAD)"'';
-    gpc = ''gp origin "$(git rev-parse --abbrev-ref HEAD)"'';
-    groot = "cd $(git rev-parse - -show-toplevel)";
-    grh = "git reset --hard";
-    gri = "git rebase --interactive";
-    gst = "git status -s -b && echo && git log | head -n 1";
-    gsub = "git submodule update --init --recursive";
-    # access github page for the repo we are currently in
-    github = "open \`git remote -v | grep github.com | grep fetch | head -1 | awk '{print $2}' | sed 's/git:/http:/git'\`";
+    gcam = "git --no-pager  commit --amend";
+    gco = "git --no-pager  checkout";
+    gdc = "git --no-pager  diff --cached";
+    gdi = "git --no-pager  diff";
+    gl = "git --no-pager  pull";
+    glg = "git --no-pager  log";
+    gm = "git --no-pager  merge";
+    gp = "git --no-pager  push";
+    gpf = "git --no-pager  push --force";
+    glc = ''gl origin "$(git --no-pager  rev-parse --abbrev-ref HEAD)"'';
+    gpc = ''gp origin "$(git --no-pager  rev-parse --abbrev-ref HEAD)"'';
+    groot = "cd $(git --no-pager  rev-parse - -show-toplevel)";
+    grh = "git --no-pager  reset --hard";
+    gri = "git --no-pager  rebase --interactive";
+    gst = "git --no-pager  status -s -b && echo && git --no-pager  log | head -n 1";
+    gsub = "git --no-pager  submodule update --init --recursive";
+    # access git --no-pager hub page for the repo we are currently in
+    github = "open \`git --no-pager  remote -v | grep git --no-pager hub.com | grep fetch | head -1 | awk '{print $2}' | sed 's/git --no-pager :/http:/git --no-pager '\`";
     # cleanup leftover files from merges
     mergeclean = "find . -type f -name '*.orig' -exec rm -f {} \;";
   };

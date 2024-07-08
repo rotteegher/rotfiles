@@ -34,7 +34,6 @@
     tldr
     hwatch
     ent
-    busybox
     coreutils-full
     ffmpeg
 
