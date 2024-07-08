@@ -164,6 +164,14 @@
       style = "adwaita-dark";
     };
 
+    # fix opening terminal for nemo / thunar by using xdg-terminal-exec spec
+    xdg.terminal-exec = {
+      enable = true;
+      settings = {
+        default = [ "${config.hm.custom.terminal.package.pname}.desktop" ];
+      };
+    };
+
     custom.persist = {
       root.directories = lib.mkIf config.hm.custom.wifi.enable [ "/etc/NetworkManager" ];
 

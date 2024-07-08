@@ -1,63 +1,54 @@
 {
-  pkgs,
   config,
-  lib,
   isNixOS,
+  lib,
+  pkgs,
   ...
 }:
-let
-  # create a fake gnome-terminal shell script so xdg terminal applications open in the correct terminal
-  # https://unix.stackexchange.com/a/642886
-  fakeGnomeTerminal = pkgs.writeShellApplication {
-    name = "gnome-terminal";
-    text = ''${config.custom.terminal.exec} "$@"'';
-  };
-  nemo-patched = pkgs.cinnamon.nemo-with-extensions.overrideAttrs (_: {
-    postFixup = ''
-      wrapProgram $out/bin/nemo \
-        --prefix PATH : "${lib.makeBinPath [ fakeGnomeTerminal ]}"
-    '';
-  });
-in
 {
-  home = {
-    packages = [
-      pkgs.cinnamon.nemo-fileroller
-      nemo-patched
-    ];
-  };
+  home.packages = with pkgs; [
+    cinnamon.nemo-fileroller
+    webp-pixbuf-loader # for webp thumbnails
+    cinnamon.nemo-with-extensions
+  ];
 
-  # fix mimetype associations
   xdg = {
     # fix mimetype associations
     mimeApps.defaultApplications = {
       "inode/directory" = "nemo.desktop";
-      # wtf zathura registers itself to open archives
+      # wtf zathura / pqiv registers themselves to open archives
       "application/zip" = "org.gnome.FileRoller.desktop";
       "application/vnd.rar" = "org.gnome.FileRoller.desktop";
       "application/x-7z-compressed" = "org.gnome.FileRoller.desktop";
+      "application/x-bzip2-compressed-tar" = "org.gnome.FileRoller.desktop";
     };
-    # other OSes seem to override this file
-    configFile = lib.mkIf (!isNixOS) {
-      "mimeapps.list".force = true;
-      "gtk-3.0/bookmarks".force = true;
-    };
+
+    configFile =
+      {
+        "mimeapps.list".force = true;
+      }
+      # other OSes seem to override this file
+      // lib.mkIf (!isNixOS) { "gtk-3.0/bookmarks".force = true; };
   };
 
-  gtk.gtk3.bookmarks = [
-    "file:///home/rot/Documents Documents"
-    "file:///home/rot/Downloads Downloads"
-    "file:///home/rot/Videos Videos"
-    "file:///home/rot/Pictures Pictures"
-    "file:///home/rot/Pictures/Wallpapers WALLPAPERS"
-    "file:///home/rot/pr PR"
-    "file:///home/rot/pr/rotfiles ROTS"
-    "file:///persist PERSIST"
-    "sftp://192.168.12.1 sftpLAP"
-    "smb://192.168.1.101/wdc-data smbLAPwdc"
-    "smb://192.168.1.101/stsea-okii smbLAPstsea"
-    "smb://192.168.1.101/persist smbLAPpersist"
-  ];
+  gtk.gtk3.bookmarks =
+    let
+      homeDir = config.home.homeDirectory;
+    in
+    [
+      "file://${homeDir}/Documents Documents"
+      "file://${homeDir}/Downloads Downloads"
+      "file://${homeDir}/Videos Videos"
+      "file://${homeDir}/Pictures Pictures"
+      "file://${homeDir}/Pictures/Wallpapers WALLPAPERS"
+      "file://${homeDir}/pr PR"
+      "file://${homeDir}/pr/rotfiles ROTS"
+      "file:///persist PERSIST"
+      "sftp://192.168.12.1 sftpLAP"
+      "smb://192.168.1.101/wdc-data smbLAPwdc"
+      "smb://192.168.1.101/stsea-okii smbLAPstsea"
+      "smb://192.168.1.101/persist smbLAPpersist"
+    ];
 
   dconf.settings = {
     # fix open in terminal
