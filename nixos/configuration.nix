@@ -24,6 +24,8 @@
     };
   };
 
+  powerManagement.enable = true;
+
   systemd.enableEmergencyMode = false;
 
   networking.hostName = "${host}";
