@@ -19,10 +19,18 @@
           "ui.background" = {fg = "none";};
         };
       };
-      settings = {
+      languages = {
+        language-server.rust-analyzer.command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
+        language-server.rust-analyzer.config.diagnostics.disabled = [ "inactive-code" ];
+      };
+      settings = { 
         theme = "mtr";
         editor = {
+          lsp.display-messages = true;
           lsp.display-inlay-hints = true;
+          statusline = {
+            center = ["file-absolute-path"];
+          };
           true-color = true;
           line-number = "relative";
           mouse = true;

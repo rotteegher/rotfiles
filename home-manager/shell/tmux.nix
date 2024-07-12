@@ -6,7 +6,7 @@
       theme = "catpuccin-mocha";
 
       on_force_close = "quit";
-      simplified_ui = true;
+      simplified_ui = false;
       default_shell = "fish";
       pane_frames = false;
       default_layout = "compact";

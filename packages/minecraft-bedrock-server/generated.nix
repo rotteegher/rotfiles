@@ -3,10 +3,10 @@
 {
   minecraft-bedrock-server = {
     pname = "minecraft-bedrock-server";
-    version = "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.1.03.zip";
+    version = "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.2.02.zip";
     src = fetchurl {
-      url = "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.1.03.zip";
-      sha256 = "sha256-96re6vDreW+hQsozi4xwjS+5EsAaKju5fZAQpRK7bqs=";
+      url = "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.2.02.zip";
+      sha256 = "sha256-1+PCqkLeSeZH0747TQ0kXBvuX10eJts/yqb3PgVgPsY=";
     };
   };
 }

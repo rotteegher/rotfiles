@@ -35,11 +35,13 @@
     hwatch
     ent
     coreutils-full
+    pciutils
     ffmpeg
 
     cmus
 
     stripe-cli
+    nodePackages.vercel
 
     typora # md viewer
     marksman # mv lsp

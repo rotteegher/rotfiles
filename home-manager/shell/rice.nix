@@ -21,6 +21,7 @@
       scope-tui
       tokei
       tenki
+      wl-color-picker
       inputs.wfetch.packages.${pkgs.system}.wfetch
     ];
 
