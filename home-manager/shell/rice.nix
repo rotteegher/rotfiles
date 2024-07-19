@@ -11,6 +11,7 @@
       asciiquarium
       cbonsai
       cmatrix
+      hollywood
       fastfetch
       cpufetch
       fortune

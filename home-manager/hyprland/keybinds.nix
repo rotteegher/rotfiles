@@ -128,10 +128,10 @@ in
         "$mod, Right, focusmonitor, +1"
 
         # resize windows
-        "$mod_SHIFT, right, resizeactive, 50 0"
-        "$mod_SHIFT, left, resizeactive, -50 0"
-        "$mod_SHIFT, up, resizeactive, 0 -50"
-        "$mod_SHIFT, down, resizeactive, 0 50"
+        "$mod_CTRL, h, resizeactive, -50 0"
+        "$mod_CTRL, j, resizeactive, 0 50"
+        "$mod_CTRL, k, resizeactive, 0 -50"
+        "$mod_CTRL, l, resizeactive, 50 0"
 
         # # move to next / previous monitor
         # "$mod_SHIFT, Left, movewindow, ${

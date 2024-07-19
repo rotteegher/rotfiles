@@ -78,29 +78,29 @@ in {
           }
       );
 
-      wallust = assert (lib.assertMsg (prev.wallust.version == "2.10.0") "wallust: use wallust from nixpkgs?");
-        prev.wallust.overrideAttrs (
-          o:
-            sources.wallust
-            // {
-              nativeBuildInputs = (o.nativeBuildInputs or []) ++ [prev.installShellFiles];
+    #   wallust = assert (lib.assertMsg (prev.wallust.version == "2.10.0") "wallust: use wallust from nixpkgs?");
+    #     prev.wallust.overrideAttrs (
+    #       o:
+    #         sources.wallust
+    #         // {
+    #           nativeBuildInputs = (o.nativeBuildInputs or []) ++ [prev.installShellFiles];
 
-              postInstall = ''
-                installManPage man/wallust*
-                installShellCompletion --cmd wallust \
-                  --bash completions/wallust.bash \
-                  --zsh completions/_wallust \
-                  --fish completions/wallust.fish
-              '';
+    #           postInstall = ''
+    #             installManPage man/wallust*
+    #             installShellCompletion --cmd wallust \
+    #               --bash completions/wallust.bash \
+    #               --zsh completions/_wallust \
+    #               --fish completions/wallust.fish
+    #           '';
 
-              # creating an overlay for buildRustPackage overlay
-              # https://discourse.nixos.org/t/is-it-possible-to-override-cargosha256-in-buildrustpackage/4393/3
-              cargoDeps = prev.rustPlatform.importCargoLock {
-                lockFile = sources.wallust.src + "/Cargo.lock";
-                allowBuiltinFetchGit = true;
-              };
-            }
-        );
+    #           # creating an overlay for buildRustPackage overlay
+    #           # https://discourse.nixos.org/t/is-it-possible-to-override-cargosha256-in-buildrustpackage/4393/3
+    #           cargoDeps = prev.rustPlatform.importCargoLock {
+    #             lockFile = sources.wallust.src + "/Cargo.lock";
+    #             allowBuiltinFetchGit = true;
+    #           };
+    #         }
+    #     );
     })
     inputs.nix-minecraft.overlay
   ];

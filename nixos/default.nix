@@ -102,6 +102,8 @@
           procps
           ripgrep
           htop
+          dmidecode
+          memtester
           wget
           dig
           lsof
