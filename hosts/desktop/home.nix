@@ -10,8 +10,8 @@
     wifi.enable = true;
     displays = [
       {
-        name = "HDMI-A-2"; # ====== 0 horizontal
-        hyprland = "1920x1080@60,0x0,1,transform,0"; # |||||| 1 vertical
+        name = "DP-3";
+        hyprland = "2560x1080@200,0x0,0.6";
         workspaces = [
           1
           2

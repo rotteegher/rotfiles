@@ -13,9 +13,9 @@ config = lib.mkIf config.custom.reaper.enable {
 
       # Plugins
       helm
-      sorcer
+      # sorcer
       oxefmsynth
-      fmsynth
+      # fmsynth
       aether-lv2
       bespokesynth
       x42-plugins
@@ -37,11 +37,11 @@ config = lib.mkIf config.custom.reaper.enable {
       fverb
       mooSpace
       boops
-      artyFX
+      # artyFX
       zam-plugins
       molot-lite
       bankstown-lv2
-      vital
+      # vital
     ]
     # NOTE: https://discourse.nixos.org/t/lmms-vst-plugins/42985/3
     # To add it to yabridge, we just have to add the common path for plugins:
