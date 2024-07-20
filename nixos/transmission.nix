@@ -116,6 +116,23 @@ in
       9091
     ];
 
+    # xdg handler for magnet links
+    hm = {
+      xdg = {
+        desktopEntries.transmission = {
+          name = "Transmission";
+          genericName = "BitTorrent Client";
+          icon = "transmission";
+          exec = "transmission-remote -a %U";
+        };
+
+        mimeApps.defaultApplications = {
+          "x-scheme-handler/magnet" = "transmission.desktop";
+        };
+      };
+    };
+
+
     hm.home.packages = with pkgs; [ transmission-remote-gtk ];
 
     custom.persist.home.directories = [

@@ -49,7 +49,7 @@
 
     environment = {
       etc = {
-        # git
+        # universal git settings
         "gitconfig".text = config.hm.xdg.configFile."git/config".text;
         # get gparted to use system theme
         "xdg/gtk-3.0/settings.ini".text = config.hm.xdg.configFile."gtk-3.0/settings.ini".text;

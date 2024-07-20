@@ -6,22 +6,22 @@
   ...
 }:
 let
-  catppuccinDefault = "blue";
+  catppuccinDefault = "Blue";
   catppuccinAccents = {
-    blue = "#89b4fa";
-    flamingo = "#f2cdcd";
-    green = "#a6e3a1";
-    lavender = "#b4befe";
-    maroon = "#eba0ac";
-    mauve = "#cba6f7";
-    peach = "#fab387";
-    pink = "#f5c2e7";
-    red = "#f38ba8";
-    # rosewater = "#f5e0dc";
-    sapphire = "#74c7ec";
-    sky = "#89dceb";
-    teal = "#94e2d5";
-    yellow = "#f9e2af";
+    Blue = "#89b4fa";
+    Flamingo = "#f2cdcd";
+    Green = "#a6e3a1";
+    Lavender = "#b4befe";
+    Maroon = "#eba0ac";
+    Mauve = "#cba6f7";
+    Peach = "#fab387";
+    Pink = "#f5c2e7";
+    Red = "#f38ba8";
+    # Rosewater = "#f5e0dc";
+    Sapphire = "#74c7ec";
+    Sky = "#89dceb";
+    Teal = "#94e2d5";
+    Yellow = "#f9e2af";
   };
 in
 {
@@ -47,22 +47,17 @@ in
     # set dark theme for gtk 4
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      cursor-theme = config.home.pointerCursor.name;
     };
   };
 
   gtk = {
     enable = true;
     theme = {
-      name = "catppuccin-mocha-${catppuccinDefault}-compact";
+      name = "Catppuccin-Mocha-Compact-${catppuccinDefault}-Dark";
       package = pkgs.catppuccin-gtk.override {
         # allow all accents so the closest matching color can be selected by dotfiles-utils
-        accents = lib.attrNames catppuccinAccents;
+        accents = map lib.toLower (lib.attrNames catppuccinAccents);
         variant = "mocha";
-        tweaks = [
-          # "black" # black tweak for oled
-          # "rimless"
-        ];
         size = "compact";
       };
     };
