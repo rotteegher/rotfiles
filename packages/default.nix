@@ -25,8 +25,7 @@ in
 
   minecraft-bedrock-server = w pkgs.callPackage ./minecraft-bedrock-server { };
 
-  # goo-engine =
-  #   pkgs.callPackage ./goo-engine;
+  goo-engine = w pkgs.callPackage ./goo-engine;
 
   # custom version of pob with a .desktop entry, overwritten as a custom package
   # as the interaction with passthru is weird

@@ -1,0 +1,5 @@
+[goo-engine]
+src.git = "https://github.com/dillongoostudios/goo-engine"
+fetch.github = "dillongoostudios/goo-engine"
+git.fetchSubmodules = false
+
