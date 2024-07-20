@@ -185,7 +185,7 @@ in
 
         # switching wallpapers or themes
         "$mod, apostrophe, exec, imv-wallpaper"
-        "$mod_SHIFT, apostrophe, exec, rofi-wallust-theme"
+        "$mod_SHIFT, comma, exec, rofi-wallust-theme"
 
         # special keys
         # "XF86AudioPlay, mpvctl playpause"

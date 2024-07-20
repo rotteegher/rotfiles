@@ -74,10 +74,6 @@
     enable = true;
     userDirs.enable = true;
     mimeApps.enable = true;
-    configFile = {
-      "nix/nix.conf".text = "experimental-features = nix-command flakes";
-      "nixpkgs/config.nix".text = ''{ allowUnfree = true; }'';
-    };
   };
 
   custom.persist = {

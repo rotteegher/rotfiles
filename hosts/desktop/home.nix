@@ -11,7 +11,7 @@
     displays = [
       {
         name = "DP-3";
-        hyprland = "2560x1080@200,0x0,0.6";
+        hyprland = "2560x1080@200,0x0,1";
         workspaces = [
           1
           2

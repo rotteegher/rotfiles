@@ -123,7 +123,7 @@ in
         {
           gaps_in = gap;
           gaps_out = gap;
-          border_size = 1;
+          border_size = 3;
           layout = "master";
         };
 
