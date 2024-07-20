@@ -34,6 +34,7 @@ in {
       });
 
       blender = prev.blender.override { cudaSupport = true; };
+      goo-engine = prev.blender.override { cudaSupport = true; };
 
       hyprcursor =
         # assert (
