@@ -1,4 +1,5 @@
 {
+  pkgs,
   source,
   vulkan-tools,
   vulkan-loader,
@@ -268,6 +269,67 @@ stdenv.mkDerivation (
       placeholder "out"
       + ("/bin/goo-engine");
 
+  installPhase = ''
+    echo "Current Build Dir: $(pwd)"
+    ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3
+
+    mkdir -p $out/bin
+    echo "Source: $src"
+    ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3 $src
+    echo "Output: $out"
+    ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3 $out
+
+    echo "Making install"
+    make install
+
+    echo "Output AFTER INSTALL: $out"
+    ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3 $out
+    
+    # cp -r share/* "$out/share/"
+    # cp -r $src/share/blender $out/share
+    # cp -r $src/share/doc $out/share
+    # cp -r $src/share/icons $out/share
+
+    echo "Blender Desktop Entry:"
+    cat $out/share/applications/blender.desktop
+    cp -v $out/share/applications/blender.desktop $out/share/applications/${finalAttrs.finalPackage.pname}.desktop
+
+    echo "Unmodified:"
+    cat $out/share/applications/${finalAttrs.finalPackage.pname}.desktop
+
+    sed -i -e 's/Exec=blender/Exec=${finalAttrs.finalPackage.pname}/g' -e 's/Name=Blender/Name=Goo-Engine/g' $out/share/applications/${finalAttrs.finalPackage.pname}.desktop
+
+    echo "Modified Goo Engine Desktop Entry:"
+    cat $out/share/applications/${finalAttrs.finalPackage.pname}.desktop
+
+    rm $out/share/applications/blender.desktop
+
+    echo "Desktop Entries:"
+    ls -lag $out/share/applications
+
+    buildPythonPath "$pythonPath"
+
+    # makeWrapper bin/blender $out/bin/${finalAttrs.finalPackage.pname} \
+    #   --prefix PATH : $program_PATH \
+    #   --prefix PYTHONPATH : $program_PYTHONPATH
+
+    echo "Listing $out bin"
+    ls -lah $out/bin
+
+    echo "after Renaming blender bin"
+    mv $out/bin/blender $out/bin/${finalAttrs.finalPackage.pname}
+    ls -lah $out/bin
+
+    echo "Current Build Dir:"
+    ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3
+    echo "Output:"
+    ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3 $out
+    echo Installation Success!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    file $out/bin/goo-engine
+    $out/bin/goo-engine --version
+  '';
+
+
     postInstall =
       lib.optionalString stdenv.isLinux ''
         mv $out/share/blender/${lib.versions.majorMinor finalAttrs.version}/python{,-ext}
@@ -283,57 +345,57 @@ stdenv.mkDerivation (
     # Set RUNPATH so that libcuda and libnvrtc in /run/opengl-driver(-32)/lib can be
     # found. See the explanation in libglvnd.
     postFixup = lib.optionalString cudaSupport ''
-      for program in $out/bin/blender $out/bin/.blender-wrapped; do
+      for program in $out/bin/goo-engine $out/bin/.goo-engine-wrapped; do
         isELF "$program" || continue
         addOpenGLRunpath "$program"
       done
     '';
 
-    passthru = {
-      python = python3;
-      pythonPackages = python3Packages;
+    # passthru = {
+    #   python = python3;
+    #   pythonPackages = python3Packages;
 
-      withPackages =
-        f:
-        (callPackage ./wrapper.nix { }).override {
-          blender = finalAttrs.finalPackage;
-          extraModules = (f python3Packages);
-        };
+    #   withPackages =
+    #     f:
+    #     (callPackage ./wrapper.nix { }).override {
+    #       blender = finalAttrs.finalPackage;
+    #       extraModules = (f python3Packages);
+    #     };
 
-      tests = {
-        render = runCommand "${finalAttrs.pname}-test" { } ''
-          set -euo pipefail
-          export LIBGL_DRIVERS_PATH=${mesa.drivers}/lib/dri
-          export __EGL_VENDOR_LIBRARY_FILENAMES=${mesa.drivers}/share/glvnd/egl_vendor.d/50_mesa.json
-          cat <<'PYTHON' > scene-config.py
-          import bpy
-          bpy.context.scene.eevee.taa_render_samples = 32
-          bpy.context.scene.cycles.samples = 32
-          if ${if (stdenv.isAarch64 && stdenv.isLinux) then "True" else "False"}:
-              bpy.context.scene.cycles.use_denoising = False
-          bpy.context.scene.render.resolution_x = 100
-          bpy.context.scene.render.resolution_y = 100
-          bpy.context.scene.render.threads_mode = 'FIXED'
-          bpy.context.scene.render.threads = 1
-          PYTHON
+    #   tests = {
+    #     render = runCommand "${finalAttrs.pname}-test" { } ''
+    #       set -euo pipefail
+    #       export LIBGL_DRIVERS_PATH=${mesa.drivers}/lib/dri
+    #       export __EGL_VENDOR_LIBRARY_FILENAMES=${mesa.drivers}/share/glvnd/egl_vendor.d/50_mesa.json
+    #       cat <<'PYTHON' > scene-config.py
+    #       import bpy
+    #       bpy.context.scene.eevee.taa_render_samples = 32
+    #       bpy.context.scene.cycles.samples = 32
+    #       if ${if (stdenv.isAarch64 && stdenv.isLinux) then "True" else "False"}:
+    #           bpy.context.scene.cycles.use_denoising = False
+    #       bpy.context.scene.render.resolution_x = 100
+    #       bpy.context.scene.render.resolution_y = 100
+    #       bpy.context.scene.render.threads_mode = 'FIXED'
+    #       bpy.context.scene.render.threads = 1
+    #       PYTHON
 
-          mkdir $out
-          for engine in BLENDER_EEVEE CYCLES; do
-            echo "Rendering with $engine..."
-            # Beware that argument order matters
-            ${lib.getExe finalAttrs.finalPackage} \
-              --background \
-              -noaudio \
-              --factory-startup \
-              --python-exit-code 1 \
-              --python scene-config.py \
-              --engine "$engine" \
-              --render-output "$out/$engine" \
-              --render-frame 1
-          done
-        '';
-      };
-    };
+    #       mkdir $out
+    #       for engine in BLENDER_EEVEE CYCLES; do
+    #         echo "Rendering with $engine..."
+    #         # Beware that argument order matters
+    #         ${lib.getExe finalAttrs.finalPackage} \
+    #           --background \
+    #           -noaudio \
+    #           --factory-startup \
+    #           --python-exit-code 1 \
+    #           --python scene-config.py \
+    #           --engine "$engine" \
+    #           --render-output "$out/$engine" \
+    #           --render-frame 1
+    #       done
+    #     '';
+    #   };
+    # };
 
     meta = {
       description = "3D Creation/Animation/Publishing System";
@@ -354,7 +416,7 @@ stdenv.mkDerivation (
         goibhniu
         veprbl
       ];
-      mainProgram = "blender";
+      mainProgram = "goo-engine";
     };
   })
 )

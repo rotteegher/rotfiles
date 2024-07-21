@@ -50,25 +50,29 @@ in
     };
   };
 
+  home.sessionVariables.GTK_THEME = "Tokyonight-Dark";
+
   gtk = {
     enable = true;
     theme = {
-      name = "Catppuccin-Mocha-Compact-${catppuccinDefault}-Dark";
-      package = pkgs.catppuccin-gtk.override {
+      name = "Tokyonight-Dark";
+      package = pkgs.tokyo-night-gtk;
+      # name = "Catppuccin-Mocha-Compact-${catppuccinDefault}-Dark";
+      # package = pkgs.catppuccin-gtk.override {
         # allow all accents so the closest matching color can be selected by dotfiles-utils
-        accents = map lib.toLower (lib.attrNames catppuccinAccents);
-        variant = "mocha";
-        size = "compact";
-      };
+        # accents = map lib.toLower (lib.attrNames catppuccinAccents);
+        # variant = "mocha";
+        # size = "compact";
+      # };
     };
     iconTheme = {
-      name = "Tela-${catppuccinDefault}-dark";
-      package = pkgs.custom.tela-dynamic-icon-theme.override { colors = catppuccinAccents; };
+      name = "Tokyonight-Dark";
+      package = pkgs.tokyo-night-gtk;
     };
     font = {
-      name = "${config.custom.fonts.regular} Regular";
-      package = pkgs.geist-font;
-      size = 10;
+      name = "${config.custom.fonts.monospace}";
+      package = pkgs.monocraft;
+      size = 6;
     };
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
     gtk3.extraConfig = {

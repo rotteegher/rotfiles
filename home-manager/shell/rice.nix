@@ -36,7 +36,7 @@
   xresources = {
     path = "${config.xdg.configHome}/.Xresources";
     properties = {
-      "Xft.dpi" = 96;
+      "Xft.dpi" = 90;
       "Xft.antialias" = true;
       "Xft.hinting" = true;
       "Xft.rgba" = "rgb";

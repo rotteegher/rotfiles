@@ -26,6 +26,8 @@
         ];
       }
     ];
+    terminal.size = 9;
+
     hyprland = {
       modkey = "SUPER"; # could be "ALT"
       autostart = false;
