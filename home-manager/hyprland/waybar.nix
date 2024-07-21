@@ -228,7 +228,7 @@ lib.mkIf cfg.enable {
           let
             margin = "12px";
             baseModuleCss = ''
-              font-family: ${config.custom.fonts.regular};
+              font-family: ${config.custom.fonts.monospace};
               font-weight: bold;
               color: {{foreground}};
               transition: none;
