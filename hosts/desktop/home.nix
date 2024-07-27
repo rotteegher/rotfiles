@@ -61,7 +61,7 @@
 
     discord.enable = true;
     telegram.enable = true;
-    viber.enable = true;
+    viber.enable = false;
 
     insomnia.enable = true;
     minecraft-launchers.enable = true;

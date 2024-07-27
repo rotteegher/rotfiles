@@ -102,6 +102,9 @@
           procps
           ripgrep
           htop
+          ventoy
+          stress
+          stress-ng
           dmidecode
           memtester
           wget

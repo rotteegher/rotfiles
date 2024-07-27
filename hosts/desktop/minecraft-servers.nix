@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   custom = {
     services.minecraft-bedrock-server = {
-      enable = false;
+      enable = true;
       do-run = true;
       package = pkgs.custom.minecraft-bedrock-server;
       dataDir = "/srv/minecraft-bedrock-server";
