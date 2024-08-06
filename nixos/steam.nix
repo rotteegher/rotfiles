@@ -3,7 +3,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   config = lib.mkIf config.custom.steam.enable {
     programs.steam = {
       enable = true;
@@ -31,9 +32,7 @@
       path-of-building
     ];
     custom.persist = {
-      home.directories = [
-        ".local/share/Steam"
-      ];
+      home.directories = [ ".local/share/Steam" ];
     };
   };
 }

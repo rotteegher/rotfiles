@@ -18,9 +18,7 @@ lib.mkIf config.custom.lutris.enable {
     })
   ];
   custom.persist = {
-    root.directories = [
-      "/var/lib/waydroid"
-    ];
+    root.directories = [ "/var/lib/waydroid" ];
     home.directories = [
       ".local/share/lutris"
       ".local/share/waydroid"

@@ -4,9 +4,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   pr_dir = "/persist${config.home.homeDirectory}/pr";
-in {
+in
+{
   home = {
     shellAliases =
       {
