@@ -197,7 +197,6 @@ in
 
         "$mod, n, exec, hypr-wallpaper"
       ]
-      ++ lib.optionals config.custom.wezterm.enable [ "$mod, q, exec, wezterm start" ]
       ++ lib.optionals config.custom.backlight.enable [
         ",XF86MonBrightnessDown, exec, ${lib.getExe pkgs.brightnessctl} set 5%-"
         ",XF86MonBrightnessUp, exec, ${lib.getExe pkgs.brightnessctl} set +5%"

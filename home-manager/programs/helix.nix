@@ -21,7 +21,7 @@
       };
       languages = {
         language-server.rust-analyzer.command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-        language-server.rust-analyzer.config.diagnostics.disabled = [ "inactive-code" ];
+        language-server.rust-analyzer.config.diagnostics.disabled = [ "inactive-code" "unlinked-file" ];
       };
       settings = { 
         theme = "mtr";

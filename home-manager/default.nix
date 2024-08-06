@@ -43,7 +43,7 @@
         trash-cli
         xdg-utils
 
-        mcomix
+        # mcomix
 
         # misc utilities for dotfiles written in rust
         custom.dotfiles-utils

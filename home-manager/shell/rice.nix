@@ -20,6 +20,7 @@
       nitch
       pipes-rs
       scope-tui
+      moon-buggy
       tokei
       tenki
       wl-color-picker
