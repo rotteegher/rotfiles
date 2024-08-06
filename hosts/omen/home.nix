@@ -93,7 +93,6 @@
         # gimp
         # kdenlive
         feh
-        mupdf
         ffmpeg
       ]
     );

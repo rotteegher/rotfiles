@@ -29,6 +29,7 @@ in {
 
         rhx = "cd ~/pr/rotfiles & hx .";
         dhx = "cd ~/pr/dotfiles & hx .";
+        rst = "cd ~/pr/rustpr/ln/";
 
         hy = "exec Hyprland &> /dev/null";
 

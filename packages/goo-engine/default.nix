@@ -174,8 +174,6 @@ stdenv.mkDerivation (
         llvmPackages.llvm.dev
         makeWrapper
         python3Packages.wrapPython
-      ]
-      ++ lib.optionals cudaSupport [
         addOpenGLRunpath
         cudaPackages.cuda_nvcc
       ]
@@ -183,6 +181,7 @@ stdenv.mkDerivation (
 
     buildInputs =
       [
+        addOpenGLRunpath
         vulkan-tools
         vulkan-loader
         vulkan-headers
@@ -344,12 +343,28 @@ stdenv.mkDerivation (
 
     # Set RUNPATH so that libcuda and libnvrtc in /run/opengl-driver(-32)/lib can be
     # found. See the explanation in libglvnd.
-    postFixup = lib.optionalString cudaSupport ''
-      for program in $out/bin/goo-engine $out/bin/.goo-engine-wrapped; do
-        isELF "$program" || continue
-        addOpenGLRunpath "$program"
+    postFixup = lib.optionalString cudaSupport "
+    for program in \"$out/bin/goo-engine\" \"$out/bin/.goo-engine-wrapped\"; do
+        isELF \"$program\" || continue
+
+        forceRpath=
+        while [ $# -gt 0 ]; do
+          case \"$1\" in
+            --) shift; break;;
+            --force-rpath) shift; forceRpath=1;;
+            --*)
+              echo \"addDriverRunpath: ERROR: Invalid command line\" \
+                   \"argument: $1\" >&2
+              return 1;;
+            *) break;;
+          esac
+        done  
+
+
+        origRpath=\"$(patchelf --print-rpath \"$program\")\"
+        patchelf --set-rpath \"/run/opengl-driver/lib:$origRpath\" \${forceRpath:+--force-rpath} \"$program\"
       done
-    '';
+    ";
 
     # passthru = {
     #   python = python3;

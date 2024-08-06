@@ -84,7 +84,6 @@
         guvcview
         # USE imv INSTEAD!
         # feh 
-        mupdf
       ]
     );
   };

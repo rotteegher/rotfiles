@@ -13,6 +13,7 @@ lib.mkIf config.custom.lutris.enable {
       ];
       extraLibraries = _pkgs: [
         # List library dependencies here
+        libadwaita
       ];
     })
   ];
