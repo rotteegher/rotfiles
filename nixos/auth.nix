@@ -5,7 +5,7 @@
   user,
   ...
 }: let
-  autoLoginUser = config.services.xserver.displayManager.autoLogin.user;
+  autoLoginUser = config.services.displayManager.autoLogin.user;
 in
   lib.mkMerge [
     # ssh settings
