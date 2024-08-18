@@ -8,10 +8,10 @@
         "pinned": false,
         "src": {
             "name": null,
-            "sha256": "sha256-6xznfVO4g+ICgVixwM7RrrmoVMlFnbIFwWDt1kYfvnM=",
+            "sha256": "sha256-vvJrQDQvsGFHpaN/pRckxajsp3BSCU+iZWL9dx26U9U=",
             "type": "url",
-            "url": "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.3.01.zip"
+            "url": "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.20.03.zip"
         },
-        "version": "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.3.01.zip"
+        "version": "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.20.03.zip"
     }
 }

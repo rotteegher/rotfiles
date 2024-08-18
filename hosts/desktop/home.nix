@@ -82,6 +82,8 @@
       with pkgs;
       [
         guvcview
+        krita
+
         # USE imv INSTEAD!
         # feh 
       ]

@@ -10,10 +10,13 @@ lib.mkIf config.custom.hyprland.enable {
   services.xserver.displayManager.lightdm.enable = lib.mkForce false;
   # services.xserver.displayManager.sddm.enable = lib.mkForce true;
 
+  # See https://nixos.org/manual/nixos/stable/release-notes#sec-release-23.11
+  # Fcitx5 Doesn't Start When Using WM
+  # As of NixOS 23.11 i18n.inputMethod.enabled no longer creates systemd services for fcitx5.
+  # Instead it relies on XDG autostart files. If using a Window Manager (WM), such as Sway, you may need to add vvvTHISvvv to your NixOS configuration. 
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
+
   programs.hyprland =
-    #   assert (
-    #     lib.assertMsg (pkgs.hyprland.version == "0.39.1") "hyprland: updated, sync with hyprnstack?"
-    #   );
     {
       enable = true;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;

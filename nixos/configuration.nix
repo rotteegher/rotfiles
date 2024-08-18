@@ -77,7 +77,7 @@
   # boot.kernel.sysctl."kernel.sysrq" = 1;
 
   # enable opengl
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
   };
 

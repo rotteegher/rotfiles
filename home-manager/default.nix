@@ -40,6 +40,7 @@
         lzip
         ripgrep
         libreoffice
+        onlyoffice-bin
         trash-cli
         xdg-utils
 
