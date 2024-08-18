@@ -14,6 +14,8 @@
     };
     environment.systemPackages = with pkgs; [
       steam
+      gamescope
+      mangohud
 
       # steamcmd
       # steam-tui
@@ -32,7 +34,7 @@
       path-of-building
     ];
     custom.persist = {
-      home.directories = [ ".local/share/Steam" ];
+      home.directories = [ ".local/share/Steam" ".config/mangohud" ];
     };
   };
 }

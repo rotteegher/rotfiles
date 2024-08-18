@@ -12,11 +12,11 @@ lib.mkIf config.custom.surrealdb.enable {
     dbPath = "file:///var/lib/private/surrealdb";
     extraFlags = [
       "--auth"
-      # "--allow-all"
+      "--allow-all"
       "--user"
-      "root"
+      "rotter"
       "--pass"
-      "root"
+      "rotter"
       "--log"
       "debug"
     ];
@@ -24,6 +24,6 @@ lib.mkIf config.custom.surrealdb.enable {
   };
 
   custom.persist = {
-    root.directories = ["/var/lib/private"];
+    root.directories = ["/var/lib/private/surrealdb"];
   };
 }
