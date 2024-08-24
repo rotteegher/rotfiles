@@ -1,0 +1,17 @@
+{
+    "terrafirmagreg": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "terrafirmagreg",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-Ts9Vseb76ALNDbVFbLHUlH3kfIN5S3b8b2XHTCqs9KQ=",
+            "type": "url",
+            "url": "https://github.com/TerraFirmaGreg-Team/Modpack-Modern/releases/download/0.7.12/TerraFirmaGreg-1.20.x-0.7.12-server.zip"
+        },
+        "version": "0.7.12"
+    }
+}

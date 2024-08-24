@@ -35,7 +35,7 @@ in {
 
     # make sure the tty4 is not overrun by getty
     services.logind.extraConfig = ''
-      NAutoVTs=3
+      NAutoVTs=2
     '';
 
     systemd.services.minecraft-bedrock-server = {
@@ -48,8 +48,8 @@ in {
       serviceConfig = {
         Type = "simple";
 
-        ProtectHome = "read-only";
-        ProtectSystem = "full";
+        # ProtectHome = "read-only";
+        # ProtectSystem = "full";
         PrivateDevices = false;
         PrivateTmp = false;
 

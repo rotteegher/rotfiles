@@ -44,14 +44,15 @@
       };
     };
 
-    services.minecraft-java-servers.fabric-latest = {
-      enable = false;
+    services.minecraft-java-servers.terrafirmagreg = {
+      enable = true;
       do-run = true;
       autoStart = true;
+      dataDir = "/srv/minecraft-java-server-terrafirmagreg";
       # jvmOpts = "-Xms8192M -Xmx8192M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
       serverProperties = {
         enable-jmx-monitoring = false;
-        "rcon.port" = 25585;
+        "rcon.port" = 2525;
         level-seed = "";
         gamemode = "survival";
         enable-command-block = false;
@@ -69,18 +70,18 @@
         max-tick-time = 60000;
         require-resource-pack = false;
         use-native-transport = true;
-        max-players = 20;
+        max-players = 3;
         online-mode = true;
         enable-status = true;
         allow-flight = false;
         initial-disabled-packs = "";
         broadcast-rcon-to-ops = true;
-        view-distance = 10;
+        view-distance = 64;
         server-ip = "";
         resource-pack-prompt = "";
         allow-nether = true;
         server-port = 25565;
-        enable-rcon = false;
+        enable-rcon = true;
         sync-chunk-writes = true;
         op-permission-level = 4;
         prevent-proxy-connections = false;
@@ -88,7 +89,7 @@
         resource-pack = "";
         entity-broadcast-range-percentage = 100;
         simulation-distance = 10;
-        "rcon.password" = "";
+        "rcon.password" = "ASDsss";
         player-idle-timeout = 0;
         force-gamemode = false;
         rate-limit = 0;
