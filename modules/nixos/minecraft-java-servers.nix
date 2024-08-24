@@ -29,7 +29,14 @@ in {
       <option>services.minecraft-servers.servers.<name>.files</option> with the
       syntax @varname@.
     '';
-    fabric-latest = {
+    terrafirmagreg = {
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.custom.terrafirmagreg;
+        defaultText = "pkgs.terrafirmagreg";
+        description = "Version of modpack to run.";
+      };
+
       do-run = lib.mkEnableOption "Stop minecraft server?" // {default = true;};
       autoStart = lib.mkEnableOption "Auto start minecraft server on boot?" // {default = true;};
       enable = lib.mkOption {
@@ -39,7 +46,14 @@ in {
           Enable Fabric Server
         '';
       };
-      jvmOpts = mkOpt' (types.separatedString " ") "-Xmx12G -Xms12G" "JVM options for this server.";
+      dataDir = lib.mkOption {
+        type = lib.types.path;
+        default = "/srv/minecraft-java-server-terrafirmagreg";
+        description = ''
+          Directory to store Minecraft Bedrock database and other state/data files.
+        '';
+      };
+      jvmOpts = mkOpt' (types.separatedString " ") "-Xmx22G -Xms22G" "JVM options for this server.";
       # example = "-Xms4096M -Xmx4096M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
 
       # Whitelisted players,

@@ -29,9 +29,9 @@ in {
         });
 
       # nixos-small logo looks like ass
-      fastfetch = prev.fastfetch.overrideAttrs (o: {
-        patches = (o.patches or []) ++ [./fastfetch-nixos-old-small.patch];
-      });
+      # fastfetch = prev.fastfetch.overrideAttrs (o: {
+      #   patches = (o.patches or []) ++ [./fastfetch-nixos-old-small.patch];
+      # });
 
       blender = prev.blender.override { cudaSupport = true; };
       goo-engine = prev.blender.override { cudaSupport = true; };

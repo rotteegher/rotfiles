@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./minecraft-java-servers.nix
+    ./minecraft-java-server-terrafirmagreg.nix
     ./minecraft-bedrock-server.nix
   ];
   config = lib.mkIf (config.custom.services.minecraft-bedrock-server.enable || config.custom.services.minecraft-java-servers) {

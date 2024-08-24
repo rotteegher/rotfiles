@@ -24,6 +24,7 @@ in
   distro-grub-themes-nixos = pkgs.callPackage ./distro-grub-themes-nixos { };
 
   minecraft-bedrock-server = w pkgs.callPackage ./minecraft-bedrock-server { };
+  terrafirmagreg = w pkgs.callPackage ./terrafirmagreg { };
 
   goo-engine = w pkgs.callPackage ./goo-engine { cudaSupport = true; };
 
