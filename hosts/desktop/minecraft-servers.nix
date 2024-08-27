@@ -31,7 +31,7 @@
         player-idle-timeout = 30;
         max-threads = 4;
         level-name = "Jungle Island";
-        level-seed = "1070141852853881206";
+        level-seed = "0";
         default-player-permission-level = "member";
         texturepack-required = false;
         content-log-file-enabled = false;
@@ -49,7 +49,15 @@
       do-run = true;
       autoStart = true;
       dataDir = "/srv/minecraft-java-server-terrafirmagreg";
-      # jvmOpts = "-Xms8192M -Xmx8192M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
+      jvmOpts = "-Xms32768 -Xmx32768M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
+      opsJson = [
+        {
+          uuid = "2cbb65e9-088b-48d8-be9e-0f7b4d0c0b62";
+          name = "rotteegher";
+          level = 4;
+          bypassesPlayerLimit = false;
+        }
+      ];
       serverProperties = {
         enable-jmx-monitoring = false;
         "rcon.port" = 2525;
@@ -59,10 +67,10 @@
         enable-query = false;
         generator-settings = "{}";
         enforce-secure-profile = true;
-        level-name = "Java level";
-        motd = "Nixos Minecraft Server";
+        level-name = "terrafirmagreg_world";
+        motd = "Реалістичний Майнкрафт модпак Сервер";
         "query.port" = 25565;
-        pvp = true;
+        pvp = false;
         generate-structures = true;
         max-chained-neighbor-updates = 1000000;
         difficulty = "easy";
@@ -73,13 +81,13 @@
         max-players = 3;
         online-mode = true;
         enable-status = true;
-        allow-flight = false;
+        allow-flight = true;
         initial-disabled-packs = "";
         broadcast-rcon-to-ops = true;
         view-distance = 64;
-        server-ip = "";
+        server-ip = "0.0.0.0";
         resource-pack-prompt = "";
-        allow-nether = true;
+        allow-nether = false;
         server-port = 25565;
         enable-rcon = true;
         sync-chunk-writes = true;
@@ -101,7 +109,7 @@
         log-ips = true;
         function-permission-level = 2;
         initial-enabled-packs = "vanilla";
-        level-type = "minecraft\:normal";
+        level-type = "tfc\:overworld";
         text-filtering-config = "";
         spawn-monsters = true;
         enforce-whitelist = false;

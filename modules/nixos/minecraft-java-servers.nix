@@ -71,6 +71,38 @@ in {
         };
       };
 
+      opsJson = lib.mkOption {
+        # type = with lib.types; listOf attrs;
+        type = lib.types.listOf (lib.types.submodule { freeformType = (pkgs.formats.json {  }).type; });
+        default = [];
+        description = ''
+          A list of operators for the Minecraft server. Each operator is represented by an
+          attribute set containing the following keys:
+
+          - `uuid` (string): The unique identifier for the player.
+          - `name` (string): The name of the player.
+          - `level` (integer): The operator level (1-4).
+          - `bypassesPlayerLimit` (boolean): Whether the player bypasses the server's player limit.
+        
+          Example value:
+          [
+            {
+              uuid = "2cbb65e9-088b-48d8-be9e-0f7b4d0c0b62";
+              name = "rotteegher";
+              level = 4;
+              bypassesPlayerLimit = true;
+            }
+            {
+              uuid = "12b5c603-8037-4c03-92e7-00b9cfcfd82a";
+              name = "playername";
+              level = 1;
+              bypassesPlayerLimit = false;
+            }
+            # Add more operators as needed
+          ]
+        '';
+      };
+
       serverProperties = lib.mkOption {
         type = with lib.types; attrsOf (oneOf [bool int str]);
         default = {
