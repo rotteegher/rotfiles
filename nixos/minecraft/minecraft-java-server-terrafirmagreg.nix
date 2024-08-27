@@ -20,6 +20,10 @@
       (n: v: "${n}=${cfgToString v}")
       cfg.serverProperties));
 
+  opsJsonFile = pkgs.writeText "ops.json" ('' 
+    # ops.json managed by NixOS configuration
+  '' + "\n" + builtins.toJSON cfg.opsJson);
+
   serverPort = cfg.serverProperties.server-port or 25565;
 in {
   config = lib.mkIf cfg.enable {
@@ -39,7 +43,7 @@ in {
       # conflicts = ["getty@tty3.service"];
       after = ["network.target"];
 
-      path = [ pkgs.jdk21_headless ];
+      path = [ pkgs.jdk17_headless ];
       serviceConfig = {
         Type = "simple";
 
@@ -63,8 +67,8 @@ in {
         RemainAfterExit = true;
       
         ExecStart = "${pkgs.jdk21_headless}/bin/java -jar ./minecraft_server.jar ${cfg.jvmOpts}";
-        preStop = "rcon -m -H localhost -p ${toString cfg.serverProperties."rcon.port"} -P ${cfg.serverProperties."rcon.password"} stop";
       };
+      preStop = "${pkgs.rcon}/bin/rcon -m -H localhost -p ${toString cfg.serverProperties."rcon.port"} -P ${cfg.serverProperties."rcon.password"} stop";
       preStart = ''
         echo "Server Directory $(stat ${cfg.dataDir})"
 
@@ -72,6 +76,9 @@ in {
 
         cp -f ${serverPropertiesFile} server.properties
         echo "[server.properties] Server Properties: $(cat server.properties)"
+
+        cp -f ${opsJsonFile} ops.json
+        echo "[ops.json] Server Operators: $(cat ops.json)"
 
         echo "Setting permissions"
         chown -R ${user}:users ${cfg.dataDir}
