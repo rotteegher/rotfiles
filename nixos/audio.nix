@@ -31,7 +31,11 @@
     #   # };
     # };
 
-    musnix.enable = true;
+    musnix = {
+      enable = true;
+      rtcqs.enable = true;
+      # kernel.realtime = true;
+    };
     users.users.${user} = {...}: {
       extraGroups = ["jackaudio" "audio" ];
     };

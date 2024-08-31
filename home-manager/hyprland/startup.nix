@@ -26,6 +26,8 @@ in {
       # firefox
       (openOnWorkspace 1 "librewolf")
 
+      (openOnWorkspace 2 "$term sh -c 'tenki; exec fish'")
+
       # Open Discord
       (openOnWorkspace 4 "discord-vesktop")
 
