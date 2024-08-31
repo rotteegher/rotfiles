@@ -51,8 +51,16 @@
             "extend_line_up"
             "extend_to_line_bounds"
           ];
+          "Ч" = [
+            "extend_line_up"
+            "extend_to_line_bounds"
+          ];
           A-x = "extend_to_line_bounds";
+          "A-ч" = [
+            "extend_to_line_bounds"
+          ];
           C-y = "yank_to_clipboard";
+          "C-н" = "yank_to_clipboard";
         };
         keys.normal = {
           # until fixed ISSUE: https://github.com/helix-editor/helix/issues/10389
@@ -66,12 +74,9 @@
           "к" = [ "replace" ]; # r
           "е" = [ "find_till_char" ]; # t
           "н" = [ "yank_to_clipboard" ]; # y
-          "г" = [ ];
-          "C-г" = [ "page_cursor_half_up" ]; # u
-          "ш" = [ "insert_mode" ];
-          "C-ш" = [ "jump_forward" ]; # i
-          "щ" = [ "open_below" ];
-          "C-щ" = [ "jump_backward" ]; # o
+          "г" = [ "undo" ]; "C-г" = [ "page_cursor_half_up" ]; # u
+          "ш" = [ "insert_mode" ]; "C-ш" = [ "jump_forward" ]; # i
+          "щ" = [ "open_below" ]; "C-щ" = [ "jump_backward" ]; # o
           "з" = [ "paste_clipboard_after" ]; # p
           "х" = [ ]; # @
           "ї" = [ ]; # [
@@ -82,62 +87,57 @@
           "К" = [ "replace_selections_with_clipboard" ]; # R
           "Е" = [ "till_prev_char" ]; # T
           "Н" = [ "yank_main_selection_to_clipboard" ]; # Y
-          "Г" = [ ]; # U
-          "Ш" = [ ]; # I
-          "Щ" = [ ]; # O
+          "Г" = [ "redo" ]; # U
+          "Ш" = [ "insert_at_line_start" ]; # I
+          "Щ" = [ "open_above" ]; # O
           "З" = [ "paste_clipboard_before" ]; # P
-          "Х" = [ ]; # `
-          "Ї" = [ ]; # {
+          # "Х" = [ ]; # `
+          # "Ї" = [ ]; # {
 
           # другий ряд 
           "ф" = [ "append_mode" ]; # a
-          "і" = [ "select_regex" ];
-          "C-і" = [ "save_selection" ];
-          "A-і" = [ "split_selection_on_newline" ]; # s
-          "в" = [ "delete_selection" ];
-          "C-в" = [ "page_cursor_half_down" ]; # d
-          "а" = [ "find_next_char" ];
-          "C-а" = [ "page_down" ]; # f
+          "і" = [ "select_regex" ]; "C-і" = [ "save_selection" ]; "A-і" = [ "split_selection_on_newline" ]; # s
+          "в" = [ "delete_selection" ]; "C-в" = [ "page_cursor_half_down" ]; # d
+          "а" = [ "find_next_char" ]; "C-а" = [ "page_down" ]; # f
           "п" = [ ]; # g
           "р" = [ "move_char_left" ]; # h
           "о" = [ "move_visual_line_down" ]; # j
           "л" = [ "move_visual_line_up" ]; # k
           "д" = [ "move_char_right" ]; # l
-          "ж" = [ ]; # ;
-          "є" = [ ]; # :
-          "ґ" = [ ]; # ]
+          # "ж" = [ ]; # ;
+          # "є" = [ ]; # : # important to leave unbinded to not confuse layouts
+          # "ґ" = [ ]; # ]
 
-          "Ф" = [ ]; # A
-          "І" = [ ]; # S
-          "В" = [ ]; # D
+          "Ф" = [ "insert_at_line_end" ]; # A
+          "І" = [ "split_selection" ]; # S
+          # "В" = [ ]; # D
           "А" = [ "find_prev_char" ]; # F
           "П" = [ "goto_line" ]; # G
-          "Р" = [ ]; # H
-          "О" = [ ]; # J
-          "Л" = [ ]; # K
-          "Д" = [ ]; # L/R
-          "Ж" = [ ]; # +
-          "Є" = [ ]; # *
-          "Ґ" = [ ]; # }
+          # "Р" = [ ]; # H
+          "О" = [ "join_selections" ]; # J
+          "Л" = [ "keep_selections" ]; # K
+          # "Д" = [ ]; # L
+          # "Ж" = [ ]; # +
+          # "Є" = [ ]; # *
+          # "Ґ" = [ ]; # }
 
           # третій ряд
-          "я" = [ ]; # z
-          "ч" = [ ]; # x
-          "с" = [ ]; # c
-          "м" = [ ]; # v
-          "и" = [ "move_prev_word_start" ];
-          "C-и" = [ "page_up" ]; # b
-          "т" = [ ]; # n
+          # "я" = [ ]; # z
+          "ч" = [ "extend_line_below" ]; # x
+          "с" = [ "change_selection" ]; "A-с" = [ "change_selection_noyank" ]; # c
+          "м" = [ "select_mode" ]; # v
+          "и" = [ "move_prev_word_start" ]; "C-и" = [ "page_up" ]; # b
+          "т" = [ "search_next" ]; # n
           "ь" = [ ]; # m
           "б" = [ ]; # ,
           "ю" = [ ]; # .
           "." = [ "global_search" ]; # /
 
-          "Я" = [ ]; # Z
-          "Ч" = [ ]; # X
+          # "Я" = [ ]; # Z
+          "Ч" = [ "extend_to_line_bounds" ]; # X
           "С" = [ ]; # "М" = []; # V
           "И" = [ "move_prev_long_word_start" ]; # B
-          "Т" = [ ]; # N
+          "Т" = [ "search_prev" ]; # N
           "Ь" = [ ]; # M
           "Б" = [ ]; # <
           "Ю" = [ ]; # >

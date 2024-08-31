@@ -59,9 +59,6 @@
         pkgs = import inputs.nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          config.permittedInsecurePackages = [
-            "openssl-1.1.1w" # make viber work
-          ];
         };
         specialArgs = {
           inherit self inputs;

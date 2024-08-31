@@ -61,7 +61,6 @@
 
     discord.enable = true;
     telegram.enable = true;
-    viber.enable = false;
 
     insomnia.enable = true;
     minecraft-launchers.enable = true;
@@ -84,8 +83,7 @@
         guvcview
         krita
 
-        # USE imv INSTEAD!
-        # feh 
+        senpai
       ]
     );
   };
