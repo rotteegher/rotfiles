@@ -56,13 +56,46 @@ in {
       jvmOpts = mkOpt' (types.separatedString " ") "-Xmx22G -Xms22G" "JVM options for this server.";
       # example = "-Xms4096M -Xmx4096M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
 
+      tfcConfigFile = lib.mkOption {
+        type = lib.types.str;
+        default = ''
+          [general]
+          	#
+          	# If the TFC world preset 'tfc:overworld' should be set as the default world generation when creating a new world.
+          	defaultWorldPreset = "tfc:overworld"
+
+          [calendar]
+          	#
+          	# The number of days in a month, for newly created worlds.
+          	# This can be modified in existing worlds using the /time command
+          	#Range: > 1
+          	# defaultMonthLength = 8 # DEFAULT IS 8
+          	defaultMonthLength = 31
+          	#
+          	# The start date for newly created worlds, in a number of ticks, for newly created worlds
+          	# This represents a number of days offset from January 1, 1000
+          	# The default is (5 * daysInMonth) = 40, which starts at June 1, 1000 (with the default daysInMonth = 8)
+          	#Range: > -1
+          	defaultCalendarStartDay = 40
+
+          [debug]
+          	#
+          	# Enables a series of network fail-safes that are used to debug network connections between client and servers.
+          	# Important: this MUST BE THE SAME as what the server has set, otherwise you are liable to see even stranger errors.
+          	enableNetworkDebugging = false
+          	#
+          	# If enabled, TFC will validate that certain pieces of reloadable data fit the conditions we expect, for example heating recipes having heatable items. It will error or warn in the log if these conditions are not met.
+          	enableDatapackTests = false
+        '';
+      };
+
       # Whitelisted players,
       # only has an effect when services.minecraft-server.declarative is true
       # and the whitelist is enabled via by setting serverProperties.white-list to true.
       # This is a mapping from Minecraft usernames to UUIDs.
       # You can use https://mcuuid.net/ to get a Minecraft UUID for a username.
       whitelist = lib.mkOption {
-        type = lib.types.attrs;
+        type = lib.types.attrsOf lib.types.str;
         default = {};
         description = "Arbitrary whitelist for the Minecraft Java Server.";
         example = {

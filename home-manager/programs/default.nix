@@ -13,6 +13,7 @@
     ./nemo.nix
     ./minecraft-launchers.nix
     ./obs-studio.nix
+    ./irc.nix
     ./kiwix.nix
     # ./pathofbuilding.nix
     ./rofi.nix

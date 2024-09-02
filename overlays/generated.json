@@ -21,7 +21,7 @@
     },
     "hyprlock": {
         "cargoLocks": null,
-        "date": "2024-08-31",
+        "date": "2024-09-01",
         "extract": null,
         "name": "hyprlock",
         "passthru": null,
@@ -33,11 +33,11 @@
             "name": null,
             "owner": "hyprwm",
             "repo": "hyprlock",
-            "rev": "cc71c0b7d9aae799420f3a919d00efe1e0a32c80",
-            "sha256": "sha256-aKB6Z/nohmSnB9n66PRFUq82GMYL4ctUSFAaXF2U5rE=",
+            "rev": "73b0fc26c0e2f6f82f9d9f5b02e660a958902763",
+            "sha256": "sha256-N7Kfq8tpOWjtRKBnH5RqcDtQFGZPZ5vXgmxbnZVPCuU=",
             "type": "github"
         },
-        "version": "cc71c0b7d9aae799420f3a919d00efe1e0a32c80"
+        "version": "73b0fc26c0e2f6f82f9d9f5b02e660a958902763"
     },
     "swww": {
         "cargoLocks": null,
