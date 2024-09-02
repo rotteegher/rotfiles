@@ -14,6 +14,9 @@
       };
     };
 
+    irc.enable = lib.mkEnableOption "senpai" // {
+      default = false;
+    };
     discord.enable = lib.mkEnableOption "discord" // {
       default = false;
     };

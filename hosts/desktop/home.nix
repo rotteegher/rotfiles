@@ -65,6 +65,8 @@
     insomnia.enable = true;
     minecraft-launchers.enable = true;
 
+    irc.enable = true;
+
     # Select gpg keyid for git
     # keys located in ~/.local/share/.gnupg
     # To list the gpg signing keyid run:
@@ -82,8 +84,6 @@
       [
         guvcview
         krita
-
-        senpai
       ]
     );
   };

@@ -3,6 +3,7 @@
   lib,
   pkgs,
   user,
+  std,
   ...
 }: let
   # Host specific Module Configuration
@@ -20,15 +21,19 @@
       (n: v: "${n}=${cfgToString v}")
       cfg.serverProperties));
 
+  tfcConfigFile = pkgs.writeText "tfc-common.toml" (''
+      # tfc config file managed by NixOS configuration
+    '' + "\n" + cfg.tfcConfigFile);
+
   opsJsonFile = pkgs.writeText "ops.json" ('' 
     # ops.json managed by NixOS configuration
   '' + "\n" + builtins.toJSON cfg.opsJson);
-
+  
   serverPort = cfg.serverProperties.server-port or 25565;
 in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      # USE mcrcon to connect to server console via rcon.password
+      # USE mcrcon or rcon to connect to server console via rcon.password
       mcrcon
       rcon
 
@@ -79,6 +84,9 @@ in {
 
         cp -f ${opsJsonFile} ops.json
         echo "[ops.json] Server Operators: $(cat ops.json)"
+
+        cp -f ${tfcConfigFile} config/tfc-common.toml
+        echo "[tfc-common.toml] TFC CONFIG: $(cat config/tfc-common.toml)"
 
         echo "Setting permissions"
         chown -R ${user}:users ${cfg.dataDir}

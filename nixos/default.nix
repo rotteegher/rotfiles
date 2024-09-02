@@ -114,6 +114,7 @@
           nmap
           arp-scan
           wireshark
+          dhcpcd
           netdiscover
           aria2
           inetutils
