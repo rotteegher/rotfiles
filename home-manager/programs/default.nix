@@ -28,6 +28,5 @@
     ./blender.nix
     ./reaper.nix
     ./k3b.nix
-    # TODO!!!!
   ];
 }

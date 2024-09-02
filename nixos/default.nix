@@ -28,8 +28,11 @@
     ./impermanence.nix
     ./nix.nix
     ./plasma.nix
+    ./sops.nix
+    ./gh.nix
     # ./syncoid.nix
     ./transmission.nix
+    ./coolify.nix
     ./users.nix
     ./surrealdb.nix
     ./minecraft

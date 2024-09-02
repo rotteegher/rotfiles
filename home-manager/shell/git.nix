@@ -141,7 +141,6 @@ in {
 
   custom.persist = {
     home.directories = [
-      ".config/gh"
       ".config/systemd"
     ];
   };

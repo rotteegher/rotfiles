@@ -11,7 +11,7 @@
     # ./neovim.nix
     ./nix.nix
     ./rice.nix
-    ./rust.nix # TODO
+    ./rust.nix
     ./shell.nix
     ./starship.nix
     ./tmux.nix

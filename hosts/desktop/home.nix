@@ -26,7 +26,7 @@
         ];
       }
     ];
-    terminal.size = 9;
+    terminal.size = 8;
 
     hyprland = {
       modkey = "SUPER"; # could be "ALT"
