@@ -59,7 +59,7 @@
           user
         ])
         inputs.impermanence.nixosModules.impermanence
-        # inputs.sops-nix.nixosModules.sops # FIXME
+        inputs.sops-nix.nixosModules.sops # FIXME
       ];
     };
 in {

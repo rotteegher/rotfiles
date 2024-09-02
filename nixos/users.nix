@@ -51,27 +51,27 @@
 
     # FIXME sops
     # # use sops for user passwords if enabled
-    # (lib.mkIf config.custom.sops.enable (
-    #   let
-    #     inherit (config.sops) secrets;
-    #   in
-    #   {
-    #     # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
-    #     sops.secrets = {
-    #       rp.neededForUsers = true;
-    #       up.neededForUsers = true;
-    #     };
+    (lib.mkIf config.custom.sops.enable (
+      let
+        inherit (config.sops) secrets;
+      in
+      {
+        # https://github.com/Mic92/sops-nix?tab=readme-ov-file#setting-a-users-password
+        sops.secrets = {
+          rp.neededForUsers = true;
+          up.neededForUsers = true;
+        };
 
-    #     users = {
-    #       mutableUsers = false;
-    #       # create a password with for root and $user with:
-    #       # mkpasswd -m sha-512 'PASSWORD' and place in secrets.json under the appropriate key
-    #       users = {
-    #         root.hashedPasswordFile = lib.mkForce secrets.rp.path;
-    #         ${user}.hashedPasswordFile = lib.mkForce secrets.up.path;
-    #       };
-    #     };
-    #   }
-    # ))
+        users = {
+          mutableUsers = false;
+          # create a password with for root and $user with:
+          # mkpasswd -m sha-512 'PASSWORD' and place in secrets.json under the appropriate key
+          users = {
+            root.hashedPasswordFile = lib.mkForce secrets.rp.path;
+            ${user}.hashedPasswordFile = lib.mkForce secrets.up.path;
+          };
+        };
+      }
+    ))
   ];
 }
