@@ -118,7 +118,7 @@ in
 
       general =
         let
-          gap = if host == "desktop" then 5 else 4;
+          gap = if host == "desktop" then 3 else 2;
         in
         {
           gaps_in = gap;

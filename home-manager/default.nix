@@ -41,6 +41,8 @@
         ripgrep
         libreoffice
         onlyoffice-bin
+        zathura
+        mupdf
         trash-cli
         xdg-utils
 

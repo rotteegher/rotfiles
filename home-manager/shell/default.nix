@@ -26,6 +26,7 @@
     htop
     dust # better du
     jq
+    htmlq
     sd # better sed
     libnotify
     ugrep
@@ -37,11 +38,15 @@
     coreutils-full
     pciutils
     ffmpeg
+    woeusb
 
     cmus
 
+    devenv
+
+    git-filter-repo
     stripe-cli
-    nodePackages.vercel
+    # nodePackages.vercel
 
     typora # md viewer
     marksman # mv lsp

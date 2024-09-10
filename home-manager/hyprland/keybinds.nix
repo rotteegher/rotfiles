@@ -11,6 +11,9 @@ in
   wayland.windowManager.hyprland.settings = lib.mkIf config.wayland.windowManager.hyprland.enable {
     bind =
       [
+        #GLOBAL
+        ", mouse:276, pass, ^(TeamSpeak 3)$"
+        
         # Exec
         "$mod, Return, exec, $term"
         "$mod_SHIFT, Return, exec, rofi -show drun"
