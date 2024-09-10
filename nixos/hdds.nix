@@ -38,6 +38,7 @@ in
       };
     };
 
+
     # add bookmarks for gtk
     hm =
       { ... }@hmCfg:
@@ -51,6 +52,7 @@ in
             "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
             "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
             "file://${wdc-blue-mountpoint}/Documents/papers papers"
+            "file://${wdc-blue-mountpoint}/_KOROBKA _KOROBKA"
             "file://${wdc-blue-mountpoint}/ wdc-blue/data"
           ]
           ++ (lib.optionals cfg.stsea3tb [ "file://${stsea-mountpoint}/ stsea-barra/okii" ]);
@@ -92,7 +94,7 @@ in
             insmod ntfs
             insmod search_fs_uuid
             insmod chain
-            search --fs-uuid --set=root 14A1-3DF5
+            search --fs-uuid --set=root 703A-A953
             chainloader /EFI/Microsoft/Boot/bootmgfw.efi
           }
         ''
@@ -100,7 +102,7 @@ in
     };
 
     fileSystems = lib.mkIf cfg.enable {
-      "/windows" = lib.mkIf cfg.windows {
+      "/md/windows" = lib.mkIf cfg.windows {
         device = "/dev/disk/by-label/WINDOWS";
         fsType = "ntfs";
         neededForBoot = false;

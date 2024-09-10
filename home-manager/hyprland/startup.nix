@@ -26,10 +26,13 @@ in {
       # firefox
       (openOnWorkspace 1 "librewolf")
 
-      (openOnWorkspace 2 "$term sh -c 'tenki; exec fish'")
+      (openOnWorkspace 7 "$term sh -c 'tenki --fps 60 --tps 60 --show-fps --timer-color yellow --mode rain; exec fish'")
 
       # Open Discord
       (openOnWorkspace 4 "discord-vesktop")
+
+      # Open Steam
+      (openOnWorkspace 5 "steam")
 
       # audio
       (openOnWorkspace 9 "pavucontrol")
