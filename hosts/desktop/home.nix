@@ -84,6 +84,7 @@
       [
         guvcview
         krita
+        inkscape
       ]
     );
   };
