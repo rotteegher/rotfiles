@@ -36,6 +36,10 @@
       };
     };
 
+    samba.enable = lib.mkEnableOption "Samba" // {
+      default = false;
+    };
+
     hdds = {
       enable = lib.mkEnableOption "Desktop HDDs" // {
         default = false;
