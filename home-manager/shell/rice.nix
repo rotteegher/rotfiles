@@ -8,7 +8,12 @@
 {
   home = {
     packages = with pkgs; [
+      sl
+      libcaca
+      oneko
+      ninvaders
       asciiquarium
+      bastet
       cbonsai
       cmatrix
       hollywood

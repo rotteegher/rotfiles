@@ -20,9 +20,6 @@
   ];
 
   home.packages = with pkgs; [
-    shell-gpt
-    llm
-
     dysk # better disk info
     fd # better find
     fx # terminal json viewer and processor
@@ -42,8 +39,10 @@
     pciutils
     ffmpeg
     woeusb
+    fio
 
     cmus
+    feh
 
     devenv
 

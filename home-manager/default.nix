@@ -37,6 +37,7 @@
         rar # includes unrar
         zip # not includes unzip
         unzip
+        p7zpi
         lzip
         ripgrep
         libreoffice
