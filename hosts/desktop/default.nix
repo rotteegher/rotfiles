@@ -24,7 +24,7 @@
     wine.enable = true;
     distrobox.enable = true;
     jellyfin.enable = true;
-    llm.enable = false;
+    llm.enable = true;
     docker.enable = true;
     surrealdb.enable = true;
     # syncoid.enable = true; # TODO

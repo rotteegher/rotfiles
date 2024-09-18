@@ -36,13 +36,13 @@ in {
       blender = prev.blender.override { cudaSupport = true; };
       goo-engine = prev.blender.override { cudaSupport = true; };
 
-      hyprcursor =
-        # assert (
-        #   lib.assertMsg (prev.hyprcursor.version == "0.1.5") "hyprcursor: source overlay still needed?"
-        # );
-        prev.hyprcursor.overrideAttrs (
-          o: sources.hyprcursor // {buildInputs = (o.buildInputs or []) ++ [prev.tomlplusplus];}
-        );
+      # hyprcursor =
+      #   # assert (
+      #   #   lib.assertMsg (prev.hyprcursor.version == "0.1.5") "hyprcursor: source overlay still needed?"
+      #   # );
+      #   prev.hyprcursor.overrideAttrs (
+      #     o: sources.hyprcursor // {buildInputs = (o.buildInputs or []) ++ [prev.tomlplusplus];}
+      #   );
 
       hyprlock = prev.hyprlock.overrideAttrs (_: sources.hyprlock);
 
@@ -66,18 +66,18 @@ in {
       });
 
       # use latest commmit from git
-      swww = prev.swww.overrideAttrs (
-        _:
-          sources.swww
-          // {
-            # creating an overlay for buildRustPackage overlay
-            # https://discourse.nixos.org/t/is-it-possible-to-override-cargosha256-in-buildrustpackage/4393/3
-            cargoDeps = prev.rustPlatform.importCargoLock {
-              lockFile = sources.swww.src + "/Cargo.lock";
-              allowBuiltinFetchGit = true;
-            };
-          }
-      );
+      # swww = prev.swww.overrideAttrs (
+      #   _:
+      #     sources.swww
+      #     // {
+      #       # creating an overlay for buildRustPackage overlay
+      #       # https://discourse.nixos.org/t/is-it-possible-to-override-cargosha256-in-buildrustpackage/4393/3
+      #       cargoDeps = prev.rustPlatform.importCargoLock {
+      #         lockFile = sources.swww.src + "/Cargo.lock";
+      #         allowBuiltinFetchGit = true;
+      #       };
+      #     }
+      # );
 
     #   wallust = assert (lib.assertMsg (prev.wallust.version == "2.10.0") "wallust: use wallust from nixpkgs?");
     #     prev.wallust.overrideAttrs (

@@ -24,6 +24,7 @@ in
     home = {
       sessionVariables = {
         HYPR_LOG = "/tmp/hyprland.log";
+        WLR_NO_HARDWARE_CURSORS = 1;
       };
 
       packages = with pkgs; [

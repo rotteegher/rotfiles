@@ -15,6 +15,10 @@ lib.mkIf config.custom.llm.enable {
 
   virtualisation.docker.enableNvidia = true;
 
+  environement.variables = {
+    OPENAI_API_KEY = config.sops.secrets.openai_api_key.path;
+  };
+
   # ollama
   # docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
   virtualisation.oci-containers.backend = "docker";
