@@ -8,6 +8,7 @@
 lib.mkIf (config.custom.docker.enable || config.custom.distrobox.enable) {
   environment.systemPackages = lib.mkIf config.custom.distrobox.enable [pkgs.distrobox];
 
+
   users.users.${user}.extraGroups = ["docker"];
 
   virtualisation.docker = {
