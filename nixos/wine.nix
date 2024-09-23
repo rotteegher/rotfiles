@@ -23,6 +23,9 @@
     # winetricks (all versions)
     winetricks
 
+    # for audio sync
+    wineasio
+
     # native wayland support (unstable)
     wineWowPackages.waylandFull
   ];

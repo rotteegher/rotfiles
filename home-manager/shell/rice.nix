@@ -8,6 +8,7 @@
 {
   home = {
     packages = with pkgs; [
+      cool-retro-term
       sl
       libcaca
       oneko

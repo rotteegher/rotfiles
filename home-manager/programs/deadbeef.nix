@@ -7,7 +7,7 @@
   cfg = config.custom.deadbeef;
 in {
   config = lib.mkIf cfg.enable {
-    home.packages = [pkgs.deadbeef];
+    home.packages = [pkgs.deadbeef pkgs.audacious];
 
     custom.persist = {
       home.directories = [
