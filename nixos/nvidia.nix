@@ -27,14 +27,24 @@
       };
       graphics.extraPackages = with pkgs; [
         vaapiVdpau
-        # nvidia-vaapi-driver
-        # libvdpau-va-gl
+        nvidia-vaapi-driver
+        libvdpau-va-gl
 
         nvtopPackages.full
         glxinfo
         vulkan-tools
       ];
     };
+    environment.systemPackages = with pkgs; [
+        # nvidia-vaapi-driver
+        # libvdpau-va-gl
+        nvtopPackages.full
+        glxinfo
+        vulkan-tools
+        cudaPackages.cudatoolkit
+        cudaPackages.cudnn
+        cudaPackages.cuda_cudart
+    ];
 
     environment.sessionVariables =
       {

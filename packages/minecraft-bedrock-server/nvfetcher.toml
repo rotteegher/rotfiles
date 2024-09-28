@@ -1,4 +1,4 @@
-[minecraft-bedrock-server]
-src.webpage = "https://www.minecraft.net/en-us/download/server/bedrock"
-src.regex = 'https:\/\/minecraft\.azureedge\.net\/bin-linux\/bedrock-server-\d+\.\d+\.\d+\.\d+\.zip'
-fetch.url = "$ver"
+# [minecraft-bedrock-server]
+# src.webpage = "https://www.minecraft.net/en-us/download/server/bedrock"
+# src.regex = 'https:\/\/minecraft\.azureedge\.net\/bin-linux\/bedrock-server-\d+\.\d+\.\d+\.\d+\.zip'
+# fetch.url = "$ver"

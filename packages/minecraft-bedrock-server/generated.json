@@ -1,17 +1,1 @@
-{
-    "minecraft-bedrock-server": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "minecraft-bedrock-server",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "name": null,
-            "sha256": "sha256-kYCtr1/7d0yBFyAtzNq9kEyi2DfqmmBDJ1snhWhHD/U=",
-            "type": "url",
-            "url": "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.30.03.zip"
-        },
-        "version": "https://minecraft.azureedge.net/bin-linux/bedrock-server-1.21.30.03.zip"
-    }
-}
+{}
