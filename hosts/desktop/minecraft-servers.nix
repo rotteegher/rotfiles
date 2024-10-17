@@ -1,8 +1,9 @@
 {pkgs, ...}: {
   custom = {
+    minecraft.enable = false;
     services.minecraft-bedrock-server = {
       enable = false;
-      do-run = true;
+      do-run = false;
       package = pkgs.custom.minecraft-bedrock-server;
       dataDir = "/srv/minecraft-bedrock-server";
       permissions = [
