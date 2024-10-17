@@ -133,10 +133,11 @@ in
     };
 
 
-    hm.home.packages = with pkgs; [ transmission-remote-gtk ];
+    hm.home.packages = with pkgs; [ transmission-remote-gtk liferea ];
 
     custom.persist.home.directories = [
       "_CURRENT"
+      ".config/liferea"
       ".config/transmission-daemon"
       ".config/transmission-remote-gtk"
     ];

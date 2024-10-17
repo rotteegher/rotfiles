@@ -11,6 +11,9 @@ with lib; let
     mkOption {inherit type default description;};
 in {
   # MINECRAFT
+  options.custom.minecraft.enable = lib.mkEnableOption "minecraft" // {
+    default = false;
+  };
   options.custom.services.minecraft-java-servers = {
     enable = lib.mkOption {
       type = lib.types.bool;

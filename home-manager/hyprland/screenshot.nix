@@ -77,15 +77,54 @@
       esac
     '';
   };
-  # run ocr on selected area and copy to clipboard
   hypr-ocr = pkgs.writeShellApplication {
     name = "hypr-ocr";
-    runtimeInputs = [pkgs.tesseract5];
+    runtimeInputs = with pkgs; [
+      tesseract
+      grimblast
+      wl-clipboard
+      libnotify
+      rofi-wayland
+    ];
     text = ''
       img="$HOME/Pictures/Screenshots/ocr.png"
 
+      # Define language selection and display it with rofi
+      lang_option=$(echo -e "eng\njpn" | rofi -dmenu -p "Select OCR Language" -i -lines 2)
+    
+      # Default to "eng" if no language was selected
+      if [ -z "$lang_option" ]; then
+        lang_option="eng"
+      fi
+
+      # Define PSM options and display them with rofi for selection
+      psm_option=$(echo -e "10: single character.\
+      \n3: Full automatic p.segm, but no OSD. (Default)\
+      \0: Orientation and script detection (OSD) only.\
+      \n1: Automatic p.segm. with OSD.\
+      \n2: Automatic p.segm., but no OSD, or OCR. (not implemented)\
+      \n4: single column variable sizes.\
+      \n5: single block of vertically aligned text.\
+      \n6: single uniform block of text.\
+      \n7: single text line.\
+      \n8: single word.\
+      \n9: single word in a circle.\
+      \n11: Find amap text no order.\
+      \n12: Sparse text with OSD.\
+      \n13: Raw line. Treat the image as a single text line, bypassing hacks that are Tesseract-specific." | \
+      rofi -dmenu -p "Select PSM mode" -i -lines 14)
+
+      # Extract the PSM number from the selection
+      psm_number=$(echo "$psm_option" | cut -d ':' -f 1)
+
+      # If no option selected, use the default mode (3)
+      if [ -z "$psm_number" ]; then
+        psm_number=3
+      fi
+
+      # Take screenshot and perform OCR with selected language and PSM mode
       grimblast save area "$img"
-      teserract5 "$img" - | wl-copy
+      ${pkgs.tesseract}/bin/tesseract -l "$lang_option" --psm "$psm_number" "$img" - | wl-copy
       rm "$img"
       notify-send "$(wl-paste)"
     '';

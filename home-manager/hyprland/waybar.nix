@@ -91,8 +91,8 @@ lib.mkIf cfg.enable {
             mode-mon-col = 3;
             on-scroll = 1;
           };
+          format-alt = "󰥔 {:%Y-%m-%d %H:%M:%S-%Z}";
           format = "󰸗 {:%a, %d %b %Y 󰥔 %H:%M:%S} ";
-          format-alt = "󰥔 {:%H:%M:%S}";
           # format = "󰥔   {:%H:%M}";
           # format-alt = "  {:%a, %d %b %Y}";
           interval = 1;

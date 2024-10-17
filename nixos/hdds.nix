@@ -24,13 +24,13 @@ in
 
       datasets = {
         ${wdc-blue-dataset} = lib.mkIf cfg.wdc1tb {
-          hourly = 3;
+          hourly = 12;
           daily = 10;
           weekly = 2;
           monthly = 0;
         };
         ${stsea-dataset} = lib.mkIf cfg.stsea3tb {
-          hourly = 3;
+          hourly = 12;
           daily = 10;
           weekly = 2;
           monthly = 0;

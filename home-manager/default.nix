@@ -48,6 +48,8 @@
         xdg-utils
 
         # mcomix
+        yacreader
+        musescore
 
         # misc utilities for dotfiles written in rust
         custom.dotfiles-utils
