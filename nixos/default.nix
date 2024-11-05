@@ -120,6 +120,8 @@
           dhcpcd
           netdiscover
           aria2
+          speedtest-cli
+          axel
           inetutils
           usbutils
           zellij
