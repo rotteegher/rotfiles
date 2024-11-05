@@ -20,7 +20,7 @@ stdenvNoCC.mkDerivation (
       installPhase = ''
         ls -la .
         mkdir $out
-        cp -r ./.minecraft/* $out/
+        cp -r ./* $out/
         ls -la .
         ls -la $out/
         # install -m755 -D .minecraft/ $out/bin/bedrock_server

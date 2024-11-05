@@ -11,14 +11,14 @@ in {
     fish = {
       enable = true;
       functions = {
-        yy = ''
-        	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-        	yazi $argv --cwd-file="$tmp"
-        	if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-        		cd -- "$cwd"
-        	end
-        	rm -f -- "$tmp"
-        '';
+        # yy = ''
+        # 	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+        # 	yazi $argv --cwd-file="$tmp"
+        # 	if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        # 		cd -- "$cwd"
+        # 	end
+        # 	rm -f -- "$tmp"
+        # '';
         fish_user_key_bindings = ''
           fish_default_key_bindings -M insert
 

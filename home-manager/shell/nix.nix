@@ -263,14 +263,14 @@ in {
           nix build "nixpkgs#hyprland" --print-out-paths | awk '{ print length, $0 }' | sort -n -s | cut -d" " -f2- | head -n1
       fi
     '';
-    ynpath = pkgs.writeShellApplication {
-      name = "ynpath";
-      runtimeInputs = with pkgs; [
-        yazi
-        custom.shell.npath
-      ];
-      text = ''yazi "$(npath "$@")"'';
-    };
+    # ynpath = pkgs.writeShellApplication {
+    #   name = "ynpath";
+    #   runtimeInputs = with pkgs; [
+    #     yazi
+    #     custom.shell.npath
+    #   ];
+    #   text = ''yazi "$(npath "$@")"'';
+    # };
     # what depends on the given package in the current nixos install?
     nix-depends = pkgs.writeShellApplication {
       name = "nix-depends";

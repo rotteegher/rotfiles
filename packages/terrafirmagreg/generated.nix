@@ -3,10 +3,10 @@
 {
   terrafirmagreg = {
     pname = "terrafirmagreg";
-    version = "0.7.12";
+    version = "0.7.14";
     src = fetchurl {
-      url = "https://github.com/TerraFirmaGreg-Team/Modpack-Modern/releases/download/0.7.12/TerraFirmaGreg-1.20.x-0.7.12-server.zip";
-      sha256 = "sha256-Ts9Vseb76ALNDbVFbLHUlH3kfIN5S3b8b2XHTCqs9KQ=";
+      url = "https://github.com/TerraFirmaGreg-Team/Modpack-Modern/releases/download/0.8.1/TerraFirmaGreg-Modern-0.8.1-serverpack.zip";
+      sha256 = "sha256-TZmncuTLNGuqWZHzd8XUTiUppGj2iOq9KU3Zsxx8I/s=";
     };
   };
 }

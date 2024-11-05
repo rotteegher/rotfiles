@@ -8,7 +8,7 @@ lib.mkIf config.custom.surrealdb.enable {
   environment.systemPackages = [pkgs.surrealdb];
 
   services.surrealdb = {
-    enable = true;
+    enable = false;
     dbPath = "file:///var/lib/private/surrealdb";
     extraFlags = [
       "--auth"

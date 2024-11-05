@@ -8,9 +8,9 @@
 lib.mkMerge [
     (lib.mkIf config.custom.llm.enable {
       environment.systemPackages = with pkgs; [
-        ollama
-        shell-gpt
-        llm
+        # ollama
+        # shell-gpt
+        # llm
       ];
       # setup port forwarding
       networking.firewall.allowedTCPPorts = [9000];
