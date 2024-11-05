@@ -16,6 +16,7 @@
 
     ./auth.nix
     ./samba.nix
+    ./fileshare.nix
     # ./sws.nix # TODO
     ./configuration.nix
     ./wine.nix

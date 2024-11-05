@@ -20,7 +20,11 @@
       wifi_iface = "wlp4s0";
     };
 
+
     # software
+    fileshare.enable = true;
+    # samba.enable = true;
+
     wine.enable = true;
     distrobox.enable = true;
     jellyfin.enable = true;

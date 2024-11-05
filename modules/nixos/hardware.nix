@@ -40,6 +40,10 @@
       default = false;
     };
 
+    fileshare.enable = lib.mkEnableOption "File Share" // {
+      default = false;
+    };
+    
     hdds = {
       enable = lib.mkEnableOption "Desktop HDDs" // {
         default = false;
