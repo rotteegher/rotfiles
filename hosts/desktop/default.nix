@@ -26,7 +26,7 @@
     # samba.enable = true;
 
     wine.enable = true;
-    distrobox.enable = true;
+    distrobox.enable = false;
     jellyfin.enable = true;
     llm.enable = true;
     docker.enable = true;

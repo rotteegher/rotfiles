@@ -22,7 +22,7 @@ in
         "$mod_CTRL, BackSpace, exec, hyprctl kill"
         # File
         "$mod, b, exec, nemo ~/Downloads"
-        "$mod_SHIFT, b, exec, $term yazi ~/Downloads"
+
         # Firefox
         "$mod_CTRL, f, exec, firefox"
         "$mod_SHIFT, f, exec, firefox --private-window"

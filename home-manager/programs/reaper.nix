@@ -22,14 +22,14 @@ config = lib.mkIf config.custom.reaper.enable {
       fluidsynth
       airwindows-lv2
       mda_lv2
-      tunefish
+      # tunefish
       soundfont-generaluser
       soundfont-ydp-grand
       noise-repellent
       speech-denoiser
       mod-distortion
       midi-trigger
-      distrho
+      # distrho
       bshapr
       bchoppr
       fomp

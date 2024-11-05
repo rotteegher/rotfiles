@@ -6,7 +6,7 @@
 }: {
   config = lib.mkIf config.custom.flatpak.enable {
     services.flatpak.enable = true;
-    environment.systemPackages = [pkgs.flatpak pkgs.gnome.gnome-software];
+    environment.systemPackages = [pkgs.flatpak pkgs.gnome-software];
 
     custom.persist = {
       home.directories = [

@@ -9,7 +9,7 @@ in
   lib.mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      theme = "Catppuccin-Mocha";
+      themeFile = "Catppuccin-Mocha";
       font = {
         name = terminal.font;
         inherit (terminal) size;

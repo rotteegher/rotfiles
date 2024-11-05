@@ -7,14 +7,14 @@
 }:
 lib.mkIf config.custom.jellyfin.enable {
   services.jellyfin = {
-    enable = true;
+    enable = false;
     openFirewall = true;
     user = "${user}";
   };
   environment.systemPackages = with pkgs; [
-    jellyfin
-    jellyfin-web
-    jellyfin-ffmpeg
+    # jellyfin
+    # jellyfin-web
+    # jellyfin-ffmpeg
   ];
   networking.firewall.allowedTCPPorts = [ 8096 ];
   networking.firewall.allowedUDPPorts = [ 8096 ];

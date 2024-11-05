@@ -90,7 +90,7 @@
             tree
             # yazi
 
-            y
+            # y
             ;
         };
 

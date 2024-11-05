@@ -15,15 +15,15 @@
   };
   hyprlock = {
     pname = "hyprlock";
-    version = "edbecc87081756b45bdbea16b63e413473659dcd";
+    version = "1cd3231537cfd0a3e0f927e3e060b8e45d900c6d";
     src = fetchFromGitHub {
       owner = "hyprwm";
       repo = "hyprlock";
-      rev = "edbecc87081756b45bdbea16b63e413473659dcd";
+      rev = "1cd3231537cfd0a3e0f927e3e060b8e45d900c6d";
       fetchSubmodules = false;
-      sha256 = "sha256-jh7PhejwT+XqkkYnpZ6K/Gkqy4tvjN7g/ZBTvlS+Q9Y=";
+      sha256 = "sha256-RPMEWwYEmVFrX+2UPb1n2HtifnsGJ9cyStIxL579wp0=";
     };
-    date = "2024-10-27";
+    date = "2024-11-05";
   };
   swww = {
     pname = "swww";

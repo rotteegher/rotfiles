@@ -21,7 +21,7 @@
         default = with pkgs; [
           monocraft
           noto-fonts
-          noto-fonts-cjk
+          noto-fonts-cjk-sans
           noto-fonts-emoji
           (nerdfonts.override {fonts = ["JetBrainsMono"];})
         ];

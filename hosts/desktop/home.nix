@@ -52,7 +52,7 @@
     };
 
     vlc.enable = true;
-    k3b.enable = true;
+    k3b.enable = false;
 
     kiwix.enable = true;
 

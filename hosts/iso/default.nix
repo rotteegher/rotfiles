@@ -38,7 +38,7 @@ let
                   btop
                   git
                   eza
-                  yazi
+                  # yazi
                   helix
                 ]);
               shellAliases = {
@@ -49,7 +49,7 @@ let
                 lla = "eza -la";
                 t = "eza -la --git-ignore --icons --tree --hyperlink --level 3";
                 tree = "eza -la --git-ignore --icons --tree --hyperlink --level 3";
-                y = "yazi";
+                # y = "yazi";
               };
             };
 

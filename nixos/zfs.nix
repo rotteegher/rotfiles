@@ -13,7 +13,9 @@ in
   boot = {
     # booting with zfs
     supportedFilesystems = [ "zfs" ];
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    # kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+
     zfs = {
       devNodes = lib.mkDefault "/dev/disk/by-id";
       package = pkgs.zfs_unstable;
