@@ -78,6 +78,7 @@ in
       "L+ ${wdc-blue-mountpoint}/pr/rustpr             - - - - /home/${user}/pr/rustpr/ln/"
       "L+ /home/${user}/_MAIN                          - - - - ${wdc-blue-mountpoint}/_MAIN"
       "L+ /home/${user}/_SMALL                         - - - - ${wdc-blue-mountpoint}/_SMALL"
+      "L+ /home/${user}/_KOROBKA                       - - - - ${wdc-blue-mountpoint}/_KOROBKA"
       "L+ /home/${user}/_SMALL/_MUSIC                  - - - - ${wdc-blue-mountpoint}/_MUSIC"
       "L+ /home/${user}/_SMALL/_FILM                   - - - - ${wdc-blue-mountpoint}/_FILM"
       "L+ /home/${user}/_SMALL/_ANIME                  - - - - ${wdc-blue-mountpoint}/_ANIME"
