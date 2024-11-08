@@ -116,7 +116,7 @@ lib.mkIf cfg.enable {
 
         "custom/nix" = {
           format = "󱄅";
-          on-click = "hypr-wallpaper";
+          on-click = "hw";
           on-click-right = "wallpapers-select";
           tooltip = false;
         };

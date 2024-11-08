@@ -33,6 +33,10 @@
         nvtopPackages.full
         glxinfo
         vulkan-tools
+        xorg.libXi xorg.libXmu freeglut
+        xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib 
+        linuxPackages.nvidia_x11
+        libGLU libGL
       ];
     };
     environment.systemPackages = with pkgs; [
