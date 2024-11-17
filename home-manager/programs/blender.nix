@@ -10,6 +10,7 @@
       # pkgs.blender
       # (lib.meta.lowPrio pkgs.custom.goo-engine) # TODO! compiled already
 
+      pkgs.unityhub
     ];
 
     custom.persist = {

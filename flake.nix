@@ -55,20 +55,38 @@
     inputs@{ nixpkgs, self, ... }:
     let
       system = "x86_64-linux";
-      forAllSystems =
-        function:
-        nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system: function nixpkgs.legacyPackages.${system});
-      commonArgs = {
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      lib = import ./lib.nix {
         inherit (nixpkgs) lib;
-        inherit self inputs nixpkgs;
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
+        inherit pkgs;
+        inherit (inputs) home-manager;
+      };
+      createCommonArgs = system: {
+        inherit
+          self
+          inputs
+          nixpkgs
+          lib
+          pkgs
+          system
+          ;
         specialArgs = {
           inherit self inputs;
         };
       };
+      commonArgs = createCommonArgs system;
+      # call with forAllSystems (commonArgs: function body)
+      forAllSystems =
+        fn:
+        lib.genAttrs [
+          "x86_64-linux"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "aarch64-darwin"
+        ] (system: fn (createCommonArgs system));
     in
     {
       nixosConfigurations = (import ./hosts/nixos.nix commonArgs) // (import ./hosts/iso commonArgs);
