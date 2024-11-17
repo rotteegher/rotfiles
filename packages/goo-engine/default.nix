@@ -415,9 +415,9 @@ stdenv.mkDerivation (
         license = with lib.licenses; [ gpl2Plus ] ++ lib.optional cudaSupport unfree;
         platforms = [
           "aarch64-linux"
-          "x86_64-darwin"
+          # "x86_64-darwin"
           "x86_64-linux"
-          "aarch64-darwin"
+          # "aarch64-darwin"
         ];
         # the current apple sdk is too old (currently 11_0) and fails to build "metal" on x86_64-darwin
         broken = stdenv.hostPlatform.system == "x86_64-darwin";
