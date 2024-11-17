@@ -40,6 +40,9 @@ in {
       # my server modpack package
       pkgs.custom.terrafirmagreg
     ];
+
+    # ensure data persistence
+    custom.persist.root.directories = [cfg.dataDir];
     
     systemd.services.minecraft-java-server-terrafirmagreg = {
       enable = cfg.do-run;
