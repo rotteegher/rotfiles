@@ -19,7 +19,7 @@
   dbus,
   embree,
   fetchzip,
-  # ffmpeg,
+  ffmpeg,
   fftw,
   fftwFloat,
   freetype,
@@ -86,7 +86,8 @@ let
   python3Packages = python311Packages;
   python3 = python3Packages.python;
   # pyPkgsOpenusd = python3Packages.openusd.override { withOsl = false; };
-  pyPkgsOpenusd = python3Packages.openusd.override { withOsl = false; };
+  # pyPkgsOpenusd = python3Packages.openusd.override { withOsl = true; };
+  pyPkgsOpenusd = openusd;
 
   libdecor' = libdecor.overrideAttrs (old: {
     # Blender uses private APIs, need to patch to expose them
@@ -127,7 +128,7 @@ stdenv.mkDerivation (
           "-DPYTHON_NUMPY_PATH=${python3Packages.numpy}/${python3.sitePackages}"
           "-DPYTHON_VERSION=${python3.pythonVersion}"
           "-DWITH_ALEMBIC=ON"
-          "-DWITH_CODEC_FFMPEG=OFF"
+          "-DWITH_CODEC_FFMPEG=ON"
           "-DWITH_CODEC_SNDFILE=ON"
           "-DWITH_FFTW3=ON"
           "-DWITH_IMAGE_OPENJPEG=ON"
@@ -146,14 +147,11 @@ stdenv.mkDerivation (
           # "-DWITH_USD=ON"
           "-DWITH_USD=OFF"
 
-          # temporary turn off cycles
-          "-DWITH_CYCLES=OFF"
-
           # Blender supplies its own FindAlembic.cmake (incompatible with the Alembic-supplied config file)
           "-DALEMBIC_INCLUDE_DIR=${lib.getDev alembic}/include"
           "-DALEMBIC_LIBRARY=${lib.getLib alembic}/lib/libAlembic${stdenv.hostPlatform.extensions.sharedLibrary}"
-
-          # Wayland support
+        ]
+        ++ lib.optionals waylandSupport [
           "-DWITH_GHOST_WAYLAND=ON"
           "-DWITH_GHOST_WAYLAND_DBUS=ON"
           "-DWITH_GHOST_WAYLAND_DYNLOAD=OFF"
@@ -182,16 +180,16 @@ stdenv.mkDerivation (
       buildInputs =
         [
           addOpenGLRunpath
-          # vulkan-tools
+          vulkan-tools
           vulkan-loader
-          # vulkan-headers
-          # vulkan-validation-layers
+          vulkan-headers
+          vulkan-validation-layers
           shaderc
           imath
 
           alembic
           boost
-          # ffmpeg
+          ffmpeg
           fftw
           fftwFloat
           freetype
@@ -222,14 +220,6 @@ stdenv.mkDerivation (
           tbb
           zlib
           zstd
-
-          #wayland support
-          dbus
-          libdecor'
-          libffi
-          libxkbcommon
-          wayland
-          wayland-protocols
         ]
         ++ lib.optionals (!stdenv.isAarch64 && stdenv.isLinux) [
           embree
@@ -248,6 +238,14 @@ stdenv.mkDerivation (
           pyPkgsOpenusd
         ]
         ++ lib.optionals cudaSupport [ cudaPackages.cuda_cudart ]
+        ++ lib.optionals waylandSupport [
+          dbus
+          libdecor'
+          libffi
+          libxkbcommon
+          wayland
+          wayland-protocols
+        ]
         ++ lib.optional colladaSupport opencollada
         ++ lib.optional jackaudioSupport libjack2
         ++ lib.optional spaceNavSupport libspnav;
@@ -265,10 +263,6 @@ stdenv.mkDerivation (
 
       blenderExecutable = placeholder "out" + ("/bin/goo-engine");
 
-      # buildPhase = ''
-      #   cat Makefile
-      # '';
-
       installPhase = ''
         echo "Current Build Dir: $(pwd)"
         ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3
@@ -282,8 +276,9 @@ stdenv.mkDerivation (
         echo "Making install"
         make install
 
-        echo "Output AFTER MAKE INSTALL: $out"
+        echo "Output AFTER INSTALL: $out"
         ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3 $out
+
         # cp -r share/* "$out/share/"
         # cp -r $src/share/blender $out/share
         # cp -r $src/share/doc $out/share

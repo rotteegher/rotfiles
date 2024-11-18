@@ -3,14 +3,14 @@
 {
   goo-engine = {
     pname = "goo-engine";
-    version = "8457395892beec33d4605ef9d894a1aff4a8d79f";
+    version = "c13bcaa193fafb9341697b98154533538830bc97";
     src = fetchFromGitHub {
       owner = "dillongoostudios";
       repo = "goo-engine";
-      rev = "8457395892beec33d4605ef9d894a1aff4a8d79f";
+      rev = "c13bcaa193fafb9341697b98154533538830bc97";
       fetchSubmodules = false;
-      sha256 = "sha256-K/cHakGb+x2kvTVXl+8hRKPlwoSAyFxvU4+dHFs0PXQ=";
+      sha256 = "sha256-uXJHRfBjyKiEgyrZo9ZsdL/5YA/vaP6YZVJjUe3euk8=";
     };
-    date = "2024-10-15";
+    date = "2024-05-26";
   };
 }

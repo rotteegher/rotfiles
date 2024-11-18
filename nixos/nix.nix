@@ -8,7 +8,7 @@
   ...
 }:
 let
-  dots = "/persist${config.hm.home.homeDirectory}/pr/rotfiles";
+  rots = "/persist${config.hm.home.homeDirectory}/pr/rotfiles";
 in
 # create an fhs environment to run downloaded binaries
 # https://nixos-and-flakes.thiscute.world/best-practices/run-downloaded-binaries-on-nixos
@@ -80,7 +80,7 @@ in
         name = "nbuild-iso";
         runtimeInputs = [ pkgs.nixos-generators ];
         text = ''
-          cd ${dots}
+          cd ${rots}
           nix build ".#nixosConfigurations.$1.config.system.build.isoImage"
           cd - > /dev/null
         '';
@@ -91,8 +91,8 @@ in
       nsw-remote = pkgs.writeShellApplication {
         name = "nsw-remote";
         text = ''
-          cd ${dots}
-          sudo nixos-rebuild --target-host "root@''${1:-${user}-laptop}" --flake ".#''${2:-framework}" switch
+          cd ${rots}
+          sudo nixos-rebuild --target-host "root@''${1:-omen}" --flake ".#''${2:-omen}" switch
           cd - > /dev/null
         '';
       };
