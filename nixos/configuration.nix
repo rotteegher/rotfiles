@@ -34,9 +34,10 @@
     "127.0.0.1" = [ "local.farmtasker.au" "rotteegher.ddns.net" "116.250.178.114" ];
     "localhost" = [ "local.farmtasker.au" "rotteegher.ddns.net" "116.250.178.114" "127.0.0.1" ];
     "desktop" = [ "local.farmtasker.au" "rotteegher.ddns.net" "116.250.178.114" ];
-    "192.168.1.101" = [ "desktop" ];
-    "192.168.1.104" = [ "omen" ];
-    "192.168.1.105" = [ "omen-wlan" ];
+    "omen" = ["192.168.1.104" "192.168.1.105" "192.168.12.22"];
+    "192.168.12.22" = ["omen"];
+    "192.168.1.104" = ["omen"];
+    "192.168.1.105" = ["omen"];
   };
 
   # Enable networking

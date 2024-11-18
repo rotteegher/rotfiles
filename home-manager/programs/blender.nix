@@ -8,7 +8,7 @@
     home.packages = [
       # (lib.lowPrio pkgs.blender)
       # pkgs.blender
-      # (lib.meta.lowPrio pkgs.custom.goo-engine) # TODO! compiled already
+      (lib.meta.lowPrio pkgs.custom.goo-engine) # TODO! compiled already
 
       pkgs.unityhub
     ];
