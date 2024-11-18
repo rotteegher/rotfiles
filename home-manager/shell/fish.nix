@@ -38,6 +38,7 @@ in {
 
           # set options for plugins
           set sponge_regex_patterns 'password|passwd'
+          set sponge_filter_failed 'false'
         ''
         # wallust colorscheme
         + lib.optionalString config.custom.wallust.enable ''

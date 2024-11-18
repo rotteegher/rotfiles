@@ -5,6 +5,27 @@
   user,
   ...
 }:
+let 
+  additionalPackages = [
+    pkgs.sycl-info
+    pkgs.opensycl
+    pkgs.level-zero
+    pkgs.mkl
+    pkgs.vpl-gpu-rt
+    pkgs.intel-compute-runtime.drivers
+    pkgs.intel-compute-runtime.out
+    pkgs.intel-gpu-tools
+    pkgs.intel-media-driver
+    pkgs.intel-vaapi-driver
+    pkgs.vaapi-intel-hybrid
+    pkgs.intel-gmmlib
+    pkgs.intel-ocl
+    pkgs.libgcc.libgcc
+    pkgs.libgcc.lib
+    pkgs.libgcc.out
+    # pkgs.zluda
+  ];
+in
 lib.mkIf config.custom.llm.enable {
   environment.systemPackages = with pkgs; [
     ollama
@@ -12,7 +33,8 @@ lib.mkIf config.custom.llm.enable {
     # shell-gpt
     # llm
     aichat
-  ];
+
+  ] ++ additionalPackages;
   # setup port forwarding
   networking.firewall.allowedTCPPorts = [8080 9000];
   users.users.${user}.extraGroups = ["render" "video" "ollama"];
@@ -26,15 +48,32 @@ lib.mkIf config.custom.llm.enable {
   services.ollama = {
     enable = true;
     acceleration = "cuda";
-    group = "root";
     package = pkgs.ollama-cuda;
+    group = "render";
     port = 11434;
     home = "/var/lib/private/ollama";
     openFirewall = true;
     environmentVariables = {
-      CUDA_PATH = "${pkgs.cudatoolkit}";
       STATE_DIRECTORY = "/var/lib/private/ollama";
       OLLAMA_STATE_DIRECTORY = "/var/lib/private/ollama";
+      HIP_VISIBLE_DEVICES = "0,1";
+      OLLAMA_INTEL_GPU = "1";
+      OLLAMA_SCHED_SPREAD = "1";
+      OLLAMA_MAX_LOADED_MODELS = "1";
+      OLLAMA_NUM_PARALLEL = "2";
+      OLLAMA_NUM_GPU = "999";
+      OLLAMA_GPU_OVERHEAD = "1";
+      OLLAMA_DEBUG = "1";
+      CUDA_PATH = "${pkgs.lib.makeLibraryPath [pkgs.cudaPackages.cudatoolkit pkgs.cudaPackages.cuda_cudart]}";
+      LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath additionalPackages}:$LD_LIBRARY_PATH";
+    };
+  };
+
+  systemd.services.ollama = {
+    serviceConfig = {
+      ReadWritePaths = [ "/dev/dri" ];
+      # Use ReadOnlyPaths if only read access is needed
+      # ReadOnlyPaths = [ "/dev/dri" ];
     };
   };
 
