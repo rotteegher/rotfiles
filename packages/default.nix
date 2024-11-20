@@ -19,7 +19,7 @@ in
   dotfiles-utils = callPackage ./dotfiles-utils { };
 
   # custom tela built with catppucin variant colors
-  tela-dynamic-icon-theme = callPackage ./tela-dynamic-icon-theme { };
+  tela-dynamic-icon-theme = pkgs.callPackage ./tela-dynamic-icon-theme { };
 
   distro-grub-themes-nixos = pkgs.callPackage ./distro-grub-themes-nixos { };
 

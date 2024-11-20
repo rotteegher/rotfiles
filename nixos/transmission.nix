@@ -133,7 +133,7 @@ in
     };
 
 
-    hm.home.packages = with pkgs; [ transmission-remote-gtk liferea ];
+    hm.home.packages = with pkgs; [ transmission-remote-gtk ];
 
     custom.persist.home.directories = [
       "_CURRENT"

@@ -59,7 +59,7 @@ lib.mkIf config.custom.llm.enable {
       HIP_VISIBLE_DEVICES = "0,1";
       OLLAMA_INTEL_GPU = "1";
       OLLAMA_SCHED_SPREAD = "1";
-      OLLAMA_MAX_LOADED_MODELS = "1";
+      OLLAMA_MAX_LOADED_MODELS = "2";
       OLLAMA_NUM_PARALLEL = "2";
       OLLAMA_NUM_GPU = "999";
       OLLAMA_GPU_OVERHEAD = "1";
