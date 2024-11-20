@@ -63,7 +63,7 @@
   openimagedenoise,
   openimageio,
   openjpeg,
-  openpgl,
+  # openpgl,
   opensubdiv,
   openvdb,
   openxr-loader,
@@ -77,6 +77,12 @@
   tbb,
   wayland,
   wayland-protocols,
+  wayland-scanner,
+  egl-wayland,
+  eglexternalplatform,
+  glfw,
+  freeglut,
+  mesa,
   waylandSupport ? stdenv.isLinux,
   zlib,
   zstd,
@@ -86,7 +92,7 @@ let
   python3Packages = python311Packages;
   python3 = python3Packages.python;
   # pyPkgsOpenusd = python3Packages.openusd.override { withOsl = false; };
-  pyPkgsOpenusd = python3Packages.openusd.override { withOsl = false; };
+  # pyPkgsOpenusd = openusd;
 
   libdecor' = libdecor.overrideAttrs (old: {
     # Blender uses private APIs, need to patch to expose them
@@ -118,6 +124,7 @@ stdenv.mkDerivation (
 
       env.NIX_CFLAGS_COMPILE = "-I${python3}/include/${python3.libPrefix}";
 
+
       cmakeFlags =
         [
           "-DPYTHON_INCLUDE_DIR=${python3}/include/${python3.libPrefix}"
@@ -127,7 +134,7 @@ stdenv.mkDerivation (
           "-DPYTHON_NUMPY_PATH=${python3Packages.numpy}/${python3.sitePackages}"
           "-DPYTHON_VERSION=${python3.pythonVersion}"
           "-DWITH_ALEMBIC=ON"
-          "-DWITH_CODEC_FFMPEG=OFF"
+          "-DWITH_CODEC_FFMPEG=OFF" # turned off to make it compile
           "-DWITH_CODEC_SNDFILE=ON"
           "-DWITH_FFTW3=ON"
           "-DWITH_IMAGE_OPENJPEG=ON"
@@ -137,7 +144,6 @@ stdenv.mkDerivation (
           "-DWITH_OPENCOLLADA=${if colladaSupport then "ON" else "OFF"}"
           "-DWITH_OPENCOLORIO=ON"
           "-DWITH_OPENSUBDIV=ON"
-          "-DWITH_OPENVDB=ON"
           "-DWITH_PYTHON_INSTALL=OFF"
           "-DWITH_PYTHON_INSTALL_NUMPY=OFF"
           "-DWITH_PYTHON_INSTALL_REQUESTS=OFF"
@@ -146,21 +152,27 @@ stdenv.mkDerivation (
           # "-DWITH_USD=ON"
           "-DWITH_USD=OFF"
 
-          # temporary turn off cycles
-          "-DWITH_CYCLES=OFF"
+          # temporary turn offs
+          # "-DWITH_CYCLES=OFF" # cycles kinda needed to make everything work even though it compiles
+          "-DWITH_CYCLES_EMBREE=OFF"
+          "-DWITH_GL_EGL=OFF"
+          "-DWITH_OPENVDB=OFF" # FOG STUFF
+          "-DWITH_OPENPGL=OFF"
 
           # Blender supplies its own FindAlembic.cmake (incompatible with the Alembic-supplied config file)
           "-DALEMBIC_INCLUDE_DIR=${lib.getDev alembic}/include"
           "-DALEMBIC_LIBRARY=${lib.getLib alembic}/lib/libAlembic${stdenv.hostPlatform.extensions.sharedLibrary}"
+
+          "-DOPENGLES_EGL_LIBRARY=${pkgs.lib.makeLibraryPath [ glfw egl-wayland ]}"
 
           # Wayland support
           "-DWITH_GHOST_WAYLAND=ON"
           "-DWITH_GHOST_WAYLAND_DBUS=ON"
           "-DWITH_GHOST_WAYLAND_DYNLOAD=OFF"
           "-DWITH_GHOST_WAYLAND_LIBDECOR=ON"
+
         ]
         ++ lib.optionals (stdenv.hostPlatform.isAarch64 && stdenv.hostPlatform.isLinux) [
-          "-DWITH_CYCLES_EMBREE=OFF"
         ]
         ++ lib.optional stdenv.cc.isClang "-DPYTHON_LINKFLAGS=" # Clang doesn't support "-export-dynamic"
         ++ lib.optional jackaudioSupport "-DWITH_JACK=ON"
@@ -177,10 +189,15 @@ stdenv.mkDerivation (
         python3Packages.wrapPython
         addOpenGLRunpath
         cudaPackages.cuda_nvcc
-      ] ++ lib.optionals waylandSupport [ pkg-config ];
+        pkg-config
+
+        glfw
+      ];
 
       buildInputs =
         [
+
+
           addOpenGLRunpath
           # vulkan-tools
           vulkan-loader
@@ -213,7 +230,7 @@ stdenv.mkDerivation (
           # openexr
           openimageio
           openjpeg
-          openpgl
+          # openpgl
           (opensubdiv.override { inherit cudaSupport; })
           openvdb
           potrace
@@ -223,20 +240,25 @@ stdenv.mkDerivation (
           zlib
           zstd
 
-          #wayland support
+          # linux stuff:
+          embree
+          mesa
+
           dbus
           libdecor'
           libffi
           libxkbcommon
           wayland
           wayland-protocols
-        ]
-        ++ lib.optionals (!stdenv.isAarch64 && stdenv.isLinux) [
-          embree
-          (openimagedenoise.override { inherit cudaSupport; })
-        ]
-        ++ [
+          wayland-scanner
+          egl-wayland
+          eglexternalplatform
+          glfw
+          freeglut
+
           libGL
+          libGL.out
+          libGL.dev
           libGLU
           libX11
           libXext
@@ -245,7 +267,10 @@ stdenv.mkDerivation (
           libXxf86vm
           openal
           openxr-loader
-          pyPkgsOpenusd
+          # pyPkgsOpenusd
+        ]
+        ++ lib.optionals (!stdenv.isAarch64 && stdenv.isLinux) [
+          (openimagedenoise.override { inherit cudaSupport; })
         ]
         ++ lib.optionals cudaSupport [ cudaPackages.cuda_cudart ]
         ++ lib.optional colladaSupport opencollada
@@ -265,25 +290,31 @@ stdenv.mkDerivation (
 
       blenderExecutable = placeholder "out" + ("/bin/goo-engine");
 
-      # buildPhase = ''
-      #   cat Makefile
-      # '';
+      buildPhase = ''
+        # debug
+        echo "\n"
+        cat Makefile
+        echo "\n"
 
-      installPhase = ''
         echo "Current Build Dir: $(pwd)"
         ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3
+        echo "\n"
 
         mkdir -p $out/bin
         echo "Source: $src"
         ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3 $src
         echo "Output: $out"
         ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3 $out
+        echo "\n"
 
         echo "Making install"
         make install
 
         echo "Output AFTER MAKE INSTALL: $out"
         ${pkgs.eza}/bin/eza -la --group-directories-first --git-ignore --icons --tree --hyperlink --level 3 $out
+      '';
+
+      installPhase = ''
         # cp -r share/* "$out/share/"
         # cp -r $src/share/blender $out/share
         # cp -r $src/share/doc $out/share
