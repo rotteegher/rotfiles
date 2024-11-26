@@ -26,6 +26,12 @@ in
     jellyfin.enable = lib.mkEnableOption "jellyfin" // {
       default = false;
     };
+    pr_managment.enable = lib.mkEnableOption "project managment" // {
+      default = false;
+    };
+    nginx.enable = lib.mkEnableOption "nginx" // {
+      default = false;
+    };
     hyprland = {
       enable = lib.mkEnableOption "hyprland (nixos)" // {
         default = true;

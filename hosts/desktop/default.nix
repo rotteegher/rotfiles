@@ -13,6 +13,7 @@
     nvidia.enable = true;
     zfs.encryption = false;
 
+    dns.enable = true;
     bluetooth.enable = true;
     hotspot = {
       enable = true;
@@ -28,6 +29,8 @@
     wine.enable = true;
     distrobox.enable = false;
     jellyfin.enable = true;
+    pr_managment.enable = true;
+    nginx.enable = true;
     llm.enable = true;
     docker.enable = true;
     surrealdb.enable = true;

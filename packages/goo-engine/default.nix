@@ -155,7 +155,6 @@ stdenv.mkDerivation (
           # temporary turn offs
           # "-DWITH_CYCLES=OFF" # cycles kinda needed to make everything work even though it compiles
           "-DWITH_CYCLES_EMBREE=OFF"
-          "-DWITH_GL_EGL=OFF"
           "-DWITH_OPENVDB=OFF" # FOG STUFF
           "-DWITH_OPENPGL=OFF"
 

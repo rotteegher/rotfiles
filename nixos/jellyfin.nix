@@ -7,7 +7,7 @@
 }:
 lib.mkIf config.custom.jellyfin.enable {
   services.jellyfin = {
-    enable = false;
+    enable = true;
     openFirewall = true;
     user = "${user}";
   };
@@ -20,6 +20,9 @@ lib.mkIf config.custom.jellyfin.enable {
   networking.firewall.allowedUDPPorts = [ 8096 ];
 
   custom.persist = {
-    root.directories = [ "/var/lib/jellyfin" ];
+    root.directories = [
+      "/var/lib/jellyfin"
+      "/var/cache/jellyfin"
+    ];
   };
 }

@@ -10,6 +10,10 @@
       default = isLaptop;
     };
 
+    dns.enable = lib.mkEnableOption "Domain Name Server" // {
+      default = false;
+    };
+
     hotspot = {
       enable = lib.mkEnableOption "WiFI Broadcast HotSpot" // {
         default = false;

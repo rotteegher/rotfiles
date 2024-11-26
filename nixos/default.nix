@@ -18,6 +18,9 @@
     ./samba.nix
     ./fileshare.nix
     # ./sws.nix # TODO
+    ./dns.nix
+    ./pr_managment.nix
+    ./nginx.nix
     ./configuration.nix
     ./wine.nix
     ./docker.nix
@@ -67,6 +70,7 @@
         TERMINAL = lib.getExe config.hm.custom.terminal.package;
         EDITOR = config.hm.custom.shell.defaultEditor;
         VISUAL = config.hm.custom.shell.defaultEditor;
+        MANPAGER = config.hm.custom.shell.defaultEditor;
         NIXPKGS_ALLOW_UNFREE = "1";
         STARSHIP_CONFIG = "${config.hm.xdg.configHome}/starship.toml";
       };

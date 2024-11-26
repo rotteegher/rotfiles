@@ -39,6 +39,11 @@ in
         # reset input language
         "$mod_SHIFT, z, exec, fcitx5-remote -s keyboard-jp"
 
+        # lighting
+        "$mod_CTRL, a, exec, hyprshade on blue-light-filter"
+        "$mod_CTRL, s, exec, hyprshade off"
+        "$mod_CTRL, d, exec, hyprshade on blue-light-filter2"
+
         "$mod, Escape, killactive"
 
         "$mod, h, movefocus, l"
