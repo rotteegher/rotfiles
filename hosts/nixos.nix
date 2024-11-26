@@ -15,7 +15,6 @@
         // {
           inherit host user;
           isNixOS = true;
-          # isLaptop = host == "xps" || host == "framework";
           isLaptop = host == "omen";
         };
 
@@ -38,7 +37,6 @@
               // {
                 inherit host user;
                 isNixOS = true;
-                # isLaptop = host == "xps" || host == "framework";
                 isLaptop = host == "omen";
               };
 
