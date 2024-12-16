@@ -92,5 +92,6 @@
 
   home.shellAliases = {
     y = "yazi";
+    zj = "zellij";
   };
 }

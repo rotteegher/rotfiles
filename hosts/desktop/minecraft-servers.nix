@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   custom = {
-    minecraft.enable = false;
+    minecraft.enable = true;
     services.minecraft-bedrock-server = {
       enable = false;
       do-run = false;

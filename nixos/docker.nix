@@ -6,7 +6,7 @@
   ...
 }:
 lib.mkIf (config.custom.docker.enable || config.custom.distrobox.enable) {
-  environment.systemPackages = lib.mkIf config.custom.distrobox.enable [pkgs.distrobox];
+  environment.systemPackages = lib.mkIf config.custom.distrobox.enable [pkgs.distrobox pkgs.docker pkgs.docker-compose];
 
 
   users.users.${user}.extraGroups = ["docker"];
@@ -15,6 +15,10 @@ lib.mkIf (config.custom.docker.enable || config.custom.distrobox.enable) {
     enable = true;
     enableOnBoot = true;
     storageDriver = lib.mkIf (config.fileSystems."/".fsType == "zfs") "zfs";
+  };
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
   };
 
   # store docker images on zroot/cache

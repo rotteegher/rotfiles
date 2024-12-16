@@ -1,4 +1,5 @@
 # [minecraft-bedrock-server]
-# src.webpage = "https://www.minecraft.net/en-us/download/server/bedrock"
-# src.regex = 'https:\/\/minecraft\.azureedge\.net\/bin-linux\/bedrock-server-\d+\.\d+\.\d+\.\d+\.zip'
-# fetch.url = "$ver"
+# src.github = "bedrock-crustaceans/RAstra"
+# src.git = 'https://github.com/bedrock-crustaceans/RAstra.git'
+# fetch.github = "bedrock-crustaceans/RAstra"
+# fetch.git = "https://github.com/bedrock-crustaceans/RAstra.git"

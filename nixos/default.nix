@@ -134,6 +134,8 @@
           powertop
           powerstat
           hibernate
+          brightnessctl
+          ddcutil
         ]
         ++
           # install gtk theme for root, some apps like gparted only run as root

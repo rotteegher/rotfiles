@@ -17,5 +17,8 @@
     custom.persist.root.directories = [
       "/srv"
     ];
+    custom.persist.home.directories = [
+      ".gradle"
+    ];
   };
 }
