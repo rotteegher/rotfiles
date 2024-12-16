@@ -28,7 +28,7 @@ in {
         # "msdfs root" = "no";
       };
       "korobka" = lib.mkIf config.custom.hdds.wdc1tb {
-        "path" = "/md/wdc-data/_KOROBKA";
+        "path" = "/md/wdc-data/_FARMTASKER";
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "no";

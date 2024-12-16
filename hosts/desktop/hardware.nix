@@ -16,6 +16,7 @@
   boot.extraModulePackages = [];
   boot.kernelParams = [
     "boot.shell_on_fail"
+    "acpi_backlight=native"
   ];
   boot.tmp.useTmpfs = true;
 

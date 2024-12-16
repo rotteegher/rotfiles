@@ -52,7 +52,7 @@ in
             "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
             "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
             "file://${wdc-blue-mountpoint}/Documents/papers papers"
-            "file://${wdc-blue-mountpoint}/_KOROBKA _KOROBKA"
+            "file://${wdc-blue-mountpoint}/_FARMTASKER _FARMTASKER"
             "file://${wdc-blue-mountpoint}/ wdc-blue/data"
           ]
           ++ (lib.optionals cfg.stsea3tb [ "file://${stsea-mountpoint}/ stsea-barra/okii" ]);
@@ -78,7 +78,7 @@ in
       "L+ ${wdc-blue-mountpoint}/pr/rustpr             - - - - /home/${user}/pr/rustpr/ln/"
       "L+ /home/${user}/_MAIN                          - - - - ${wdc-blue-mountpoint}/_MAIN"
       "L+ /home/${user}/_SMALL                         - - - - ${wdc-blue-mountpoint}/_SMALL"
-      "L+ /home/${user}/_KOROBKA                       - - - - ${wdc-blue-mountpoint}/_KOROBKA"
+      "L+ /home/${user}/_FARMTASKER                       - - - - ${wdc-blue-mountpoint}/_FARMTASKER"
       "L+ /home/${user}/_SMALL/_MUSIC                  - - - - ${wdc-blue-mountpoint}/_MUSIC"
       "L+ /home/${user}/_SMALL/_FILM                   - - - - ${wdc-blue-mountpoint}/_FILM"
       "L+ /home/${user}/_SMALL/_ANIME                  - - - - ${wdc-blue-mountpoint}/_ANIME"

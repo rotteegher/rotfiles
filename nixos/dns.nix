@@ -27,8 +27,8 @@ lib.mkIf config.custom.dns.enable {
           jellyfin     IN      A       192.168.1.101
           nextcloud    IN      A       192.168.1.101
 
-          ns1          IN      A       8.8.8.8
-          ns2          IN      A       1.1.1.1
+          ns1          IN      A       192.168.1.101
+          ns2          IN      A       192.168.1.101
         '';
       };
     };

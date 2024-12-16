@@ -41,6 +41,7 @@
     ffmpeg
     woeusb
     fio
+    lshw
 
     cmus
     feh
@@ -82,6 +83,7 @@
     home.directories = [
       ".local/share/zoxide"
       ".config/Typora"
+      ".cache/tealdear"
     ];
   };
 }

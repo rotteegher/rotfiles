@@ -27,6 +27,18 @@ lib.mkIf config.custom.nginx.enable {
         };
       };
 
+      "localhost" = {
+        listen = [
+          # { addr = "0.0.0.0"; port = 9999; }
+          { addr = "0.0.0.0"; port = 80;}
+        ];
+        locations = {
+          "/" = {
+            proxyPass = "http://127.0.0.1:8080";
+          };
+        };
+      };
+
       "192.168.12.1" = {
         listen = [
           # { addr = "0.0.0.0"; port = 9999; }

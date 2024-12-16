@@ -15,6 +15,7 @@ in
         ":e" = "nvim";
         ":o" = "hx";
         ":q" = "exit";
+        ":q!" = "exit";
         c = "clear";
         cat = "bat";
         ccat = "command cat";
@@ -34,6 +35,9 @@ in
         rst = "cd ~/pr/rustpr/ln/";
 
         hy = "exec Hyprland &> /dev/null";
+
+        zz = "zellij";
+        zj = "zellij";
 
         # cd aliases
         ".." = "cd ..";

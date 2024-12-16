@@ -24,7 +24,7 @@
       wdnt = "/md/wdc-data/_MAIN/_NT_STUDIO";
       wdzirka = "/md/wdc-data/_MAIN/_NT_STUDIO/_ZIRKA";
       papers = "/md/wdc-data/Documents/papers";
-      mdkorobka = "/md/wdc-data/_KOROBKA";
+      mdkorobka = "/md/wdc-data/_FARMTASKER";
       current = "~/_CURRENT";
     };
     description = "Shortcuts for navigating across multiple terminal programs.";

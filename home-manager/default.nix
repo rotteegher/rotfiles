@@ -44,6 +44,7 @@
         onlyoffice-bin
         zathura
         mupdf
+        digikam
         trash-cli
         xdg-utils
 
@@ -84,5 +85,6 @@
 
   custom.persist = {
     home.directories = [ "Pictures" ];
+    home.files = [ ".config/digikamrc" ".config/digikam_systemrc" ];
   };
 }

@@ -74,7 +74,7 @@ in {
         RestartSec = 5;
         RemainAfterExit = true;
       
-        ExecStart = "${pkgs.jdk21_headless}/bin/java -jar ./minecraft_server.jar ${cfg.jvmOpts}";
+        ExecStart = "${pkgs.jdk17_headless}/bin/java -jar ./minecraft_server.jar ${cfg.jvmOpts}";
       };
       preStop = "${pkgs.rcon}/bin/rcon -m -H localhost -p ${toString cfg.serverProperties."rcon.port"} -P ${cfg.serverProperties."rcon.password"} stop";
       preStart = ''

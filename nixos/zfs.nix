@@ -71,14 +71,35 @@ in
 
   systemd.services.systemd-udev-settle.enable = false;
 
+  environment.systemPackages = [ pkgs.sanoid ];
+
   services.sanoid = lib.mkIf cfg.snapshots {
     enable = true;
+    interval = "hourly";
+    settings = {
+      template_backup = {
+        frequent_period = 15;
+
+        frequently = 4;
+        hourly_min = 0;
+        daily_hour = 23;
+        daily_min = 59;
+      };
+    };
+
+    templates.backup = {
+        hourly = 24;
+        daily = 7;
+        weekly = 7;
+        monthly = 3;
+    };
 
     datasets = {
       "zroot/persist" = {
-        hourly = 50;
-        daily = 20;
-        weekly = 6;
+        use_template = [ "backup" ];
+        hourly = 24;
+        daily = 7;
+        weekly = 7;
         monthly = 3;
       };
     };

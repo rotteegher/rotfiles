@@ -17,6 +17,7 @@ in
         settings.PermitRootLogin = "prohibit-password";
         allowSFTP = true;
       };
+      networking.firewall.allowedTCPPorts = [ 22 ];
 
       users.users = let
         keyFiles = [
@@ -63,6 +64,14 @@ in
           ".ssh"
           ".local/share/.gnupg"
           ".local/share/keyrings"
+        ];
+      };
+      custom.persist.root = {
+        directories = [
+          "/root/.pki"
+          "/root/.ssh"
+          "/root/.local/share/.gnupg"
+          "/root/.local/share/keyrings"
         ];
       };
     }

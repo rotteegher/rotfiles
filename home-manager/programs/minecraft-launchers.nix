@@ -9,7 +9,7 @@
       # Launcher Java
       prismlauncher
       cubiomes-viewer
-      jdk21
+      jdk17
       jdt-language-server
     ];
 
