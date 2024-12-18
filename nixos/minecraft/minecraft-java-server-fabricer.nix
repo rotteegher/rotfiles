@@ -7,7 +7,7 @@
   ...
 }: let
   # Host specific Module Configuration
-  cfg = config.custom.services.minecraft-java-servers.terrafirmagreg;
+  cfg = config.custom.services.minecraft-java-servers.fabricer;
 
   cfgToString = v:
     if lib.isBool v
@@ -20,10 +20,6 @@
     + lib.concatStringsSep "\n" (lib.mapAttrsToList
       (n: v: "${n}=${cfgToString v}")
       cfg.serverProperties));
-
-  tfcConfigFile = pkgs.writeText "tfc-common.toml" (''
-      # tfc config file managed by NixOS configuration
-    '' + "\n" + cfg.tfcConfigFile);
 
   opsJsonFile = pkgs.writeText "ops.json" ('' 
     # ops.json managed by NixOS configuration
@@ -44,7 +40,7 @@ in {
     # ensure data persistence
     custom.persist.root.directories = [cfg.dataDir];
     
-    systemd.services.minecraft-java-server-terrafirmagreg = {
+    systemd.services.minecraft-java-server-fabricer = {
       enable = cfg.do-run;
       description = "Minecraft Java Server Service";
       wantedBy = ["multi-user.target"];
@@ -74,22 +70,23 @@ in {
         RestartSec = 5;
         RemainAfterExit = true;
       
-        ExecStart = "${pkgs.jdk21_headless}/bin/java -jar ./minecraft_server.jar ${cfg.jvmOpts}";
+        ExecStart = "${pkgs.lib.getExe cfg.package} ${cfg.jvmOpts}";
+        # ExecStart = "./bin/minecraft-server ${cfg.jvmOpts}";
       };
       preStop = "${pkgs.rcon}/bin/rcon -m -H localhost -p ${toString cfg.serverProperties."rcon.port"} -P ${cfg.serverProperties."rcon.password"} stop";
       preStart = ''
         echo "Server Directory $(stat ${cfg.dataDir})"
 
-        cp -r ${cfg.package}/* .
+        # cp -r ${cfg.package}/* .
+
+        # Agree to Eula
+        sed -i 's/eula=false/eula=true/' eula.txt
 
         cp -f ${serverPropertiesFile} server.properties
         echo "[server.properties] Server Properties: $(cat server.properties)"
 
         cp -f ${opsJsonFile} ops.json
         echo "[ops.json] Server Operators: $(cat ops.json)"
-
-        cp -f ${tfcConfigFile} config/tfc-common.toml
-        echo "[tfc-common.toml] TFC CONFIG: $(cat config/tfc-common.toml)"
 
         echo "Setting permissions"
         chown -R ${user}:users ${cfg.dataDir}
@@ -127,3 +124,4 @@ in {
     # };
   };
 }
+

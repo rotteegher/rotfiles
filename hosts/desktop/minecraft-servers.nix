@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   custom = {
-    minecraft.enable = true;
+    minecraft.enable = false;
     services.minecraft-bedrock-server = {
       enable = false;
       do-run = false;
@@ -111,6 +111,80 @@
         function-permission-level = 2;
         initial-enabled-packs = "vanilla";
         level-type = "tfc\:overworld";
+        text-filtering-config = "";
+        spawn-monsters = true;
+        enforce-whitelist = false;
+        spawn-protection = 16;
+        resource-pack-sha1 = "";
+        max-world-size = 29999984;
+      };
+    };
+    services.minecraft-java-servers.fabricer = {
+      enable = true;
+      do-run = true;
+      autoStart = true;
+      dataDir = "/srv/minecraft-java-server-fabricer";
+      jvmOpts = "-Xms12g -Xmx16g -XX:+UseG1GC -XX:ParallelGCThreads=4";
+      opsJson = [
+        {
+          uuid = "2cbb65e9-088b-48d8-be9e-0f7b4d0c0b62";
+          name = "rotteegher";
+          level = 4;
+          bypassesPlayerLimit = false;
+        }
+      ];
+      serverProperties = {
+        enable-jmx-monitoring = false;
+        "rcon.port" = 2526;
+        level-seed = "";
+        gamemode = "survival";
+        enable-command-block = false;
+        enable-query = false;
+        generator-settings = "{}";
+        enforce-secure-profile = true;
+        level-name = "fabricer_world";
+        motd = "Реалістичний Майнкрафт модпак Сервер";
+        "query.port" = 25565;
+        pvp = false;
+        generate-structures = true;
+        max-chained-neighbor-updates = 1000000;
+        difficulty = "easy";
+        network-compression-threshold = 256;
+        max-tick-time = 60000;
+        require-resource-pack = false;
+        use-native-transport = true;
+        max-players = 3;
+        online-mode = true;
+        enable-status = true;
+        allow-flight = true;
+        initial-disabled-packs = "";
+        broadcast-rcon-to-ops = true;
+        view-distance = 64;
+        server-ip = "0.0.0.0";
+        resource-pack-prompt = "";
+        allow-nether = false;
+        server-port = 25595;
+        enable-rcon = true;
+        sync-chunk-writes = true;
+        op-permission-level = 4;
+        prevent-proxy-connections = false;
+        hide-online-players = false;
+        resource-pack = "";
+        entity-broadcast-range-percentage = 100;
+        simulation-distance = 10;
+        "rcon.password" = "ASDsss";
+        player-idle-timeout = 0;
+        force-gamemode = false;
+        rate-limit = 0;
+        hardcore = false;
+        white-list = false;
+        broadcast-console-to-ops = true;
+        spawn-npcs = true;
+        spawn-animals = true;
+        log-ips = true;
+        function-permission-level = 2;
+        initial-enabled-packs = "vanilla";
+        level-type = "minecraft\:normal";
         text-filtering-config = "";
         spawn-monsters = true;
         enforce-whitelist = false;

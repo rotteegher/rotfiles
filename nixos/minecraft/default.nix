@@ -8,6 +8,7 @@
   imports = [
     ./minecraft-java-server-terrafirmagreg.nix
     ./minecraft-bedrock-server.nix
+    ./minecraft-java-server-fabricer.nix
   ];
   config = lib.mkIf (config.custom.minecraft.enable) {
     users.users.${user}.extraGroups = ["minecraft"];
