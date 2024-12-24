@@ -37,6 +37,7 @@
     hwatch
     ent
     coreutils-full
+    util-linux
     pciutils
     ffmpeg
     woeusb

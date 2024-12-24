@@ -8,7 +8,7 @@
   shaderc,
   imath,
 
-  addOpenGLRunpath,
+  addDriverRunpath,
   alembic,
   boost,
   cmake,
@@ -186,7 +186,7 @@ stdenv.mkDerivation (
         llvmPackages.llvm.dev
         makeWrapper
         python3Packages.wrapPython
-        addOpenGLRunpath
+        addDriverRunpath
         cudaPackages.cuda_nvcc
         pkg-config
 
@@ -197,7 +197,7 @@ stdenv.mkDerivation (
         [
 
 
-          addOpenGLRunpath
+          addDriverRunpath
           # vulkan-tools
           vulkan-loader
           # vulkan-headers
