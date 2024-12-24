@@ -8,6 +8,7 @@
   custom = {
     kbLayout = "jp";
     wifi.enable = true;
+    backlight.enable = true;
     displays = [
       {
         name = "DP-3";

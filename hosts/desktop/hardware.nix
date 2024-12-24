@@ -16,7 +16,8 @@
   boot.extraModulePackages = [];
   boot.kernelParams = [
     "boot.shell_on_fail"
-    "acpi_backlight=native"
+    "acpi_backlight=vendor"
+    "video.use_native_backlight=1"
   ];
   boot.tmp.useTmpfs = true;
 

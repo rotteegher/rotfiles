@@ -48,6 +48,9 @@
         cudaPackages.cudatoolkit
         cudaPackages.cudnn
         cudaPackages.cuda_cudart
+
+        linuxHeaders
+        libdrm
     ];
 
     environment.sessionVariables =

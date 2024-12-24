@@ -23,8 +23,7 @@
           noto-fonts
           noto-fonts-cjk-sans
           noto-fonts-emoji
-          (nerdfonts.override {fonts = ["JetBrainsMono"];})
-        ];
+        ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
         description = "The packages to install for the fonts";
       };
     };

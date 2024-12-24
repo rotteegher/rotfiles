@@ -1,14 +1,16 @@
 {
   lib,
   stdenvNoCC,
-  nerdfonts,
+  pkgs,
   source,
 }:
 stdenvNoCC.mkDerivation (source
   // {
     version = "unstable-${source.date}";
 
-    buildInputs = [(nerdfonts.override {fonts = ["JetBrainsMono" "Iosevka"];})];
+    buildInputs = [
+    ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
 
     installPhase = ''
       runHook preInstall

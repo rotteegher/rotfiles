@@ -77,7 +77,7 @@ in {
       preStart = ''
         echo "Server Directory $(stat ${cfg.dataDir})"
 
-        # cp -r ${cfg.package}/* .
+        mkdir mods
 
         # Agree to Eula
         sed -i 's/eula=false/eula=true/' eula.txt
@@ -92,7 +92,7 @@ in {
         chown -R ${user}:users ${cfg.dataDir}
         chmod -R gu+rwx "${cfg.dataDir}"
 
-        echo "Server Directory Contents: $(ls -la --group-directories-first ${cfg.dataDir})"
+        echo "Server Directory Contents: $(ls -la --group-directories-first ${cfg.dataDir}/*)"
       '';
     };
 
