@@ -29,6 +29,7 @@
       moon-buggy
       tokei
       tenki
+      snowmachine
       ninvaders
       wl-color-picker
       inputs.wfetch.packages.${pkgs.system}.wfetch

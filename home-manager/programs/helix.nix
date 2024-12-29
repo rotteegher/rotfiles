@@ -27,10 +27,17 @@
       };
       languages = {
         language-server.rust-analyzer.command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-        language-server.rust-analyzer.config.diagnostics.disabled = [
-          "inactive-code"
-          "unlinked-file"
-        ];
+        language-server.rust-analyzer.config = {
+          procMacro = {
+            ignored = {
+              # leptos_macro = [ "server" "component" ]; // makes huge red warning...
+            };
+          };
+          diagnostics.disabled = [
+            "inactive-code"
+            "unlinked-file"
+          ];
+        };
       };
       settings = {
         theme = "mtr";

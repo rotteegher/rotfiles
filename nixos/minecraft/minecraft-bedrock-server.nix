@@ -30,7 +30,7 @@ in {
       conspy
 
       # My bedrock server package
-      custom.minecraft-bedrock-server
+      pkgs.custom.minecraft-bedrock-server
     ];
 
     # make sure the tty4 is not overrun by getty

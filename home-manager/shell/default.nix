@@ -32,8 +32,7 @@
     ugrep
     file
     b3sum
-    # tldr
-    tealdeer
+    tldr
     hwatch
     ent
     coreutils-full
