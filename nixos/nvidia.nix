@@ -14,7 +14,7 @@
       kernelModules = [ "nvidia-uvm" ];
       # use nvidia framebuffer
       # https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers#Kernel_module_parameters for more info.
-      kernelParams = [ "nvidia-drm.fbdev=1" ];
+      kernelParams = [ "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" ];
     };
 
     hardware = {

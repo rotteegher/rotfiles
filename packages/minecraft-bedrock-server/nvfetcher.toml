@@ -1,5 +1,3 @@
 # [minecraft-bedrock-server]
-# src.github = "bedrock-crustaceans/RAstra"
-# src.git = 'https://github.com/bedrock-crustaceans/RAstra.git'
-# fetch.github = "bedrock-crustaceans/RAstra"
-# fetch.git = "https://github.com/bedrock-crustaceans/RAstra.git"
+# src.manual = "1.21.51.02"
+# fetch.url = "https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-1.21.51.02.zip"

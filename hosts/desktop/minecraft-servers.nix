@@ -2,19 +2,19 @@
   custom = {
     minecraft.enable = false;
     services.minecraft-bedrock-server = {
-      enable = false;
+      enable = false; # can't fetch source of bedrock server
       do-run = false;
-      package = pkgs.custom.minecraft-bedrock-server;
+      # package = pkgs.custom.minecraft-bedrock-server;
       dataDir = "/srv/minecraft-bedrock-server";
       permissions = [
-        {
-          permission = "operator";
-          pfid = "6cf9edda1be490d6";
-        }
-        {
-          permission = "operator";
-          xuid = "2535460878389100";
-        }
+        # {
+        #   permission = "operator";
+        #   pfid = "6cf9edda1be490d6";
+        # }
+        # {
+        #   permission = "operator";
+        #   xuid = "2535460878389100";
+        # }
       ];
       serverProperties = {
         server-name = "Dedicated Rot Server";

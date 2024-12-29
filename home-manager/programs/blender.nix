@@ -13,6 +13,7 @@
       pkgs.unityhub
 
       pkgs.darktable
+      pkgs.gimp
     ];
 
     custom.persist = {
