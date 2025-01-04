@@ -24,7 +24,7 @@
 
     # software
     fileshare.enable = true;
-    samba.enable = true;
+    samba.enable = false;
 
     wine.enable = true;
     distrobox.enable = false;

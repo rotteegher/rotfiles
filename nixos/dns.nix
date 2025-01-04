@@ -5,6 +5,7 @@ lib.mkIf config.custom.dns.enable {
   services.bind = {
     enable = true;
     ipv4Only = true;
+    listenOn = [ "127.0.0.1" "192.168.1.101" ];
     zones = {
       "farmtasker.au" = {
         master = true;
