@@ -11,8 +11,8 @@
     backlight.enable = true;
     displays = [
       {
-        name = "DP-3";
-        hyprland = "2560x1080@200,0x0,1";
+        name = "";
+        hyprland = "preffered,auto,1";
         workspaces = [
           1
           2

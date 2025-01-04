@@ -14,43 +14,82 @@
       kernelModules = [ "nvidia-uvm" ];
       # use nvidia framebuffer
       # https://wiki.gentoo.org/wiki/NVIDIA/nvidia-drivers#Kernel_module_parameters for more info.
-      kernelParams = [ "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" ];
+      kernelParams = [ 
+        "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1"
+        "i915.force_probe=3e92"
+        "i915.modeset=1"
+        "i915.enable_gvt=1"
+        "i915.enable_dpcd_backlight=1"
+        "psi=1"
+       ];
     };
 
     hardware = {
       nvidia = {
         modesetting.enable = true;
         powerManagement.enable = true;
-        open = false;
+        open = true;
         nvidiaSettings = false;
         package = config.boot.kernelPackages.nvidiaPackages.beta;
       };
       graphics.extraPackages = with pkgs; [
+        vaapiIntel
         vaapiVdpau
-        nvidia-vaapi-driver
+        vaapi-intel-hybrid
         libvdpau-va-gl
+        intel-vaapi-driver
+        intel-media-driver
+        intel-compute-runtime
+        vpl-gpu-rt
+        ocl-icd
+        intel-ocl
+        nvidia-vaapi-driver
 
-        nvtopPackages.full
-        glxinfo
-        vulkan-tools
+        vulkan-loader
+        vulkan-headers
+        vulkan-extension-layer
+        vulkan-memory-allocator
+        vulkan-validation-layers
+        vulkan-utility-libraries
         xorg.libXi xorg.libXmu freeglut
         xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib 
         linuxPackages.nvidia_x11
         libGLU libGL
+        linuxHeaders
+        libdrm
+        libgbinder
+
+        mesa
+        mesa.drivers
+        swiftshader
+        egl-wayland
       ];
     };
     environment.systemPackages = with pkgs; [
-        # nvidia-vaapi-driver
-        # libvdpau-va-gl
+        mesa
+        mesa.drivers
+
         nvtopPackages.full
         glxinfo
+        clinfo
+        inxi
+        drm_info
         vulkan-tools
+
+        vulkan-loader
+        vulkan-headers
+        vulkan-extension-layer
+        vulkan-memory-allocator
+        vulkan-validation-layers
+        vulkan-utility-libraries
+
         cudaPackages.cudatoolkit
         cudaPackages.cudnn
         cudaPackages.cuda_cudart
 
         linuxHeaders
         libdrm
+        libgbinder
     ];
 
     environment.sessionVariables =

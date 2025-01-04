@@ -30,7 +30,7 @@ in
         # exit hyprland
         "$mod_CTRL, c, exit,"
 
-        ''CTRL_ALT, Delete, exec, rofi -show power-menu -font "${config.custom.fonts.monospace} 14" -modi power-menu:rofi-power-menu''
+        ''$mod_CTRL, Return, exec, rofi -show power-menu -font "${config.custom.fonts.monospace} 14" -modi power-menu:rofi-power-menu''
         "$mod_CTRL, v, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
 
         # reset monitors
