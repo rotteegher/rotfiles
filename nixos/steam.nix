@@ -34,7 +34,7 @@
       path-of-building
     ];
     custom.persist = {
-      home.directories = [ ".local/share/Steam" ".config/mangohud" ];
+      home.directories = [ ".local/share/Steam" ".config/mangohud" ".config/unity3d" ];
     };
   };
 }

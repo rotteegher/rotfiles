@@ -25,6 +25,7 @@ in
       sessionVariables = {
         HYPR_LOG = "/tmp/hyprland.log";
         WLR_NO_HARDWARE_CURSORS = 1;
+        ELECTRON_OZONE_PLATFORM_HINT = "discord";
       };
 
       packages = with pkgs; [

@@ -61,7 +61,7 @@
 
         mesa
         mesa.drivers
-        swiftshader
+        # swiftshader
         egl-wayland
       ];
     };
