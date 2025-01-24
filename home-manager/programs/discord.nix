@@ -18,6 +18,8 @@
         desktopName = "Discord-Vesktop";
         icon = "${pkgs.tela-circle-icon-theme}/share/icons/Tela-circle/scalable/apps/discord.svg";
       })
+
+      pkgs.discord
     ];
 
     custom.persist = {

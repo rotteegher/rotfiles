@@ -12,7 +12,7 @@ lib.mkIf config.custom.dns.enable {
         file = pkgs.writeText "zone-farmtasker.au" ''
           $ORIGIN farmtasker.au.
           $TTL 2d
-          @            IN      SOA     8.8.8.8 1.1.1.1 (
+          @            IN      SOA     1.1.1.1 8.8.8.8 (
                                  1    ; Serial
                                  3h   ; Refresh
                                  1h   ; Retry
