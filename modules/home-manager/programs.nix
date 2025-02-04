@@ -60,7 +60,7 @@
       default = isNixOS && host == "desktop";
     };
     pathofbuilding.enable = lib.mkEnableOption "pathofbuilding" // {
-      default = isNixOS;
+      default = false;
     };
     rclip.enable = lib.mkEnableOption "rclip";
     trimage.enable = lib.mkEnableOption "trimage";
