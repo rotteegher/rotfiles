@@ -35,6 +35,7 @@ lib.mkMerge [
     config = {
       adminuser = "admin";
       dbname = "nextcloud";
+      dbtype = "sqlite";
       adminpassFile = config.sops.secrets.nextcloud_adminpass.path;
     };
   };

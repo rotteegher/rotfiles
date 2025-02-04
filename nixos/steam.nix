@@ -31,7 +31,7 @@
       krb5
       keyutils
       glfw-wayland-minecraft
-      path-of-building
+      # path-of-building
     ];
     custom.persist = {
       home.directories = [ ".local/share/Steam" ".config/mangohud" ".config/unity3d" ];
