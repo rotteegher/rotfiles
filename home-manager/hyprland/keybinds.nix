@@ -28,7 +28,7 @@ in
         "$mod_SHIFT, f, exec, firefox --private-window"
 
         # exit hyprland
-        "$mod_CTRL, c, exit,"
+        "$mod_CTRL, 5, exit,"
 
         ''$mod_CTRL, Return, exec, rofi -show power-menu -font "${config.custom.fonts.monospace} 14" -modi power-menu:rofi-power-menu''
         "$mod_CTRL, v, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
