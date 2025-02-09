@@ -36,6 +36,8 @@
         killall
         # rar # includes unrar
         zip # not includes unzip
+        rsync
+        sendme
         unzip
         p7zip
         lzip
