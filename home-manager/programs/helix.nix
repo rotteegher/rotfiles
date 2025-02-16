@@ -4,11 +4,22 @@
   pkgs,
   ...
 }:
+let
+  # tex = (pkgs.texlive.combine {
+  #   inherit (pkgs.texlive) scheme-basic
+  #     dvisvgm dvipng # for preview and export as html
+  #     wrapfig amsmath ulem hyperref capt-of;
+  #     # (setq org-latex-compiler "lualatex")
+  #     #(setq org-preview-latex-default-process 'dvisvgm)
+  # });
+in
 {
   config = lib.mkIf config.custom.helix.enable {
     home.packages = [
       pkgs.lldb
       pkgs.clang-tools
+      # tex
+      pkgs.texlive.combined.scheme-full
     ];
     programs.helix = {
       enable = true;
