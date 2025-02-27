@@ -14,7 +14,9 @@
   ];
 
   # setup fonts for other distros, run "fc-cache -f" to refresh fonts
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+  };
 
   home = {
     username = user;
