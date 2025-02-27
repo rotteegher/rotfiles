@@ -111,6 +111,7 @@
           procps
           ripgrep
           htop
+          iftop
           ventoy
           stress
           stress-ng

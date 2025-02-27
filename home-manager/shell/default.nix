@@ -34,6 +34,7 @@
     b3sum
     tldr
     hwatch
+    entr
     ent
     coreutils-full
     util-linux

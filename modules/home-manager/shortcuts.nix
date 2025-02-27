@@ -23,6 +23,7 @@
       wdmain = "/md/wdc-data/_MAIN/";
       wdnt = "/md/wdc-data/_MAIN/_NT_STUDIO";
       wdzirka = "/md/wdc-data/_MAIN/_NT_STUDIO/_ZIRKA";
+      zirkasc = "/md/wdc-data/_MAIN/_NT_STUDIO/_ZIRKA/scenario-zirka";
       papers = "/md/wdc-data/Documents/papers";
       mdkorobka = "/md/wdc-data/_FARMTASKER";
       curr = "~/_CURRENT";

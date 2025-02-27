@@ -217,6 +217,7 @@ in
         "bordersize 5,fullscreen:1" # monocle mode
         "float,class:(wlroots)" # hyprland debug session
         "float,class:(Waydroid)"
+        "float,class:(QjackCtl)"
         "float,class:(ayaka-gui)"
         "float,class:(org.fcitx.)"
         "float,class:(fl64.exe)"
