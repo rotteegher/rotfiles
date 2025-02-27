@@ -8,7 +8,7 @@
 in {
   config = lib.mkIf cfg.enable {
     home.packages = [
-      pkgs.kiwix
+      # pkgs.kiwix
     ];
 
     custom.persist = {
