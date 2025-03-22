@@ -47,7 +47,7 @@
 
     services.minecraft-java-servers.terrafirmagreg = {
       enable = true;
-      do-run = true;
+      do-run = false;
       autoStart = true;
       dataDir = "/srv/minecraft-java-server-terrafirmagreg";
       jvmOpts = "-Xms32768 -Xmx32768M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=4 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";

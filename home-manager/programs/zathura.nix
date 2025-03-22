@@ -22,7 +22,7 @@
         statusbar-v-padding = 0;
         page-padding = 1;
         adjust-open = "best-fit";
-        recolor = true; # invert by default
+        recolor = false; # invert by default
       };
     };
   };

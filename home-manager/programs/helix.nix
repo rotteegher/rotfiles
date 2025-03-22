@@ -30,8 +30,10 @@ in
       defaultEditor = config.custom.shell.defaultEditor == "hx";
       themes = {
         mtr = {
-          "inherits" = "mellow";
-          # "inherits" = "ferra";
+          # "inherits" = "heisenberg";
+          # "inherits" = "curzon";
+          # "inherits" = "mellow";
+          "inherits" = "ferra";
           # "inherits" = "vim_dark_high_contrast";
           # "inherits" = "catppuccin_mocha";
           # "inherits" = "catppuccin_latte";

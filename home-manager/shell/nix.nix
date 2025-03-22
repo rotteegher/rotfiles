@@ -67,6 +67,7 @@ in {
           then "hostname"
           else "configuration";
       in ''
+        sudo -l &>/dev/null
         cd ${rots}
 
         # stop bothering me about untracked files

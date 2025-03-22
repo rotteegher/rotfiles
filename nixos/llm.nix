@@ -8,7 +8,7 @@
 let 
   additionalPackages = [
     pkgs.sycl-info
-    pkgs.opensycl
+    pkgs.adaptivecpp
     pkgs.level-zero
     pkgs.mkl
     pkgs.vpl-gpu-rt

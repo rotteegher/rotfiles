@@ -43,6 +43,10 @@
     woeusb
     fio
     lshw
+    cpulimit
+    llvmPackages.bintools-unwrapped
+    linuxConsoleTools
+    patchelf
 
     cmus
     feh
