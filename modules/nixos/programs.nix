@@ -17,6 +17,9 @@ in
     llm.enable = lib.mkEnableOption "large language model" // {
       default = false;
     };
+    monero.enable = lib.mkEnableOption "monero" // {
+      default = false;
+    };
     docker.enable = lib.mkEnableOption "docker" // {
       default = cfg.distrobox.enable;
     };

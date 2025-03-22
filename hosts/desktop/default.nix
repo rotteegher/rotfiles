@@ -26,6 +26,7 @@
     fileshare.enable = true;
     samba.enable = false;
 
+    monero.enable = true;
     wine.enable = true;
     distrobox.enable = false;
     jellyfin.enable = true;

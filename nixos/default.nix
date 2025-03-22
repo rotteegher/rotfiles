@@ -17,6 +17,7 @@
     ./auth.nix
     ./samba.nix
     ./fileshare.nix
+    ./monero.nix
     # ./sws.nix # TODO
     ./dns.nix
     ./pr_managment.nix
@@ -136,6 +137,8 @@
           powerstat
           hibernate
           brightnessctl
+          smartmontools
+          parted
           ddcutil
         ]
         ++

@@ -1,12 +1,13 @@
 {...}: {
   programs.zellij = {
     enable = true;
+    enableBashIntegration = false;
     enableFishIntegration = false;
     settings = {
       theme = "catpuccin-mocha";
 
       on_force_close = "quit";
-      simplified_ui = false;
+      simplified_ui = true;
       default_shell = "fish";
       pane_frames = false;
       default_layout = "compact";

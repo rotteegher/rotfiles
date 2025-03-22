@@ -32,6 +32,7 @@
       snowmachine
       ninvaders
       wl-color-picker
+      umoria
       inputs.wfetch.packages.${pkgs.system}.wfetch
     ];
 
