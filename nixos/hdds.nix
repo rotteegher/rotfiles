@@ -109,11 +109,6 @@ in
       #   neededForBoot = false;
       # };
 
-      "/md/ramdisk" = {
-        device = "tmpfs";
-        fsType = "tmpfs";
-        options = ["defaults" "size=12G" "mode=777"];
-      };
 
       "/md/wdc-data" = lib.mkIf cfg.wdc1tb {
         device = "wdc-blue/data";

@@ -5,16 +5,15 @@
     enableFishIntegration = false;
     settings = {
       theme = "catpuccin-mocha";
-
       on_force_close = "quit";
-      simplified_ui = true;
+      simplified_ui = false;
       default_shell = "fish";
       pane_frames = false;
-      default_layout = "compact";
+      default_layout = "default";
       copy_command = "wl-copy";
       ui = {
         pane_frames = {
-          hide_session_name = true;
+          hide_session_name = false;
           rounded_corners = true;
         };
       };

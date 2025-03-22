@@ -56,6 +56,25 @@
       # path-of-building
       ckan
     ];
+    # fileSystems."/md/wckan" = {
+    #   device = "wdc-blue/ckan";
+    #   fsType = "zfs";
+    #   neededForBoot = false;
+    #   options = ["defaults" "mode=777"];
+    # };
+    fileSystems."/md/zckan" = {
+      device = "/dev/zvol/zroot/ckan";
+      fsType = "ext4";
+      neededForBoot = false;
+      options = ["defaults"];
+    };
+    fileSystems."/md/ramdisk" = {
+      device = "tmpfs";
+      fsType = "tmpfs";
+      options = ["defaults" "size=48G" "mode=777"];
+      neededForBoot = false;
+    };
+
     custom.persist = {
       home.directories = [ ".local/share/Steam" ".config/mangohud" ".config/unity3d" ".steam" ];
     };
