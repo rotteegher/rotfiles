@@ -18,6 +18,10 @@ in
       (lib.optionalString cfg.wdc1tb "wdc-blue")
       (lib.optionalString cfg.stsea3tb "stsea-barra")
     ];
+    boot.kernelModules = [ "brd" ];
+    boot.extraModprobeConfig = ''
+      options brd rd_nr=1 rd_size=41943040
+    '';
 
     services.sanoid = lib.mkIf config.custom.zfs.snapshots {
       enable = true;
