@@ -10,7 +10,7 @@ let
     pkgs.sycl-info
     pkgs.adaptivecpp
     pkgs.level-zero
-    pkgs.mkl
+    # pkgs.mkl
     pkgs.vpl-gpu-rt
     pkgs.intel-compute-runtime.drivers
     pkgs.intel-compute-runtime.out
@@ -77,22 +77,22 @@ lib.mkIf config.custom.llm.enable {
     };
   };
 
-  services.open-webui = {
-    enable = true;
-    openFirewall = true;
-    stateDir = "/var/lib/private/open-webui";
-    host = "0.0.0.0";
-    environment = {
-      OLLAMA_API_BASE_URL = "http://127.0.0.1:11434";
-      # Disable authentication
-      WEBUI_AUTH = "False";
-      ANONYMIZED_TELEMETRY = "False";
-      DO_NOT_TRACK = "True";
-      SCARF_NO_ANALYTICS = "True";
-      LOCAL_FILES_ONLY = "False";
-      USER_AGENT = "${user}";
-    };
-  };
+  # services.open-webui = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   stateDir = "/var/lib/private/open-webui";
+  #   host = "0.0.0.0";
+  #   environment = {
+  #     OLLAMA_API_BASE_URL = "http://127.0.0.1:11434";
+  #     # Disable authentication
+  #     WEBUI_AUTH = "False";
+  #     ANONYMIZED_TELEMETRY = "False";
+  #     DO_NOT_TRACK = "True";
+  #     SCARF_NO_ANALYTICS = "True";
+  #     LOCAL_FILES_ONLY = "False";
+  #     USER_AGENT = "${user}";
+  #   };
+  # };
 
   # open-webui
   # pc:
