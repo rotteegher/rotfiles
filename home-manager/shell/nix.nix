@@ -29,11 +29,7 @@ in {
     nix-current-generation = ''
       GENERATIONS=$(sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | grep current | awk '{print $1}')
       # add generation number from before desktop format
-      echo $(( GENERATIONS + ${
-        if host == "desktop"
-        then "1196"
-        else "0"
-      }))
+      echo $(( GENERATIONS ))
     '';
     # build flake but don't switch
     nbuild = pkgs.writeShellApplication {

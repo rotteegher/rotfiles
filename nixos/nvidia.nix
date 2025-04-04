@@ -66,7 +66,6 @@
     };
     environment.systemPackages = with pkgs; [
         mesa
-        mesa.drivers
 
         nvtopPackages.full
         glxinfo
