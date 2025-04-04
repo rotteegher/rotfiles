@@ -60,7 +60,6 @@
         libgbinder
 
         mesa
-        mesa.drivers
         # swiftshader
         egl-wayland
       ];

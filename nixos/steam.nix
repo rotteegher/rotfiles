@@ -62,12 +62,12 @@
     #   neededForBoot = false;
     #   options = ["defaults" "mode=777"];
     # };
-    fileSystems."/md/zckan" = {
-      device = "/dev/zvol/zroot/ckan";
-      fsType = "ext4";
-      neededForBoot = false;
-      options = ["defaults"];
-    };
+    # fileSystems."/md/zckan" = {
+    #   device = "/dev/zvol/zroot/ckan";
+    #   fsType = "ext4";
+    #   neededForBoot = false;
+    #   options = ["defaults"];
+    # };
     fileSystems."/md/ramdisk" = {
       device = "tmpfs";
       fsType = "tmpfs";

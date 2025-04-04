@@ -18,7 +18,7 @@
     hotspot = {
       enable = true;
       internet_iface = "eno1";
-      wifi_iface = "wlp5s0";
+      wifi_iface = "wlp2s0";
     };
 
 

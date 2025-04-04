@@ -1,47 +1,48 @@
 {
   config,
   pkgs,
+  pkgs-stable,
   lib,
   user,
   ...
 }: {
 config = lib.mkIf config.custom.reaper.enable {
   home = {
-    packages = with pkgs; [
+    packages = [
       # The DAW
-      reaper
+      pkgs.reaper
 
       # Plugins
-      helm
-      # sorcer
-      oxefmsynth
-      # fmsynth
-      aether-lv2
-      bespokesynth
-      x42-plugins
-      fluidsynth
-      airwindows-lv2
-      mda_lv2
-      # tunefish
-      soundfont-generaluser
-      soundfont-ydp-grand
-      noise-repellent
-      speech-denoiser
-      mod-distortion
-      midi-trigger
-      # distrho
-      bshapr
-      bchoppr
-      fomp
-      gxplugins-lv2
-      fverb
-      mooSpace
-      boops
-      # artyFX
-      zam-plugins
-      molot-lite
-      bankstown-lv2
-      # vital
+      pkgs.helm
+      # pkgs.sorcer
+      pkgs.oxefmsynth
+      # pkgs.fmsynth
+      pkgs.aether-lv2
+      pkgs.bespokesynth
+      pkgs.x42-plugins
+      pkgs.fluidsynth
+      pkgs.airwindows-lv2
+      pkgs.mda_lv2
+      # pkgs.tunefish
+      pkgs.soundfont-generaluser
+      pkgs.soundfont-ydp-grand
+      pkgs.noise-repellent
+      pkgs.speech-denoiser
+      pkgs.mod-distortion
+      pkgs.midi-trigger
+      # pkgs.distrho
+      pkgs.bshapr
+      pkgs.bchoppr
+      pkgs.fomp
+      pkgs.gxplugins-lv2
+      pkgs.fverb
+      pkgs.mooSpace
+      pkgs.boops
+      # pkgs.artyFX
+      pkgs.zam-plugins
+      pkgs.molot-lite
+      pkgs.bankstown-lv2
+      # pkgs.vital
     ]
     # NOTE: https://discourse.nixos.org/t/lmms-vst-plugins/42985/3
     # To add it to yabridge, we just have to add the common path for plugins:
@@ -51,8 +52,10 @@ config = lib.mkIf config.custom.reaper.enable {
     # If you want to know which plugins are loaded, just run the following command and it will show you the path and type for each plugin and if it’s synced or not:
     # $ yabridgectl status
     ++ [
-      yabridge
-      yabridgectl
+      # pkgs.yabridge
+      # pkgs.yabridgectl
+      pkgs-stable.yabridge
+      pkgs-stable.yabridgectl
     ];
 
     # just a NOTE: that plugins are installed into these directories:
