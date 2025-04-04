@@ -2,6 +2,7 @@
   lib,
   config,
   user,
+  pkgs,
   ...
 }:
 let
@@ -42,6 +43,18 @@ in
       };
     };
 
+    custom.shell.packages = {
+      destroy-snapshots = pkgs.writeShellApplication {
+        name = "destroy-snapshots";
+        # runtimeInputs = with pkgs; [custom.shell.nsw];
+        text = ''
+          for i in $(zfs list -t snapshot "$1" -H | awk '{print $1}' | grep autosnap); do 
+              # sudo zfs destroy "$i"
+              echo destroying "$i"
+          done
+        '';
+      };
+    };
 
     # add bookmarks for gtk
     hm =
