@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
@@ -59,6 +59,10 @@
         inherit system;
         config.allowUnfree = true;
       };
+      pkgs-stable = import inputs.nixpkgs-stable {
+        inherit system;
+        config.allowUnfree = true;
+      };
       lib = import ./lib.nix {
         inherit (nixpkgs) lib;
         inherit pkgs;
@@ -71,10 +75,11 @@
           nixpkgs
           lib
           pkgs
+          pkgs-stable
           system
           ;
         specialArgs = {
-          inherit self inputs;
+          inherit self inputs pkgs-stable;
         };
       };
       commonArgs = createCommonArgs system;
