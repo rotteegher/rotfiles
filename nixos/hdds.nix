@@ -44,16 +44,21 @@ in
     };
 
     custom.shell.packages = {
-      destroy-snapshots = pkgs.writeShellApplication {
-        name = "destroy-snapshots";
-        # runtimeInputs = with pkgs; [custom.shell.nsw];
-        text = ''
-          for i in $(zfs list -t snapshot "$1" -H | awk '{print $1}' | grep autosnap); do 
-              # sudo zfs destroy "$i"
-              echo destroying "$i"
-          done
-        '';
-      };
+      zfs-destroy-dataset-snapshots = ''
+        for i in $(zfs list -t snapshot "$1" -H | awk '{print $1}' | grep autosnap); do 
+            echo WILL DESTROY: "$i"
+        done
+
+        # Ask for confirmation
+        read -r -p "Are you sure you want to destroy these snapshots? (y/n): " confirm
+        if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+            for i in $(zfs list -t snapshot "$1" -H | awk '{print $1}' | grep autosnap); do 
+                sudo zfs destroy "$i"
+            done
+        else
+            echo "Operation cancelled."
+        fi
+      '';
     };
 
     # add bookmarks for gtk

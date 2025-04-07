@@ -4,6 +4,8 @@
 {
   config,
   lib,
+  pkgs,
+  user,
   ...
 }: {
   imports = [
@@ -27,6 +29,16 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+
+  hardware.openrazer.enable = true;
+  environment.systemPackages = with pkgs; [
+    openrazer-daemon
+    polychromatic
+  ];
+  users.users.${user} = {...}: {
+    extraGroups = ["openrazer"];
+  };
+
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
