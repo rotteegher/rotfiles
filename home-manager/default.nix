@@ -51,6 +51,7 @@
         digikam
         trash-cli
         xdg-utils
+        zenity
 
         # mcomix
         yacreader
