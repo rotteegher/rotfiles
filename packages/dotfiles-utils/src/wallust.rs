@@ -199,7 +199,7 @@ pub fn from_wallpaper(wallpaper_info: &Option<WallInfo>, wallpaper: &str) {
                 nix_info
                     .monitors
                     .iter()
-                    .any(|nix_mon| nix_mon.name == m.name)
+                    .any(|nix_mon| nix_mon.display_name == m.name)
             }) {
                 if let Some(geometry) = info.get_geometry(m.width, m.height) {
                     // output cropped and resized wallpaper to /tmp

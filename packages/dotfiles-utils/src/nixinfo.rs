@@ -11,8 +11,9 @@ pub struct ColorsSpecial {
 
 #[derive(Clone, Default, Deserialize, Debug)]
 pub struct NixMonitorInfo {
-    pub name: String,
+    pub display_name: String,
     pub workspaces: Vec<i32>,
+    pub workspace_names: Vec<String>,
 }
 
 #[derive(Debug, Clone, Default, Deserialize)]

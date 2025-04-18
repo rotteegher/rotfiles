@@ -1,32 +1,14 @@
-{
-  pkgs,
-  lib,
-  isNixOS,
-  ...
-}:
-{
+{ pkgs, lib, isNixOS, ... }: {
   custom = {
     wifi.enable = true;
     battery.enable = true;
     backlight.enable = true;
-    displays = [
-      {
-        name = "eDP-1";
-        hyprland = "1920x1080@144,0x0,1";
-        workspaces = [
-          1
-          2
-          3
-          4
-          5
-          6
-          7
-          8
-          9
-          10
-        ];
-      }
-    ];
+    displays = [{
+      name = "eDP-1";
+      hyprland = "1920x1080@144,0x0,1";
+      workspace_names = [ "1" "2" "3" "4" "q" "w" "e" "a" "s" "d" ];
+      workspaces = [ 1 2 3 4 5 6 7 8 9 10 ];
+    }];
     mouse_sensitivity = 0.5;
     hyprland = {
       modkey = "SUPER";
@@ -39,9 +21,7 @@
       devIndex = 0;
     };
     firefox.enable = true;
-    wallust = {
-      enable = true;
-    };
+    wallust = { enable = true; };
     rofi.enable = true;
     # rclip.enable = false;
     waybar = {
@@ -76,24 +56,15 @@
       git-keyid = "92058DC9E2CF5F4C";
     };
     terminal.size = 12;
-    persist = {
-      home.directories = [
-        "Downloads"
-        "Documents"
-        "Videos"
-      ];
-    };
+    persist = { home.directories = [ "Downloads" "Documents" "Videos" ]; };
   };
 
   home = {
-    packages = lib.mkIf isNixOS (
-      with pkgs;
-      [
-        # gimp
-        # kdenlive
-        feh
-        ffmpeg
-      ]
-    );
+    packages = lib.mkIf isNixOS (with pkgs; [
+      # gimp
+      # kdenlive
+      feh
+      ffmpeg
+    ]);
   };
 }

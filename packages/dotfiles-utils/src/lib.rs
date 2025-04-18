@@ -155,8 +155,10 @@ impl Workspace {
             .unwrap_or_else(|| panic!("monitor {} not found", self.monitor))
     }
 
-    pub fn by_name(name: &str) -> Option<Self> {
-        Self::workspaces().into_iter().find(|w| w.name == name)
+    pub fn by_name(display_name: &str) -> Option<Self> {
+        Self::workspaces()
+            .into_iter()
+            .find(|w| w.name == display_name)
     }
 }
 

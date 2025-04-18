@@ -27,7 +27,7 @@ fn main() {
             ..
         } = NixInfo::before()
         {
-            let rearranged_workspaces = Monitor::rearranged_workspaces();
+            let rearranged_workspaces = Monitor::rearranged_workspaces_names();
 
             cfg["hyprland/workspaces"]["persistent-workspaces"] =
                 serde_json::to_value(rearranged_workspaces)
