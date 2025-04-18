@@ -32,7 +32,7 @@ in {
       (openOnWorkspace 4 "discord-vesktop")
 
       # Open Steam
-      (openOnWorkspace 5 "steam")
+      # (openOnWorkspace 5 "steam")
 
       # audio
       (openOnWorkspace 9 "pavucontrol")

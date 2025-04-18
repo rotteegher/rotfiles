@@ -57,6 +57,7 @@ in
       # for nixlang / nixpkgs
       with pkgs; [
         nil
+        nixd
         nix-init
         nix-update
         nixfmt-rfc-style

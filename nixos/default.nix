@@ -137,7 +137,9 @@
           powerstat
           hibernate
           brightnessctl
+          ddcutil
           smartmontools
+          nvme-cli
           parted
           ddcutil
         ]

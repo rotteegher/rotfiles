@@ -37,6 +37,19 @@
       gamescope
       mangohud
 
+      (pkgs.makeDesktopItem {
+        name = "steam-minimal-runtime";
+        exec = "${pkgs.lib.getExe pkgs.steam} -cef-disable-gpu-compositing -cef-disable-gpu steam://open/minigameslist %U";
+        desktopName = "Steam Minimal (Runtime)";
+        icon = "${pkgs.steam}/share/icons/hicolor/16x16/apps/steam.png";
+      })
+      (pkgs.writeShellApplication {
+        name = "steam-minimal-runtime";
+        text = ''
+            ${pkgs.lib.getExe pkgs.steam} -cef-disable-gpu-compositing -cef-disable-gpu steam://open/minigameslist %U
+        '';
+      })
+
       # steamcmd
       # steam-tui
       gcc
