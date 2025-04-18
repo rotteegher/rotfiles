@@ -34,6 +34,7 @@
   environment.systemPackages = with pkgs; [
     openrazer-daemon
     polychromatic
+    razergenie
   ];
   users.users.${user} = {...}: {
     extraGroups = ["openrazer"];

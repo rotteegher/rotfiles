@@ -39,6 +39,54 @@ lib.mkIf cfg.enable {
           fi
         '';
       };
+      brightness-ddc = pkgs.writeShellApplication {
+        name = "brightness-ddc";
+        runtimeInputs = with pkgs; [ ddcutil coreutils gnugrep ];
+        text = ''
+          #!/usr/bin/env bash
+
+          get_current_brightness() {
+            ddcutil getvcp 10 | grep -oP 'current value = +\K[0-9]+'
+          }
+
+          case "$1" in
+            get)
+              get_current_brightness
+              ;;
+            set)
+              value="$2"
+              ddcutil setvcp 10 "$value"
+              ;;
+            toggle)
+              current=$(get_current_brightness)
+              if [ "$current" -gt 50 ]; then
+                ddcutil setvcp 10 0
+              else
+                ddcutil setvcp 10 100
+              fi
+              ;;
+            up)
+              delta="$2"
+              current=$(get_current_brightness)
+              new=$((current + delta))
+              [ "$new" -gt 100 ] && new=100
+              ddcutil setvcp 10 "$new"
+              ;;
+            down)
+              delta="$2"
+              current=$(get_current_brightness)
+              new=$((current - delta))
+              [ "$new" -lt 0 ] && new=0
+              ddcutil setvcp 10 "$new"
+              ;;
+            *)
+              echo "Usage: brightness-ddc {get|set <value>|toggle|up <value>|down <value>}"
+              exit 1
+              ;;
+          esac
+        '';
+      };
+
     };
 
     waybar.config =
@@ -46,7 +94,7 @@ lib.mkIf cfg.enable {
         alertSpan = s: ''<span color="{{color4}}">${s}</span>'';
       in
       {
-        backlight = lib.mkIf config.custom.backlight.enable {
+        backlight = {
           format = "{icon}   {percent}%";
           format-icons = [
             "󰃞"
@@ -129,6 +177,18 @@ lib.mkIf cfg.enable {
           on-click-middle = "hyprshade off";
           tooltip = false;
         };
+        "custom/brightness-ddc" = {
+          format = "󰃠 {}%";
+          interval = 10;
+          exec = "${lib.getExe config.custom.shell.packages.brightness-ddc} get";
+          on-click-right = "${lib.getExe config.custom.shell.packages.brightness-ddc} set 100";
+          on-click = "${lib.getExe config.custom.shell.packages.brightness-ddc} set 0";
+          on-click-middle = "${lib.getExe config.custom.shell.packages.brightness-ddc} toggle";
+          on-scroll-down = "${lib.getExe config.custom.shell.packages.brightness-ddc} down 20";
+          on-scroll-up = "${lib.getExe config.custom.shell.packages.brightness-ddc} up 20";
+          tooltip = false;
+        };
+
 
         idle_inhibitor = lib.mkIf cfg.idle-inhibitor {
           format = "{icon}";
@@ -163,6 +223,7 @@ lib.mkIf cfg.enable {
 
         modules-left = [
           "custom/shade"
+          "custom/brightness-ddc"
           "custom/nix"
         ] ++ (lib.optional cfg.idle-inhibitor "idle_inhibitor") ++ [ "hyprland/window" ];
 
@@ -176,8 +237,8 @@ lib.mkIf cfg.enable {
             "tray"
             "network"
             "pulseaudio"
+            "backlight"
           ]
-          ++ (lib.optional config.custom.backlight.enable "backlight")
           ++ (lib.optional config.custom.battery.enable "battery")
           ++ [ "clock" ];
 
@@ -267,7 +328,7 @@ lib.mkIf cfg.enable {
                 }
 
                 #waybar {
-                  background: rgba(0,0,0,0.5)
+                  background: rgba(0,0,0,0.1)
                 }
 
                 ${mkModulesCss cfg.config.modules-left}
