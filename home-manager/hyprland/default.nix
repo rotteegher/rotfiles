@@ -1,14 +1,6 @@
-{
-  config,
-  host,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  inherit (config.custom) displays display;
-in
-{
+{ config, host, lib, pkgs, ... }:
+let inherit (config.custom) displays display;
+in {
   imports = [
     ./idle.nix
     ./keybinds.nix
@@ -52,8 +44,8 @@ in
     ];
 
     wayland.windowManager.hyprland.settings = {
-      monitor =
-        (lib.forEach displays ({ name, hyprland, ... }: "${name}, ${hyprland}"))
+      monitor = (lib.forEach displays
+        ({ display_name, hyprland, ... }: "${display_name}, ${hyprland}"))
         ++ (lib.optional (host != "desktop") ",preferred,auto,auto");
 
       env = [
@@ -73,7 +65,8 @@ in
         touchdevice = lib.mkIf display.touchDevice.enabled {
           enabled = true;
           transform = display.touchDevice.transform;
-          output = (lib.elemAt displays display.touchDevice.devIndex).name;
+          output =
+            (lib.elemAt displays display.touchDevice.devIndex).display_name;
         };
 
         touchpad = {
@@ -118,16 +111,13 @@ in
 
       "$term" = "${config.custom.terminal.exec}";
 
-      general =
-        let
-          gap = if host == "desktop" then 3 else 2;
-        in
-        {
-          gaps_in = gap;
-          gaps_out = gap;
-          border_size = 3;
-          layout = "master";
-        };
+      general = let gap = if host == "desktop" then 3 else 2;
+      in {
+        gaps_in = gap;
+        gaps_out = gap;
+        border_size = 3;
+        layout = "master";
+      };
 
       decoration = {
         rounding = 0;
@@ -187,9 +177,7 @@ in
         smart_resizing = true;
       };
 
-      binds = {
-        workspace_back_and_forth = false;
-      };
+      binds = { workspace_back_and_forth = false; };
 
       misc = {
         disable_hyprland_logo = false;
@@ -206,9 +194,10 @@ in
       debug.disable_logs = false;
 
       # bind workspaces to monitors
-      workspace = pkgs.custom.lib.mapWorkspaces (
-        { workspace, monitor, ... }: "${workspace}, monitor:${monitor}"
-      ) displays;
+      workspace = pkgs.custom.lib.mapWorkspaces
+        ({ workspace, monitor, workspace_name, ... }:
+          "${workspace}, monitor:${monitor}, defaultName:${workspace_name}")
+        displays;
 
       windowrulev2 = [
         # fix discord not detecting keyboard input
@@ -237,8 +226,6 @@ in
       # source = "~/.config/hypr/hyprland-test.conf";
     };
     # hyprland crash reports
-    custom.persist = {
-      home.directories = [ ".cache/hyprland" ];
-    };
+    custom.persist = { home.directories = [ ".cache/hyprland" ]; };
   };
 }

@@ -119,7 +119,7 @@ impl Monitor {
             .iter()
             .enumerate()
             .fold(HashMap::new(), |mut acc, (mon_idx, mon)| {
-                let name = &mon.name;
+                let name = &mon.display_name;
                 match active_workspaces.get(name) {
                     // active, use current workspaces
                     Some(_) => {
@@ -130,7 +130,7 @@ impl Monitor {
                     // not active, add to the other monitors
                     None => {
                         for (other_mon_idx, other_mon) in nix_monitors.iter().enumerate() {
-                            let other_name = &other_mon.name;
+                            let other_name = &other_mon.display_name;
 
                             if mon_idx != other_mon_idx
                                 && active_workspaces.contains_key(other_name)
@@ -145,6 +145,44 @@ impl Monitor {
                 acc
             })
     }
+    pub fn rearranged_workspaces_names() -> HashMap<String, Vec<serde_json::Value>> {
+        let nix_monitors = NixInfo::before().monitors;
+        let active_workspaces = Self::active_workspaces();
+
+        nix_monitors
+            .iter()
+            .enumerate()
+            .fold(HashMap::new(), |mut acc, (mon_idx, mon)| {
+                let name = &mon.display_name;
+                let target = if active_workspaces.contains_key(name) {
+                    name
+                } else {
+                    nix_monitors
+                        .iter()
+                        .enumerate()
+                        .find_map(|(i, m)| {
+                            if i != mon_idx && active_workspaces.contains_key(&m.display_name) {
+                                Some(&m.display_name)
+                            } else {
+                                None
+                            }
+                        })
+                        .unwrap_or(name)
+                };
+
+                acc.entry(target.to_string())
+                    .or_default()
+                    .extend(mon.workspace_names.iter().map(|i| {
+                        if let Ok(n) = i.parse::<u64>() {
+                            serde_json::Value::Number(n.into())
+                        } else {
+                            serde_json::Value::String(i.clone())
+                        }
+                    }));
+
+                acc
+            })
+    }
 
     /// distribute the workspaces evenly across all monitors
     pub fn distribute_workspaces(extend_as_primary: bool) -> HashMap<String, Vec<i32>> {
@@ -155,7 +193,7 @@ impl Monitor {
 
         // sort all_monitors, putting the nix_monitors first
         all_monitors.sort_by_key(|a| {
-            let is_base_monitor = nix_monitors.iter().any(|m| m.name == a.name);
+            let is_base_monitor = nix_monitors.iter().any(|m| m.display_name == a.name);
             (
                 if extend_as_primary {
                     is_base_monitor

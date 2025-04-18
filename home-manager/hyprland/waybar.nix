@@ -198,7 +198,7 @@ lib.mkIf cfg.enable {
           };
         };
 
-        "hyprland/workspaces" = {
+        # "hyprland/workspaces" = {
           # TODO: pacman, remove active inverse circle
           # format = "{icon}";
           # format-icons = {
@@ -206,7 +206,7 @@ lib.mkIf cfg.enable {
           #   default = "·";
           #   urgent = "󰊠";
           # };
-        };
+        # };
 
         "hyprland/window" = {
           rewrite = {
@@ -337,6 +337,12 @@ lib.mkIf cfg.enable {
 
                 ${mkModuleClassName "custom/nix"} {
                   font-size: 20px;
+                }
+
+                ${mkModuleClassName "hyprland/workspaces"} * {
+                  transition: 200ms;
+                  transition-duration: 200ms;
+                  font-size: 10px;
                 }
 
                 #workspaces button {

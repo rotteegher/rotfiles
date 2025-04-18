@@ -1,32 +1,14 @@
-{
-  pkgs,
-  lib,
-  isNixOS,
-  ...
-}:
-{
+{ pkgs, lib, isNixOS, ... }: {
   custom = {
     kbLayout = "jp";
     wifi.enable = true;
     backlight.enable = true;
-    displays = [
-      {
-        name = "";
-        hyprland = "2560x1080@200,0x0,1";
-        workspaces = [
-          1
-          2
-          3
-          4
-          5
-          6
-          7
-          8
-          9
-          10
-        ];
-      }
-    ];
+    displays = [{
+      display_name = "DP-3";
+      hyprland = "2560x1080@200,0x0,1";
+      workspace_names = [ "1" "2" "3" "4" "q" "w" "e" "a" "s" "d" ];
+      workspaces = [ 1 2 3 4 5 6 7 8 9 10 ];
+    }];
     terminal.size = 8;
 
     hyprland = {
@@ -80,13 +62,6 @@
   };
 
   home = {
-    packages = lib.mkIf isNixOS (
-      with pkgs;
-      [
-        guvcview
-        krita
-        inkscape
-      ]
-    );
+    packages = lib.mkIf isNixOS (with pkgs; [ guvcview krita inkscape ]);
   };
 }
