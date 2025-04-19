@@ -6,7 +6,7 @@
     xkbLayout = "jp";
     hdds = {
       enable = true;
-      stsea3tb = true;
+      stsea3tb = false;
       wdc1tb = true;
       windows = true;
     };
@@ -26,7 +26,7 @@
     fileshare.enable = true;
     samba.enable = false;
 
-    monero.enable = true;
+    monero.enable = false;
     wine.enable = true;
     distrobox.enable = false;
     jellyfin.enable = true;

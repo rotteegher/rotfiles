@@ -21,7 +21,7 @@ in
         ccat = "command cat";
         crate = "cargo";
         isodate = ''date +"%Y-%m-%dT%H:%M:%S-%Z"'';
-        lsblkf = ''lsblk -f --output NAME,SERIAL,MODEL,LABEL,SIZE,ID-LINK,FSTYPE,TRAN,MOUNTPOINT'';
+        lsblkf = ''lsblk -f --output TYPE,NAME,SERIAL,MODEL,SIZE,FSTYPE,TRAN,ID-LINK,MOUNTPOINT,LABEL'';
         restartaudio = ''systemctl --user restart pipewire pipewire-pulse wireplumber'';
         man = "${pkgs.bat-extras.batman}/bin/batman";
         mime = "xdg-mime query filetype";

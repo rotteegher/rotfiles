@@ -36,7 +36,7 @@ in {
 
       # audio
       (openOnWorkspace 9 "pavucontrol")
-      (openOnWorkspace 9 "easyeffects")
+      # (openOnWorkspace 9 "easyeffects")
 
       # (openOnWorkspace 9 "easyeffects")
 
