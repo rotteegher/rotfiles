@@ -3,14 +3,11 @@ let
   cfg = config.custom.hdds;
   wdc-blue-mountpoint = "/md/wdc-data";
   wdc-blue-dataset = "wdc-blue/data";
-  stsea-mountpoint = "/md/stsea-okii";
-  stsea-dataset = "stsea-barra/okii";
 in {
   config = lib.mkIf cfg.enable {
     # non os zfs disks
     boot.zfs.extraPools = [
       (lib.optionalString cfg.wdc1tb "wdc-blue")
-      (lib.optionalString cfg.stsea3tb "stsea-barra")
     ];
     boot.kernelModules = [ "brd" ];
     boot.extraModprobeConfig = ''
@@ -26,12 +23,6 @@ in {
           hourly = 24;
           daily = 31;
           weekly = 7;
-          monthly = 1;
-        };
-        ${stsea-dataset} = lib.mkIf cfg.stsea3tb {
-          hourly = 24;
-          daily = 31;
-          weekly = 2;
           monthly = 1;
         };
       };
@@ -67,9 +58,7 @@ in {
         "file://${wdc-blue-mountpoint}/Documents/papers papers"
         "file://${wdc-blue-mountpoint}/_FARMTASKER _FARMTASKER"
         "file://${wdc-blue-mountpoint}/ wdc-blue/data"
-      ] ++ (lib.optionals cfg.stsea3tb
-        [ "file://${stsea-mountpoint}/ stsea-barra/okii" ]);
-
+      ];
       # create symlinks for locations with ~
       home.file =
         let mkOutOfStoreSymlink = hmCfg.config.lib.file.mkOutOfStoreSymlink;
@@ -96,8 +85,6 @@ in {
       "L+ /home/${user}/_SMALL/_MUSIC                  - - - - ${wdc-blue-mountpoint}/_MUSIC"
       "L+ /home/${user}/_SMALL/_FILM                   - - - - ${wdc-blue-mountpoint}/_FILM"
       "L+ /home/${user}/_SMALL/_ANIME                  - - - - ${wdc-blue-mountpoint}/_ANIME"
-    ] ++ lib.optionals cfg.stsea3tb [
-      "L+ /home/${user}/_STSEA                         - - - - ${stsea-mountpoint}/_STSEA"
     ];
 
     # dual boot windows
@@ -122,14 +109,8 @@ in {
       #   fsType = "ntfs";
       #   neededForBoot = false;
       # };
-
       "/md/wdc-data" = lib.mkIf cfg.wdc1tb {
         device = "wdc-blue/data";
-        fsType = "zfs";
-        neededForBoot = false;
-      };
-      "/md/stsea-okii" = lib.mkIf cfg.stsea3tb {
-        device = "stsea-barra/okii";
         fsType = "zfs";
         neededForBoot = false;
       };
