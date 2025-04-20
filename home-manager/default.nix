@@ -48,7 +48,7 @@
         onlyoffice-bin
         zathura
         mupdf
-        digikam
+        # digikam
         trash-cli
         xdg-utils
         zenity
