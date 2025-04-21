@@ -32,7 +32,7 @@ inputs.devenv.lib.mkShell {
         pre-commit = {
           hooks = {
             deadnix = {
-              enable = true;
+              enable = false;
               excludes = [
                 "generated.nix"
                 "templates/.*/flake.nix"

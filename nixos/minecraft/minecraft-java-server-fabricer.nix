@@ -77,7 +77,7 @@ in {
       preStart = ''
         echo "Server Directory $(stat ${cfg.dataDir})"
 
-        mkdir mods
+        mkdir -p mods
 
         # Agree to Eula
         sed -i 's/eula=false/eula=true/' eula.txt

@@ -29,7 +29,7 @@ in
   };
 
   # 16GB swap
-  swapDevices = [ { device = "/dev/disk/by-label/SWAP"; } ];
+  # swapDevices = [ { device = "/dev/disk/by-label/SWAP"; } ];
 
   # standardized filesystem layout
   fileSystems = {

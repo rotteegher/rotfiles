@@ -44,6 +44,7 @@
     fio
     lshw
     cpulimit
+    gnuplot
     llvmPackages.bintools-unwrapped
     linuxConsoleTools
     patchelf

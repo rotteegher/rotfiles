@@ -128,6 +128,7 @@
           parted
           ddcutil
           sysstat
+          scrcpy
         ] ++
         # install gtk theme for root, some apps like gparted only run as root
         (with config.hm.gtk; [ theme.package iconTheme.package ])
