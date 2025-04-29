@@ -24,6 +24,8 @@ in
       pkgs.texlivePackages.tex-gyre
       pkgs.texlab
       pkgs.pandoc
+      pkgs.yamlfmt
+      pkgs.yaml-language-server
     ];
     programs.helix = {
       enable = true;
@@ -43,6 +45,14 @@ in
         };
       };
       languages = {
+        language = [
+          {
+            name = "yaml";
+            formatter = { command = "${pkgs.yamlfmt}/bin/yamlfmt"; args = [ "-in" ];};
+            language-servers = [ "yaml-language-server" ];
+          }
+        ];
+        language-server.yaml-language-server.command = "${pkgs.yaml-language-server}/bin/yaml-language-server";
         language-server.rust-analyzer.command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
         language-server.rust-analyzer.config = {
           procMacro = {
