@@ -60,7 +60,6 @@
       git-keyid = "92058DC9E2CF5F4C";
     };
   };
-
   home = {
     packages = lib.mkIf isNixOS (with pkgs; [ guvcview krita inkscape ]);
   };
