@@ -1,4 +1,4 @@
-{ user, ... }:
+{ user, pkgs, ... }:
 {
   imports = [ ./minecraft-servers.nix ];
   custom = {
@@ -44,6 +44,20 @@
     steam.enable = true;
     lutris.enable = true;
   };
+
+  systemd.user.services.scrcpy = {
+    enable = true;
+    description = "Start scrcpy when Motorola G54 5G is connected";
+    serviceConfig = {
+      ExecStart = "${pkgs.scrcpy}/bin/scrcpy --video-bit-rate=24M --max-size=2400";
+      Restart = "on-failure";
+      Environment = "DISPLAY=:0";
+    };
+    wantedBy = [ "default.target" ];
+  };
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="22b8", ATTR{idProduct}=="2e81", TAG+="systemd", ENV{SYSTEMD_USER_WANTS}+="scrcpy.service"
+  '';
 
   services.displayManager.autoLogin.user = user;
 
