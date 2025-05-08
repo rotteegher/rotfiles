@@ -89,7 +89,7 @@
     };
 
     custom.persist = {
-      home.directories = [ ".local/share/Steam" ".config/mangohud" ".config/unity3d" ".steam" ];
+      home.directories = [ ".local/share/Steam" ".config/mangohud" ".config/unity3d" ".steam" ".paradoxlauncher" ".local/share/Paradox Interactive" ];
     };
   };
 }
