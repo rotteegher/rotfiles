@@ -56,7 +56,7 @@ in {
       input = {
         sensitivity = config.custom.mouse_sensitivity;
         kb_layout = config.custom.kbLayout;
-        follow_mouse = 2;
+        follow_mouse = 3;
         mouse_refocus = false;
         accel_profile = "flat";
         repeat_delay = 300;
