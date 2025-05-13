@@ -98,7 +98,7 @@
           ripgrep
           htop
           iftop
-          ventoy
+          # ventoy
           stress
           stress-ng
           dmidecode
