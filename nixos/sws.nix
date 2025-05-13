@@ -10,7 +10,7 @@
 in {
   security.acme = {
     acceptTerms = true;
-    defaults.email = "noisetide@gmail.com";
+    defaults.email = "noisetide@proton.me";
     certs.${domain-name} = {
       reloadServices = [ "static-web-server" ];
       listenHTTP = ":80";
