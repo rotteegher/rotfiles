@@ -52,8 +52,8 @@ in {
     gh.enable = true;
     git = {
       enable = true;
-      userName = "Dmytro Serdiukov";
-      userEmail = "noisetide@gmail.com";
+      userName = "Sawako Taiga";
+      userEmail = "noisetide@proton.me";
       # GPG SIGNING KEY
       signing = lib.mkIf cfg.enable {
         signByDefault = true;
