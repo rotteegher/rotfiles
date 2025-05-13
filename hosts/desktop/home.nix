@@ -57,7 +57,7 @@
     # Copy over id string after similar characters 'sec dsa2048/', text after '/'
     git = {
       enable = true;
-      git-keyid = "92058DC9E2CF5F4C";
+      git-keyid = "80A56B918CFA5155";
     };
   };
   home = {
