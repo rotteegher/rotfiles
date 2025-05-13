@@ -27,20 +27,20 @@ lib.mkMerge [
   sops.secrets.nextcloud_adminpass.owner = "nextcloud";
   sops.secrets.nextcloud_adminpass.group = "nextcloud";
 
-  services.nextcloud = {
-    enable = true;
-    package = pkgs.nextcloud30;
-    home = "/persist/var/lib/nextcloud";
-    hostName = "127.0.0.1";
-    config = {
-      adminuser = "admin";
-      dbname = "nextcloud";
-      dbtype = "sqlite";
-      adminpassFile = config.sops.secrets.nextcloud_adminpass.path;
-    };
-  };
-  users.users.nextcloud.extraGroups = [ "users" "root" "wheel" ];
-  users.users.${user}.extraGroups = [ "nextcloud" ];
+  # services.nextcloud = {
+  #   enable = true;
+  #   package = pkgs.nextcloud30;
+  #   home = "/persist/var/lib/nextcloud";
+  #   hostName = "127.0.0.1";
+  #   config = {
+  #     adminuser = "admin";
+  #     dbname = "nextcloud";
+  #     dbtype = "sqlite";
+  #     adminpassFile = config.sops.secrets.nextcloud_adminpass.path;
+  #   };
+  # };
+  # users.users.nextcloud.extraGroups = [ "users" "root" "wheel" ];
+  # users.users.${user}.extraGroups = [ "nextcloud" ];
 
   networking.firewall.allowedTCPPorts = [ 80 ];
   networking.firewall.allowedUDPPorts = [ 80 ];
