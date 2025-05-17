@@ -52,6 +52,7 @@
         trash-cli
         xdg-utils
         zenity
+        lynx
 
         # mcomix
         yacreader

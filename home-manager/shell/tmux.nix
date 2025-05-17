@@ -2,12 +2,14 @@
   programs.zellij = {
     enable = true;
     enableBashIntegration = false;
-    enableFishIntegration = false;
+    enableFishIntegration = true;
     settings = {
       theme = "catpuccin-mocha";
-      on_force_close = "quit";
+      on_force_close = "detach";
       simplified_ui = false;
       default_shell = "fish";
+      show_startup_tips = false;
+      show_resease_notes = false;
       pane_frames = false;
       default_layout = "default";
       copy_command = "wl-copy";

@@ -97,6 +97,10 @@
           procps
           ripgrep
           htop
+          iotop
+          glib
+          jmtpfs
+          mtpfs
           iftop
           # ventoy
           stress

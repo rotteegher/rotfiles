@@ -114,6 +114,11 @@ in {
         fsType = "zfs";
         neededForBoot = false;
       };
+      "/md/wdc-okii" = lib.mkIf cfg.wdc1tb {
+        device = "wdc-blue/okii";
+        fsType = "zfs";
+        neededForBoot = false;
+      };
     };
   };
 }
