@@ -49,7 +49,7 @@
     enable = true;
     description = "Start scrcpy when Motorola G54 5G is connected";
     serviceConfig = {
-      ExecStart = "${pkgs.scrcpy}/bin/scrcpy --video-bit-rate=24M --max-size=2400";
+      ExecStart = "${pkgs.scrcpy}/bin/scrcpy --video-bit-rate=24M --max-size=2560";
       Restart = "on-failure";
       Environment = "DISPLAY=:0";
     };
