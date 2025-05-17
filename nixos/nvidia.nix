@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  user,
   ...
 }:
 {
@@ -99,6 +100,12 @@
         GBM_BACKEND = "nvidia-drm";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       };
+    
+    custom.persist = {
+      root.cache = [
+        "/home/${user}/.cache/nvidia"
+      ];
+    };
 
     nix.settings = {
       substituters = [ "https://cuda-maintainers.cachix.org" ];
