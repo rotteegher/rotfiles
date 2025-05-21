@@ -65,10 +65,11 @@
       # home-manager executable only on non-nixos
       ++ (lib.optional isNixOS home-manager)
       # handle fonts
-      ++ (lib.optionals (!isNixOS) config.custom.fonts.packages)
+      ++ config.custom.fonts.packages
       # add custom user created shell packages
       ++ (lib.attrValues config.custom.shell.finalPackages);
   };
+
 
   # add custom user created shell packages to pkgs.custom.shell
   nixpkgs.overlays = lib.mkIf (!isNixOS) [

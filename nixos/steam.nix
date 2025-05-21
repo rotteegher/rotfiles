@@ -8,6 +8,33 @@
   config = lib.mkIf config.custom.steam.enable {
     programs.steam = {
       enable = true;
+      fontPackages = with pkgs; [
+          monocraft
+          noto-fonts
+          noto-fonts-cjk-sans
+          noto-fonts-cjk-serif
+          noto-fonts-color-emoji
+          noto-fonts-emoji
+          corefonts
+          liberation_ttf
+          liberation-sans-narrow
+          vistafonts
+          carlito
+          caladea
+          gelasio
+          kochi-substitute
+          kochi-substitute-naga10
+          ipafont
+          ipaexfont
+          migmix
+          migu
+          hanazono
+          ricty
+          takao
+          jigmo
+          rictydiminished-with-firacode
+          wqy_zenhei
+      ] ++ config.hm.custom.fonts.packages;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       gamescopeSession.enable = true;
