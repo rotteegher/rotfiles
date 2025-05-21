@@ -80,7 +80,7 @@ in {
         mkdir -p mods
 
         # Agree to Eula
-        sed -i 's/eula=false/eula=true/' eula.txt
+        [ -f eula.txt ] && sed -i 's/eula=false/eula=true/' eula.txt
 
         cp -f ${serverPropertiesFile} server.properties
         echo "[server.properties] Server Properties: $(cat server.properties)"

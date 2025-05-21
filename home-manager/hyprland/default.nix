@@ -200,6 +200,14 @@ in {
         displays;
 
       windowrulev2 = [
+        # fix Shijima QT
+        "noblur,class:Shijima-Qt"
+        "noborder,class:Shijima-Qt"
+        "noshadow,class:Shijima-Qt"
+        "float,class:Shijima-Qt"
+        "nodim,class:Shijima-Qt"
+        "pin,class:Shijima-Qt"
+
         # fix discord not detecting keyboard input
         "forceinput, class:^(discord)$, xwayland:0"
         # "dimaround,floating:1"
