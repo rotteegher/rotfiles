@@ -1,6 +1,7 @@
 {
   host,
   pkgs,
+  config,
   ...
 }:
 {
@@ -23,6 +24,8 @@
       gfxmodeEfi = "1920x1080";
     };
   };
+
+  fonts.packages = config.hm.custom.fonts.packages;
 
   powerManagement.enable = true;
 
