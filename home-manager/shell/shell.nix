@@ -30,6 +30,8 @@ in
         open = "xdg-open";
         py = "python";
         l = "eza -lag --group-directories-first --git";
+        watchl = "hwatch eza -lag --group-directories-first --git";
+
         lto = "eza -lag --group-directories-first --git --total-size";
 
         rhx = "cd ~/pr/rotfiles & hx .";

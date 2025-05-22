@@ -36,7 +36,7 @@
         gzip
         wget
         killall
-        # rar # includes unrar
+        rar # includes unrar
         zip # not includes unzip
         rsync
         sendme

@@ -1,0 +1,23 @@
+{
+    "wl_shimeji": {
+        "cargoLocks": null,
+        "date": "2025-04-04",
+        "extract": null,
+        "name": "wl_shimeji",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": true,
+            "fetchSubmodules": true,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "CluelessCatBurger",
+            "repo": "wl_shimeji",
+            "rev": "fbb2e148981386863410f4fadecc240af6dc9e6a",
+            "sha256": "sha256-ftDWTEAZBz7jug/PbvU4+ANRcsP1kUF4zLvX0zWBUwY=",
+            "sparseCheckout": [],
+            "type": "github"
+        },
+        "version": "fbb2e148981386863410f4fadecc240af6dc9e6a"
+    }
+}

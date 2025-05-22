@@ -28,6 +28,8 @@ in
 
   goo-engine = w pkgs.callPackage ./goo-engine { cudaSupport = true; };
 
+  wl_shimeji = w pkgs.callPackage ./wl_shimeji { };
+
   # custom version of pob with a .desktop entry, overwritten as a custom package
   # as the interaction with passthru is weird
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/games/path-of-building/default.nix
