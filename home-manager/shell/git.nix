@@ -116,6 +116,7 @@ in {
     gaa = "git --no-pager  add --all";
     gb = "git --no-pager  branch";
     gbtr = "git --no-pager  bisect reset";
+    gcm = "git commit -m";
     gcaam = "gaa && gcam";
     gcam = "git --no-pager  commit --amend";
     gco = "git --no-pager  checkout";

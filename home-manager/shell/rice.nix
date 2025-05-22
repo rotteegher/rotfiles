@@ -34,6 +34,7 @@
       wl-color-picker
       umoria
       inputs.wfetch.packages.${pkgs.system}.wfetch
+      custom.wl_shimeji
     ];
 
     shellAliases = {
@@ -41,6 +42,13 @@
       hw = "hypr-wallpaper";
     };
   };
+
+  custom.persist = {
+    home.directories = [
+      ".local/share/wl_shimeji"
+    ];
+  };
+
 
   # create xresources
   xresources = {

@@ -1,0 +1,6 @@
+[wl_shimeji]
+src.git = "https://github.com/CluelessCatBurger/wl_shimeji.git"
+fetch.github = "CluelessCatBurger/wl_shimeji"
+git.fetchSubmodules = true
+git.deepClone = true
+
