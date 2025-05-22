@@ -135,29 +135,46 @@ in {
         cd - > /dev/null
       '';
     };
-    # update all nvfetcher overlays and packages
-    nv-update = pkgs.writeShellApplication {
-      name = "nv-update";
-      runtimeInputs = with pkgs; [
-        fd
-        nvfetcher
-      ];
-      text = ''
-        cd ${rots}
 
-        # run nvfetcher for overlays
-        nvfetcher --config overlays/nvfetcher.toml --build-dir overlays
+      nv-update = pkgs.writeShellApplication {
+        name = "nv-update";
+        runtimeInputs = with pkgs; [
+          fd
+          nvfetcher
+        ];
+        text = # sh
+          ''
+            pushd ${rots} > /dev/null
 
-        # run nvfetcher for packages
-        mapfile -t pkg_tomls < <(fd nvfetcher.toml packages)
+            if [ "$#" -eq 0 ]; then
+              # run nvfetcher for overlays
+              nvfetcher --keep-old --config overlays/nvfetcher.toml --build-dir overlays
 
-        for pkg_toml in "''${pkg_tomls[@]}"; do
-            pkg_dir=$(dirname "$pkg_toml")
-            nvfetcher --config "$pkg_toml" --build-dir "$pkg_dir"
-        done
-        cd - > /dev/null
-      '';
+              # run nvfetcher for packages
+              mapfile -t pkg_tomls < <(fd nvfetcher.toml packages)
+
+              for pkg_toml in "''${pkg_tomls[@]}"; do
+                  pkg_dir=$(dirname "$pkg_toml")
+                  nvfetcher --keep-old --config "$pkg_toml" --build-dir "$pkg_dir"
+              done
+            else
+              # special case
+              if [ "$1" = "main" ]; then
+                nvfetcher --keep-old --config overlays/nvfetcher.toml --build-dir overlays
+              elif  [[ -d "./packages/$1" ]]; then
+                # run nvfetcher for just the package
+                nvfetcher --keep-old --config "./packages/$1/nvfetcher.toml" --build-dir "./packages/$1"
+              else
+                # run nvfetcher for overlays
+                nvfetcher --keep-old --config overlays/nvfetcher.toml --build-dir overlays
+              fi
+              exit
+            fi
+            popd > /dev/null
+          '';
     };
+    
+    
     # update via nix flake
     upd8 = pkgs.writeShellApplication {
       name = "upd8";

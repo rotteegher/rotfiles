@@ -1,7 +1,7 @@
 {
     "hyprcursor": {
         "cargoLocks": null,
-        "date": "2024-12-23",
+        "date": "2025-04-29",
         "extract": null,
         "name": "hyprcursor",
         "passthru": null,
@@ -13,15 +13,16 @@
             "name": null,
             "owner": "hyprwm",
             "repo": "hyprcursor",
-            "rev": "69270ba8f057d55b0e6c2dca0e165d652856e613",
-            "sha256": "sha256-vQ/L9hZFezC0LquLo4TWXkyniWtYBlFHAKIsDc7PYJE=",
+            "rev": "ac903e80b33ba6a88df83d02232483d99f327573",
+            "sha256": "sha256-lzTV10FJTCGNtMdgW5YAhCAqezeAzKOd/97HbQK8GTU=",
+            "sparseCheckout": [],
             "type": "github"
         },
-        "version": "69270ba8f057d55b0e6c2dca0e165d652856e613"
+        "version": "ac903e80b33ba6a88df83d02232483d99f327573"
     },
     "hyprlock": {
         "cargoLocks": null,
-        "date": "2024-12-27",
+        "date": "2025-05-19",
         "extract": null,
         "name": "hyprlock",
         "passthru": null,
@@ -33,11 +34,12 @@
             "name": null,
             "owner": "hyprwm",
             "repo": "hyprlock",
-            "rev": "d212f4cc1013f12b6691b0ea851b27c088dd8eb8",
-            "sha256": "sha256-vvLjD1nfhgb665bmUtAsbeP0iZ0a/BXVetuKiVWISdQ=",
+            "rev": "da1d076d849fc0f298c1d287bddd04802bf7d0f9",
+            "sha256": "sha256-IypoV7crmhQ4llD0n4qqO4XTRNAAbHfA+2oiTiq2qpk=",
+            "sparseCheckout": [],
             "type": "github"
         },
-        "version": "d212f4cc1013f12b6691b0ea851b27c088dd8eb8"
+        "version": "da1d076d849fc0f298c1d287bddd04802bf7d0f9"
     },
     "swww": {
         "cargoLocks": null,
@@ -55,13 +57,14 @@
             "repo": "swww",
             "rev": "432b7135af0bb34e4b0e55edf76ff516937bc7b0",
             "sha256": "sha256-pX6fJrlNXe1W5ZO9nC9ikN1zoAcHDqErLS7EnglD33o=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "432b7135af0bb34e4b0e55edf76ff516937bc7b0"
     },
     "wallust": {
         "cargoLocks": null,
-        "date": "2024-12-22",
+        "date": "2025-05-13",
         "extract": null,
         "name": "wallust",
         "passthru": null,
@@ -71,11 +74,12 @@
             "fetchSubmodules": false,
             "leaveDotGit": false,
             "name": null,
-            "rev": "7a5df5fdff072e7a9008578c5e108fc5b3a32b93",
-            "sha256": "sha256-r5RObyYsn5TtxzX+OpXn1SC0bBWkT0ut1qrQjY4Z81Y=",
+            "rev": "9876682c09f27274673342aac9198ccc1f809b16",
+            "sha256": "sha256-KbJ/AmtjL+SjXLZOw8euA8I1HgA6MKC6rM55tXheDHQ=",
+            "sparseCheckout": [],
             "type": "git",
             "url": "https://codeberg.org/explosion-mental/wallust.git"
         },
-        "version": "7a5df5fdff072e7a9008578c5e108fc5b3a32b93"
+        "version": "9876682c09f27274673342aac9198ccc1f809b16"
     }
 }

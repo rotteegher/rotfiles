@@ -15,6 +15,7 @@
             "repo": "goo-engine",
             "rev": "8457395892beec33d4605ef9d894a1aff4a8d79f",
             "sha256": "sha256-K/cHakGb+x2kvTVXl+8hRKPlwoSAyFxvU4+dHFs0PXQ=",
+            "sparseCheckout": [],
             "type": "github"
         },
         "version": "8457395892beec33d4605ef9d894a1aff4a8d79f"
