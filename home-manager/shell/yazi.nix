@@ -1,7 +1,7 @@
 { config, lib, ... }:
 {
   programs.yazi = {
-    enable = false;
+    enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
 
