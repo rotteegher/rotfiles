@@ -112,6 +112,7 @@ in {
   };
 
   home.shellAliases = {
+    ghx = "hx $(git diff --name-only HEAD)";
     lg = "lazygit";
     gaa = "git --no-pager  add --all";
     gb = "git --no-pager  branch";

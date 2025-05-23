@@ -38,7 +38,7 @@ let
                   btop
                   git
                   eza
-                  # yazi
+                  yazi
                   helix
                 ]);
               shellAliases = {

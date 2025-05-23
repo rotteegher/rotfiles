@@ -31,6 +31,7 @@ in
         py = "python";
         l = "eza -lag --group-directories-first --git";
         watchl = "hwatch eza -lag --group-directories-first --git";
+        y = "yazi";
 
         lto = "eza -lag --group-directories-first --git --total-size";
 
@@ -57,7 +58,7 @@ in
     md = ''[[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1"'';
     # improved which for nix
     where = ''readlink -f "$(which "$1")"'';
-    # ywhere = ''yazi "$(dirname "$(dirname "$(readlink -f "$(which "$1")")")")"'';
+    ywhere = ''yazi "$(dirname "$(dirname "$(readlink -f "$(which "$1")")")")"'';
     # server command, runs a local server
     server = ''${lib.getExe pkgs.python3} -m http.server "\${"1:-8000"}"'';
     renamer = pkgs.custom.lib.useDirenv "${pr_dir}/personal-graphql" ''cargo run --release --bin renamer'';

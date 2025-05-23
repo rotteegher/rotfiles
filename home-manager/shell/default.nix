@@ -16,7 +16,7 @@
     ./starship.nix
     ./tmux.nix
     # ./typescript.nix # TODO
-    # ./yazi.nix
+    ./yazi.nix
   ];
 
   home.packages = with pkgs; [
@@ -29,7 +29,6 @@
     dua
     just
     mask
-    delta
     jq
     htmlq
     sd # better sed
