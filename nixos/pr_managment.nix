@@ -24,8 +24,8 @@ lib.mkMerge [
   # };
 })
 (lib.mkIf (config.custom.sops.enable && config.custom.pr_managment.enable) {
-  sops.secrets.nextcloud_adminpass.owner = "nextcloud";
-  sops.secrets.nextcloud_adminpass.group = "nextcloud";
+  # sops.secrets.nextcloud_adminpass.owner = "nextcloud";
+  # sops.secrets.nextcloud_adminpass.group = "nextcloud";
 
   # services.nextcloud = {
   #   enable = true;
