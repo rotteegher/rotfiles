@@ -21,10 +21,15 @@
 
   home.packages = with pkgs; [
     dysk # better disk info
+    fselect
     fd # better find
     fx # terminal json viewer and processor
     htop
     dust # better du
+    dua
+    just
+    mask
+    delta
     jq
     htmlq
     sd # better sed
@@ -36,7 +41,10 @@
     hwatch
     entr
     ent
-    coreutils-full
+    mprocs
+    presenterm
+    # coreutils-full
+    uutils-coreutils
     util-linux
     pciutils
     ffmpeg
