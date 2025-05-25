@@ -72,6 +72,23 @@
     excludePackages = [ pkgs.xterm ];
   };
 
+  systemd.extraConfig = "DefaultLimitNOFILE=524288";
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "524288";
+    }
+    {
+      domain = "*";
+      type = "hard";
+      item = "nofile";
+      value = "524288";
+    }
+  ];
+
+
   # Reboot/poweroff for unprivileged users
   # Grants permissions to reboot/poweroff machine to users in the users group.
   security = {
