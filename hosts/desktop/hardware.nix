@@ -13,15 +13,18 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "usbcore" "i2c-dev"];
   boot.initrd.kernelModules = ["i2c-dev"];
-  boot.kernelModules = ["kvm-intel" "usbcore" "snd-seq" "snd-rawmidi"];
+  boot.kernelModules = ["kvm-intel" "usbcore" "snd-seq" "snd-rawmidi" "binder_linux" "ashmem_linux" ];
   boot.blacklistedKernelModules = ["amdgpu"];
-  boot.extraModulePackages = [];
+  boot.extraModulePackages = [ ];
+
   boot.kernelParams = [
     "boot.shell_on_fail"
     "acpi_backlight=vendor"
     "video.use_native_backlight=1"
   ];
   boot.tmp.useTmpfs = true;
+
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
