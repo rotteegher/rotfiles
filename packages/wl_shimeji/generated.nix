@@ -3,17 +3,17 @@
 {
   wl_shimeji = {
     pname = "wl_shimeji";
-    version = "fbb2e148981386863410f4fadecc240af6dc9e6a";
+    version = "b8525b2a208ccbe074c79854844a138d941b4aae";
     src = fetchFromGitHub {
       owner = "CluelessCatBurger";
       repo = "wl_shimeji";
-      rev = "fbb2e148981386863410f4fadecc240af6dc9e6a";
+      rev = "b8525b2a208ccbe074c79854844a138d941b4aae";
       fetchSubmodules = true;
       deepClone = true;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-ftDWTEAZBz7jug/PbvU4+ANRcsP1kUF4zLvX0zWBUwY=";
+      sha256 = "sha256-Ahy+dUsEMn7ti3DVdMUSBeFW3ONWt931RgWDsmrFIPE=";
     };
-    date = "2025-04-04";
+    date = "2025-05-24";
   };
 }
