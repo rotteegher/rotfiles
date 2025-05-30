@@ -45,6 +45,11 @@
       url = "github:iynaix/wfetch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    focal = {
+      url = "github:iynaix/focal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };

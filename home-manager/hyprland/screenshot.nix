@@ -3,8 +3,14 @@
   isNixOS,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
+  focal = inputs.focal.packages.${pkgs.system}.default.override {
+    hyprland = config.wayland.windowManager.hyprland.package;
+    rofi-wayland = config.programs.rofi.package;
+    ocr = true;
+  };
   screenshotDir = "$HOME/Pictures/Screenshots";
   iso8601 = "%Y-%m-%dT%H:%M:%S%z";
   # screenshot with rofi options to preselect
@@ -132,34 +138,55 @@
 in {
   config = lib.mkIf config.wayland.windowManager.hyprland.enable {
     home.packages =
-      [
-        hypr-ocr
-        hypr-screenshot
-      ]
-      ++ (lib.optionals isNixOS (with pkgs; [
-        grimblast
+      (with pkgs; [
+        # hypr-ocr
+        # hypr-screenshot
         swappy
-      ]));
+        wf-recorder
+      ])
+      ++ lib.optionals isNixOS [ focal ];
+
 
     # swappy conf
-    xdg.configFile."swappy/config".text = ''
-      [Default]
-      save_dir=${screenshotDir}
-      save_filename_format=${iso8601}.png
-      show_panel=false
-      line_size=5
-      text_size=20
-      text_font=sans-serif
-      paint_mode=brush
-      early_exit=false
-      fill_shape=false
-    '';
+    xdg.configFile."swappy/config".text = lib.generators.toINI { } {
+      default = {
+        save_dir = "${config.xdg.userDirs.pictures}/Screenshots";
+        save_filename_format = "${iso8601}";
+        show_panel = false;
+        line_size = 5;
+        text_size = 20;
+        text_font = "sans-serif";
+        paint_mode = "brush";
+        early_exit = false;
+        fill_shape = false;
+      };
+    };
+
+    custom.waybar = {
+      config = {
+        "custom/focal" = {
+          exec = # sh
+            ''focal-waybar --recording "󰑋"'';
+          format = "{}";
+          # hide-empty-text = true;
+          # return-type = "json";
+          on-click = "focal video --stop";
+          interval = 2; # poll every 2s
+        };
+
+        modules-left = lib.mkBefore [ "custom/focal" ];
+      };
+    };
 
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "$mod, backslash, exec, grimblast --notify --freeze copy area"
-        "$mod_SHIFT, backslash, exec, hypr-screenshot"
-        "$mod_CTRL, backslash, exec, hypr-ocr"
+        # "$mod, backslash, exec, grimblast --notify --freeze copy area"
+        # "$mod_SHIFT, backslash, exec, hypr-screenshot"
+        # "$mod_CTRL, backslash, exec, hypr-ocr"
+      "$mod, backslash, exec, focal image --area selection --no-notify --no-save --no-rounded-windows"
+      "$mod_SHIFT, backslash, exec, focal image --edit swappy --rofi --no-rounded-windows"
+      "$mod_CTRL, backslash, exec, focal image --area selection --ocr"
+      ''ALT, backslash, exec, focal video --rofi --no-rounded-windows''
       ];
     };
   };
