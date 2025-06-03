@@ -21,7 +21,7 @@
       url = "github:musnix/musnix";
     };
 
-    hyprland.url = "github:hyprwm/hyprland/v0.38.1";
+    hyprland.url = "github:hyprwm/hyprland";
 
     devenv.url = "github:cachix/devenv";
 

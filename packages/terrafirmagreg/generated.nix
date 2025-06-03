@@ -3,7 +3,7 @@
 {
   terrafirmagreg = {
     pname = "terrafirmagreg";
-    version = "0.9.8";
+    version = "0.9.9";
     src = fetchurl {
       url = "https://github.com/TerraFirmaGreg-Team/Modpack-Modern/releases/download/0.8.1/TerraFirmaGreg-Modern-0.8.1-serverpack.zip";
       sha256 = "sha256-TZmncuTLNGuqWZHzd8XUTiUppGj2iOq9KU3Zsxx8I/s=";

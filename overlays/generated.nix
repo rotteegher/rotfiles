@@ -38,16 +38,16 @@
   };
   wallust = {
     pname = "wallust";
-    version = "80f59115d27fa96dd68d12f7094ab7c5ee5608a8";
+    version = "2abb55c4a7bbb9822f8a74aeaf1054efe35bef7b";
     src = fetchgit {
       url = "https://codeberg.org/explosion-mental/wallust.git";
-      rev = "80f59115d27fa96dd68d12f7094ab7c5ee5608a8";
+      rev = "2abb55c4a7bbb9822f8a74aeaf1054efe35bef7b";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-71PakakRvRNoEYzyNTTPRvp911tGU+NlkLLieAAwQHg=";
+      sha256 = "sha256-xZkmtsJwN4xYXC/Ew8K90P88fcuGd8L1w6ASRNWwmhk=";
     };
-    date = "2025-05-22";
+    date = "2025-05-27";
   };
 }
