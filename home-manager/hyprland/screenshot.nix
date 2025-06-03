@@ -183,8 +183,8 @@ in {
         # "$mod, backslash, exec, grimblast --notify --freeze copy area"
         # "$mod_SHIFT, backslash, exec, hypr-screenshot"
         # "$mod_CTRL, backslash, exec, hypr-ocr"
-      "$mod, backslash, exec, focal image --area selection --no-notify --no-save --no-rounded-windows"
-      "$mod_SHIFT, backslash, exec, focal image --edit swappy --rofi --no-rounded-windows"
+      "$mod_SHIFT, backslash, exec, focal image --area selection --no-notify --no-save --no-rounded-windows"
+      "$mod, backslash, exec, focal image --edit swappy --rofi --no-rounded-windows"
       "$mod_CTRL, backslash, exec, focal image --area selection --ocr"
       ''ALT, backslash, exec, focal video --rofi --no-rounded-windows''
       ];
