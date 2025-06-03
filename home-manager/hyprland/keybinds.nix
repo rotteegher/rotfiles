@@ -123,7 +123,9 @@ in
 
         # fullscreen
         "$mod, f, fullscreen, 0"
-        "$mod_SHIFT_CTRL, f, fakefullscreen"
+        # "$mod_SHIFT_CTRL, f, fakefullscreen"
+        "$mod_SHIFT, f, fullscreenstate, -1 2"
+
 
         # floating
         "$mod, g, togglefloating"

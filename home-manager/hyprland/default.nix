@@ -119,12 +119,16 @@ in {
         layout = "master";
       };
 
+      
+
       decoration = {
         rounding = 0;
-        drop_shadow = host != "vm";
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
+        shadow = {
+          enabled = host != "vm";
+          range = 4;
+          render_power = 3;
+          color = "rgba(1a1a1aee)";
+        };
 
         # dim_inactive = true
         # dim_strength = 0.05
@@ -171,7 +175,7 @@ in {
       };
 
       master = {
-        new_is_master = false;
+        new_on_active = false;
         mfact = "0.5";
         orientation = "left";
         smart_resizing = true;
@@ -208,8 +212,6 @@ in {
         # "nodim,class:Shijima-Qt"
         # "pin,class:Shijima-Qt"
 
-        # fix discord not detecting keyboard input
-        "forceinput, class:^(discord)$, xwayland:0"
         # "dimaround,floating:1"
         "bordersize 5,fullscreen:1" # monocle mode
         "float,class:(wlroots)" # hyprland debug session
@@ -222,9 +224,9 @@ in {
 
       windowrule = [
         # do not idle while watching videos
-        "idleinhibit fullscreen,librewolf"
-        "idleinhibit focus,YouTube"
-        "idleinhibit focus,mpv"
+        "idleinhibit focus,class:(librewolf)"
+        "idleinhibit focus,class:(YouTube)"
+        "idleinhibit focus,class:(mpv)"
       ];
 
       exec-once = [
