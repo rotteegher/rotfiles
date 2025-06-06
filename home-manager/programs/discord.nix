@@ -20,6 +20,19 @@
         icon = "${pkgs.tela-circle-icon-theme}/share/icons/Tela-circle/scalable/apps/discord.svg";
       })
 
+      (pkgs.writeShellApplication {
+        name = "discord-fix";
+        text = ''
+          env ELECTRON_OZONE_PLATFORM_HINT= ${lib.getExe pkgs.discord}
+        '';
+      })
+      (pkgs.makeDesktopItem {
+        name = "discord-fix";
+        exec = "env ELECTRON_OZONE_PLATFORM_HINT= ${lib.getExe pkgs.discord}";
+        desktopName = "Discord-Fix";
+        icon = "${pkgs.tela-circle-icon-theme}/share/icons/Tela-circle/scalable/apps/discord.svg";
+      })
+
       pkgs.discord
     ];
 

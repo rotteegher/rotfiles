@@ -9,11 +9,18 @@ let
 in
 {
   wayland.windowManager.hyprland.settings = lib.mkIf config.wayland.windowManager.hyprland.enable {
-    bind =
+    bindn =
       [
         #GLOBAL
-        ", mouse:276, pass, ^(TeamSpeak 3)$"
-        
+        # ", code:70, pass, class:^(librewolf)$"
+        # ", code:70, pass, class:^(discord)$"
+        ", code:70, pass, class:^(vesktop)$"
+        ", code:70, exec, notify-send hello"
+    ];
+    bind =
+      [
+        ", mouse:275, pass, class:^(librewolf)$"
+
         # Exec
         "$mod, Return, exec, $term"
         "$mod_SHIFT, Return, exec, rofi -show drun"
