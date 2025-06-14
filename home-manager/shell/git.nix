@@ -61,6 +61,7 @@ in {
       };
       extraConfig = {
         init = {defaultBranch = "master";};
+        remote.origin.push = "HEAD";
         branch = {
           master = {merge = "refs/heads/master";};
           main = {merge = "refs/heads/main";};

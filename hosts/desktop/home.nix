@@ -5,7 +5,7 @@
     backlight.enable = true;
     displays = [{
       display_name = "DP-3";
-      hyprland = "2560x1080@200,0x0,1";
+      hyprland = "2560x960@200,0x0,1";
       workspace_names = [ "1" "2" "3" "4" "q" "w" "e" "a" "s" "d" ];
       workspaces = [ 1 2 3 4 5 6 7 8 9 10 ];
     }];
