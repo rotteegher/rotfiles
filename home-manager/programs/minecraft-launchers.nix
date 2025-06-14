@@ -16,6 +16,7 @@
     custom.persist = {
       home.directories = [
         ".local/share/PrismLauncher/"
+        ".gradle"
       ];
     };
   };

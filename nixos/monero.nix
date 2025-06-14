@@ -11,7 +11,7 @@
 
     services.monero = {
       enable = true;
-      dataDir = "/md/stsea-okii/_XMR";
+      dataDir = "/md/wdc-okii/_XMR";
       mining = {
         enable = false;
         threads = 2;

@@ -26,6 +26,7 @@ in
       pkgs.pandoc
       pkgs.yamlfmt
       pkgs.yaml-language-server
+      pkgs.bash-language-server
     ];
     programs.helix = {
       enable = true;
