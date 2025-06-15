@@ -217,7 +217,7 @@ lib.mkIf cfg.enable {
         };
 
         layer = "top";
-        margin = "0";
+        margin-right = "600";
 
         modules-center = [ "hyprland/workspaces" ];
 
@@ -328,7 +328,8 @@ lib.mkIf cfg.enable {
                 }
 
                 #waybar {
-                  background: rgba(0,0,0,0.1)
+                  background: rgba(0,0,0,0.1);
+                  padding-right: 600px;
                 }
 
                 ${mkModulesCss cfg.config.modules-left}

@@ -8,7 +8,14 @@
       line_break = {
         disabled = true;
       };
+      time = {
+        disabled = false;
+        format = "[$time]($style) ";
+        style = "green";
+        time_format = "「%H:%M:%S」";
+      };
       format = lib.concatStringsSep "" [
+        "$time"
         "$username"
         "$hostname"
         "$directory"
