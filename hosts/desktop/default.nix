@@ -46,7 +46,7 @@
   };
 
   systemd.user.services.scrcpy = {
-    enable = true;
+    enable = false;
     description = "Start scrcpy when Motorola G54 5G is connected";
     serviceConfig = {
       ExecStart = "${pkgs.scrcpy}/bin/scrcpy --video-bit-rate=24M --max-size=2560";

@@ -29,7 +29,7 @@ in {
       (openOnWorkspace 7 "$term sh -c 'tenki --fps 60 --tps 60 --show-fps --timer-color yellow --mode rain; exec fish'")
 
       # Open Discord
-      (openOnWorkspace 4 "discord-vesktop")
+      (openOnWorkspace 4 "vesktop")
 
       # Open Steam
       # (openOnWorkspace 5 "steam")
@@ -57,6 +57,7 @@ in {
       "hyprctl dispatch workspace 4"
 
       "swww-daemon &"
+      "mpvpaper -s -o \"no-audio loop\" DP-3 ~/Videos/timelapce_bw.mp40001-1087.mkv &"
       "sleep 1; hypr-wallpaper && launch-waybar"
 
       # fix gparted "cannot open display: :0" error

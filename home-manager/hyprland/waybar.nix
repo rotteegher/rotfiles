@@ -139,8 +139,8 @@ lib.mkIf cfg.enable {
             mode-mon-col = 3;
             on-scroll = 1;
           };
-          format-alt = "󰥔 {:%Y-%m-%d %H:%M:%S-%Z}";
-          format = "󰸗 {:%a, %d %b %Y 󰥔 %H:%M:%S} ";
+          format-alt = "󰥔 {:%H:%M:%S-%Z %Y-%m-%d}";
+          format = "󰥔 {:%H:%M:%S 󰸗 %a, %d %b %Y} ";
           # format = "󰥔   {:%H:%M}";
           # format-alt = "  {:%a, %d %b %Y}";
           interval = 1;
@@ -219,25 +219,26 @@ lib.mkIf cfg.enable {
         layer = "top";
         margin-right = "600";
 
-        modules-center = [ "hyprland/workspaces" ];
+        modules-center = [ "hyprland/workspaces" "hyprland/window" ];
 
         modules-left = [
+          "clock" 
+          "memory"
+          "temperature"
+          "cpu"
+          "network"
+          "pulseaudio"
+          "backlight"
           "custom/shade"
           "custom/brightness-ddc"
           "custom/nix"
-        ] ++ (lib.optional cfg.idle-inhibitor "idle_inhibitor") ++ [ "hyprland/window" ];
+          "tray"
+        ] ++ (lib.optional cfg.idle-inhibitor "idle_inhibitor") ++ [  ];
 
         tray = { };
 
         modules-right =
           [
-            "memory"
-            "temperature"
-            "cpu"
-            "tray"
-            "network"
-            "pulseaudio"
-            "backlight"
           ]
           ++ (lib.optional config.custom.battery.enable "battery")
           ++ [ "clock" ];
