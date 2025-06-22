@@ -57,8 +57,6 @@
     patchelf
 
     cmus
-    feh
-
     devenv
 
     git-filter-repo
