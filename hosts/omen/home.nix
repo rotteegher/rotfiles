@@ -63,7 +63,6 @@
     packages = lib.mkIf isNixOS (with pkgs; [
       # gimp
       # kdenlive
-      feh
       ffmpeg
     ]);
   };
