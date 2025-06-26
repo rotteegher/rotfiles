@@ -59,6 +59,7 @@
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="22b8", ATTR{idProduct}=="2e81", TAG+="systemd", ENV{SYSTEMD_USER_WANTS}+="scrcpy.service"
   '';
 
+
   services.displayManager.autoLogin.user = user;
 
   networking.hostId = "83efa833"; # required for zfs

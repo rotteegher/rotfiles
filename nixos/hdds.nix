@@ -15,15 +15,17 @@ in {
       options zfs zfs_arc_max=51539607552
     '';
 
-    services.sanoid = lib.mkIf config.custom.zfs.snapshots {
-      enable = true;
+    services = {
+      sanoid = lib.mkIf config.custom.zfs.snapshots {
+        enable = true;
 
-      datasets = {
-        ${wdc-blue-dataset} = lib.mkIf cfg.wdc1tb {
-          hourly = 24;
-          daily = 31;
-          weekly = 7;
-          monthly = 1;
+        datasets = {
+          ${wdc-blue-dataset} = lib.mkIf cfg.wdc1tb {
+            hourly = 24;
+            daily = 31;
+            weekly = 7;
+            monthly = 1;
+          };
         };
       };
     };

@@ -137,18 +137,22 @@ in
         # floating
         "$mod, g, togglefloating"
 
+        "$mod, x, swapactiveworkspaces, DP-2 DP-3"
+
         # sticky
         "$mod_CTRL, s, pin"
 
         # focus next / previous monitor
-        "$mod, Left, focusmonitor, -1"
-        "$mod, Right, focusmonitor, +1"
+        "$mod_CTRL, l, focusmonitor, DP-3"
+        "$mod_CTRL, h, focusmonitor, DP-2"
+        "$mod_CTRL, k, movewindow, DP-2"
+        "$mod_CTRL, j, movewindow, DP-3"
 
         # resize windows
-        "$mod_CTRL, h, resizeactive, -50 0"
-        "$mod_CTRL, j, resizeactive, 0 50"
-        "$mod_CTRL, k, resizeactive, 0 -50"
-        "$mod_CTRL, l, resizeactive, 50 0"
+        "$mod, Left, resizeactive, -50 0"
+        "$mod, Right, resizeactive, 0 50"
+        "$mod, Up, resizeactive, 0 -50"
+        "$mod, Down, resizeactive, 50 0"
 
         # # move to next / previous monitor
         # "$mod_SHIFT, Left, movewindow, ${

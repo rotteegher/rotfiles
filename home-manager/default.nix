@@ -18,6 +18,12 @@
     enable = true;
   };
 
+  services.udiskie = {
+    enable = true;
+    tray = "auto";   # Set to "never" if you don’t want a tray icon
+    notify = true;   # Show notifications when devices are mounted
+  };
+
   home = {
     username = user;
     homeDirectory = "/home/${user}";
@@ -28,7 +34,7 @@
       __IS_NIXOS = if isNixOS then "1" else "0";
       NIXPKGS_ALLOW_UNFREE = "1";
     };
-
+    
     packages =
       with pkgs;
       [
