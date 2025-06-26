@@ -6,6 +6,7 @@
   # use centralized cargo cache
   home.sessionVariables = {
     CARGO_HOME = "/persist/cache/${config.xdg.dataHome}/.cargo";
+    RUSTUP_HOME = "/persist/cache/${config.xdg.dataHome}/.rustup";
     # CARGO_TARGET_DIR = "/persist/cache/home/${user}/cargo/target";
   };
 

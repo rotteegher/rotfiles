@@ -55,7 +55,9 @@ lib.mkIf cfg.enable {
               ;;
             set)
               value="$2"
-              ddcutil setvcp 10 "$value"
+              for i in $(seq 1 "$(ddcutil detect --brief | grep -c '^Display')"); do
+                ddcutil --sleep-multiplier=0 --display "$i" setvcp 10 "$value"
+              done
               ;;
             toggle)
               current=$(get_current_brightness)
