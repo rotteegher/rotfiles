@@ -21,6 +21,8 @@
       };
     };
   };
+  xdg.configFile."zellij/v2h.swap.kdl".source = ./v2h.swap.kdl;
+
   programs.tmux = {
     enable = true;
     prefix = "C-b";

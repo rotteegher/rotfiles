@@ -61,10 +61,11 @@ in {
       };
       extraConfig = {
         init = {defaultBranch = "master";};
-        remote.origin.push = "HEAD";
-        branch = {
-          master = {merge = "refs/heads/master";};
-        };
+        push.autoSetupRemote = true;
+        # remote.origin.push = "HEAD";
+        # branch = {
+        #   master = {merge = "refs/heads/master";};
+        # };
         core = {
           pager = "delta";
         };
@@ -83,8 +84,10 @@ in {
           pretty = "format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset";
         };
         diff = {
-          tool = "nvim -d";
-          guitool = "code";
+          # tool = "nvim -d";
+          # guitool = "code";
+          tool = "hx";
+          guitool = "hx";
           colorMoved = "default";
         };
         pull = {rebase = true;};

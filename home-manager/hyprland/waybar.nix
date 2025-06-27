@@ -329,11 +329,11 @@ lib.mkIf cfg.enable {
                 * {
                   border: none;
                   border-radius: 0;
-                  color: #fecdb2;
                 }
 
                 #waybar {
                   background: rgba(0,0,0,0.1);
+                  font-size: 14px;
                   color: #fecdb2;
                 }
 
@@ -348,7 +348,7 @@ lib.mkIf cfg.enable {
                 ${mkModuleClassName "hyprland/workspaces"} * {
                   transition: 500ms;
                   transition-duration: 500ms;
-                  font-size: 10px;
+                  font-size: 14px;
                 }
 
                 #workspaces button {
