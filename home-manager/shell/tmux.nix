@@ -4,7 +4,7 @@
     enableBashIntegration = false;
     enableFishIntegration = true;
     settings = {
-      theme = "catpuccin-mocha";
+      theme = "gruvbox-dark";
       on_force_close = "detach";
       simplified_ui = false;
       default_shell = "fish";

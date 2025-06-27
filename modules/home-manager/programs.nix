@@ -54,7 +54,7 @@
       default = true;
     };
     kitty.enable = lib.mkEnableOption "kitty" // {
-      default = isNixOS;
+      default = true;
     };
     obs-studio.enable = lib.mkEnableOption "obs-studio" // {
       default = isNixOS && host == "desktop";

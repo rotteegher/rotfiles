@@ -71,7 +71,7 @@ in
     };
     font = {
       name = "${config.custom.fonts.monospace}";
-      package = pkgs.monocraft;
+      package = pkgs.nerd-fonts.gohufont;
       size = 6;
     };
     gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";

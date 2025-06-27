@@ -13,7 +13,7 @@
       monospace = lib.mkOption {
         type = lib.types.str;
         # default = "JetBrainsMono Nerd Font";
-        default = "Monocraft";
+        default = "GohuFont uni11 Nerd Font Mono";
         description = "The font to use for monospace text";
       };
       packages = lib.mkOption {

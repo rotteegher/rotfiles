@@ -78,7 +78,7 @@ in
           true-color = true;
           line-number = "relative";
           mouse = true;
-          rulers = [ 200 ];
+          rulers = [ 0 ];
           bufferline = "always";
         };
         keys.select = {

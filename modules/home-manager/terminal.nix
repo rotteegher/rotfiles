@@ -56,13 +56,13 @@ in {
 
       padding = lib.mkOption {
         type = lib.types.int;
-        default = 12;
+        default = 0;
         description = "Padding for the terminal.";
       };
 
       opacity = lib.mkOption {
         type = lib.types.str;
-        default = "0.8";
+        default = "0.9";
         description = "Opacity for the terminal.";
       };
     };

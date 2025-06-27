@@ -19,6 +19,8 @@
     ];
     terminal.size = 8;
 
+    wallust.colorscheme = "base16-embers";
+
     hyprland = {
       modkey = "SUPER"; # could be "ALT"
       autostart = false;

@@ -296,6 +296,7 @@ lib.mkIf cfg.enable {
               font-weight: bold;
               color: {{foreground}};
               transition: none;
+              color: #fecdb2;
               text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
               border-bottom:  2px solid transparent;
               padding-left: ${margin};
@@ -328,11 +329,12 @@ lib.mkIf cfg.enable {
                 * {
                   border: none;
                   border-radius: 0;
+                  color: #fecdb2;
                 }
 
                 #waybar {
                   background: rgba(0,0,0,0.1);
-                  padding-right: 600px;
+                  color: #fecdb2;
                 }
 
                 ${mkModulesCss cfg.config.modules-left}
@@ -344,20 +346,21 @@ lib.mkIf cfg.enable {
                 }
 
                 ${mkModuleClassName "hyprland/workspaces"} * {
-                  transition: 200ms;
-                  transition-duration: 200ms;
+                  transition: 500ms;
+                  transition-duration: 500ms;
                   font-size: 10px;
                 }
 
                 #workspaces button {
                   ${baseModuleCss}
-                  padding-left: 8px;
-                  padding-right: 8px;
+                  padding-left: 4px;
+                  padding-right: 4px;
                 }
 
                 #workspaces button.active {
-                  border-bottom:  2px solid {{foreground}};
-                  background-color: rgba(255,255,255, 0.25);
+                  border-top:  1px solid #fecdb2;
+                  color: black;
+                  background-color: rgba(255,255,255, 0.85);
                 }
               ''
               + lib.optionalString cfg.idle-inhibitor ''
