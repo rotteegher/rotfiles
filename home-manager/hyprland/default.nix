@@ -111,7 +111,7 @@ in {
 
       "$term" = "${config.custom.terminal.exec}";
 
-      general = let gap = if host == "desktop" then 3 else 2;
+      general = let gap = if host == "desktop" then 0 else 2;
       in {
         gaps_in = gap;
         gaps_out = gap;
@@ -184,8 +184,9 @@ in {
       binds = { workspace_back_and_forth = false; };
 
       misc = {
-        disable_hyprland_logo = false;
-        disable_splash_rendering = false;
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+        force_default_wallpaper = 0;
         mouse_move_enables_dpms = false;
         animate_manual_resizes = true;
         animate_mouse_windowdragging = true;
@@ -193,6 +194,7 @@ in {
         enable_swallow = false;
         swallow_regex = "^([Kk]itty|[Ww]ezterm)$";
         focus_on_activate = false;
+        background_color = "0x383539";
       };
 
       debug.disable_logs = false;

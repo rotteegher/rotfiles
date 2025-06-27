@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.custom.kitty;
@@ -9,7 +10,7 @@ in
   lib.mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      themeFile = "Catppuccin-Mocha";
+      themeFile = "tokyo_night_storm";
       font = {
         name = terminal.font;
         inherit (terminal) size;

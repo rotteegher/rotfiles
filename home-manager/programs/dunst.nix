@@ -16,6 +16,7 @@ in
   custom.wallust.templates.dunstrc = lib.mkIf config.services.dunst.enable {
     text = pkgs.custom.lib.toQuotedINI {
       global = {
+        logfile = "${config.xdg.cacheHome}/dunst.log";
         browser = "brave -new-tab";
         corner_radius = 8;
         dmenu = "rofi -p dunst:";
