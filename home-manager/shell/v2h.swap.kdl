@@ -1,0 +1,12 @@
+layout {
+    swap_tiled_layout name="v2h" {
+        tab {
+            pane split_direction="vertical" {
+                pane
+                pane
+                pane
+                pane
+            }
+        }
+    }
+}
