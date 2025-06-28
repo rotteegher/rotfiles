@@ -7,14 +7,14 @@
       {
         display_name = "DP-3";
         hyprland = "addreserved, 0, 0, 0, 600, 2560x1080@200.01,0x0,1";
-        workspace_names = [ "1" "4" "a" "s" "d" ];
-        workspaces = [ 1 4 8 9 10 ];
+        workspace_names = [ "4" "a" "s" "d" "c" ];
+        workspaces = [ 4 8 9 10 11 ];
       }
       {
         display_name = "DP-2";
         hyprland = "3440x1440@180,-2560x0,1,";
-        workspace_names = [ "2" "3" "q" "w" "e"];
-        workspaces = [ 2 3 5 6 7];
+        workspace_names = [ "1" "2" "3" "q" "w" "e"];
+        workspaces = [ 1 2 3 5 6 7];
       }
     ];
     terminal.size = 8;

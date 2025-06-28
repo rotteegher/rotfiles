@@ -33,15 +33,10 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
 
-  hardware.openrazer.enable = true;
-  environment.systemPackages = with pkgs; [
-    openrazer-daemon
-    polychromatic
-    razergenie
-  ];
-  users.users.${user} = {...}: {
-    extraGroups = ["openrazer"];
-  };
+  # hardware.openrazer.enable = true;
+  # environment.systemPackages = with pkgs; [
+  # ];
+  users.users.${user}.extraGroups = ["i2c"];
 
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

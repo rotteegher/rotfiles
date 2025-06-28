@@ -91,6 +91,9 @@ in
         "$mod, 0, workspace, 10" # 10
         "$mod, d, workspace, 10" # d for 10
 
+        "$mod, -, workspace, 11" # -
+        "$mod, c, workspace, 11" # c for 11
+
         # Move active window to a workspace with mainMod + SHIFT
         # +
         # 1234 -> 1|2|3|4
@@ -118,6 +121,9 @@ in
 
         "$mod_SHIFT, 0, movetoworkspacesilent, 10" # 10
         "$mod_SHIFT, d, movetoworkspacesilent, 10" # d for 10
+
+        "$mod_SHIFT, -, movetoworkspacesilent, 11" # 11
+        "$mod_SHIFT, c, movetoworkspacesilent, 11" # c for 11
 
         # "$mod_SHIFT, b, layoutmsg, swapwithmaster"
 

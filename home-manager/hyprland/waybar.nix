@@ -333,7 +333,7 @@ lib.mkIf cfg.enable {
 
                 #waybar {
                   background: rgba(0,0,0,0.1);
-                  font-size: 14px;
+                  font-size: 12px;
                   color: #fecdb2;
                 }
 

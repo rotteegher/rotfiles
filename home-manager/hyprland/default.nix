@@ -222,6 +222,7 @@ in {
         "float,class:(ayaka-gui)"
         "float,class:(org.fcitx.)"
         "float,class:(fl64.exe)"
+        "float,class:(blender)"
       ];
 
       windowrule = [

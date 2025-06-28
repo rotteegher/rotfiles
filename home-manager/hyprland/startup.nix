@@ -35,7 +35,7 @@ in {
       # (openOnWorkspace 5 "steam")
 
       # audio
-      (openOnWorkspace 9 "pavucontrol")
+      (openOnWorkspace 11 "pavucontrol")
       # (openOnWorkspace 9 "easyeffects")
 
       # (openOnWorkspace 9 "easyeffects")
@@ -56,7 +56,7 @@ in {
       "hyprctl dispatch workspace 1"
       "hyprctl dispatch workspace 4"
 
-      "swww-daemon &"
+      # "swww-daemon &"
       "mpvpaper -s -o \"no-audio loop\" DP-3 ~/Videos/timelapce_bw.mp40001-1087.mkv &"
       "sleep 1; hypr-wallpaper && launch-waybar"
 
