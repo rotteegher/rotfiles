@@ -38,7 +38,12 @@ in
 
     # misc
     {
-      environment.systemPackages = [pkgs.gcr]; # stops errors with copilot login?
+      services.dbus.packages = [ pkgs.gcr ];
+      environment.systemPackages = [
+        pkgs.gcr # stops errors with copilot login?
+        pkgs.pinentry-tty # stops errors for passphrase asking for gpg keys
+        pkgs.pinentry-curses
+      ];
 
       security = {
         polkit.enable = true;
@@ -52,8 +57,10 @@ in
         GNUPGHOME = "${config.hm.xdg.dataHome}/.gnupg";
       };
 
+      services.pcscd.enable = true;
       programs.gnupg.agent = {
         enable = true;
+        pinentryPackage = pkgs.pinentry-curses;
         enableSSHSupport = true;
       };
 
