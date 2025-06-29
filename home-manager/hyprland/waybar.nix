@@ -346,8 +346,6 @@ lib.mkIf cfg.enable {
                 }
 
                 ${mkModuleClassName "hyprland/workspaces"} * {
-                  transition: 500ms;
-                  transition-duration: 500ms;
                   font-size: 14px;
                 }
 
@@ -358,9 +356,11 @@ lib.mkIf cfg.enable {
                 }
 
                 #workspaces button.active {
-                  border-top:  1px solid #fecdb2;
+                  border-top:  1px solid black;
                   color: black;
                   background-color: rgba(255,255,255, 0.85);
+                  transition: 200ms;
+                  transition-duration: 200ms;
                 }
               ''
               + lib.optionalString cfg.idle-inhibitor ''
