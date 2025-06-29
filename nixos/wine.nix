@@ -23,6 +23,8 @@
     # winetricks (all versions)
     winetricks
 
+    protontricks
+
     # for audio sync
     wineasio
 
