@@ -34,7 +34,7 @@
       wl-color-picker
       umoria
       inputs.wfetch.packages.${pkgs.system}.wfetch
-      custom.wl_shimeji
+      # custom.wl_shimeji
     ];
 
     shellAliases = {

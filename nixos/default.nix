@@ -133,6 +133,12 @@
           scrcpy
 
           wayvnc
+
+          cups-pdf-to-pdf
+          sane-airscan
+          sane-backends
+          simple-scan
+          xsane
         ] ++
         # install gtk theme for root, some apps like gparted only run as root
         (with config.hm.gtk; [ theme.package iconTheme.package ])

@@ -20,7 +20,7 @@
 
   services.udiskie = {
     enable = true;
-    tray = "auto";   # Set to "never" if you don’t want a tray icon
+    tray = "never";   # Set to "never" if you don’t want a tray icon
     notify = true;   # Show notifications when devices are mounted
   };
 

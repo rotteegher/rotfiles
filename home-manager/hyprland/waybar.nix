@@ -221,7 +221,7 @@ lib.mkIf cfg.enable {
         layer = "top";
         margin-right = "600";
 
-        modules-center = [ "hyprland/workspaces" "hyprland/window" ];
+        modules-center = [ "hyprland/workspaces"  ];
 
         modules-left = [
           "clock" 
@@ -241,6 +241,7 @@ lib.mkIf cfg.enable {
 
         modules-right =
           [
+            "hyprland/window"
           ]
           ++ (lib.optional config.custom.battery.enable "battery")
           ++ [ "clock" ];

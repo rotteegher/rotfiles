@@ -72,6 +72,31 @@
     excludePackages = [ pkgs.xterm ];
   };
 
+  hardware.sane = {
+    enable = true;
+    extraBackends = [ pkgs.sane-airscan pkgs.epson-escpr pkgs.epson-escpr2 pkgs.epsonscan2 pkgs.epkowa ];
+  };
+  services.printing = {
+    enable = true;
+    drivers = [
+      pkgs.epson-escpr2
+      pkgs.epson-escpr
+      pkgs.epsonscan2
+      pkgs.cups-pdf-to-pdf
+      pkgs.gutenprint
+      pkgs.epkowa
+      pkgs.sane-airscan
+      pkgs.sane-backends
+      pkgs.simple-scan
+      pkgs.xsane
+    ];
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   systemd.extraConfig = "DefaultLimitNOFILE=524288";
   security.pam.loginLimits = [
     {

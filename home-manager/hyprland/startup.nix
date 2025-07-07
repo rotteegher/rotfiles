@@ -57,7 +57,7 @@ in {
       "hyprctl dispatch workspace 4"
 
       # "swww-daemon &"
-      "mpvpaper -s -o \"no-audio loop\" DP-3 ~/Videos/timelapce_bw.mp40001-1087.mkv &"
+      # "mpvpaper -s -o \"no-audio loop\" DP-3 ~/Videos/timelapce_bw.mp40001-1087.mkv &"
       "sleep 1; hypr-wallpaper && launch-waybar"
 
       # fix gparted "cannot open display: :0" error
