@@ -71,6 +71,6 @@
     };
   };
   home = {
-    packages = lib.mkIf isNixOS (with pkgs; [ guvcview krita inkscape custom.wl_shimeji ]);
+    packages = lib.mkIf isNixOS (with pkgs; [ guvcview krita inkscape ]);
   };
 }

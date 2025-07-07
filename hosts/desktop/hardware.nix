@@ -32,6 +32,22 @@
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+  #
+  hardware.printers = {
+    ensurePrinters = [
+      {
+        name = "EPSON-ET-2810";
+        location = "Living Room";
+        deviceUri = "http://192.168.1.200:631/ipp/print";
+        model = "epson-inkjet-printer-escpr/Epson-ET-2810_Series-epson-escpr-en.ppd";
+        ppdOptions = {
+          PageSize = "A4";
+        };
+      }
+    ];
+    ensureDefaultPrinter = "EPSON-ET-2810";
+  };
+
 
   # hardware.openrazer.enable = true;
   # environment.systemPackages = with pkgs; [
