@@ -35,6 +35,7 @@ in
 
     # script to bootstrap a new install
     environment.systemPackages = with pkgs; [
+      pkgs.sops
       (writeShellApplication {
         name = "install-remote-secrets";
         runtimeInputs = [ rsync ];
