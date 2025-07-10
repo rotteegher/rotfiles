@@ -12,7 +12,7 @@
     ./samba.nix
     ./fileshare.nix
     ./monero.nix
-    # ./sws.nix # TODO
+    ./sws.nix # TODO
     ./dns.nix
     ./pr_managment.nix
     ./nginx.nix

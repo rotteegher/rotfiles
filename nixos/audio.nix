@@ -49,6 +49,7 @@
       easyeffects
       pulseaudio
       qjackctl
+      qpwgraph
       jack2
       vmpk # piano
     ];

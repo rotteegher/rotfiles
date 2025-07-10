@@ -19,6 +19,7 @@
         ];
       };
     };
+    environment.systemPackages = [pkgs.tagainijisho ];
     custom.persist = {
       home.directories = [
         ".config/fcitx/"
@@ -44,7 +45,6 @@
 
     # piper
     services.ratbagd.enable = true;
-    environment.systemPackages = [pkgs.piper];
 
     users.users.${user} = {...}: {
       extraGroups = ["input"];
