@@ -1,11 +1,13 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.custom.hotspot;
 in {
   config = lib.mkIf (config.hm.custom.wifi.enable && cfg.enable) {
+    environment.systemPackages = [ pkgs.linux-wifi-hotspot pkgs.hostapd ];
     # Enable WIFi Hotspot
     services.create_ap = {
       enable = true;

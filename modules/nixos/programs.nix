@@ -32,6 +32,15 @@ in
     pr_managment.enable = lib.mkEnableOption "project managment" // {
       default = false;
     };
+    static-web-server = {
+      enable = lib.mkEnableOption "static-web-server" // {
+        default = false;
+      };
+      listen = lib.mkOption {
+        type = lib.types.str;
+        default = "127.0.0.1:2222";
+      };
+    };
     nginx.enable = lib.mkEnableOption "nginx" // {
       default = false;
     };
