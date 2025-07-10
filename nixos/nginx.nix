@@ -52,14 +52,30 @@ lib.mkIf config.custom.nginx.enable {
       };
 
       "local.farmtasker.au" = {
+        enableACME = true;
+        forceSSL = true;
+          sslCertificate = "/var/lib/acme/local.farmtasker.au/fullchain.pem";
+          sslCertificateKey = "/var/lib/acme/local.farmtasker.au/key.pem";
+          sslTrustedCertificate = "/var/lib/acme/local.farmtasker.au/chain.pem";
         listen = [
-          # { addr = "0.0.0.0"; port = 9999; }
-          { addr = "0.0.0.0"; port = 80; }
+          { addr = "0.0.0.0"; port = 443; ssl = true;}
+          { addr = "0.0.0.0"; port = 80;}
         ];
         locations = {
           "/" = {
-            proxyPass = "http://127.0.0.1:1112";
-            # return = "403";
+            return = "302 /filebrowser/";
+          };
+          "/filebrowser/" = {
+            extraConfig = ''
+              rewrite ^/filebrowser/(.*) /$1 break;
+              proxy_pass http://127.0.0.1:3333/;
+            '';
+          };
+          "/static-web-server/" = {
+            extraConfig = ''
+              rewrite ^/static-web-server/(.*) /$1 break;
+              proxy_pass http://127.0.0.1:2222/;
+            '';
           };
         };
       };
@@ -76,7 +92,19 @@ lib.mkIf config.custom.nginx.enable {
         ];
         locations = {
           "/" = {
-            proxyPass = "http://127.0.0.1:2222";
+            return = "302 /filebrowser/";
+          };
+          "/filebrowser/" = {
+            extraConfig = ''
+              rewrite ^/filebrowser/(.*) /$1 break;
+              proxy_pass http://127.0.0.1:3333/;
+            '';
+          };
+          "/static-web-server/" = {
+            extraConfig = ''
+              rewrite ^/static-web-server/(.*) /$1 break;
+              proxy_pass http://127.0.0.1:2222/;
+            '';
           };
         };
       };
