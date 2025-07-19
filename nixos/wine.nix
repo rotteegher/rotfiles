@@ -31,10 +31,10 @@
     # native wayland support (unstable)
     wineWowPackages.waylandFull
   ];
-
   custom.persist = {
     home.directories = [
       ".wine"
+      ".cache/wine"
     ];
   };
 }

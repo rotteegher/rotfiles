@@ -99,6 +99,5 @@ in lib.mkMerge [
           EnvironmentFile = config.sops.secrets.swsb.path;
         };
       };
-
   })
 ]

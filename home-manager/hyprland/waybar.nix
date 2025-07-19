@@ -104,8 +104,8 @@ lib.mkIf cfg.enable {
             "󰃝"
             "󰃠"
           ];
-          on-scroll-down = "${lib.getExe pkgs.brightnessctl} s 1%-";
-          on-scroll-up = "${lib.getExe pkgs.brightnessctl} s +1%";
+          # on-scroll-down = "${lib.getExe pkgs.brightnessctl} s 1%-";
+          # on-scroll-up = "${lib.getExe pkgs.brightnessctl} s +1%";
         };
 
         battery = lib.mkIf config.custom.battery.enable {

@@ -44,8 +44,17 @@
           PageSize = "A4";
         };
       }
+      {
+        name = "EPSON-ET-2810-local";
+        location = "My Room";
+        deviceUri = "http://192.168.12.117:631/ipp/print";
+        model = "epson-inkjet-printer-escpr/Epson-ET-2810_Series-epson-escpr-en.ppd";
+        ppdOptions = {
+          PageSize = "A4";
+        };
+      }
     ];
-    ensureDefaultPrinter = "EPSON-ET-2810";
+    ensureDefaultPrinter = "EPSON-ET-2810-local";
   };
 
 

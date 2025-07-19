@@ -35,6 +35,7 @@
     libnotify
     ugrep
     file
+    fdupes
     b3sum
     tldr
     hwatch
