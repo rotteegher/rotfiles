@@ -43,10 +43,27 @@ in {
       # inputs.hyprgrass.packages.${pkgs.system}.default
     ];
 
+    wayland.windowManager.hyprland.importantPrefixes = [ "output" ];
     wayland.windowManager.hyprland.settings = {
-      monitor = (lib.forEach displays
-        ({ display_name, hyprland, ... }: "${display_name}, ${hyprland}"))
-        ++ (lib.optional (host != "desktop") ",preferred,auto,auto");
+      # monitor = (lib.forEach displays
+      #   ({ display_name, hyprland, ... }: "${display_name}, ${hyprland}"))
+      #   ++ (lib.optional (host != "desktop") ",preferred,auto,auto");
+
+      # monitorv2 = {
+      #   output = "DP-2";
+      #   mode = "3440x1440@200";
+      #   position = "0x0";
+      #   addreserved = "1600, 0, 0, 0";
+      #   scale = 1;
+      #   transform = 3;
+      # };
+
+      monitorv2 = (lib.forEach displays
+        ({display_name_output, mode, position, addreserved, scale, transform, ... }: {
+          output = display_name_output;
+          inherit mode position addreserved scale transform;
+        })
+      );
 
       env = [
         "HYPRCURSOR_THEME,${config.home.pointerCursor.name}"
@@ -62,12 +79,12 @@ in {
         repeat_delay = 300;
 
         # Set config.custom.display setting index to specify which monitor is a touchscreen device via host specific configuration
-        touchdevice = lib.mkIf display.touchDevice.enabled {
-          enabled = true;
-          transform = display.touchDevice.transform;
-          output =
-            (lib.elemAt displays display.touchDevice.devIndex).display_name;
-        };
+        # touchdevice = lib.mkIf display.touchDevice.enabled {
+        #   enabled = true;
+        #   transform = display.touchDevice.transform;
+        #   output =
+        #     (lib.elemAt displays display.touchDevice.devIndex).display_name_output;
+        # };
 
         touchpad = {
           natural_scroll = true;
@@ -146,26 +163,6 @@ in {
 
       animations = {
         enabled = false;
-        bezier = [
-          "overshot, 0.05, 0.9, 0.1, 1.05"
-          "smoothOut, 0.36, 0, 0.66, -0.56"
-          "smoothIn, 0.25, 1, 0.5, 1"
-        ];
-
-        # name, onoff, speed, curve, style
-        # speed units is measured in 100ms
-        animation = [
-          "windows, 1, 5, overshot, slide"
-          "windowsOut, 1, 4, smoothOut, slide"
-          "windowsMove, 1, 4, smoothIn, slide"
-          "layers, 1, 5, default, popin 80%"
-          "border, 1, 5, default"
-          # 1 loop every 5 minutes
-          "borderangle, 1, ${toString (10 * 60 * 5)}, default, loop"
-          "fade, 1, 5, smoothIn"
-          "fadeDim, 1, 5, smoothIn"
-          "workspaces, 1, 6, default"
-        ];
       };
 
       dwindle = {

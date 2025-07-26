@@ -38,18 +38,59 @@ in {
       type = with lib.types;
         listOf (submodule {
           options = {
-            display_name = lib.mkOption {
+            display_name_output = lib.mkOption {
               type = str;
               description = "The name of the display, e.g. eDP-1";
             };
-            hyprland = lib.mkOption {
+            mode = lib.mkOption {
               type = str;
               description = ''
-                Hyprland config for the monitor, see
-                https://wiki.hyprland.org/Configuring/Monitors/
-
-                e.g. 3440x1440@160,1440x1080,1
+                resolution and refresh rate
+                e.g. 3440x1440@160
               '';
+              default = "auto";
+            };
+            position = lib.mkOption {
+              type = str;
+              description = ''
+                where monitor is located positionally
+                e.g. 0x0
+                or
+                -2560x0
+              '';
+              default = "0x0";
+            };
+            addreserved = lib.mkOption {
+              type = str;
+              description = ''
+                TOP, BOTTOM, LEFT, RIGHT
+                Example:
+                600, 0, 0, 0
+
+                600 pixels from the top reserved area
+              '';
+              default = "0, 0, 0, 0";
+            };
+            scale = lib.mkOption {
+              type = float;
+              description = ''
+                scale of the interface
+              '';
+              default = 1.0;
+            };
+            transform = lib.mkOption {
+              type = int;
+              description = ''
+                  0 -> normal (no transforms)
+                  1 -> 90 degrees
+                  2 -> 180 degrees
+                  3 -> 270 degrees
+                  4 -> flipped
+                  5 -> flipped + 90 degrees
+                  6 -> flipped + 180 degrees
+                  7 -> flipped + 270 degrees
+              '';
+              default = 0;
             };
             workspaces = lib.mkOption {
               type = listOf int;
@@ -62,7 +103,25 @@ in {
           };
         });
       default = [ ];
-      description = "Config for new displays";
+      description = ''
+          # Config for the hyprland monitors
+          # https://wiki.hyprland.org/Configuring/Monitors/
+          # 
+          # monitorv2 = (lib.forEach displays
+          #   ({display_name_output, mode, position, addreserved, scale, transform, ... }: {
+          #     output = display_name_output;
+          #     inherit mode position addreserved scale transform;
+          #   })
+          # );
+          # 
+          # Example:
+          # output = "DP-2";
+          # mode = "3440x1440@200";
+          # position = "0x0";
+          # addreserved = "1600, 0, 0, 0";
+          # scale = 1;
+          # transform = 3;
+        '';
     };
 
     hyprland = {

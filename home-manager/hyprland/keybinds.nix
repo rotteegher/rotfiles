@@ -30,10 +30,6 @@ in
         # File
         "$mod, b, exec, nemo ~/Downloads"
 
-        # Firefox
-        "$mod_CTRL, f, exec, firefox"
-        "$mod_SHIFT, f, exec, firefox --private-window"
-
         # exit hyprland
         "$mod_CTRL, 5, exit,"
 

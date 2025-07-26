@@ -3,12 +3,14 @@
     wifi.enable = true;
     battery.enable = true;
     backlight.enable = true;
-    displays = [{
-      name = "eDP-1";
-      hyprland = "1920x1080@144,0x0,1";
-      workspace_names = [ "1" "2" "3" "4" "q" "w" "e" "a" "s" "d" ];
-      workspaces = [ 1 2 3 4 5 6 7 8 9 10 ];
-    }];
+    displays = [
+      {
+        display_name_output = "eDP-1";
+        mode = "1920x1080@144";
+        workspace_names = [ "1" "2" "3" "4" "q" "w" "e" "a" "s" "d" ];
+        workspaces = [ 1 2 3 4 5 6 7 8 9 10 ];
+      }
+    ];
     mouse_sensitivity = 0.5;
     hyprland = {
       modkey = "SUPER";

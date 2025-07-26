@@ -2,12 +2,12 @@
   # saner api for iterating through workspaces in a flat list
   # takes a function that accepts the following attrset {workspace, key, monitor}
   mapWorkspaces = workspaceFn: displays:
-    lib.concatMap ({ display_name, workspaces, workspace_names ? [ ], ... }:
+    lib.concatMap ({ display_name_output, workspaces, workspace_names ? [ ], ... }:
       let
         namedWorkspaces = lib.zipListsWith (ws: name: {
           workspace = toString ws;
           key = toString (lib.mod ws 10);
-          monitor = display_name;
+          monitor = display_name_output;
           workspace_name = name;
         }) workspaces workspace_names;
 
@@ -15,7 +15,7 @@
           ++ lib.drop (builtins.length workspace_names) (lib.map (ws: {
             workspace = toString ws;
             key = toString (lib.mod ws 10);
-            monitor = display_name;
+            monitor = display_name_output;
             workspace_name = toString ws;
           }) (lib.drop (builtins.length workspace_names) workspaces));
       in lib.map workspaceFn paddedWorkspaces) displays;

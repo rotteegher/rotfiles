@@ -3,16 +3,43 @@
     kbLayout = "jp";
     wifi.enable = true;
     backlight.enable = true;
+
+    # Config for the hyprland monitors
+    # https://wiki.hyprland.org/Configuring/Monitors/
+    # 
+    # monitorv2 = (lib.forEach displays
+    #   ({display_name_output, mode, position, addreserved, scale, transform, ... }: {
+    #     output = display_name_output;
+    #     inherit mode position addreserved scale transform;
+    #   })
+    # );
+    # 
+    # Example:
+    # output = "DP-2";
+    # mode = "3440x1440@200";
+    # position = "0x0";
+    # addreserved = "1600, 0, 0, 0";
+    # scale = 1;
+    # transform = 3;
+
     displays = [
       {
-        display_name = "DP-3";
-        hyprland = "addreserved, 0, 0, 0, 600, 2560x1080@200.01,0x0,1";
+        display_name_output = "DP-3";
+        mode = "2560x1080@200";
+        position = "0x0";
+        addreserved = "0, 0, 0, 600,";
+        scale = 1.0;
+        transform = 0;
         workspace_names = [ "4" "a" "s" "d" "c" ];
         workspaces = [ 4 8 9 10 11 ];
       }
       {
-        display_name = "DP-2";
-        hyprland = "3440x1440@180,-2560x0,1,";
+        display_name_output = "DP-2";
+        mode = "3440x1440@200";
+        position = "-1440x-1640";
+        addreserved = "1600, 0, 0, 0";
+        scale = 1.0;
+        transform = 3;
         workspace_names = [ "1" "2" "3" "q" "w" "e"];
         workspaces = [ 1 2 3 5 6 7];
       }
