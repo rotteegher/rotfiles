@@ -86,9 +86,7 @@
       pkgs.gutenprint
       pkgs.epkowa
       pkgs.sane-airscan
-      pkgs.sane-backends
       pkgs.simple-scan
-      pkgs.xsane
     ];
   };
   services.avahi = {

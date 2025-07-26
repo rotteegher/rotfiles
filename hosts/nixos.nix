@@ -42,7 +42,7 @@
 
             users.${user} = {
               imports = [
-                inputs.nix-index-database.hmModules.nix-index
+                inputs.nix-index-database.homeModules.nix-index
                 ./${host}/home.nix # host specific home-manager configuration
                 ../home-manager
                 ../modules/home-manager

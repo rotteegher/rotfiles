@@ -136,7 +136,6 @@
 
           cups-pdf-to-pdf
           sane-airscan
-          sane-backends
           simple-scan
           xsane
         ] ++

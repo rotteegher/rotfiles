@@ -6,7 +6,7 @@
   ...
 }:
 lib.mkIf config.custom.hyprland.enable {
-  services.xserver.desktopManager.gnome.enable = lib.mkForce false;
+  services.desktopManager.gnome.enable = lib.mkForce false;
   services.xserver.displayManager.lightdm.enable = lib.mkForce false;
   # services.displayManager.ly.enable = lib.mkForce true;
 
