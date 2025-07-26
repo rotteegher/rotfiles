@@ -15,15 +15,15 @@
   };
   hyprlock = {
     pname = "hyprlock";
-    version = "fee04f640676868fe343bd3ffd0b81b22bd032ee";
+    version = "1e5e62d6e31de0d2610ade4a424d4b696d137a78";
     src = fetchFromGitHub {
       owner = "hyprwm";
       repo = "hyprlock";
-      rev = "fee04f640676868fe343bd3ffd0b81b22bd032ee";
+      rev = "1e5e62d6e31de0d2610ade4a424d4b696d137a78";
       fetchSubmodules = false;
-      sha256 = "sha256-S4WaVk8tR6svR+L8y4VUjFPSYhsUvA9Oc6zYYELTPY0=";
+      sha256 = "sha256-Td+W8vHCCLtYQWPDVESNxk5fgzQawBmkqCS/4noNDiI=";
     };
-    date = "2025-06-28";
+    date = "2025-07-25";
   };
   swww = {
     pname = "swww";
@@ -38,16 +38,16 @@
   };
   wallust = {
     pname = "wallust";
-    version = "4d70300efaa56569de4fcdf58274e0cf97ed7e3f";
+    version = "0a0e7c0ca83a4528f1e6e9f35ecce7a263847438";
     src = fetchgit {
       url = "https://codeberg.org/explosion-mental/wallust.git";
-      rev = "4d70300efaa56569de4fcdf58274e0cf97ed7e3f";
+      rev = "0a0e7c0ca83a4528f1e6e9f35ecce7a263847438";
       fetchSubmodules = false;
       deepClone = false;
       leaveDotGit = false;
       sparseCheckout = [ ];
-      sha256 = "sha256-Q/pZu4LuH8ngV93nnZPsX65Mxv70x7vA8vZiU+X3h3c=";
+      sha256 = "sha256-2FLuAgANlLnepIcZknQB3gNE4M1U/xsr+pO9TJHHmyc=";
     };
-    date = "2025-06-18";
+    date = "2025-07-21";
   };
 }
