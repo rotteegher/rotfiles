@@ -215,6 +215,7 @@ in {
         # "pin,class:Shijima-Qt"
 
         # "dimaround,floating:1"
+        "float,class:(.*Minecraft.*)"
         "bordersize 5,fullscreen:1" # monocle mode
         "float,class:(wlroots)" # hyprland debug session
         "float,class:(Waydroid)"

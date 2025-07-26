@@ -54,7 +54,7 @@
       opsJson = [
         {
           uuid = "2cbb65e9-088b-48d8-be9e-0f7b4d0c0b62";
-          name = "rotteegher";
+          name = "sqwqko";
           level = 4;
           bypassesPlayerLimit = false;
         }
@@ -128,7 +128,7 @@
       opsJson = [
         {
           uuid = "2cbb65e9-088b-48d8-be9e-0f7b4d0c0b62";
-          name = "rotteegher";
+          name = "sqwqko";
           level = 4;
           bypassesPlayerLimit = false;
         }
@@ -136,9 +136,10 @@
       serverProperties = {
         enable-jmx-monitoring = false;
         "rcon.port" = 2526;
+        server-port = 25595;
         level-seed = "";
         gamemode = "survival";
-        enable-command-block = false;
+        enable-command-block = true;
         enable-query = false;
         generator-settings = "{}";
         enforce-secure-profile = true;
@@ -163,7 +164,6 @@
         server-ip = "0.0.0.0";
         resource-pack-prompt = "";
         allow-nether = false;
-        server-port = 25595;
         enable-rcon = true;
         sync-chunk-writes = true;
         op-permission-level = 4;
@@ -184,7 +184,7 @@
         log-ips = true;
         function-permission-level = 2;
         initial-enabled-packs = "vanilla";
-        level-type = "minecraft\:normal";
+        level-type = "bigglobe\:bigglobe";
         text-filtering-config = "";
         spawn-monsters = true;
         enforce-whitelist = false;
