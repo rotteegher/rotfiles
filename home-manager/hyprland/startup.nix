@@ -58,7 +58,8 @@ in {
 
       # "swww-daemon &"
       # "mpvpaper -s -o \"no-audio loop\" DP-3 ~/Videos/timelapce_bw.mp40001-1087.mkv &"
-      "sleep 1; hypr-wallpaper && launch-waybar"
+      "wallust theme base16-embers &"
+      "waybar &"
 
       # fix gparted "cannot open display: :0" error
       "${lib.getExe pkgs.xorg.xhost} +local:${user}"

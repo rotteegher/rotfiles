@@ -36,7 +36,7 @@
       {
         display_name_output = "DP-2";
         mode = "3440x1440@200";
-        position = "-1440x-1640";
+        position = "2560x-1640";
         addreserved = "1600, 0, 0, 0";
         scale = 1.0;
         transform = 3;
