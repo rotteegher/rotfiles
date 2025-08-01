@@ -13,6 +13,9 @@
     dns.enable = lib.mkEnableOption "Domain Name Server" // {
       default = false;
     };
+    vm.enable = lib.mkEnableOption "vm" // {
+      default = false;
+    };
 
     hotspot = {
       enable = lib.mkEnableOption "WiFI Broadcast HotSpot" // {

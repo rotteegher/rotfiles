@@ -15,6 +15,7 @@
 
     dns.enable = true;
     bluetooth.enable = true;
+    vm.enable = true;
     hotspot = {
       enable = true;
       internet_iface = "eno1";

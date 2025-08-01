@@ -51,6 +51,11 @@
     ];
 
   dconf.settings = {
+    # fix vm
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
     # fix open in terminal
     "org/gnome/desktop/applications/terminal" = {
       exec = lib.getExe config.custom.terminal.package;

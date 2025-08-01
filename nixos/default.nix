@@ -7,6 +7,7 @@
     ./audio.nix
     ./keyd.nix
     ./sensors.nix
+    ./vm.nix
 
     ./auth.nix
     ./samba.nix

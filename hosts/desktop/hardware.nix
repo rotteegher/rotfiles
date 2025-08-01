@@ -58,10 +58,13 @@
   };
 
 
-  # hardware.openrazer.enable = true;
-  # environment.systemPackages = with pkgs; [
-  # ];
-  users.users.${user}.extraGroups = ["i2c"];
+  hardware.openrazer.enable = true;
+  environment.systemPackages = with pkgs; [
+      polychromatic
+      razergenie
+      razer-cli
+  ];
+  users.users.${user}.extraGroups = ["i2c" "plugdev" "openrazer"];
 
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

@@ -30,18 +30,18 @@
         addreserved = "0, 0, 0, 600,";
         scale = 1.0;
         transform = 0;
-        workspace_names = [ "4" "a" "s" "d" "c" ];
-        workspaces = [ 4 8 9 10 11 ];
+        workspace_names = [ "1" "2" "3" "4" "a" "s" "d" "c" ];
+        workspaces = [ 1 2 3 4 8 9 10 11 ];
       }
       {
         display_name_output = "DP-2";
         mode = "3440x1440@200";
-        position = "2560x-1640";
-        addreserved = "1600, 0, 0, 0";
+        position = "2560x0";
+        addreserved = "0, 0, 0, 1650";
         scale = 1.0;
-        transform = 3;
-        workspace_names = [ "1" "2" "3" "q" "w" "e"];
-        workspaces = [ 1 2 3 5 6 7];
+        transform = 0;
+        workspace_names = [ "q" "w" "e"];
+        workspaces = [ 5 6 7];
       }
     ];
     terminal.size = 8;
