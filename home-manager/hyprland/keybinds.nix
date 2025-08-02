@@ -15,6 +15,7 @@ in
         # ", code:70, pass, class:^(librewolf)$"
         # ", code:70, pass, class:^(discord)$"
         ", code:70, pass, class:^(vesktop)$"
+        ", code:115, pass, class:^(vesktop)$"
         ", code:70, exec, notify-send hello"
     ];
     bind =

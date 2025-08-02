@@ -98,6 +98,6 @@
 
   custom.persist = {
     home.directories = [ "Pictures" ];
-    home.files = [ ".config/digikamrc" ".config/digikam_systemrc" ];
+    home.files = [ ".config/digikamrc" ".config/digikam_systemrc" ".config/MuseScore" ];
   };
 }
