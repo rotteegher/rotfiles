@@ -96,8 +96,13 @@
       enable = true;
       git-keyid = "80A56B918CFA5155";
     };
+
+    persist = {
+      home.files = [ ".config/kritarc" ".config/kritadisplayrc" ];
+      home.directories = [ ".config/PureRef" ];
+    };
   };
   home = {
-    packages = lib.mkIf isNixOS (with pkgs; [ guvcview krita inkscape ]);
+    packages = lib.mkIf isNixOS (with pkgs; [ guvcview krita inkscape pureref ]);
   };
 }

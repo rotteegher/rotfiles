@@ -4,52 +4,52 @@ lib.mkIf config.custom.nginx.enable {
     enable = true;
     virtualHosts = {
       "192.168.1.101" = {
+        enableACME = true;
+        forceSSL = true;
+          sslCertificate = "/var/lib/acme/192.168.1.101/fullchain.pem";
+          sslCertificateKey = "/var/lib/acme/192.168.1.101/key.pem";
+          sslTrustedCertificate = "/var/lib/acme/192.168.1.101/chain.pem";
         listen = [
           # { addr = "0.0.0.0"; port = 9999; }
+          { addr = "0.0.0.0"; port = 443; ssl = true;}
           { addr = "0.0.0.0"; port = 80;}
         ];
         locations = {
           "/" = {
-            proxyPass = "http://127.0.0.1:1111";
+            proxyPass = "https://127.0.0.1:3210";
           };
         };
       };
 
       "localhost" = {
+        enableACME = true;
+        forceSSL = true;
+          sslCertificate = "/var/lib/acme/localhost/fullchain.pem";
+          sslCertificateKey = "/var/lib/acme/localhost/key.pem";
+          sslTrustedCertificate = "/var/lib/acme/localhost/chain.pem";
         listen = [
           # { addr = "0.0.0.0"; port = 9999; }
+          { addr = "0.0.0.0"; port = 443; ssl = true;}
           { addr = "0.0.0.0"; port = 80;}
         ];
         locations = {
           "/" = {
-            proxyPass = "http://127.0.0.1:8080";
+            proxyPass = "https://127.0.0.1:3210";
           };
         };
       };
 
-      "192.168.12.1" = {
-        listen = [
-          # { addr = "0.0.0.0"; port = 9999; }
-          { addr = "0.0.0.0"; port = 80; }
-        ];
-        locations = {
-          "/" = {
-            proxyPass = "http://127.0.0.1:1111";
-          };
-        };
-      };
-
-      "nextcloud.farmtasker.au" = {
-        listen = [
-          # { addr = "0.0.0.0"; port = 9999; }
-          { addr = "0.0.0.0"; port = 80; }
-        ];
-        locations = {
-          "/" = {
-            proxyPass = "http://127.0.0.1";
-          };
-        };
-      };
+      # "nextcloud.farmtasker.au" = {
+      #   listen = [
+      #     # { addr = "0.0.0.0"; port = 9999; }
+      #     { addr = "0.0.0.0"; port = 80; }
+      #   ];
+      #   locations = {
+      #     "/" = {
+      #       proxyPass = "http://127.0.0.1";
+      #     };
+      #   };
+      # };
 
       "local.farmtasker.au" = {
         enableACME = true;
@@ -63,25 +63,20 @@ lib.mkIf config.custom.nginx.enable {
         ];
         locations = {
           "/" = {
-            return = "302 /filebrowser/";
-          };
-          "/filebrowser/" = {
-            extraConfig = ''
-              rewrite ^/filebrowser/(.*) /$1 break;
-              proxy_pass http://127.0.0.1:3333/;
-            '';
-          };
-          "/static-web-server/" = {
-            extraConfig = ''
-              rewrite ^/static-web-server/(.*) /$1 break;
-              proxy_pass http://127.0.0.1:2222/;
-            '';
+            proxyPass = "https://127.0.0.1:3210";
           };
         };
       };
 
       "rotteegher.ddns.net" = {
         enableACME = true;
+        extraConfig = ''
+          proxy_set_header Host             $host;
+          proxy_set_header X-Real-IP        $remote_addr;
+          proxy_set_header X-Forwarded-For  $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_http_version 1.1;
+        '';
         forceSSL = true;
           sslCertificate = "/var/lib/acme/rotteegher.ddns.net/fullchain.pem";
           sslCertificateKey = "/var/lib/acme/rotteegher.ddns.net/key.pem";
@@ -92,19 +87,7 @@ lib.mkIf config.custom.nginx.enable {
         ];
         locations = {
           "/" = {
-            return = "302 /filebrowser/";
-          };
-          "/filebrowser/" = {
-            extraConfig = ''
-              rewrite ^/filebrowser/(.*) /$1 break;
-              proxy_pass http://127.0.0.1:3333/;
-            '';
-          };
-          "/static-web-server/" = {
-            extraConfig = ''
-              rewrite ^/static-web-server/(.*) /$1 break;
-              proxy_pass http://127.0.0.1:2222/;
-            '';
+            proxyPass = "https://127.0.0.1:3210";
           };
         };
       };

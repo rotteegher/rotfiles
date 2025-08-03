@@ -7,6 +7,7 @@
 }: let
   cfg = config.custom.static-web-server;
   domain-name = "rotteegher.ddns.net";
+  domain-name2 = "local.farmtasker.au";
   path-to-serve = "/md/wdc-data/_SMALL/_ONLINE_TANK";
 in lib.mkMerge [
 {
@@ -16,88 +17,165 @@ in lib.mkMerge [
   };
 
   # Now we need to open port 80 for the ACME challenge and port 443 for SWS itself
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 3210 3211 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 3210 3211 ];
 
-  # Configure SWS to use the generated TLS certs
-  services.static-web-server = lib.mkIf cfg.enable {
+  environment.systemPackages = [ pkgs.copyparty ];
+
+  services.copyparty = {
     enable = true;
-    root = path-to-serve;
-    listen = cfg.listen;
-    configuration = {
-      general = { 
-        directory-listing = true;
-        directory-listing-order = 1;
-        directory-listing-format = "html";
-        directory-listing-download = [];
+    # directly maps to values in the [global] section of the copyparty config.
+    # see `copyparty --help` for available options
+    settings = {
+      i = "0.0.0.0";
+      # use lists to set multiple values
+      p = [ 3210 3211 ];
+      # use booleans to set binary flags
+      no-reload = true;
+      # using 'false' will do nothing and omit the value when generating a config
+      ignored-flag = false;
 
-        security-headers = true;
-        log-level = "trace";
-        #### Log request Remote Address if available
-        log-remote-address = true;
-        # #### Log real IP from X-Forwarded-For header if available
-        log-forwarded-for = true;
+      shr = "/shares";
+      shr-rt = "1440";  # keep expired share record for 1 day
 
-        redirect-trailing-slash = true;
-        health = false;
+      acao = [                          # 💬 valid CORS origins for browser calls
+        "https://127.0.0.1"
+        "https://localhost"
+        "https://rotteegher.ddns.net"
+        "https://local.farmtasker.au"
+      ];
+      acam = [ "GET" "HEAD" "POST" "PUT" "DELETE" "OPTIONS" ];  # HTTP methods allowed cross-origin
+    };
 
-        cache-control-headers = true;
-        compression = true;
-        compression-level = "default";
-        compression-static = true;
 
-        maintenance-mode = false;
+    # create a volume
+    volumes = {
+      "/guest" = {
+        path = "/md/wdc-data/_ONLINE_TANK/guest";
+        # see `copyparty --help-accounts` for available options
+        access = {
+          rwmd = "olesia,guest";
+          # user "${user}" gets admin access
+          A = [ user ];
+        };
+        # see `copyparty --help-flags` for available options
+        flags = {
+          # "fk" enables filekeys (necessary for upget permission) (4 chars long)
+          fk = 4;
+          # scan for new files every 60sec
+          scan = 60;
+          # volflag "e2d" enables the uploads database
+          e2d = true;
+          # "d2t" disables multimedia parsers (in case the uploads are malicious)
+          d2t = true;
+          # skips hashing file contents if path matches *.iso
+          nohash = "\.iso$";
+        };
+      };
+      "/family" = {
+        path = "/md/wdc-data/_ONLINE_TANK/family";
+        # see `copyparty --help-accounts` for available options
+        access = {
+          rwmd = "olesia";
+          # user "${user}" gets admin access
+          A = [ user ];
+        };
+        # see `copyparty --help-flags` for available options
+        flags = {
+          # "fk" enables filekeys (necessary for upget permission) (4 chars long)
+          fk = 4;
+          # scan for new files every 60sec
+          scan = 60;
+          # volflag "e2d" enables the uploads database
+          e2d = true;
+          # "d2t" disables multimedia parsers (in case the uploads are malicious)
+          d2t = true;
+          # skips hashing file contents if path matches *.iso
+          nohash = "\.iso$";
+        };
+      };
+      "/md" = {
+        path = "/md";
+        # see `copyparty --help-accounts` for available options
+        access = {
+          # user "${user}" gets admin access
+          A = [ user ];
+        };
+        # see `copyparty --help-flags` for available options
+        flags = {
+          # "fk" enables filekeys (necessary for upget permission) (4 chars long)
+          fk = 4;
+          # scan for new files every 60sec
+          scan = 60;
+          # volflag "e2d" enables the uploads database
+          e2d = true;
+          # "d2t" disables multimedia parsers (in case the uploads are malicious)
+          d2t = true;
+          # skips hashing file contents if path matches *.iso
+          nohash = "\.iso$";
+        };
+      };
+      "/home" = {
+        path = "/persist/home/rot";
+        # see `copyparty --help-accounts` for available options
+        access = {
+          # user "${user}" gets admin access
+          A = [ user ];
+        };
+        # see `copyparty --help-flags` for available options
+        flags = {
+          # "fk" enables filekeys (necessary for upget permission) (4 chars long)
+          fk = 4;
+          # scan for new files every 60sec
+          scan = 60;
+          # volflag "e2d" enables the uploads database
+          e2d = true;
+          # "d2t" disables multimedia parsers (in case the uploads are malicious)
+          d2t = true;
+          # skips hashing file contents if path matches *.iso
+          noidx = "^\\.[^/]+(/|$)";
+        };
       };
     };
+    # you may increase the open file limit for the process
+    openFilesLimit = 8192;
   };
-
-    # Ensure FileBrowser is available
-  environment.systemPackages = [ pkgs.filebrowser ];
-
-  # Define the systemd service for FileBrowser
-  systemd.services.filebrowser = {
-    description = "FileBrowser Service";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.filebrowser}/bin/filebrowser -d /var/lib/filebrowser/filebrowser.db --username ${user} --password $SERVER_AUTH --baseurl /filebrowser -r ${path-to-serve} -p 3333";
-      WorkingDirectory = path-to-serve;
-      StateDirectory = "filebrowser";
-      Restart = "on-failure";
-      RestartSec = 5;
-      User = user;
-      Group = "users";
-    };
-  };
-
-
-  # Now we need to override some things in the systemd unit files to allow access to those TLS certs, starting with creating a new Linux group:
-  users.groups.www-data = {};
-  # This strategy can be useful to override other advanced features as-needed
-  systemd.services.static-web-server.serviceConfig.SupplementaryGroups = pkgs.lib.mkForce [ "" "www-data" ];
-  # Note that "/some/path" should match your "root" option
-  systemd.services.static-web-server.serviceConfig.BindReadOnlyPaths = pkgs.lib.mkForce [
-    # "/some/path"
-    "/var/lib/acme/${domain-name}"
-  ];
 
   custom.persist = {
     root.directories = ["/var/lib/acme" "/var/lib/filebrowser"];
   };
 }
 (lib.mkIf config.custom.sops.enable {
-      sops.secrets.sws.owner = user;
-      sops.secrets.swsb.owner = user;
+      sops.secrets.sws_admin.owner = "copyparty";
+      sops.secrets.sws_admin.group = "copyparty";
 
-      systemd.services.static-web-server = {
-        serviceConfig = {
-          EnvironmentFile = config.sops.secrets.sws.path;
+      sops.secrets.sws_guest.owner ="copyparty";
+      sops.secrets.sws_guest.group ="copyparty";
+
+      sops.secrets.sws_olesia.owner ="copyparty";
+      sops.secrets.sws_olesia.group ="copyparty";
+      
+      services.copyparty = {
+        # create users
+        accounts = {
+          # specify the account name as the key
+          ${user}.passwordFile = config.sops.secrets.sws_admin.path;
+          guest.passwordFile = config.sops.secrets.sws_guest.path;
+
+          olesia.passwordFile = config.sops.secrets.sws_olesia.path;
         };
       };
 
-      systemd.services.filebrowser = {
-        serviceConfig = {
-          EnvironmentFile = config.sops.secrets.swsb.path;
-        };
-      };
+      # systemd.services.static-web-server = {
+      #   serviceConfig = {
+      #     EnvironmentFile = config.sops.secrets.sws.path;
+      #   };
+      # };
+
+      # systemd.services.filebrowser = {
+      #   serviceConfig = {
+      #     EnvironmentFile = config.sops.secrets.swsb.path;
+      #   };
+      # };
   })
 ]

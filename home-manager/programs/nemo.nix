@@ -44,10 +44,6 @@
       "file://${homeDir}/pr PR"
       "file://${homeDir}/pr/rotfiles ROTS"
       "file:///persist PERSIST"
-      "sftp://192.168.12.1 sftpLAP"
-      "smb://192.168.1.101/wdc-data smbLAPwdc"
-      "smb://192.168.1.101/stsea-okii smbLAPstsea"
-      "smb://192.168.1.101/persist smbLAPpersist"
     ];
 
   dconf.settings = {

@@ -18,7 +18,7 @@ lib.mkIf cfg.enable {
   # toggle / launch waybar
   wayland.windowManager.hyprland.settings.bind = [
     "$mod, v, exec, ${lib.getExe pkgs.custom.shell.toggle-waybar}"
-    "$mod_SHIFT, v, exec, launch-waybar"
+    "$mod_SHIFT, v, exec, waybar"
   ];
 
   custom = {

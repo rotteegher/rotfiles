@@ -33,6 +33,7 @@ in {
       #   patches = (o.patches or []) ++ [./fastfetch-nixos-old-small.patch];
       # });
 
+
       blender = prev.blender.override { cudaSupport = true; };
       goo-engine = prev.blender.override { cudaSupport = true; };
 
@@ -104,5 +105,6 @@ in {
     #     );
     })
     inputs.nix-minecraft.overlay
+    inputs.copyparty.overlays.default
   ];
 }
