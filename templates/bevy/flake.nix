@@ -79,7 +79,6 @@
             openssl_3
             glib
             gtk3
-            libsoup
             webkitgtk
             webkitgtk_6_0
             librsvg

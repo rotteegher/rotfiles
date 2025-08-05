@@ -95,7 +95,9 @@
     openFirewall = true;
   };
 
-  systemd.extraConfig = "DefaultLimitNOFILE=524288";
+  systemd.settings.Manager = {
+    DefaultLimitNOFILE = "524288";
+  };
   security.pam.loginLimits = [
     {
       domain = "*";

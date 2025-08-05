@@ -42,7 +42,6 @@
             udev
             clang
             lld
-            libsoup
             libsoup_3
 
             libGL
@@ -108,7 +107,6 @@
             openssl_3
             glib
             gtk3
-            libsoup
             libsoup_3
             # webkitgtk
             webkitgtk_4_1

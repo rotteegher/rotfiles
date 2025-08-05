@@ -12,14 +12,12 @@
 
       # pkgs.unityhub
 
-      pkgs.darktable
       pkgs.gimp
     ];
 
     custom.persist = {
       home.directories = [
         ".config/blender"
-        ".config/darktable"
       ];
     };
   };

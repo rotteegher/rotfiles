@@ -42,6 +42,8 @@ in lib.mkMerge [
       xff-hdr = "x-forwarded-for";
       xff-src = "127.0.0.1,::1";
       acao = [                          # 💬 valid CORS origins for browser calls
+        "https://192.168.12.1"
+        "https://192.168.1.101"
         "https://127.0.0.1"
         "https://localhost"
         "https://rotteegher.ddns.net"
