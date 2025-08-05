@@ -1,7 +1,7 @@
 {
     "wl_shimeji": {
         "cargoLocks": null,
-        "date": "2025-07-23",
+        "date": "2025-08-03",
         "extract": null,
         "name": "wl_shimeji",
         "passthru": null,
@@ -13,11 +13,11 @@
             "name": null,
             "owner": "CluelessCatBurger",
             "repo": "wl_shimeji",
-            "rev": "faad975374a3ea7eaacc1526607ce210858d7a72",
-            "sha256": "sha256-OGakNE3o7b6dGAEkDdTlHjmEFniCV6Xu7kHdgxzEgro=",
+            "rev": "d973b1a9fe0942c5a29d764c2b1983c37029a42e",
+            "sha256": "sha256-Le0zdfHDjVNKUvXQw2mzqySzmOsZdLOD2dCzxAr1gHE=",
             "sparseCheckout": [],
             "type": "github"
         },
-        "version": "faad975374a3ea7eaacc1526607ce210858d7a72"
+        "version": "d973b1a9fe0942c5a29d764c2b1983c37029a42e"
     }
 }
