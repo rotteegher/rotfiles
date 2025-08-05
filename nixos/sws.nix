@@ -38,6 +38,9 @@ in lib.mkMerge [
       shr = "/shares";
       shr-rt = "1440";  # keep expired share record for 1 day
 
+      no-robots = true;
+      xff-hdr = "x-forwarded-for";
+      xff-src = "127.0.0.1,::1";
       acao = [                          # 💬 valid CORS origins for browser calls
         "https://127.0.0.1"
         "https://localhost"
@@ -132,8 +135,8 @@ in lib.mkMerge [
           e2d = true;
           # "d2t" disables multimedia parsers (in case the uploads are malicious)
           d2t = true;
-          # skips hashing file contents if path matches *.iso
           noidx = "^\\.[^/]+(/|$)";
+          nohash = "^\\.[^/]+(/|$)";
         };
       };
     };
@@ -165,17 +168,5 @@ in lib.mkMerge [
           olesia.passwordFile = config.sops.secrets.sws_olesia.path;
         };
       };
-
-      # systemd.services.static-web-server = {
-      #   serviceConfig = {
-      #     EnvironmentFile = config.sops.secrets.sws.path;
-      #   };
-      # };
-
-      # systemd.services.filebrowser = {
-      #   serviceConfig = {
-      #     EnvironmentFile = config.sops.secrets.swsb.path;
-      #   };
-      # };
   })
 ]

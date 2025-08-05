@@ -94,6 +94,10 @@
     enable = true;
     userDirs.enable = true;
     mimeApps.enable = true;
+    mimeApps.defaultApplications = {
+      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "text/plain" = [ "helix.desktop" ];
+    };
   };
 
   custom.persist = {

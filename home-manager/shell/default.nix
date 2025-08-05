@@ -56,6 +56,7 @@
     llvmPackages.bintools-unwrapped
     linuxConsoleTools
     patchelf
+    daemonize
 
     cmus
     devenv

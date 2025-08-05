@@ -53,6 +53,18 @@ lib.mkIf config.custom.nginx.enable {
 
       "local.farmtasker.au" = {
         enableACME = true;
+        extraConfig = ''
+          # real client IP forwarding
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-Proto $scheme;
+
+          # upload tuning
+          client_max_body_size 0;
+          proxy_request_buffering off;
+          proxy_http_version 1.1;
+        '';
         forceSSL = true;
           sslCertificate = "/var/lib/acme/local.farmtasker.au/fullchain.pem";
           sslCertificateKey = "/var/lib/acme/local.farmtasker.au/key.pem";
@@ -71,10 +83,15 @@ lib.mkIf config.custom.nginx.enable {
       "rotteegher.ddns.net" = {
         enableACME = true;
         extraConfig = ''
-          proxy_set_header Host             $host;
-          proxy_set_header X-Real-IP        $remote_addr;
-          proxy_set_header X-Forwarded-For  $proxy_add_x_forwarded_for;
+          # real client IP forwarding
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Proto $scheme;
+
+          # upload tuning
+          client_max_body_size 0;
+          proxy_request_buffering off;
           proxy_http_version 1.1;
         '';
         forceSSL = true;
@@ -91,18 +108,6 @@ lib.mkIf config.custom.nginx.enable {
           };
         };
       };
-
-      # "jellyfin.farmtasker.au" = {
-      #   listen = [
-      #     # { addr = "0.0.0.0"; port = 9999; }
-      #     # { addr = "0.0.0.0"; port = 80; }
-      #   ];
-      #   locations = {
-      #     "/" = {
-      #       proxyPass = "http://127.0.0.1:8096";
-      #     };
-      #   };
-      # };
     };
   };
   networking.firewall.allowedTCPPorts = [ 9999 80 443 3000 2222 ];
