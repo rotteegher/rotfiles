@@ -77,6 +77,28 @@ in lib.mkMerge [
           nohash = "\.iso$";
         };
       };
+      "/media" = {
+        path = "/md/wdc-data/_ONLINE_TANK/media";
+        # see `copyparty --help-accounts` for available options
+        access = {
+          rwm = "olesia,margo";
+          # user "${user}" gets admin access
+          A = [ user ];
+        };
+        # see `copyparty --help-flags` for available options
+        flags = {
+          # "fk" enables filekeys (necessary for upget permission) (4 chars long)
+          fk = 4;
+          # scan for new files every 60sec
+          scan = 60;
+          # volflag "e2d" enables the uploads database
+          e2d = true;
+          # "d2t" disables multimedia parsers (in case the uploads are malicious)
+          d2t = true;
+          # skips hashing file contents if path matches *.iso
+          nohash = "\.iso$";
+        };
+      };
       "/family" = {
         path = "/md/wdc-data/_ONLINE_TANK/family";
         # see `copyparty --help-accounts` for available options
@@ -159,6 +181,9 @@ in lib.mkMerge [
 
       sops.secrets.sws_olesia.owner ="copyparty";
       sops.secrets.sws_olesia.group ="copyparty";
+
+      sops.secrets.sws_margo.owner ="copyparty";
+      sops.secrets.sws_margo.group ="copyparty";
       
       services.copyparty = {
         # create users
@@ -168,6 +193,8 @@ in lib.mkMerge [
           guest.passwordFile = config.sops.secrets.sws_guest.path;
 
           olesia.passwordFile = config.sops.secrets.sws_olesia.path;
+
+          margo.passwordFile = config.sops.secrets.sws_margo.path;
         };
       };
   })

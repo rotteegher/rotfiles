@@ -36,14 +36,13 @@
       homeDir = config.home.homeDirectory;
     in
     [
-      "file://${homeDir}/Documents Documents"
-      "file://${homeDir}/Downloads Downloads"
-      "file://${homeDir}/Videos Videos"
-      "file://${homeDir}/Pictures Pictures"
-      "file://${homeDir}/Pictures/Wallpapers WALLPAPERS"
-      "file://${homeDir}/pr PR"
-      "file://${homeDir}/pr/rotfiles ROTS"
-      "file:///persist PERSIST"
+      # "file://${homeDir}/Downloads Downloads"
+      # "file://${homeDir}/Videos Videos"
+      # "file://${homeDir}/Pictures Pictures"
+      # "file://${homeDir}/Pictures/Wallpapers WALLPAPERS"
+      # "file://${homeDir}/pr PR"
+      # "file://${homeDir}/pr/rotfiles ROTS"
+      # "file:///persist PERSIST"
     ];
 
   dconf.settings = {

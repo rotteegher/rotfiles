@@ -9,7 +9,7 @@
 }:
 let
   wallpapers_dir = "${config.xdg.userDirs.pictures}/Wallpapers";
-  walls_in_dir = "${config.xdg.userDirs.pictures}/wallpapers_in";
+  walls_in_dir = "${config.xdg.userDirs.pictures}/Wallpapers";
   wallpapers_proj = "/persist${config.home.homeDirectory}/pr/wallpaper-ui";
 in
 lib.mkMerge [
@@ -68,7 +68,7 @@ lib.mkMerge [
       '';
     };
 
-    gtk.gtk3.bookmarks = [ "file://${walls_in_dir} Walls In" ];
+    gtk.gtk3.bookmarks = [ "file://${walls_in_dir} Wallpapers" ];
 
     home.shellAliases = {
       # edit the current wallpaper

@@ -1,8 +1,11 @@
 { lib, config, user, ... }:
 let
   cfg = config.custom.hdds;
-  wdc-blue-mountpoint = "/md/wdc-data";
-  wdc-blue-dataset = "wdc-blue/data";
+  home-dir = config.hm.home.homeDirectory;
+  wdc-data-mountpoint = "/md/wdc-data";
+  wdc-data-dataset = "wdc-blue/data";
+  wdc-okii-mountpoint = "/md/wdc-okii";
+  wdc-okii-dataset = "wdc-blue/okii";
 in {
   config = lib.mkIf cfg.enable {
     # non os zfs disks
@@ -20,10 +23,16 @@ in {
         enable = true;
 
         datasets = {
-          ${wdc-blue-dataset} = lib.mkIf cfg.wdc1tb {
+          ${wdc-data-dataset} = lib.mkIf cfg.wdc1tb {
             hourly = 24;
             daily = 31;
             weekly = 7;
+            monthly = 1;
+          };
+          ${wdc-okii-dataset} = lib.mkIf cfg.wdc1tb {
+            hourly = 12;
+            daily = 14;
+            weekly = 2;
             monthly = 1;
           };
         };
@@ -51,43 +60,57 @@ in {
     # add bookmarks for gtk
     hm = { ... }@hmCfg: {
       gtk.gtk3.bookmarks = lib.optionals cfg.wdc1tb [
-        "file://${wdc-blue-mountpoint}/_SMALL/_ANIME/ _ANIME"
-        "file://${wdc-blue-mountpoint}/_SMALL/ _SMALL"
-        "file://${wdc-blue-mountpoint}/_SMALL/_FILM/ _FILM"
-        "file://${wdc-blue-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
-        "file://${wdc-blue-mountpoint}/_MAIN/ _MAIN"
-        "file://${wdc-blue-mountpoint}/_MAIN/_NT_STUDIO _NT_STUDIO"
-        "file://${wdc-blue-mountpoint}/Documents/papers papers"
-        "file://${wdc-blue-mountpoint}/_FARMTASKER _FARMTASKER"
-        "file://${wdc-blue-mountpoint}/ wdc-blue/data"
+        "file://${wdc-data-mountpoint}/ wdc-blue/data"
+        "file://${wdc-okii-mountpoint}/ wdc-blue/okii"
+        "file://${wdc-data-mountpoint}/_DOCUMENTS/ _DOCUMENTS"
+        "file://${home-dir}/_CURRENT/ _CURRENT"
+        "file://${wdc-data-mountpoint}/_SMALL/ _SMALL"
+        "file://${wdc-data-mountpoint}/_MAIN/ _MAIN"
+        "file://${wdc-data-mountpoint}/_MAIN/_NT_STUDIO/ _NT_STUDIO"
+        "file://${wdc-data-mountpoint}/_ONLINE_TANK/ _ONLINE_TANK"
+
+        "file://${wdc-okii-mountpoint}/_ANIME/ _ANIME"
+        "file://${wdc-okii-mountpoint}/_FILM/ _FILM"
+        "file://${wdc-data-mountpoint}/_SMALL/_BOOK/ _BOOK"
+        "file://${wdc-data-mountpoint}/_SMALL/_IMAGE/ _IMAGE"
+        "file://${wdc-data-mountpoint}/_SMALL/_MUSIC/ _MUSIC"
+        "file://${wdc-data-mountpoint}/_SMALL/_GAME/ _GAME"
+        "file://${wdc-data-mountpoint}/_SMALL/_H/ _H"
+        "file://${wdc-data-mountpoint}/_FARMTASKER/ _FARMTASKER"
+        "file://${wdc-data-mountpoint}/_DOCUMENTS/papers/ papers"
       ];
       # create symlinks for locations with ~
       home.file =
         let mkOutOfStoreSymlink = hmCfg.config.lib.file.mkOutOfStoreSymlink;
         in {
           "Downloads".source = lib.mkIf cfg.wdc1tb
-            (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Downloads");
+            (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_DOWNLOADS");
+          "Pictures".source = lib.mkIf cfg.wdc1tb
+            (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_PICTURES");
           "Videos".source = lib.mkIf cfg.wdc1tb
-            (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Videos");
-          # "Documents".source = lib.mkIf cfg.wdc1tb
-          #   (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Documents");
+            (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_VIDEOS");
+          "Documents".source = lib.mkIf cfg.wdc1tb
+            (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_DOCUMENTS");
+          "Desktop".source = lib.mkIf cfg.wdc1tb
+            (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_DESKTOP");
           # causes error for some reason vvvvvvvvvvvvvv
-          # "Desktop".source = lib.mkIf cfg.wdc1tb (mkOutOfStoreSymlink "${wdc-blue-mountpoint}/Desktop");
         };
     };
+ 
+    # custom.persist = { home.directories = [ "Downloads" "Documents" "Videos" "Desktop" ]; };
 
     # symlinks from hdds
     # dest src
-    systemd.tmpfiles.rules = lib.optionals cfg.enable [
-      "L+ ${wdc-blue-mountpoint}/Wallpapers            - - - - /home/${user}/Pictures/Wallpapers"
-      "L+ ${wdc-blue-mountpoint}/pr/rustpr             - - - - /home/${user}/pr/rustpr/ln/"
-      "L+ /home/${user}/_MAIN                          - - - - ${wdc-blue-mountpoint}/_MAIN"
-      "L+ /home/${user}/_SMALL                         - - - - ${wdc-blue-mountpoint}/_SMALL"
-      "L+ /home/${user}/_FARMTASKER                       - - - - ${wdc-blue-mountpoint}/_FARMTASKER"
-      "L+ /home/${user}/_SMALL/_MUSIC                  - - - - ${wdc-blue-mountpoint}/_MUSIC"
-      "L+ /home/${user}/_SMALL/_FILM                   - - - - ${wdc-blue-mountpoint}/_FILM"
-      "L+ /home/${user}/_SMALL/_ANIME                  - - - - ${wdc-blue-mountpoint}/_ANIME"
-    ];
+    # systemd.tmpfiles.rules = lib.optionals cfg.enable [
+    #   "L+ ${wdc-data-mountpoint}/Wallpapers            - - - - /home/${user}/Pictures/Wallpapers"
+    #   "L+ ${wdc-data-mountpoint}/pr/rustpr             - - - - /home/${user}/pr/rustpr/ln/"
+    #   "L+ /home/${user}/_MAIN                          - - - - ${wdc-data-mountpoint}/_MAIN"
+    #   "L+ /home/${user}/_SMALL                         - - - - ${wdc-data-mountpoint}/_SMALL"
+    #   "L+ /home/${user}/_FARMTASKER                    - - - - ${wdc-data-mountpoint}/_FARMTASKER"
+    #   "L+ /home/${user}/_SMALL/_MUSIC                  - - - - ${wdc-data-mountpoint}/_MUSIC"
+    #   "L+ /home/${user}/_SMALL/_FILM                   - - - - ${wdc-data-mountpoint}/_FILM"
+    #   "L+ /home/${user}/_SMALL/_ANIME                  - - - - ${wdc-data-mountpoint}/_ANIME"
+    # ];
 
     # dual boot windows
     boot.loader.grub = {
