@@ -27,21 +27,31 @@
         display_name_output = "DP-3";
         mode = "2560x1080@200";
         position = "0x0";
-        addreserved = "0, 0, 0, 600,";
+        addreserved = "600, 0, 0, 0,";
         scale = 1.0;
-        transform = 0;
-        workspace_names = [ "1" "2" "3" "4" "a" "s" "d" "c" ];
-        workspaces = [ 1 2 3 4 8 9 10 11 ];
+        transform = 3;
+        workspace_names = [ "a" "s" "d" "c" ];
+        workspaces = [ 8 9 10 11 ];
       }
       {
-        display_name_output = "DP-2";
-        mode = "3440x1440@200";
-        position = "2560x0";
-        addreserved = "0, 0, 0, 1650";
+        display_name_output = "DP-4";
+        mode = "5120x1440@144";
+        position = "1080x700";
+        addreserved = "0, 0, 0, 0,";
         scale = 1.0;
         transform = 0;
         workspace_names = [ "q" "w" "e"];
         workspaces = [ 5 6 7];
+      }
+      {
+        display_name_output = "DP-2";
+        mode = "3440x1440@200";
+        position = "6200x-700";
+        addreserved = "1700, 0, 0, 0";
+        scale = 1.0;
+        transform = 3;
+        workspace_names = [ "1" "2" "3" "4"];
+        workspaces = [ 1 2 3 4 ];
       }
     ];
     terminal.size = 8;
