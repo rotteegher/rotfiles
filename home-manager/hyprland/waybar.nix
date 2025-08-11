@@ -94,6 +94,7 @@ lib.mkIf cfg.enable {
     waybar.config =
       let
         alertSpan = s: ''<span color="{{color4}}">${s}</span>'';
+        displays = config.custom.displays;
       in
       {
         backlight = {
@@ -107,6 +108,8 @@ lib.mkIf cfg.enable {
           # on-scroll-down = "${lib.getExe pkgs.brightnessctl} s 1%-";
           # on-scroll-up = "${lib.getExe pkgs.brightnessctl} s +1%";
         };
+
+        output = [ (lib.head displays).display_name_output ];
 
         battery = lib.mkIf config.custom.battery.enable {
           format = "{icon}    {capacity}%";
@@ -341,6 +344,7 @@ lib.mkIf cfg.enable {
                 ${mkModulesCss cfg.config.modules-left}
                 ${mkModulesCss cfg.config.modules-center}
                 ${mkModulesCss cfg.config.modules-right}
+
 
                 ${mkModuleClassName "custom/nix"} {
                   font-size: 20px;

@@ -38,6 +38,7 @@ config = lib.mkIf config.custom.reaper.enable {
       pkgs.fverb
       pkgs.mooSpace
       pkgs.boops
+      # pkgs.decent-sampler
       # pkgs.artyFX
       pkgs.zam-plugins
       pkgs.molot-lite
@@ -91,6 +92,7 @@ config = lib.mkIf config.custom.reaper.enable {
     custom.persist = {
       home.directories = [
         ".config/REAPER"
+        ".config/DecentSampler"
         ".vst"
         ".vst3"
         ".lv2"

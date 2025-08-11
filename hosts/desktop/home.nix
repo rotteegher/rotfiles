@@ -22,17 +22,8 @@
     # scale = 1;
     # transform = 3;
 
+    # first monitor in list gets selected for waybar to show only at that monitor
     displays = [
-      {
-        display_name_output = "DP-3";
-        mode = "2560x1080@200";
-        position = "0x0";
-        addreserved = "600, 0, 0, 0,";
-        scale = 1.0;
-        transform = 3;
-        workspace_names = [ "a" "s" "d" "c" ];
-        workspaces = [ 8 9 10 11 ];
-      }
       {
         display_name_output = "DP-4";
         mode = "5120x1440@144";
@@ -42,6 +33,26 @@
         transform = 0;
         workspace_names = [ "q" "w" "e"];
         workspaces = [ 5 6 7];
+      }
+      {
+        display_name_output = "DP-3";
+        mode = "2560x1080@200";
+        position = "0x0";
+        addreserved = "600, 0, 0, 0,";
+        scale = 1.0;
+        transform = 3;
+        workspace_names = [ "a" "s" "d" ];
+        workspaces = [ 8 9 10 ];
+      }
+      {
+        display_name_output = "HDMI-A-4";
+        mode = "2560x1600@60";
+        position = "2616x2140";
+        addreserved = "0, 0, 0, 0,";
+        scale = 3.2;
+        transform = 0;
+        workspace_names = [ "c" "m" ];
+        workspaces = [ 11 12 ];
       }
       {
         display_name_output = "DP-2";

@@ -62,6 +62,7 @@
       steam
       steamcmd
       gamescope
+      gamemode
       mangohud
 
       (pkgs.makeDesktopItem {

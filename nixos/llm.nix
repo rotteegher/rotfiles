@@ -36,7 +36,7 @@ lib.mkIf config.custom.llm.enable {
 
   ] ++ additionalPackages;
   # setup port forwarding
-  networking.firewall.allowedTCPPorts = [8080 9000];
+  networking.firewall.allowedTCPPorts = [8080 9000 11434];
   users.users.${user}.extraGroups = ["render" "video" "ollama"];
 
   hardware.nvidia-container-toolkit.enable = true;
