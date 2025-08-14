@@ -58,7 +58,7 @@
         display_name_output = "DP-2";
         mode = "3440x1440@200";
         position = "6200x-700";
-        addreserved = "1700, 0, 0, 0";
+        addreserved = "1800, 0, 0, 0";
         scale = 1.0;
         transform = 3;
         workspace_names = [ "1" "2" "3" "4"];

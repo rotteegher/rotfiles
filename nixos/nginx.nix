@@ -1,5 +1,6 @@
-{ config, lib, pkgs, ...}:
-lib.mkIf config.custom.nginx.enable {
+{ config, lib, pkgs, user, ...}:
+lib.mkMerge [  
+(lib.mkIf config.custom.nginx.enable {
   services.nginx = {
     enable = true;
     appendHttpConfig = ''
@@ -165,4 +166,30 @@ lib.mkIf config.custom.nginx.enable {
   };
   networking.firewall.allowedTCPPorts = [ 9999 80 443 3000 2222 11434 11435 21434 ];
   networking.firewall.allowedUDPPorts = [ 9999 80 443 3000 2222 11434 11435 21434 ];
-}
+})
+(lib.mkIf (config.custom.sops.enable && config.custom.llm.enable) {
+  sops.secrets.ollama_apikey = {
+    owner = "nginx";
+    group = "nginx";
+    mode = "0440";
+  };
+  sops.secrets.ollama_bearer = {
+    owner = "nginx";
+    group = "nginx";
+    mode = "0440";
+  };
+  # services.nginx.virtualHosts."rotteegher.ddns.net".locations = {
+  #   "/api".extraConfig = ''
+  #       auth_basic "Ollama API";
+  #       auth_basic_user_file ${config.sops.secrets.ollama_apikey.path};
+  #   '';
+  #   "/v1".extraConfig = ''        
+  #       auth_basic "Ollama API";
+  #       auth_basic_user_file ${config.sops.secrets.ollama_apikey.path};
+  #   '';
+  # };  
+  # services.nginx.appendHttpConfig = lib.mkAfter ''
+  #   include ${config.sops.secrets.ollama_bearer.path};
+  # '';
+})
+]

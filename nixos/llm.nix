@@ -16,6 +16,7 @@ let
     pkgs.intel-compute-runtime.out
     pkgs.intel-gpu-tools
     pkgs.intel-media-driver
+    pkgs.intel-gmmlib
     pkgs.intel-vaapi-driver
     pkgs.vaapi-intel-hybrid
     pkgs.intel-gmmlib
@@ -23,6 +24,9 @@ let
     pkgs.libgcc.libgcc
     pkgs.libgcc.lib
     pkgs.libgcc.out
+    pkgs.libva
+    pkgs.libva-utils
+    pkgs.libva-vdpau-driver
     # pkgs.zluda
   ];
 in
@@ -60,7 +64,7 @@ lib.mkIf config.custom.llm.enable {
       OLLAMA_INTEL_GPU = "1";
       OLLAMA_SCHED_SPREAD = "1";
       OLLAMA_MAX_LOADED_MODELS = "2";
-      OLLAMA_NUM_PARALLEL = "2";
+      OLLAMA_NUM_PARALLEL = "1";
       OLLAMA_NUM_GPU = "999";
       OLLAMA_GPU_OVERHEAD = "1";
       OLLAMA_DEBUG = "1";
@@ -114,5 +118,3 @@ lib.mkIf config.custom.llm.enable {
     ];
   };
 }
-
-

@@ -40,6 +40,10 @@
         libvdpau-va-gl
         intel-vaapi-driver
         intel-media-driver
+        intel-gmmlib
+        libva
+        libva-utils
+        libva-vdpau-driver
         intel-compute-runtime
         vpl-gpu-rt
         ocl-icd

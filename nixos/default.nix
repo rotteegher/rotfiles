@@ -132,6 +132,8 @@
           ddcutil
           sysstat
           scrcpy
+          cmake
+          python3
 
           wayvnc
 

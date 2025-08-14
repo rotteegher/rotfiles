@@ -13,7 +13,7 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "usbcore" "i2c-dev"];
   boot.initrd.kernelModules = ["i2c-dev"];
-  boot.kernelModules = ["kvm-intel" "usbcore" "snd-seq" "snd-rawmidi" "binder_linux" "ashmem_linux" ];
+  boot.kernelModules = ["kvm-intel" "usbcore" "snd-seq" "snd-rawmidi" "binder_linux" "ashmem_linux" "i915" ];
   boot.blacklistedKernelModules = ["amdgpu"];
   boot.extraModulePackages = [ ];
 
