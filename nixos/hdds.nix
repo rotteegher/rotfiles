@@ -83,6 +83,8 @@ in {
       home.file =
         let mkOutOfStoreSymlink = hmCfg.config.lib.file.mkOutOfStoreSymlink;
         in {
+          "_MAIN".source = lib.mkIf cfg.wdc1tb
+            (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_MAIN");
           "Downloads".source = lib.mkIf cfg.wdc1tb
             (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_DOWNLOADS");
           "Pictures".source = lib.mkIf cfg.wdc1tb
@@ -93,7 +95,8 @@ in {
             (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_DOCUMENTS");
           "Desktop".source = lib.mkIf cfg.wdc1tb
             (mkOutOfStoreSymlink "${wdc-data-mountpoint}/_DESKTOP");
-          # causes error for some reason vvvvvvvvvvvvvv
+          ".config/DecentSampler".source = lib.mkIf config.hm.custom.reaper.enable
+            (mkOutOfStoreSymlink "${wdc-okii-mountpoint}/DecentSampler");
         };
     };
  

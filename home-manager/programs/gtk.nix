@@ -50,25 +50,19 @@ in
     };
   };
 
-  home.sessionVariables.GTK_THEME = "Tokyonight-Dark";
+  home.sessionVariables.GTK_THEME = "Kanagawa-BL-LB";
+
+  home.packages = [ pkgs.gtk-engine-murrine ];
 
   gtk = {
     enable = true;
     theme = {
-      name = "Tela circle dark";
-      package = pkgs.tela-circle-icon-theme;
-      # name = "Catppuccin-Mocha-Compact-${catppuccinDefault}-Dark";
-      # package = pkgs.catppuccin-gtk.override {
-        # allow all accents so the closest matching color can be selected by dotfiles-utils
-        # accents = map lib.toLower (lib.attrNames catppuccinAccents);
-        # variant = "mocha";
-        # size = "compact";
-      # };
+      name = "Kanagawa-BL-LB";
+      package = pkgs.kanagawa-gtk-theme;
     };
     iconTheme = {
-      name = "Tokyonight-Dark";
-      package = pkgs.tokyo-night-gtk;
-      
+      name = "Tela circle dark";
+      package = pkgs.tela-circle-icon-theme;      
     };
     font = {
       name = "${config.custom.fonts.monospace}";

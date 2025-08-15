@@ -13,14 +13,7 @@ lib.mkMerge [
     '';
     virtualHosts = {
       "192.168.1.101" = {
-        enableACME = true;
-        forceSSL = true;
-          sslCertificate = "/var/lib/acme/192.168.1.101/fullchain.pem";
-          sslCertificateKey = "/var/lib/acme/192.168.1.101/key.pem";
-          sslTrustedCertificate = "/var/lib/acme/192.168.1.101/chain.pem";
         listen = [
-          # { addr = "0.0.0.0"; port = 9999; }
-          { addr = "0.0.0.0"; port = 443; ssl = true;}
           { addr = "0.0.0.0"; port = 80;}
         ];
         locations = {
@@ -31,14 +24,7 @@ lib.mkMerge [
       };
 
       "localhost" = {
-        enableACME = true;
-        forceSSL = true;
-          sslCertificate = "/var/lib/acme/localhost/fullchain.pem";
-          sslCertificateKey = "/var/lib/acme/localhost/key.pem";
-          sslTrustedCertificate = "/var/lib/acme/localhost/chain.pem";
         listen = [
-          # { addr = "0.0.0.0"; port = 9999; }
-          { addr = "0.0.0.0"; port = 443; ssl = true;}
           { addr = "0.0.0.0"; port = 80;}
         ];
         locations = {

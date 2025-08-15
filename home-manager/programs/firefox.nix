@@ -31,7 +31,9 @@ in {
         "text/html" = browser;
         "text/xml" = browser;
         "application/xhtml_xml" = browser;
-        "image/webp" = browser;
+        "image/webp" = lib.getExe pkgs.imv;
+        "image/jpeg" = lib.getExe pkgs.imv;
+        "image/png" = lib.getExe pkgs.imv;
         "x-scheme-handler/https" = browser;
         "x-scheme-handler/ftp" = browser;
       };
