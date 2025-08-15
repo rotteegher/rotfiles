@@ -55,8 +55,8 @@ in
   gtk = {
     enable = true;
     theme = {
-      name = "Tela circle dark";
-      package = pkgs.tela-circle-icon-theme;
+      name = "Kanagawa-BL-LB";
+      package = pkgs.kanagawa-gtk-theme;
       # name = "Catppuccin-Mocha-Compact-${catppuccinDefault}-Dark";
       # package = pkgs.catppuccin-gtk.override {
         # allow all accents so the closest matching color can be selected by dotfiles-utils
@@ -66,8 +66,8 @@ in
       # };
     };
     iconTheme = {
-      name = "Tokyonight-Dark";
-      package = pkgs.tokyo-night-gtk;
+      name = "Kanagawa-BL-LB";
+      package = pkgs.kanagawa-gtk-theme;
       
     };
     font = {

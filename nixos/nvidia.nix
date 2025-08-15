@@ -8,7 +8,7 @@
 {
   config = lib.mkIf config.custom.nvidia.enable {
     # enable nvidia support
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.videoDrivers = [ "nvidia" "displaylink" "modesetting" ];
 
     boot = {
       # nvidia-uvm is required for CUDA applications
@@ -67,9 +67,12 @@
         mesa
         # swiftshader
         egl-wayland
+        displaylink
       ];
     };
     environment.systemPackages = with pkgs; [
+        displaylink
+        
         mesa
 
         nvtopPackages.full

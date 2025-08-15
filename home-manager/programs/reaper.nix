@@ -92,7 +92,7 @@ config = lib.mkIf config.custom.reaper.enable {
     custom.persist = {
       home.directories = [
         ".config/REAPER"
-        ".config/DecentSampler"
+        # ".config/DecentSampler"
         ".vst"
         ".vst3"
         ".lv2"

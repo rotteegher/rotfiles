@@ -24,7 +24,7 @@ in {
       # (openOnWorkspace 1 "brave --profile-directory=Default")
 
       # firefox
-      (openOnWorkspace 1 "librewolf")
+      (openOnWorkspace 5 "librewolf")
 
       (openOnWorkspace 12 "$term sh -c 'tenki --fps 60 --tps 60 --show-fps --timer-color yellow --mode rain; exec fish'")
 
@@ -56,7 +56,8 @@ in {
       "hyprctl dispatch workspace 1"
       "hyprctl dispatch workspace 4"
 
-      # "swww-daemon &"
+      "swww-daemon &"
+      "swww img ~/Pictures/Wallpapers/nix-wide.png &"
       # "mpvpaper -s -o \"no-audio loop\" DP-3 ~/Videos/timelapce_bw.mp40001-1087.mkv &"
       "wallust theme base16-embers &"
       "waybar &"
