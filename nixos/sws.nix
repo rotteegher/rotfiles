@@ -48,6 +48,13 @@ in lib.mkMerge [
         "https://localhost"
         "https://rotteegher.ddns.net"
         "https://local.farmtasker.au"
+
+        "http://192.168.12.1"
+        "http://192.168.1.101"
+        "http://127.0.0.1"
+        "http://localhost"
+        "http://rotteegher.ddns.net"
+        "http://local.farmtasker.au"
       ];
       acam = [ "GET" "HEAD" "POST" "PUT" "DELETE" "OPTIONS" ];  # HTTP methods allowed cross-origin
     };

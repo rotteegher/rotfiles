@@ -35,6 +35,6 @@ in
 
     home.shellAliases = {
       # change color on ssh
-      ssh = "kitten ssh --kitten=color_scheme=Dracula";
+      # ssh = "kitten ssh --kitten=color_scheme=Dracula";
     };
   }

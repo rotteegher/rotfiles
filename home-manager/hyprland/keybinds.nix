@@ -232,7 +232,8 @@ in
 
     # Move/resize windows with mainMod + LMB/RMB and dragging
     bindm = [
-      "$mod, mouse:272, movewindow"
+      # "$mod, mouse:272, movewindow"
+      "$mod, code:49, movewindow"
       "$mod, mouse:273, resizewindow"
     ];
   };
