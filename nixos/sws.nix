@@ -39,7 +39,8 @@ in lib.mkMerge [
       shr-rt = "1440";  # keep expired share record for 1 day
 
       no-robots = true;
-      xff-hdr = "x-forwarded-for";
+      rproxy = 1;
+      xff-hdr = "x-real-ip";
       xff-src = "127.0.0.1,::1";
       acao = [                          # 💬 valid CORS origins for browser calls
         "https://192.168.12.1"

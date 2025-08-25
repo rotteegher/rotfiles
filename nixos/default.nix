@@ -135,6 +135,9 @@
           cmake
           python3
 
+          gdb
+          scanmem
+
           wayvnc
 
           cups-pdf-to-pdf

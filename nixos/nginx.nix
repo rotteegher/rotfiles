@@ -18,7 +18,7 @@ lib.mkMerge [
         ];
         locations = {
           "/" = {
-            proxyPass = "https://127.0.0.1:3210";
+            proxyPass = "http://127.0.0.1:3210";
           };
         };
       };
@@ -29,7 +29,7 @@ lib.mkMerge [
         ];
         locations = {
           "/" = {
-            proxyPass = "https://127.0.0.1:3210";
+            proxyPass = "http://127.0.0.1:3210";
           };
         };
       };
@@ -52,7 +52,7 @@ lib.mkMerge [
           # real client IP forwarding
           proxy_set_header Host $host;
           proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header X-Forwarded-For $remote_addr;
           proxy_set_header X-Forwarded-Proto $scheme;
 
           # upload tuning
@@ -70,7 +70,7 @@ lib.mkMerge [
         ];
         locations = {
           "/" = {
-            proxyPass = "https://127.0.0.1:3210";
+            proxyPass = "http://127.0.0.1:3210";
           };
         };
       };
@@ -88,7 +88,7 @@ lib.mkMerge [
         ];
         locations = {
           "/" = {
-            proxyPass = "https://127.0.0.1:3210";
+            proxyPass = "http://127.0.0.1:3210";
           };
           "/api" = {
             proxyPass = "http://127.0.0.1:11434";
@@ -101,12 +101,12 @@ lib.mkMerge [
               proxy_set_header Access-Control-Request-Headers "";
 
               # *** key line ***
-              proxy_set_header Host localhost;
+              proxy_set_header Host $host;
 
               # optional: don’t leak real client IP to Ollama
               # (not strictly required—Host is the big one)
-              proxy_set_header X-Real-IP 127.0.0.1;
-              proxy_set_header X-Forwarded-For 127.0.0.1;
+              proxy_set_header X-Real-IP 192.168.1.1;
+              proxy_set_header X-Forwarded-For 192.168.1.1;
               proxy_set_header X-Forwarded-Proto http;
 
               add_header Access-Control-Allow-Origin * always;
@@ -129,12 +129,12 @@ lib.mkMerge [
               proxy_set_header Access-Control-Request-Headers "";
 
               # *** key line ***
-              proxy_set_header Host localhost;
+              proxy_set_header Host $host;
 
               # optional: don’t leak real client IP to Ollama
               # (not strictly required—Host is the big one)
-              proxy_set_header X-Real-IP 127.0.0.1;
-              proxy_set_header X-Forwarded-For 127.0.0.1;
+              proxy_set_header X-Real-IP 192.168.1.1;
+              proxy_set_header X-Forwarded-For 192.168.1.1;
               proxy_set_header X-Forwarded-Proto http;
 
               add_header Access-Control-Allow-Origin * always;
